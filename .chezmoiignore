@@ -1,2 +1,6 @@
 LICENSE
 README.md
+{{ if not (lookPath "sway") -}}
+# Don't install sway configs
+dot_config/sway
+{{ end -}}

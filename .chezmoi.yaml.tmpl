@@ -27,6 +27,13 @@
 {{-   $signingkey = promptString "signingkey" -}}
 {{- end -}}
 
+{{- $githubuser := "" -}}
+{{- if hasKey . "githubuser" -}}
+{{-   $githubuser = .githubuser -}}
+{{- else if $interactive -}}
+{{-   $githubuser = promptString "githubuser" -}}
+{{- end -}}
+
 {{- if $interactive -}}
 {{-   writeToStdout "💡 Tip: you can re-enter your data with `chezmoi init --data=false`.\n" -}}
 {{- end -}}
@@ -38,3 +45,4 @@ data:
   name: "{{ $name }}"
   email: "{{ $email }}"
   signingkey: "{{ $signingkey }}"
+  githubuser: "{{ $githubuser }}"

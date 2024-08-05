@@ -1,0 +1,133 @@
+[user]
+	name = {{ .name }}
+	email = {{ .email }}
+	signingkey = {{ .signingkey }}
+[color]
+	branch = auto
+	diff = auto
+	interactive = auto
+	status = auto
+	ui = auto
+[diff]
+	renames = true
+	guitool=vscode
+
+[core]
+	excludesfile = {{ .chezmoi.homeDir }}/.gitignore_global
+	pager = less -FXRS -x2
+[alias]
+	st = status
+	di = diff
+	co = checkout
+	ci = commit
+	br = branch
+	sta = stash
+	llog = log --date=local
+	flog = log --pretty=fuller --decorate
+	lg = log --graph --abbrev-commit --date=relative --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	lol = log --graph --decorate --oneline --abbrev-commit
+	lola = log --graph --decorate --oneline --all --abbrev-commit
+	logg = log --graph --decorate --all
+	blog = log origin/master... --left-right
+	ds = diff --staged
+	ls = ls-files
+	l  = log --pretty=oneline --abbrev-commit
+	fixup = commit --fixup
+	squash = commit --squash
+	unstage = reset HEAD
+	rum = rebase master@{u}
+	lgs = log --graph  --pretty=format:'%C(auto)%h - %Cgreen(sig: %G?)%Creset -%d %s %Cgreen(%cr) %C(bold blue)<%an>%Creset%n%>|(10)%C(green)\\%Creset%n%>|(11)%C(green)gpg: Key ID %GK%Creset%n%C(green)%>|(250)%GG%Creset' --abbrev-commit
+	oldest-ancestor = !bash -c \"diff -u <(git rev-list --first-parent \\\"${1:-master}\\\") <(git rev-list --first-parent \\\"${2:-HEAD}\\\") | sed -ne 's/^ //p' | head -1\"
+	unstage-all = reset HEAD --
+	changes=diff --name-status -r
+	svn-switch = config svn-remote.svn.url
+	sw = config svn-remote.svn.url
+## 2023-07-15 TODO: Figure out if we like this or not... maybe just use git-fzf Zsh implementation?
+##            TODO: Compare with updated version: https://git.tsundere.moe/Frederick888/frederick-settings/blob/master/.gitconfig#L167-249
+## Source: https://gist.github.com/junegunn/f4fca918e937e6bf5bad?permalink_comment_id=3715673#gistcomment-3715673
+	fzlog = !sh -c \"git log --decorate --oneline --abbrev-commit --color | fzf --ansi --preview 'git show $(echo {} | cut -d" " -f1)'\"
+        fzf = !"                                                                                                                                                                              \
+            function gfzf() {                                                                                                                                                                 \
+                local filter;                                                                                                                                                                 \
+                if [ -n $@ ] && [ -e $@ ]; then                                                                                                                                               \
+                    filter=\"-- $@\";                                                                                                                                                         \
+                fi;                                                                                                                                                                           \
+                export LESS='-R'                                                                                                                                                              \
+                export BAT_PAGER='less -S -R -M -i';                                                                                                                                          \
+                git log                                                                                                                                                                       \
+                    --graph --color=always --abbrev=7                                                                                                                                         \
+                    --format=format:\"%C(bold blue)%h%C(reset) %C(dim white)%an%C(reset)%C(bold yellow)%d%C(reset) %C(white)%s%C(reset) %C(bold green)(%ar)%C(reset)\" $@ |                   \
+                        fzf --ansi --no-sort --layout=reverse --tiebreak=index                                                                                                                \
+                            --preview=\"f() { set -- \\$(echo -- \\$@ | rg -o '\\b[a-f0-9]{7,}\\b'); [ \\$# -eq 0 ] || git show --color=always \\$1 $filter | delta --line-numbers; }; f {}\" \
+                            --bind=\"ctrl-d:half-page-down,ctrl-u:half-page-up,ctrl-j:preview-down,ctrl-k:preview-up,ctrl-f:preview-page-down,ctrl-b:preview-page-up\"                        \
+                            --bind=\"ctrl-m:execute:                                                                                                                                          \
+                                    (rg -o '\\b[a-f0-9]{7,}\\b' | head -1 |                                                                                                                   \
+                                    xargs -I % -- git show --color=always %) << 'FZFEOF'\n                                                                                                    \
+                                    {}                                                                                                                                                        \
+                                    \nFZFEOF\"                                                                                                                                                \
+                            --bind=\"ctrl-y:execute-silent:                                                                                                                                   \
+                                    (rg -o '\\b[a-f0-9]{7,}\\b' | head -1 | tr -d \\$'\\n' | clipboard) << 'FZFEOF'\n                                                                         \
+                                    {}                                                                                                                                                        \
+                                    \nFZFEOF\"                                                                                                                                                \
+                            --preview-window=right:60%;                                                                                                                                       \
+            };                                                                                                                                                                                \
+            gfzf                                                                                                                                                                              \
+        "
+[apply]
+	whitespace = nowarn
+[branch]
+	autosetupmerge = true
+[rebase]
+	autosquash = true
+{{- if eq .chezmoi.os "darwin" -}}
+# MacOS Specific version
+[merge]
+	tool = meld
+{{ else }}
+[merge]
+	tool = vscode
+{{ end -}}
+[mergetool "meld"]
+	cmd = meld $BASE $LOCAL $REMOTE --output $MERGED
+[mergetool "vscode"]
+	cmd = code --reuse-window --wait --diff $BASE $LOCAL $REMOTE $MERGED
+[difftool "vscode"]
+	cmd = code --reuse-window --wait --diff $BASE $LOCAL $REMOTE
+[push]
+	default = simple
+	autoSetupRemote = true
+[filter "media"]
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f
+[commit]
+	gpgsign = true
+[gpg]
+	program = gpg2
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[bash-it]
+	hide-status = 1
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+[url "git+ssh://{{ .launchpaduser }}@git.launchpad.net/"]
+	insteadof = lp:
+[merge]
+	guitool = meld
+[init]
+	defaultBranch = main
+[safe]
+	directory = /opt/flutter
+[interactive]
+	diffFilter = delta --color-only --line-numbers
+[delta]
+	features = Matcha-Dark-Theme zebra-dark
+[delta "Matcha-Dark-Theme"]
+	syntax-theme = Matcha-Dark
+	minus-style = syntax "#641f39"
+	minus-emph-style = syntax bold "#902c29"
+	plus-emph-style = "#9fca56" bold "#295738"
+	plus-style = syntax "#123730"
+	keep-plus-minus-markers = true

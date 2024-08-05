@@ -34,6 +34,13 @@
 {{-   $githubuser = promptString "githubuser" -}}
 {{- end -}}
 
+{{- $launchpaduser := "" -}}
+{{- if hasKey . "launchpaduser" -}}
+{{-   $launchpaduser = .launchpaduser -}}
+{{- else if $interactive -}}
+{{-   $launchpaduser = promptString "launchpaduser" -}}
+{{- end -}}
+
 {{- if $interactive -}}
 {{-   writeToStdout "💡 Tip: you can re-enter your data with `chezmoi init --data=false`.\n" -}}
 {{- end -}}
@@ -46,3 +53,4 @@ data:
   email: "{{ $email }}"
   signingkey: "{{ $signingkey }}"
   githubuser: "{{ $githubuser }}"
+  launchpaduser: "{{ $launchpaduser }}"

@@ -1,0 +1,106 @@
+/*
+* Copyright (C) © 🄯  2024 James Cuzella
+* This program is free software: you can redistribute it and/or modify it under
+* the terms of the GNU Affero General Public License as published by the Free
+* Software Foundation, either version 3 of the License, or (at your option) any
+* later version.
+*
+* This program is distributed in the hope that it will be useful, but WITHOUT
+* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+* FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+* details.
+*
+* You should have received a copy of the GNU Affero General Public License along
+* with this program. If not, see <https://www.gnu.org/licenses/>.
+*/
+
+#main {
+    border-radius: 10px;
+
+    background-color: #121718aa;
+    border-radius: 8px;
+    border-width: 2px;
+    border-color: #9FCA56ff;
+}
+
+#base {
+    margin: 10px;
+}
+
+.fullscale {
+    height: 100%;
+    width: 100%;
+}
+
+.colflex {
+    display: flex;
+    flex-direction: column;
+}
+
+.rowflex {
+    display: flex;
+    flex-direction: row;
+}
+
+.workspace {
+    margin: 10px;
+    border-radius: 8px;
+    border-width: 1px;
+    background-color: #0000000F;
+    border-color: #555555FF;
+}
+
+.window {
+    width: 100px;
+    height: 80px;
+    background-color: #1b2224ee;
+    border-radius: 8px;
+    border-width: 2px;
+    border-color: #282A2BFF;
+}
+
+.window_active {
+    width: 100px;
+    height: 80px;
+    background-color: #444444FF;
+    background-color: #141a1bee;
+    border-radius: 8px;
+    border-width: 2px;
+    border-color: #2EB398FF;
+}
+
+.title {
+    width: 100%;
+    height: 21px;
+    margin-top: 4px;
+    margin-left: 4px;
+    margin-right: 4px;
+    color: #CCD7D4FF;
+    font-size: 14px;
+    font-family: "JetBrainsMonoNL NFM ExtraBold:style=EstraBold,Bold";
+}
+
+.content {
+    width: 100%;
+    height: 100%;
+    margin-left: 4px;
+    margin-right: 4px;
+    color: #999999FF;
+    vertical-align: top;
+    font-size: 12px;
+    font-family: "JetBrainsMonoNL NFM ExtraBold:style=EstraBold,Bold";
+    word-wrap: break-word;
+    line-height: 24px;
+}
+
+.number {
+    width: 20px;
+    height: 20px;
+    right: -14px;
+    top: -9px;
+    color: #FFFFFFFF;
+    font-size: 18px;
+    font-family: "JetBrainsMonoNL NFM ExtraBold:style=EstraBold,Bold";
+/*    font-family: "Terminus (TTF):style=Bold"; */
+}
+

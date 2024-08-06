@@ -1,2 +1,13 @@
 LICENSE
 README.md
+{{ if not (lookPath "nwg-wrapper") -}}
+.config/nwg-wrapper
+{{ end -}}
+{{ if not (lookPath "sway") -}}
+# Don't install sway-related configs
+.config/sway
+.local/share/sway
+.config/sov
+.config/nwg-wrapper/sway-time.sh
+.config/nwg-wrapper/timezones.css
+{{ end -}}

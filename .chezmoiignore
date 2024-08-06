@@ -1,5 +1,8 @@
 LICENSE
 README.md
+{{ if not (lookPath "nwg-wrapper") -}}
+.config/nwg-wrapper
+{{ end -}}
 {{ if not (lookPath "sway") -}}
 # Don't install sway-related configs
 .config/sway

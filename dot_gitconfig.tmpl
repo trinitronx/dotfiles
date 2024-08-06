@@ -10,7 +10,7 @@
 	ui = auto
 [diff]
 	renames = true
-	guitool=vscode
+	guitool = vscode
 
 [core]
 	excludesfile = {{ .chezmoi.homeDir }}/.gitignore_global
@@ -36,10 +36,10 @@
 	squash = commit --squash
 	unstage = reset HEAD
 	rum = rebase master@{u}
-	lgs = log --graph  --pretty=format:'%C(auto)%h - %Cgreen(sig: %G?)%Creset -%d %s %Cgreen(%cr) %C(bold blue)<%an>%Creset%n%>|(10)%C(green)\\%Creset%n%>|(11)%C(green)gpg: Key ID %GK%Creset%n%C(green)%>|(250)%GG%Creset' --abbrev-commit
+	lgs = log --graph --pretty=format:'%C(auto)%h - %Cgreen(sig: %G?)%Creset -%d %s %Cgreen(%cr) %C(bold blue)<%an>%Creset%n%>|(10)%C(green)\\%Creset%n%>|(11)%C(green)gpg: Key ID %GK%Creset%n%C(green)%>|(250)%GG%Creset' --abbrev-commit
 	oldest-ancestor = !bash -c \"diff -u <(git rev-list --first-parent \\\"${1:-master}\\\") <(git rev-list --first-parent \\\"${2:-HEAD}\\\") | sed -ne 's/^ //p' | head -1\"
 	unstage-all = reset HEAD --
-	changes=diff --name-status -r
+	changes = diff --name-status -r
 	svn-switch = config svn-remote.svn.url
 	sw = config svn-remote.svn.url
 

@@ -1,3 +1,5 @@
+.vscode
+.sublime-text
 LICENSE
 README.md
 {{ if not (lookPath "nwg-wrapper") -}}

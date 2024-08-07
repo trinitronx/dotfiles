@@ -29,7 +29,9 @@
 	lola = log --graph --decorate --oneline --all --abbrev-commit
 	logg = log --graph --decorate --all
 	blog = log origin/master... --left-right
+	credit = blame --color-lines -w -C -C -C
 	ds = diff --staged
+	dw = diff --word-diff
 	ls = ls-files
 	l  = log --pretty=oneline --abbrev-commit
 	fixup = commit --fixup
@@ -47,6 +49,7 @@
 	whitespace = nowarn
 [branch]
 	autosetupmerge = true
+	sort = -committerdate
 [rebase]
 	autosquash = true
 {{- if eq .chezmoi.os "darwin" }}
@@ -103,3 +106,7 @@
 	plus-emph-style = "#9fca56" bold "#295738"
 	plus-style = syntax "#123730"
 	keep-plus-minus-markers = true
+[maintenance]
+	repo = {{ .chezmoi.homeDir }}/.local/share/chezmoi
+[fetch]
+	writeCommitGraph = true

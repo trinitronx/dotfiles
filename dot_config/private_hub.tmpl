@@ -1,0 +1,14 @@
+github.com:
+- user: {{ .githubuser }}
+{{- with (index ( printf "hub - GitHub token - %s" .chezmoi.hostname | lastpass) 0) -}}
+{{- $token_fullname_split_slice := (regexSplit " - " .note.notes -1) -}}
+{{- $last_idx := sub (len $token_fullname_split_slice) 1 }}
+  # {{ .note.name | trim }}
+  # Regen token name:
+  #   echo "hub - $(date +'%Y-%m-%d %H:%M:%S %z') - $(hostname) - {{ index $token_fullname_split_slice $last_idx | trim }}"
+  # {{ .note.notes | trim }}
+  # CREATED: {{ .note.createdDate | trim | toDate "January,02,2006" | date "2006-01-02" }}
+  # EXPIRES: {{ .note.expiryDate | trim | toDate "January,02,2006" | date "2006-01-02" }}
+  oauth_token: {{ .note.secretAPIKey | trim | quote }}
+  protocol: https
+{{- end }}

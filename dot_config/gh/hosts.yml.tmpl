@@ -2,4 +2,12 @@ github.com:
     user: {{ .githubuser }}
     git_protocol: ssh
     users:
-        {{ .githubuser }}: {}
+{{- if lookPath "lpass" -}}
+{{- $lpResults := ( printf "GitHub: gh - GitHub token - %s" .chezmoi.hostname | lastpass) -}}
+{{-   if $lpResults }}{{ $lpItem := index $lpResults 0 }}
+        # {{ $lpItem.note.name | trim }}
+        # CREATED: {{ $lpItem.note.creationDate | trim | toDate "January,02,2006" | date "2006-01-02" }}
+        {{ .githubuser }}: {{ if eq .chezmoi.os "darwin" | or (not $lpItem) }}{}{{ else }}
+            oauth_token: {{ $lpItem.note.clientsecret }}{{ end }}
+{{-   end -}}
+{{- end -}}

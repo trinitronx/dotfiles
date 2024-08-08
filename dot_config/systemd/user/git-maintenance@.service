@@ -7,6 +7,7 @@ Description=Optimize Git repositories data
 
 [Service]
 Type=oneshot
+Environment="SSH_AUTH_SOCK=%t/gnupg/S.gpg-agent.ssh"
 ExecStart="/usr/lib/git-core/git" --exec-path="/usr/lib/git-core" for-each-repo --config=maintenance.repo maintenance run --schedule=%i
 LockPersonality=yes
 MemoryDenyWriteExecute=yes

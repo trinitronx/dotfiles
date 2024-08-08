@@ -1,0 +1,17 @@
+--smart-case
+--pager=less -MIRFX
+
+# Customise file types
+--type-add=ruby=.haml,.ru
+--type-add=html=.html.erb,.html.haml
+--type-add=js=.js.erb,.coffee,.json
+--type-add=css=.sass,.scss
+--type-set=markdown=.markdown,.md,.mkd
+--type-add=restructuredtext=.rst
+
+# Ignore things
+--ignore-directory=tmp/librarian
+--ignore-directory=.kitchen
+--ignore-directory=.vagrant
+--nomarkdown
+--norestructuredtext

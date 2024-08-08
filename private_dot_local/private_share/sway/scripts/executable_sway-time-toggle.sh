@@ -13,8 +13,8 @@
 # You should have received a copy of the GNU Affero General Public License along
 # with this program. If not, see <https://www.gnu.org/licenses/>.
 
-sway_time_start_cmd=${XDG_DATA_HOME:-${HOME}/.local/share}/sway/scripts/sway-time-show.sh
-sway_time_kill_cmd=${XDG_DATA_HOME:-${HOME}/.local/share}/sway/scripts/sway-time-hide.sh
+sway_time_start_cmd="${XDG_DATA_HOME:-${HOME}/.local/share}/sway/scripts/sway-time-show.sh"
+sway_time_kill_cmd="${XDG_DATA_HOME:-${HOME}/.local/share}/sway/scripts/sway-time-hide.sh"
 time_overlay_state=/tmp/sway-time.state
 _sway_output_friendlyname="${default_output:-HDMI-A-1}"
 export _sway_output_friendlyname

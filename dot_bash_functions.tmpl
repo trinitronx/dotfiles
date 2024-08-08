@@ -50,11 +50,12 @@ sha256()
 pidport() {
   lsof -n -i4TCP:$1 | grep LISTEN
 }
-{{- end }}
 
+{{ end -}}
 {{ if eq .chezmoi.hostname "lyra" -}}
 fuck-it()
 {
   for h in ComputerName LocalHostName HostName ; do sudo scutil --set $h lyra; done
 }
-{{- end }}
+
+{{ end -}}

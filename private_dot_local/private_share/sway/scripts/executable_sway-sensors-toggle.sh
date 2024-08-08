@@ -16,9 +16,13 @@
 sway_sensors_start_cmd="${XDG_DATA_HOME:-${HOME}/.local/share}/sway/scripts/sway-sensors-show.sh"
 sway_sensors_kill_cmd="${XDG_DATA_HOME:-${HOME}/.local/share}/sway/scripts/sway-sensors-hide.sh"
 sensors_overlay_state=/tmp/sway-sensors.state
+_sway_output_friendlyname="${default_output:-HDMI-A-1}"
+
+# Find dynamic HDMI / output name & export this to pass to nwg-wrapper
+export SWAY_OUTPUT="$(swaymsg -t get_outputs  | jq -r ".[] | select(.type == \"output\") | [ select( ((.make + \" \" + .model + \" \" + .serial) | ascii_downcase | contains(\"${_sway_output_friendlyname}\" | ascii_downcase)) or (.name | ascii_downcase | contains(\"${_sway_output_friendlyname}\" | ascii_downcase)) ) ] | first | .name | select (.!=null)")"
 
 if pgrep --full  'nwg-wrapper -s sway-sensors.sh' 1>/dev/null 2>&1 ; then
-  swaylock_time_pid=$(pgrep --full  'nwg-wrapper -s sway-sensors.sh')
+  sway_sensors_pid=$(pgrep --full  'nwg-wrapper -s sway-sensors.sh')
   if [ -f "$sensors_overlay_state" ]; then
     state=$(cat "$sensors_overlay_state")
     if [[ "$state" -eq "1" ]]; then

@@ -20,6 +20,12 @@ README.md
 {{   if not (lookPath "nwg-wrapper") -}}
 # Sway-specific help script
 .config/nwg-wrapper/help.sh
+# Sensors overlay
+.config/nwg-wrapper/executable_sway-sensors.sh
+.config/sway/definitions.d/04-sensors-bg-overlay.conf
+.local/share/sway/scripts/executable_sway-sensors-hide.sh
+.local/share/sway/scripts/executable_sway-sensors-show.sh
+.local/share/sway/scripts/executable_sway-sensors-toggle.sh
 {{   end -}}
 {{   if not (lookPath "nwg-drawer") -}}
 .config/nwg-drawer

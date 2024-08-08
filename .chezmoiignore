@@ -16,6 +16,11 @@ README.md
 # Sway-specific help script
 .config/nwg-wrapper/help.sh
 {{   end -}}
+{{   if not (lookPath "nwg-drawer") -}}
+.config/nwg-drawer
+.config/sway/config.d/04-nwg-drawer.conf
+.config/sway/definitions.d/07-nwg-drawer.conf
+{{   end -}}
 {{   if not (lookPath "irssi") -}}
 .config/sway/definitions.d/08-irssi-fnotify.conf
 .local/share/sway/scripts/irssi-fnotify-local.sh

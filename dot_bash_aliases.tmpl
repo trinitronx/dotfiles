@@ -1,0 +1,5 @@
+alias rb=rbenv
+{{ if eq .chezmoi.os "darwin" -}}
+alias md5sum='md5 -r'
+alias brewski='brew update && brew upgrade && brew cleanup && brew cask cleanup; brew doctor'
+{{- end }}

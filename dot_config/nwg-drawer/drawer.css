@@ -1,0 +1,74 @@
+/*
+* Copyright (C) © 🄯  2023-2024 James Cuzella
+* This program is free software: you can redistribute it and/or modify it under
+* the terms of the GNU Affero General Public License as published by the Free
+* Software Foundation, either version 3 of the License, or (at your option) any
+* later version.
+*
+* This program is distributed in the hope that it will be useful, but WITHOUT
+* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+* FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+* details.
+*
+* You should have received a copy of the GNU Affero General Public License along
+* with this program. If not, see <https://www.gnu.org/licenses/>.
+*/
+window {
+/*    background-color: rgba (36, 47, 79, 0.95); */
+    background-color: rgba (18, 23, 24, 0.87);
+    color: #96e9d4;
+/*    font-family: "Roboto", "System-ui"; */
+    font-family: "System-ui";
+    font-weight: bold;
+}
+
+/* general text & selected text */
+/* textview text {
+  background-color: blue;
+  color: white;
+}
+  .view text selection {
+  background-color: green;
+  color: yellow;
+}
+*/
+
+/* search entry */
+entry {
+    background-color: rgba (34, 43, 46, 0.95);
+    color: #96e9d4
+}
+entry search text {
+    background-color: rgba (172, 116, 249, 0.95); /* #ac74f9 */
+    color: #96e9d4
+}
+
+
+button, image {
+    background: none;
+    border: none
+}
+
+button:hover {
+    background-color: rgba (255, 255, 255, 0.3)
+}
+
+button:focus {
+    background-color: rgba (43, 179, 152, 0.9)
+}
+
+/* in case you wanted to give category buttons a different look */
+#category-button {
+    margin: 0 10px 0 10px
+}
+
+#pinned-box {
+    padding-bottom: 5px;
+    border-bottom: 1px dotted #2eb398
+}
+
+#files-box {
+    padding: 5px;
+    border: 1px dotted gray;
+    border-radius: 15px
+}

@@ -20,6 +20,7 @@ README.md
 .config/nwg-drawer
 .config/sway/config.d/04-nwg-drawer.conf
 .config/sway/definitions.d/07-nwg-drawer.conf
+.local/share/sway/scripts/nwg-drawer.sh
 {{   end -}}
 {{   if not (lookPath "irssi") -}}
 .config/sway/definitions.d/08-irssi-fnotify.conf

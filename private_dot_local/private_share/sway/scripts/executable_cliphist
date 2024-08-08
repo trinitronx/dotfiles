@@ -1,0 +1,134 @@
+#!/usr/bin/env -S bash -x
+# Copyright (C) © 🄯  2023-2024 James Cuzella
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU Affero General Public License as published by the Free
+# Software Foundation, either version 3 of the License, or (at your option) any
+# later version.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+# details.
+#
+# You should have received a copy of the GNU Affero General Public License along
+# with this program. If not, see <https://www.gnu.org/licenses/>.
+
+PS4='+ $(date "+%s.%N") (${BASH_SOURCE}:${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
+# Wait for rofi-lpass watcher
+_done=0
+count=0
+rofi_lpass_pid=0
+# Close stdin to prevent any potential interference from subshell pgrep
+while ! [ "$_done" -eq 1 ] && ! rofi_lpass_pid=$(exec 0<&-; pgrep --full '.*bash.*/rofi-lpass finalize-progress-dialog' 2>/dev/null) ; do
+  # Waiting for rofi-lpass clipboard watcher to start
+  sleep 0.01
+  count=$((count+1))
+  if [ "$count" -gt 10 ]; then
+    # echo "rofi-lpass watcher not found!" >&2
+    _done=1
+  fi
+done
+
+# Pass along anything we recieved in env
+export CLIPHIST_DEBUG=1
+[ -n "$CLIPBOARD_STATE" ] && export CLIPBOARD_STATE
+if [ -n "$CLIPHIST_DEBUG" ] && [ "$CLIPHIST_DEBUG" == "1" ]; then
+  echo "CLIPBOARD_STATE initial value exported: $CLIPBOARD_STATE" >&2
+fi
+# run this in sway as:
+# exec wl-paste -t text --watch cliphist store
+
+app_json=$( swaymsg -t get_tree | jq -r '.. | select(.type?) | select(.focused==true)|.'  )
+app_id=$( echo "$app_json" | jq -r '.app_id'  )
+app_title=$( echo "$app_json" | jq -r '.name'  )
+app_xwayland_class=$( echo "$app_json" | jq -r '.window_properties.class'  )
+app_xwayland_title=$( echo "$app_json" | jq -r '.window_properties.title'  )
+app_xwayland_instance=$( echo "$app_json" | jq -r '.window_properties.instance'  )
+
+# Using extended glob patterns
+# Note: These are NOT RegEx! See: man bash "Pattern Matching"
+shopt -s extglob
+shopt -s nocasematch
+# Match app IDs
+case $app_id in
+  authenticator) ;&
+  chrome-hdokiejnpimakedhajhdlcegeplioahd-Default) ;& # LastPass Chrome Extension
+  gcr-prompter) ;&
+  org.keepassxc.KeePassXC) ;&
+  seahorse) ;&
+  veracrypt)
+    export CLIPBOARD_STATE=sensitive ;;
+esac
+# Match app name / title
+# Fallthrough any match to set sensitive clipboard state
+case $app_title in
+  *+(Yubico Authenticator|YubiKey Multifactor Authentication|VeraCrypt|TrueCrypt|seahorse)*) ;&
+  *+(My LastPass Vault|Extension: (LastPass: Free Password Manager)|Edit password|Reprompt)*) ;&
+  @(rofi-lpass:?( +(Added sensitive text to clipboard|sensitive))*)) ;&
+  # **(lpass show)*) ;&
+  # *+(Login)*+( Mozilla Firefox| Google Chrome)) export CLIPBOARD_STATE=sensitive ;;
+  *+(?(Secure )+(Login|LogIn|Log-In|log-in|login|Log into|Log Into|log in|Log In|Log in|Log-in|Sign in|Sign-in|Sign In|Sign-In|sign in|signin|Signin|Session Expired|MFA Verify|Account|Member Portal|create credential))*+( Mozilla Firefox| Google Chrome)) ;&
+  *+(TD Ameritrade|Advisor Client|Ally|FirstBank|HSA Bank Online|Northwestern Mutual|Alerus|American Century Investments|American Express|Citi.com|Discover Card|Intuit|PayPal|– Stripe|\| Empower|Orion Portfolio Solutions|Fidelity NetBenefits|Carta|freecreditscore.com|Wealthfront)*+( Mozilla Firefox| Google Chrome)) ;&
+  *+(Blockchain.com|CEX.IO|Coinbase|curecoin.net|LocalBitcoins|Braiins Pool|SwingTradeBot.com)*+( Mozilla Firefox| Google Chrome)) ;&
+  # 2FA / API key Pages
+  *+(2-Step Verification|2FA|Google Authenticator)*+( Mozilla Firefox| Google Chrome)) ;&
+  *+(API key)*+( Mozilla Firefox| Google Chrome)) ;&
+  *+(Add Actions secret|*(Fine-grained )Personal Access Tokens)*+( Mozilla Firefox| Google Chrome)) ;&
+  # Non-descriptive Login Pages
+  *+(MyADT|Netflix|Nextdoor|Nix Toolkit|TownSq|Stocktwits|StreetAuthority)*+( Mozilla Firefox| Google Chrome)) ;&
+  *+(Web Hosting, Domain Names, E-commerce - Bluehost)*+( Mozilla Firefox| Google Chrome)) ;&
+  *+(Account – Flux Smart Lighting|LIFX Cloud)*+( Mozilla Firefox| Google Chrome)) ;&
+  *+(Consolidated Holdings|Secure Messaging Portal|Tax Package Support)*+( Mozilla Firefox| Google Chrome)) ;&
+  *+(Online Service Center \| GEICO)*+( Mozilla Firefox| Google Chrome)) ;&
+  *+(GreenSky Customer Portal)*+( Mozilla Firefox| Google Chrome)) ;&
+  *+(Customer Portal: City and County of Broomfield)*+( Mozilla Firefox| Google Chrome)) ;&
+  *+(Marriott Bonvoy Hotels)*+( Mozilla Firefox| Google Chrome)) ;&
+  *+(Music and Podcasts, Free and On-Demand \| Pandora)*+( Mozilla Firefox| Google Chrome)) ;&
+  *+(Join * Community on Slack)*+( Mozilla Firefox| Google Chrome)) ;&
+  *+(Wayfair.com - Online Home Store for Furniture, Decor, Outdoors & More \| Wayfair )*+( Mozilla Firefox| Google Chrome))
+    export CLIPBOARD_STATE=sensitive ;;
+esac
+
+# XWayland Apps
+case $app_xwayland_class in
+  *+(Google-Chrome|Chromium)*) ;&
+  x-check-title-instance)
+    case $app_xwayland_title in
+      Reprompt)
+        export CLIPBOARD_STATE=sensitive ;;
+    esac
+    # Specify Extension IDs here (e.g. LastPass pop-up password prompt windows)
+    case $app_xwayland_instance in
+      crx_hdokiejnpimakedhajhdlcegeplioahd) # LastPass
+        export CLIPBOARD_STATE=sensitive ;;
+    esac
+    ;;
+esac
+
+shopt -u extglob
+shopt -u nocasematch
+
+if [ -n "$CLIPHIST_DEBUG" ] && [ "$CLIPHIST_DEBUG" == "1" ]; then
+  # ppid="$(ps -o ppid= -p "$$")"
+  # echo "ppid: $ppid"
+  echo "app_id=$app_id" >&2
+  echo "app_title=$app_title" >&2
+  echo "app_xwayland_class=$app_xwayland_class" >&2
+  echo "app_xwayland_title=$app_xwayland_title"  >&2
+  echo "app_xwayland_instance=$app_xwayland_instance" >&2
+
+  echo "CLIPBOARD_STATE exported: $CLIPBOARD_STATE" >&2
+  echo "EXECUTING: $(which cliphist)" >&2
+  echo "SHELL: $(cat /proc/$$/cmdline | tr '\0' ' ')" >&2
+  echo "PATH: $PATH" >&2
+  echo "GOPATH: $GOPATH" >&2
+  #echo "ENV: $(cat /proc/$$/environ | tr '\0' '\n')" >&2
+fi
+
+## TODO: Fix this when rofi_lpass_pid is multiple PIDs (separated by newlines)
+# Syntax error: Integer expression expected
+[ -n "$rofi_lpass_pid" ] && [ "$rofi_lpass_pid" -gt 1 ] && sleep 1
+# Translate non-UTF-8 chars into UTF-8 first
+#iconv -f ISO-8859-1 -t UTF-8//TRANSLIT -o - | cliphist "$@"
+# 2024-07-08: JMC: Try to simply translate / corerce into UTF-8, assuming UTF-8 input by default
+iconv -f UTF-8 -t UTF-8//TRANSLIT -o - | cliphist "$@"

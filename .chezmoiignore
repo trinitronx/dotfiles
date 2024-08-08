@@ -12,6 +12,10 @@ README.md
 .config/sov
 .config/nwg-wrapper/sway-time.sh
 .config/nwg-wrapper/timezones.css
+{{   if not (lookPath "nwg-wrapper") -}}
+# Sway-specific help script
+.config/nwg-wrapper/help.sh
+{{   end -}}
 {{ end -}}
 {{ if not (eq .chezmoi.os "linux") | or (not (lookPath "systemctl")) -}}
 # Don't install SystemD units

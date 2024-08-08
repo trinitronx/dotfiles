@@ -1,6 +1,10 @@
 # Editor Droppings #
 ####################
 .idea
+.vscode
+## Build Tools
+.cache
+compile_commands.json
 
 # OS generated files #
 ######################

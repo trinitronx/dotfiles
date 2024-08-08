@@ -1,0 +1,46 @@
+# Convert a unix timestamp to a readable format (like date12h in .bash_aliases)
+dateFromEpoch()
+{
+    #date +'%a %b %d %I:%M:%S %p %Z %Y' -d "@${1}"
+    date -r "${1}"
+}
+
+instance_info()
+{
+    local profile_cmd="";
+    if ( echo $1 | egrep -q -- '^i-' ); then
+        local instances=$*;
+    else
+        local profile_cmd="--profile=$1";
+        shift 1;
+        local instances=$*;
+    fi;
+    aws ${profile_cmd} --output=text ec2 describe-instances --instance-ids ${instances} | awk '$1~/^INSTANCES|TAGS/ {
+        if ($1~/INSTANCES/) print "\nInstanceId:", $8;
+        else if ($1 ~/TAGS/) print $2":", $3;
+    }'
+}
+
+dockerterm()
+{
+  CONTAINER=$1
+  docker exec -it $CONTAINER bash
+}
+
+{{ if eq .chezmoi.os "darwin" -}}
+sha256()
+{
+  shasum -a 256 "$1" | awk '{ print $1 }' | pbcopy
+}
+
+pidport() {
+  lsof -n -i4TCP:$1 | grep LISTEN
+}
+{{- end }}
+
+{{ if eq .chezmoi.hostname "lyra" -}}
+fuck-it()
+{
+  for h in ComputerName LocalHostName HostName ; do sudo scutil --set $h lyra; done
+}
+{{- end }}

@@ -1,0 +1,111 @@
+* {
+    all: unset;
+}
+
+.findex-window {
+    background: transparent;
+    border: none;
+}
+
+.findex-container {
+    background: rgb(20, 20, 20);
+    border-radius: 10px;
+    margin: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 20px -17px rgba(0,0,0,1);
+}
+
+.findex-query {
+    background: none;
+    padding: 20px 24px;
+    font-size: 25px;
+    border: none;
+    color: #ddd;
+    box-shadow: none;
+}
+
+.findex-query selection {
+    background: #404040;
+}
+
+.findex-query-icon {
+    margin: 20px 0 20px 20px;
+}
+
+.findex-query-container {
+    border: none;
+}
+
+.findex-results-scroll {
+    padding: 5px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: none;
+    background-image: none;
+}
+
+.findex-results {
+    background: none;
+    border-radius: 5px;
+}
+
+.findex-result-row {
+    outline: none;
+    margin: 5px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #202020;
+    border-left: 5px solid #bbbbbb;
+}
+
+.findex-result-row:selected {
+    border-left: 5px solid #50ee50;
+}
+
+.findex-result-trigger-shortcut {
+    padding-right: 20px;
+    color: #eee;
+}
+
+.findex-result-row:selected {
+    background: #252525;
+}
+
+.findex-result-app-name {
+    font-size: 15px;
+    font-weight: 500;
+    color: #ddd;
+}
+
+.findex-result-icon {
+    margin-right: 20px;
+}
+
+.findex-result-app-description,
+.findex-result-app-command {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.findex-result-app-name,
+.findex-result-app-description,
+.findex-result-app-command {
+    margin-left: 7px;
+}
+
+.findex-result-app-command {
+    font-style: italic;
+}
+
+.findex-result-row box:last-child {
+    margin-left: 10px;
+}
+
+.findex-results:first-child {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.findex-results:last-child {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom: 1px solid transparent;
+}

@@ -21,14 +21,18 @@
 .findex-window {
     background: transparent;
     border: none;
+    font-family: "System-ui";
 }
 
 .findex-container {
     background: rgb(20, 20, 20);
     border-radius: 10px;
     margin: 50px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 0 20px -17px rgba(0,0,0,1);
+    /* Matcha Light Charcoal */
+    border: 10px solid rgba(40, 42, 43, 0.95);
+    /* Matcha Olive */
+    /* same color as sov window border */
+    box-shadow: 0 0 20px -17px rgba(159, 202, 86, 0.95);
 }
 
 .findex-query {
@@ -50,6 +54,8 @@
 
 .findex-query-container {
     border: none;
+    /* Matcha Teal */
+    box-shadow: 0 0 15px -10px rgba(46, 179, 152, 0.95);
 }
 
 .findex-results-scroll {
@@ -71,10 +77,15 @@
     border-radius: 5px;
     border: 1px solid #202020;
     border-left: 5px solid #bbbbbb;
+    /* Animate selected colors */
+    transition:
+        border-left-color 300ms ease-in-out,
+        background 500ms ease-in-out;
 }
 
 .findex-result-row:selected {
-    border-left: 5px solid #50ee50;
+    /* Matcha Teal */
+    border-left: 5px solid #2eb398;
 }
 
 .findex-result-trigger-shortcut {

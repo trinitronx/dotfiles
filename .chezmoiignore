@@ -20,6 +20,11 @@ README.md
 .config/sway/definitions.d/05-dragon-drop.conf
 .local/bin/dragon-drop-last-screenshot.sh
 {{   end -}}
+{{   if not (lookPath "findex") -}}
+.config/sway/config.d/04-findex.conf
+.config/sway/definitions.d/05-findex.conf
+.config/findex
+{{   end -}}
 {{   if not (lookPath "nwg-wrapper") -}}
 # Sway-specific help script
 .config/nwg-wrapper/help.sh

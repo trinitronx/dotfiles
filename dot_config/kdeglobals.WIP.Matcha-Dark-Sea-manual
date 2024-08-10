@@ -1,0 +1,113 @@
+# Copyright (C) © 🄯  2023-2024 James Cuzella
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU Affero General Public License as published by the Free
+# Software Foundation, either version 3 of the License, or (at your option) any
+# later version.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+# details.
+#
+# You should have received a copy of the GNU Affero General Public License along
+# with this program. If not, see <https://www.gnu.org/licenses/>.
+
+# Matcha Light Charcoal #282a2b
+# Matcha Teal #2eb398
+# Matcha Foreground text #f8f8f2
+
+[Colors:View]
+#Background Alternate
+BackgroundAlternate=#282a2b
+#Background Color
+BackgroundNormal=#222b2e
+#Background Color on active Selection
+#DecorationFocus=#2eb398
+DecorationFocus=#30393b
+#Hover Background Color
+DecorationHover=#38464b
+#Alerts/Messages/Warnings
+ForegroundActive=184,187,38
+#Certain placeholder text in search boxes
+ForegroundInactive=55,115,117
+#Hyperlink Color
+ForegroundLink=142,192,124
+ForegroundNegative=218,68,83
+ForegroundNeutral=246,116,0
+#Text Color on Foreground
+ForegroundNormal=#f8f8f2
+ForegroundPositive=39,174,96
+ForegroundVisited=127,140,141
+
+[Colors:Window]
+BackgroundAlternate=52,51,50
+#Background Color
+#BackgroundNormal=#282a2b
+BackgroundNormal=#1b2224
+DecorationFocus=39,94,160
+#DecorationHover=87,129,176
+ForegroundActive=150,191,240
+ForegroundInactive=120,119,117
+ForegroundLink=80,142,216
+ForegroundNegative=232,88,72
+ForegroundNeutral=192,162,95
+ForegroundNormal=224,222,219
+ForegroundPositive=120,183,83
+ForegroundVisited=142,121,165
+
+[Colors:Button]
+BackgroundAlternate=66,65,64
+BackgroundNormal=64,63,62
+##DecorationFocus=39,94,160
+DecorationFocus=#2eb398
+#DecorationHover=87,129,176
+DecorationHover=#289b83
+ForegroundActive=150,191,240
+ForegroundInactive=120,119,117
+ForegroundLink=80,142,216
+ForegroundNegative=232,88,72
+ForegroundNeutral=192,162,95
+ForegroundNormal=232,230,227
+ForegroundPositive=120,183,83
+ForegroundVisited=142,121,165
+
+[Colors:Selection]
+BackgroundAlternate=#289b83
+#Hovering over Highlight
+BackgroundNormal=#2eb398
+DecorationFocus=#289b83
+#BackgroundNormal=104,157,106
+#DecorationFocus=104,157,106
+
+DecorationHover=131,165,152
+
+ForegroundActive=252,252,252
+ForegroundInactive=235,219,178
+ForegroundLink=253,188,75
+ForegroundNegative=218,68,83
+ForegroundNeutral=246,116,0
+#Text Color on active selection
+#ForegroundNormal=235,219,178
+ForegroundNormal=#222218
+
+ForegroundPositive=39,174,96
+ForegroundVisited=189,195,199
+
+[Colors:Tooltip]
+BackgroundAlternate=60,56,54
+#Tooltip Background Color
+BackgroundNormal=40,40,40
+DecorationFocus=#2eb398
+DecorationHover=#2eb398
+#DecorationHover=131,165,152
+ForegroundActive=184,187,38
+#Tooltip Text Alternate Color
+ForegroundInactive=55,115,117
+ForegroundLink=142,192,124
+ForegroundNegative=218,68,83
+ForegroundNeutral=246,116,0
+#Tooltip Text
+ForegroundNormal=235,219,178
+ForegroundPositive=39,174,96
+ForegroundVisited=127,140,141
+

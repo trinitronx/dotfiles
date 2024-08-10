@@ -18,6 +18,10 @@
 # Source: Matcha-sea/colors in theme .tar
 #   https://store.kde.org/p/1312390
 #   https://github.com/vinceliuice/Matcha-kde/blob/master/color-schemes/MatchaSeaDark.colors
+
+# Matcha Light Charcoal #282a2b
+# Matcha Teal #2eb398
+# Matcha Foreground text #f8f8f2
 [ColorEffects:Disabled]
 Color=56,56,56
 ColorAmount=0
@@ -54,6 +58,7 @@ ForegroundVisited=46,179,152
 
 [Colors:Selection]
 BackgroundAlternate=29,153,243
+#Hovering over Highlight
 BackgroundNormal=46,179,152
 DecorationFocus=65,255,214
 DecorationHover=65,255,214
@@ -62,40 +67,53 @@ ForegroundInactive=176,214,214
 ForegroundLink=253,188,75
 ForegroundNegative=218,68,83
 ForegroundNeutral=246,116,0
+#Text Color on active selection
 ForegroundNormal=237,246,255
 ForegroundPositive=39,174,96
 ForegroundVisited=230,171,230
 
 [Colors:Tooltip]
 BackgroundAlternate=27,34,36
+#Tooltip Background Color
 BackgroundNormal=53,57,69
 DecorationFocus=46,179,152
 DecorationHover=46,179,152
 ForegroundActive=60,232,206
+#Tooltip Text Alternate Color
 ForegroundInactive=102,106,115
 ForegroundLink=41,128,185
 ForegroundNegative=218,68,83
 ForegroundNeutral=246,116,0
+#Tooltip Text
 ForegroundNormal=211,218,227
 ForegroundPositive=39,174,96
 ForegroundVisited=46,179,152
 
 [Colors:View]
+#Background Alternate
 BackgroundAlternate=34,43,46
+#Background Color
 BackgroundNormal=34,43,46
+#Background Color on active Selection
 DecorationFocus=46,179,152
+#Hover Background Color
 DecorationHover=46,179,152
+#Alerts/Messages/Warnings
 ForegroundActive=60,232,206
+#Certain placeholder text in search boxes
 ForegroundInactive=102,106,115
+#Hyperlink Color
 ForegroundLink=41,128,185
 ForegroundNegative=218,68,83
 ForegroundNeutral=246,116,0
+#Text Color on Foreground
 ForegroundNormal=211,218,227
 ForegroundPositive=39,174,96
 ForegroundVisited=46,179,152
 
 [Colors:Window]
 BackgroundAlternate=27,34,36
+#Background Color
 BackgroundNormal=27,34,36
 DecorationFocus=46,179,152
 DecorationHover=46,179,152

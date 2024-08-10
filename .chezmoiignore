@@ -46,6 +46,9 @@ README.md
 .local/share/sway/scripts/irssi-fnotify-local.sh
 {{   end -}}
 {{ end -}}
+{{ if not (lookPath "qt5ct") | or (not (lookPath "qt6ct")) -}}
+.config/kdeglobals
+{{ end -}}
 {{ if not (eq .chezmoi.os "linux") | or (not (lookPath "systemctl")) -}}
 # Don't install SystemD units
 .config/systemd

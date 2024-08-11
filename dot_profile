@@ -3,7 +3,7 @@
 export EDITOR=nvim
 
 # Most pure GTK3 apps use wayland by default, but some,
-# like Firefox, need the backend to be explicitely selected.
+# such as Firefox, require the backend to be explicitly selected.
 export MOZ_ENABLE_WAYLAND=1
 export MOZ_DBUS_REMOTE=1
 export GTK_CSD=0
@@ -18,10 +18,13 @@ export _JAVA_AWT_WM_NONREPARENTING=1
 
 # set default shell and terminal
 export SHELL=/usr/bin/zsh
-export TERMINAL_COMMAND=/usr/share/sway/scripts/foot.sh
+export TERMINAL_COMMAND=xdg-terminal-exec
 
 # add default location for zeit.db
-export ZEIT_DB="$HOME/config/zeit.db"
+export ZEIT_DB="$HOME/.config/zeit.db"
+
+# set ozone platform to wayland
+export ELECTRON_OZONE_PLATFORM_HINT=wayland
 
 # Disable hardware cursors. This might fix issues with
 # disappearing cursors
@@ -29,6 +32,9 @@ if systemd-detect-virt -q; then
     # if the system is running inside a virtual machine, disable hardware cursors
     export WLR_NO_HARDWARE_CURSORS=1
 fi
+
+# Disable warnings by OpenCV
+export OPENCV_LOG_LEVEL=ERROR
 
 set -a
 . "$HOME/.config/user-dirs.dirs"

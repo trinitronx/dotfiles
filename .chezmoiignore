@@ -19,6 +19,9 @@ README.md
 {{ if not (lookPath "zeit") -}}
 .config/profile.d/08-zeit.sh
 {{ end -}}
+{{ if not (lookPath "opencv_version") -}}
+.config/profile.d/08-opencv.sh
+{{ end -}}
 {{ if not (lookPath "sway") -}}
 # Don't install sway-related configs
 .config/sway

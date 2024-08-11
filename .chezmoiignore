@@ -8,6 +8,10 @@ README.md
 {{ if not (lookPath "nwg-wrapper") -}}
 .config/nwg-wrapper
 {{ end -}}
+{{ if not (lookPath "wayland-scanner") | or (not (eq .xdg_session_type "wayland")) -}}
+# Don't install wayland-related configs
+.config/profile.d/00-wayland.sh
+{{ end -}}
 {{ if not (lookPath "sway") -}}
 # Don't install sway-related configs
 .config/sway

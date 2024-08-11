@@ -6,9 +6,6 @@ export EDITOR=nvim
 export SHELL=/usr/bin/zsh
 export TERMINAL_COMMAND=xdg-terminal-exec
 
-# add default location for zeit.db
-export ZEIT_DB="$HOME/.config/zeit.db"
-
 # Disable warnings by OpenCV
 export OPENCV_LOG_LEVEL=ERROR
 

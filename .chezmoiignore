@@ -16,6 +16,9 @@ README.md
 # Don't install wayland-related configs
 .config/profile.d/00-wayland.sh
 {{ end -}}
+{{ if not (lookPath "zeit") -}}
+.config/profile.d/08-zeit.sh
+{{ end -}}
 {{ if not (lookPath "sway") -}}
 # Don't install sway-related configs
 .config/sway

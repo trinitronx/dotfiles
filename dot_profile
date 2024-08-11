@@ -1,6 +1,4 @@
 #!/bin/sh
-# make default editor Neovim
-export EDITOR=nvim
 
 set -a
 . "$HOME/.config/user-dirs.dirs"

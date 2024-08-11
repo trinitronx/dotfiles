@@ -8,6 +8,9 @@ README.md
 {{ if not (lookPath "nwg-wrapper") -}}
 .config/nwg-wrapper
 {{ end -}}
+{{ if not (eq .chezmoi.os "darwin") -}}
+.config/profile.d/01-osx-manpath.sh
+{{ end -}}
 {{ if not (lookPath "wayland-scanner") | or (not (eq .xdg_session_type "wayland")) -}}
 # Don't install wayland-related configs
 .config/profile.d/00-wayland.sh

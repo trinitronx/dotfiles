@@ -2,9 +2,6 @@
 # make default editor Neovim
 export EDITOR=nvim
 
-# set default shell
-export SHELL=/usr/bin/zsh
-
 set -a
 . "$HOME/.config/user-dirs.dirs"
 set +a

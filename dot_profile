@@ -1,16 +1,4 @@
 #!/bin/sh
-# make default editor Neovim
-export EDITOR=nvim
-
-# set default shell and terminal
-export SHELL=/usr/bin/zsh
-export TERMINAL_COMMAND=xdg-terminal-exec
-
-# add default location for zeit.db
-export ZEIT_DB="$HOME/.config/zeit.db"
-
-# Disable warnings by OpenCV
-export OPENCV_LOG_LEVEL=ERROR
 
 set -a
 . "$HOME/.config/user-dirs.dirs"

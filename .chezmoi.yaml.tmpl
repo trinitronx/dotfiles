@@ -41,6 +41,13 @@
 {{-   $launchpaduser = promptString "launchpaduser" -}}
 {{- end -}}
 
+{{- $xdg_session_type := "" -}}
+{{- if hasKey . "xdg_session_type" -}}
+{{-   $xdg_session_type = .xdg_session_type -}}
+{{- else if (env "XDG_SESSION_TYPE") -}}
+{{-   $xdg_session_type = env "XDG_SESSION_TYPE" -}}
+{{- end -}}
+
 {{- if $interactive -}}
 {{-   writeToStdout "💡 Tip: you can re-enter your data with `chezmoi init --data=false`.\n" -}}
 {{- end -}}
@@ -54,3 +61,6 @@ data:
   signingkey: "{{ $signingkey }}"
   githubuser: "{{ $githubuser }}"
   launchpaduser: "{{ $launchpaduser }}"
+  # platform-specific vars
+  xdg_session_type: "{{ $xdg_session_type }}"
+

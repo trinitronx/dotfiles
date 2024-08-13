@@ -2,6 +2,7 @@
 # ~/.bashrc
 #
 
+# If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
 colors() {
@@ -112,7 +113,3 @@ shopt -s expand_aliases
 # Enable history appending instead of overwriting.  #139609
 shopt -s histappend
 
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-## Rely on ~/.config/profile.d/99-z-rvm-path.sh instead
-#export PATH="$PATH:$HOME/.rvm/bin"

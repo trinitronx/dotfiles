@@ -225,7 +225,7 @@ fi
 
   # Set default Docker Machine name for Bash-It plugin to setup our DOCKER_HOST & env vars
   #BASH_IT_DOCKER_MACHINE=$(docker-machine active 2>/dev/null)
-  #[ -z $BASH_IT_DOCKER_MACHINE ] && BASH_IT_DOCKER_MACHINE=$(docker-machine ls --filter 'driver=virtualbox' --format '{{.Name}}')
+  #[ -z $BASH_IT_DOCKER_MACHINE ] && BASH_IT_DOCKER_MACHINE=$(docker-machine ls --filter 'driver=virtualbox' --format '{{`{{.Name}}`}}')
   BASH_IT_DOCKER_MACHINE=dm
   
   # If ChefDK is installed, set path

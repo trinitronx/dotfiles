@@ -1,0 +1,5 @@
+{{- if eq .chezmoi.os "linux" -}}
+{{- template "bash/dot_bashrc.manjaro" . -}}
+{{- else if eq .chezmoi.os "darwin" -}}
+{{- template "bash/dot_bashrc.macOS" . -}}
+{{- end -}}

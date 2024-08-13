@@ -33,7 +33,6 @@ colors() {
 }
 
 [ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
-command -v soroban  2>&1 >/dev/null && [ -x "$(command -v soroban)" ] && source <(soroban completion --shell bash)
 
 # Change the window title of X terminals
 case ${TERM} in

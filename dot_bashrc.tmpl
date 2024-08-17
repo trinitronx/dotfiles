@@ -1,5 +1,6 @@
 {{- if eq .chezmoi.os "linux" -}}
-{{- template "bash/dot_bashrc.manjaro" . -}}
+{{- $bashrcTmpl := (printf "bash/dot_bashrc.%s" .chezmoi.osRelease.id) -}}
+{{- template "$bashrcTmpl" . -}}
 {{- else if eq .chezmoi.os "darwin" -}}
 {{- template "bash/dot_bashrc.macOS" . -}}
 {{- end -}}

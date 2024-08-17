@@ -1,3 +1,6 @@
+# ~/.bashrc: executed by bash(1) for non-login shells.
+# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
+# for examples
 #######################
 ## BEGIN TIME PROFILING
 #######################
@@ -107,7 +110,7 @@ export DEBSIGN_KEYID='{{ .signingkey }}'
 # For special options to pass to dpkg-buildpackage
 #DEBUILD_DPKG_BUILDPACKAGE_OPTS="-i -ICVS -I.svn"
 export DEBUILD_DPKG_BUILDPACKAGE_OPTS="-sa -k${DEBSIGN_KEYID}"
-export DEBUILD_LINTIAN_OPTS="-i -I --show-overrides"
+export DEBUILD_LINTIAN_OPTS='-i -I --show-overrides'
 export EDITOR="vim"
 # Setup dquilt alias
 # See Debian Maintainer's Guide:
@@ -117,12 +120,6 @@ alias dquilt="quilt --quiltrc=${HOME}/.quiltrc-dpkg"
 export QUILT_PATCHES=debian/patches
 export QUILT_REFRESH_ARGS="-p ab --no-timestamps --no-index"
 
-## Only set PATH in ~/.profile
-#PATH=$HOME/sbin:$HOME/bin:$PATH
-# Bazaar settings: Stored in ~/.bazaar/bazaar.conf
-
-# Set window title for compiz window rules
-#detect-dualscreen
 
 # Tell Python to use .pythonrc
 #export PYTHONSTARTUP=${HOME}/.pythonrc
@@ -130,6 +127,14 @@ export QUILT_REFRESH_ARGS="-p ab --no-timestamps --no-index"
 # SC local dev settings
 #export ANT_HOME=/usr/share/ant/
 #export JAVA_HOME=/usr/lib/jvm/java-7-oracle/
+# Disable Software Flow Control (XOFF/XON) (Ctrl+S/Ctrl+Q)
+# Reference: https://unix.stackexchange.com/a/72092/7688
+# I like Ctrl+R Ctrl+S better for history search back / forward better!
+# Ctrl+R = (reverse-i-search)
+# Ctrl+S = (i-search)
+stty -ixon
+
+
 
 # Node.js global module path
 export NODE_PATH=/usr/local/lib/node_modules/

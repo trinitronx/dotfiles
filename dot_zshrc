@@ -1,0 +1,44 @@
+# Use powerline
+USE_POWERLINE="true"
+
+## 2024-06-03 JMC: This is broken again!
+## ZSH_AUTOSUGGEST_IGNORE_WIDGETS Workaround now failing to work also!
+## The culprit is https://github.com/zsh-users/zsh-autosuggestions/issues/363
+## Ref: https://unix.stackexchange.com/questions/426640/zsh-yanks-only-last-cut-word
+## Seems that enabling this AND the ZSH_AUTOSUGGEST_IGNORE_WIDGETS does not work
+## Yet, with this disabled and $ZSH_AUTOSUGGEST_IGNORE_WIDGETS set... it works again!
+# Set backward-kill-word like bash
+#autoload -U select-word-style
+#select-word-style bash
+
+# Disables the mzc_termsupport_precmd() function in manjaro-zsh-config
+MZC_DISABLE_AUTO_TITLE=true
+MZC_DISABLE_AUTO_TITLE_HOOK=true
+
+# Source manjaro-zsh-configuration
+if [[ -e /usr/share/zsh/manjaro-zsh-config ]]; then
+  source /usr/share/zsh/manjaro-zsh-config
+fi
+# Use manjaro zsh prompt
+if [[ -e /usr/share/zsh/manjaro-zsh-prompt ]]; then
+#  source /usr/share/zsh/manjaro-zsh-prompt
+## 2024-06-03 JMC: Trying to test a bugfix
+##  Using: https://github.com/zsh-users/zsh-autosuggestions/pull/551
+  source /home/trinitronx/src/pub/zsh-autosuggestions/manjaro-zsh-prompt
+fi
+
+# Ctrl + space to accept autosuggestion
+bindkey '^ ' autosuggest-accept
+
+# Restore yank buffer behavior change by autosuggest
+# After sourcing zsh-autosuggestions.zsh
+ZSH_AUTOSUGGEST_IGNORE_WIDGETS+=(backward-kill-word)
+ZSH_AUTOSUGGEST_IGNORE_WIDGETS+=(backward-kill-word-match)
+ZSH_AUTOSUGGEST_IGNORE_WIDGETS+=(backward-kill-\*)
+#echo $ZSH_AUTOSUGGEST_IGNORE_WIDGETS
+
+# 2023-08-21: Moved to .profile
+#export GOPATH=$HOME/src/pub/go
+#PATH=$PATH:$GOPATH/bin
+#PATH=$PATH:/usr/local/opt/go/libexec/bin
+source ${HOME}/.config/zsh/.zprofile

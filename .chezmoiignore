@@ -2,6 +2,10 @@
 .sublime-text
 LICENSE
 README.md
+.config/zsh/.zcompdump*
+.zsh/
+.zsh/cache
+.zsh_history
 {{ if not (lookPath "ack") -}}
 .ackrc
 {{ end -}}

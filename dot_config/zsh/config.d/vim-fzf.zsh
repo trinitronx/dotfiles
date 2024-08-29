@@ -1,0 +1,1 @@
+vim-fzf() { "$EDITOR" "$(fzf)"; }

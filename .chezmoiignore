@@ -24,6 +24,10 @@ README.md
 {{ if not (lookPath "opencv_version") -}}
 .config/profile.d/08-opencv.sh
 {{ end -}}
+{{ if not (lookPath "rg") -}}
+.config/ripgrep
+.config/profile.d/07-ripgrep-conf.sh
+{{ end -}}
 {{ if not (lookPath "sway") -}}
 # Don't install sway-related configs
 .config/sway

@@ -62,6 +62,9 @@ README.md
 .local/share/sway/scripts/irssi-fnotify-local.sh
 {{   end -}}
 {{ end -}}
+{{ if not (lookPath "fzf") -}}
+.config/zsh/config.d/*-fzf*.zsh
+{{ end -}}
 {{ if not (lookPath "mpv") -}}
 .config/mpv
 {{ end -}}

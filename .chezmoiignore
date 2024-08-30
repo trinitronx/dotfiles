@@ -62,6 +62,9 @@ README.md
 .local/share/sway/scripts/irssi-fnotify-local.sh
 {{   end -}}
 {{ end -}}
+{{ if not (lookPath "mpv") -}}
+.config/mpv
+{{ end -}}
 {{ if not (lookPath "qt5ct") | or (not (lookPath "qt6ct")) -}}
 .config/kdeglobals
 {{ end -}}

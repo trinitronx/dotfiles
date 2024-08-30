@@ -78,3 +78,6 @@ README.md
 # Don't install SystemD units
 .config/systemd
 {{ end -}}
+{{ if not (eq .chezmoi.os "linux") | and (hasKey .chezmoi.osRelease "idLike" | and (not (eq (index .chezmoi.osRelease "idLike") "arch"))) | or (not (lookPath "yay")) -}}
+.config/zsh/config.d/03-yay-fzf-search.zsh
+{{ end -}}

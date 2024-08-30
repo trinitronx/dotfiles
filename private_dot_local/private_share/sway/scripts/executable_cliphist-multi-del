@@ -1,0 +1,10 @@
+#!/bin/bash
+cliphist list | rofi -p 'Select clipboard item(s) to delete' \
+    -font 'JetBrainsMono Nerd Font 12' \
+    -dmenu -theme-str 'window{ width: 60%;}' \
+    -multi-select | \
+  tr '\n' '\0' | \
+  while read -d $'\0' line ;
+  do
+    echo "$line" | cliphist delete ;
+  done

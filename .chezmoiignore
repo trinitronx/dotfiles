@@ -5,6 +5,9 @@ README.md
 {{ if not (lookPath "ack") -}}
 .ackrc
 {{ end -}}
+{{ if not (lookPath "azap") -}}
+.azap
+{{ end -}}
 {{ if not (lookPath "nwg-wrapper") -}}
 .config/nwg-wrapper
 {{ end -}}

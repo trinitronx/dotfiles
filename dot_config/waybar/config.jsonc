@@ -1,0 +1,15 @@
+[{
+    "id": "default",
+    "include": [
+        "/usr/share/sway/templates/waybar/config.jsonc"
+    ]
+},
+{
+    "id": "bar-1",
+    "name": "bar-1",
+    "ipc": true,
+    "include": [
+        "$HOME/.config/waybar/config.d/*.jsonc",
+        "/usr/share/sway/templates/waybar/config.jsonc"
+    ]
+}]

@@ -1,0 +1,16 @@
+{
+  "custom/menu#nwg-drawer": {
+    "min-length": 3,
+    "max-length": 10,
+    "format": "{icon} {}",
+    "format-icons": {
+      "open": "󰘔",
+      "closed": "󰀻"
+    },
+    "on-click": "swaymsg exec \\$nwg_drawer; pkill -SIGRTMIN+13 waybar",
+    "exec": "/home/trinitronx/.local/share/sway/scripts/nwg-drawer.sh",
+    "return-type": "json",
+    "tooltip": true,
+    "signal": 13
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "sway/window": {
+    "format": "{shell} {app_id} {title}",
+    "max-length": 50,
+    "rewrite": {
+      "^xdg_shell firefox (.*)\\s+—\\s+Mozilla Firefox": "  $1",
+      "^xdg_shell foot (.*)": "  [$1]",
+      "(.*) [—-] zsh": "  [$1]",
+      "^xdg_shell font-manager (.*)": "󰛖 $1",
+      "^xdg_shell audacity (.*?)": "󱑽 $1",
+      "^xdg_shell code-oss (.*) - Code - OSS": "󰨞  $1",
+      "^xdg_shell discord (.*)": "󰙯  $1",
+      "^xdg_shell waybar (.*)": "󱔓  $1",
+      "^xdg_shell file-roller (.*)": " $1",
+      "^xdg_shell pcmanfm (.*?)": "󰙅 $1",
+      "^xdg_shell seahorse (.*?)": "󱕵 $1",
+      "^xdg_shell org\\.manjaro\\.pamac\\.manager (.*?)": "󰀼 $1",
+      "^xdg_shell cmake-gui (.*?)": "󰯙 $1",
+      "^xdg_shell zenity (.*?)": "  $1",
+      "^xdg_shell org\\.gnome\\.dspy (.*?)": "🕵️‍♂️ $1",
+      "^xdg_shell (Darwinia .*?)": "󰊴  $1",
+      "^xwayland steamwebhelper (.*?)": "𝕏 𝕎𝕝  $1",
+      "^xwayland gamescope (Darwinia .*?)": "𝕏 𝕎𝕝 󰊴 󰓾  $1",
+      "^xdg_shell greedy-bad (.*?)": "$1",
+      "^xwayland greedy-bad (.*)": "𝕏 𝕎𝕝 $1"
+    }
+  }
+}

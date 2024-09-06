@@ -1,0 +1,27 @@
+{
+  "wlr/taskbar": {
+    "icon-size": 24,
+    "format": "{icon}{short_state}",
+    "tooltip-format": "{name}{title}{state}",
+    "markup": true,
+    "on-click": "minimize-raise",
+    "on-click-middle": "minimize",
+    "ignore-list": [
+      "Alacritty",
+      "foot",
+      "firefox-unignoreTODO"
+    ],
+    "app_ids-mapping": {
+      "firefoxdeveloperedition": "firefox-developer-edition"
+    },
+    "rewrite": {
+      "Code OSS": "Code",
+      "Firefox Web Browser": "Firefox",
+      "(.*)\\s+—\\s+Mozilla Firefox": " $1",
+      "(.*)A$": "$1",
+      "(.*?)[AmM]?F$": "$1",
+      "(.*?)A?m$": "$1",
+      "(.*?)A?M$": "$1"
+    }
+  }
+}

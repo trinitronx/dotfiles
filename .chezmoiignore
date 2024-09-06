@@ -14,6 +14,9 @@ README.md
 {{ if not (lookPath "nwg-wrapper") -}}
 .config/nwg-wrapper
 {{ end -}}
+{{ if not (lookPath "waybar") -}}
+.config/waybar
+{{ end -}}
 {{ if not (eq .chezmoi.os "darwin") -}}
 .config/profile.d/01-osx-manpath.sh
 .config/profile.d/01-osx-sbin-path.sh

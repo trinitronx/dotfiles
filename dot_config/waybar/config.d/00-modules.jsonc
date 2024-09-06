@@ -1,0 +1,16 @@
+{
+    "layer": "top",
+    // If height property would be not present, it'd be calculated dynamically
+    "height": 40,
+    "position": "bottom",
+
+    "modules-left": ["custom/menu#nwg-drawer"],
+    "modules-center": ["sway/window"],
+    "modules-right": ["wlr/taskbar","tray"],
+    "include": [
+        "$HOME/.config/waybar/config.d/menu-nwg-drawer.jsonc",
+        "$HOME/.config/waybar/config.d/sway-window.jsonc",
+        "$HOME/.config/waybar/config.d/wlr-taskbar.jsonc",
+        "$HOME/.config/waybar/config.d/tray.jsonc"
+    ]
+}

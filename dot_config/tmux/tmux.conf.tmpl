@@ -39,6 +39,14 @@ set -g mouse on
 # scrollback buffer size increase
 set -g history-limit 500000
 
+# Copy-mode OSC 133 shell integration
+# C-z scrolls back to last prompt
+#bind-key -T copy-mode  /  \; send-keys -X previous-prompt \; send-keys -X previous-prompt \; send-key /
+bind-key -T copy-mode    C-z send-keys -X next-prompt
+bind-key -T copy-mode-vi C-z send-keys -X next-prompt
+bind-key -T copy-mode    C-x send-keys -X previous-prompt
+bind-key -T copy-mode-vi C-x send-keys -X previous-prompt
+
 # C-b C-b will swap to last used window
 bind-key C-b last-window
 

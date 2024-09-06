@@ -22,6 +22,9 @@ README.md
 {{ if not (lookPath "nwg-wrapper") -}}
 .config/nwg-wrapper
 {{ end -}}
+{{ if not (lookPath "tmux") -}}
+.config/tmux
+{{ end -}}
 {{ if not (lookPath "waybar") -}}
 .config/waybar
 {{ end -}}

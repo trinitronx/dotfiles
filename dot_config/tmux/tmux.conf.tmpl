@@ -62,7 +62,31 @@ bind - split-window -v
 set-option -g terminal-overrides '*88col*:colors=88,*256col*:colors=256,xterm*:XT:Ms=\E]52;%p1%s;%p2%s\007:Cc=\E]12;%p1%s\007:Cr=\E]112\007:Cs=\E]50;CursorShape=%?%p1%{3}%<%t%{0}%e%p1%{2}%-%;%d\007'
 
 
-# tmux OSX pbcopy integration => Adapted to wl-copy for Wayland Linux
+{{ $comment_str := "" -}}
+{{ $copy_cmd := "" -}}
+{{ $paste_cmd := "" -}}
+{{ if (eq .chezmoi.os "linux") | and ((lookPath "wayland-scanner") | or (eq .xdg_session_type "wayland")) -}}
+{{   $comment_str = "Wayland Linux" -}}
+{{   $copy_cmd = "wl-copy" -}}
+{{   $paste_cmd = "wl-paste" -}}
+{{ else if (eq .chezmoi.os "linux") -}}
+{{   $comment_str = "Xorg Linux" -}}
+{{   $copy_cmd = "xclip -selection clipboard -in" -}}
+{{   $paste_cmd = "xclip -selection clipboard -o" -}}
+{{ else if (eq .chezmoi.os "darwin") -}}
+{{   $comment_str = "" -}}
+{{   $copy_cmd = "pbcopy" -}}
+{{   $paste_cmd = "pbpaste" -}}
+{{ else if (eq .chezmoi.os "windows") -}}
+{{   $comment_str = "Windows Subsystem for Linux" -}}
+{{   $copy_cmd = "perl -pe 'chomp if eof' | clip.exe" -}}
+{{   $paste_cmd = "powershell.exe Get-Clipboard | sed 's/\r$//'" -}}
+{{ else -}}
+{{   $comment_str = "Xorg Unknown OS" -}}
+{{   $copy_cmd = "xclip -selection clipboard -in" -}}
+{{   $paste_cmd = "xclip -selection clipboard -o" -}}
+{{ end -}}
+# tmux OSX pbcopy integration{{ if ne $comment_str "" }} => Adapted to {{ $copy_cmd }} for {{ $comment_str }}{{ end }}
 # Source: http://evertpot.com/osx-tmux-vim-copy-paste-clipboard/
 # Linux method reference: https://github.com/nicknisi/dotfiles/pull/167
 # Copy-paste integration
@@ -73,11 +97,11 @@ setw -g mode-keys vi
 
 # Setup 'v' to begin selection as in Vim
 bind-key -T copy-mode-vi v send-keys -X begin-selection
-bind-key -T copy-mode-vi y send-keys -X copy-pipe "wl-copy"
+bind-key -T copy-mode-vi y send-keys -X copy-pipe "{{ $copy_cmd }}"
 
 # Update default binding of `Enter` to also use copy-pipe
 unbind -T copy-mode-vi Enter
-bind-key -T copy-mode-vi Enter send-keys -X copy-pipe "wl-copy"
+bind-key -T copy-mode-vi Enter send-keys -X copy-pipe "{{ $copy_cmd }}"
 
-# Bind ']' to use pbpaste
-bind ] run "wl-paste | tmux load-buffer - && tmux paste-buffer"
+# Bind ']' to use wl-paste
+bind ] run "{{ $paste_cmd }} | tmux load-buffer - && tmux paste-buffer"

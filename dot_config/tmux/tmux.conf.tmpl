@@ -107,5 +107,5 @@ bind-key -T copy-mode-vi y send-keys -X copy-pipe "{{ $copy_cmd }}"
 unbind -T copy-mode-vi Enter
 bind-key -T copy-mode-vi Enter send-keys -X copy-pipe "{{ $copy_cmd }}"
 
-# Bind ']' to use wl-paste
+# Bind ']' to use {{ $paste_cmd }}
 bind ] run "{{ $paste_cmd }} | tmux load-buffer - && tmux paste-buffer"

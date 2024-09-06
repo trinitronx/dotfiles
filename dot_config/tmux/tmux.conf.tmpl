@@ -77,6 +77,10 @@ set-option -g terminal-overrides '*88col*:colors=88,*256col*:colors=256,xterm*:X
 {{   $comment_str = "" -}}
 {{   $copy_cmd = "pbcopy" -}}
 {{   $paste_cmd = "pbpaste" -}}
+{{   if lookPath "reattach-to-user-namespace" -}}
+{{     $copy_cmd = printf "%s%s" "reattach-to-user-namespace " $copy_cmd -}}
+{{     $paste_cmd = printf "%s%s" "reattach-to-user-namespace " $paste_cmd -}}
+{{   end -}}
 {{ else if (eq .chezmoi.os "windows") -}}
 {{   $comment_str = "Windows Subsystem for Linux" -}}
 {{   $copy_cmd = "perl -pe 'chomp if eof' | clip.exe" -}}

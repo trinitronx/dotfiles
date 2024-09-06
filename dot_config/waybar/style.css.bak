@@ -1,0 +1,255 @@
+@import url("/usr/share/sway/templates/waybar/style.css");
+
+
+@keyframes hover-unhide {
+    0% {
+        margin-bottom: -50px;
+    }
+    70% {
+        background-color: rgba(10, 9, 10, 0.0);
+    }
+
+    to {
+        background-color: rgba(10, 9, 10, 0.87);
+        margin-bottom: 0px;
+    }
+}
+
+window.bar-1 {
+    background-color: rgba(10, 9, 10, 0.0);
+}
+
+window.bar-1:hover box label {
+    background-color: rgba(10, 9, 10, 0.87);
+    animation-name: hover-unhide;
+    animation-duration: 1s;
+}
+
+/* Each bar-1 module */
+bar-1 {
+  background-color: rgba(10, 9, 10, 0.0);
+  font-size: 39pt;
+}
+
+/* Testing PoC workspace animation
+  https://github.com/Alexays/Waybar/issues/1904 
+*/
+#workspaces button {
+    /* border: 2px solid #ebdbb2; */
+    /* background-color: #282828;  */
+    /* color: #ebdbb2; */
+    /* margin: 3px 0px 3px 3px; */
+    border-radius: 5px;
+    /* padding-left: 0px; */
+    /* padding-right: 0px; */
+    margin-top: 2px;
+    /* border-top: 2px solid #ebdbb2; */
+    /* To compensate for the top border and still have vertical centering */
+    padding-bottom: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    transition-property: all;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-out;
+}
+
+/* Add extra space between manjaro custom/menu and 1st workspace button */
+#workspaces button:first-child {
+    margin-left: 5px;
+}
+/* Add extra space between workspace 10 and scratchpad */
+#workspaces button:last-child {
+    margin-right: 5px;
+}
+
+#workspaces button.focused {
+    /* background-color: #ebdbb2; */
+    /* color: #282828; */
+    border-radius: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    transition-property: all;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-out;
+}
+
+#workspaces button:hover {
+    border-top: 2px solid #ebdbb2;
+    border-left: 1px solid #ebdbb2;
+    border-right: 1px solid #ebdbb2;
+    border-bottom: 2px solid #ebdbb2;
+
+    padding-left: 9px;
+    padding-right: 9px;
+    padding-bottom: 0px;
+
+    transition-property: all;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-out;
+}
+
+#workspaces button.focused:hover {
+    border-top: 2px solid #ebdbb2;
+    border-left: 1px solid #ebdbb2;
+    border-right: 1px solid #ebdbb2;
+    border-bottom: 2px solid #ebdbb2;
+
+    padding-left: 9px;
+    padding-right: 9px;
+    padding-bottom: 0px;
+
+    transition-property: all;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-out;
+}
+/*
+#custom-menu.nwg-drawer {
+    padding-left: 8px;
+    padding-right: 0px;
+    background-color: #ffac10;
+   color: @theme_bg_color; 
+   background-color: @theme_selected_bg_color; 
+
+} */
+
+/*
+#custom-menu.bar-1 .nwg-drawer {
+    padding-left: 8px;
+    padding-right: 13px;
+    color: @theme_bg_color;
+    background-color: @theme_selected_bg_color;
+} */
+
+/*
+window.bar-1 label#custom-menu.nwg-drawer {
+    font-size: 15pt;
+}
+*/
+
+window.bar-1 #taskbar button {
+    border-top: 2px solid transparent;
+    /* To compensate for the top border and still have vertical centering */
+    padding-bottom: 2px;
+    padding-left: 1px;
+    padding-right: 1px;
+    margin-left: 1px;
+    margin-right: 1px;
+    color: @theme_selected_bg_color;
+
+    background-image: radial-gradient(circle at 50% 50%, @theme_selected_bg_color 0%, @theme_bg_color 58%);
+    -gtk-dpi: 36;
+    background-size: 100% 100%;
+
+    transition-property: all;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in;
+}
+
+/* TODO: Figure out button sibling border sizes to look like macOS */
+
+window.bar-1 #taskbar button:hover box {
+    border-bottom: 10px solid transparent; /*  */
+    color: @theme_selected_bg_color;
+
+    background-image: radial-gradient(circle at 51% 51%, @theme_selected_bg_color 0%, @theme_bg_color 83%);
+    -gtk-dpi: 36;
+    background-size: 100% 100%;
+    /* transform: scale(1.5); */
+    transition-property: all;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in;
+}
+/* Transition back to un-hovered state */
+window.bar-1 #taskbar button + button box {
+    border-bottom: 3px solid transparent; /*  */
+    background-color: @theme_bg_color;
+    color: @theme_fg_color;
+
+    transition-property: all;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in;
+}
+/* TODO: Figure out previous sibling... as next sibling works below */
+window.bar-1 #taskbar button:hover + button box {
+    border-bottom: 3px solid transparent; /*  */
+    color: @theme_selected_bg_color;
+
+    background-image: radial-gradient(circle at 51% 51%, @theme_selected_bg_color 0%, @theme_bg_color 83%);
+    -gtk-dpi: 36;
+    background-size: 100% 100%;
+    /* transform: scale(1.5); */
+    transition-property: all;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in;
+}
+
+
+window.bar-1 #taskbar button.active label {
+    color: @theme_bg_color;
+    font-weight: bolder;
+    -gtk-dpi: 36; /* Testing to match Vizio M601d */
+    font-size: 39pt;
+    /* font-size: 14pt; */
+    padding-right: 8px;
+    transition-property: all;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in;
+}
+
+window.bar-1 #taskbar button.active {
+    transition-property: all;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in;
+    /* background-color: @theme_selected_bg_color; */
+    background-image: radial-gradient(circle farthest-side at left bottom, @theme_bg_color, mix(@selected_fg_color, @theme_selected_bg_color, 0.4) 1px, @theme_selected_bg_color);
+    border-color: @theme_selected_color;
+    -gtk-dpi: 96;
+}
+
+window.bar-1 #taskbar button.active:hover {
+    /* border-color: rgba(0,0,0,0.0); TODO: Fix transparent border on active button */
+    border-color: rgba(255,255,255,1.0);
+}
+
+/* window.bar-1 #taskbar button:has(+ button:hover) label {
+    color: orange;
+    transition-property: all;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in;
+}
+:has() is not valid :-( 
+[2023-08-11 22:13:49.456] [info] Using CSS file /home/trinitronx/.config/waybar/style.css
+[2023-08-11 22:13:49.456] [error] style.css:201:29Invalid name of pseudo-class
+ */
+
+/* #taskbar.bar-1 button.minimized {
+    border-color: @theme_selected_bg_color;
+}
+
+#taskbar.bar-1 button.maximized {
+    border-color: @theme_selected_bg_color;
+} */
+
+#taskbar.bar-1 button.fullscreen {
+    border-color: @error_color;
+    color: @error_color;
+}
+
+#tray button {
+    border-top: 2px solid transparent;
+    /* To compensate for the top border and still have vertical centering */
+    padding-bottom: 2px;
+    padding-left: 0px;
+    padding-right: 0px;
+    color: @theme_selected_bg_color;
+}
+
+#tray button.focused {
+    border-color: @theme_selected_bg_color;
+}
+
+#tray button.urgent {
+    border-color: @error_color;
+    color: @error_color;
+}

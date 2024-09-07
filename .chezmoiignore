@@ -18,6 +18,10 @@ README.md
 {{ else if not (eq .chezmoi.os "linux") -}}
 .config/profile.d/00-xdg-terminal-command.sh
 {{ end -}}
+{{- /* Manjaro uses /usr/share/zsh/p10k.zsh from extra/manjaro-zsh-config */ -}}
+{{ if eq .osId "manjaro" -}}
+.p10k.zsh
+{{ end -}}
 {{ if not (lookPath "wayland-scanner") | or (not (eq .xdg_session_type "wayland")) -}}
 # Don't install wayland-related configs
 .config/profile.d/00-wayland.sh

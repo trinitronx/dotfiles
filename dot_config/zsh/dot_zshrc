@@ -10,7 +10,10 @@ export ZSH_PYENV_QUIET='true'
 # 2023-08-27: JMC: Override manjaro-sway-config so we can actually use plugins
 source "${XDG_CONFIG_HOME:-$HOME/.config}/oh-my-zsh/zshrc"
 
-#p10k instant prompt to make terminal open a bit snappier
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+# p10k instant prompt to make terminal open a bit snappier
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
@@ -30,7 +33,7 @@ fi
 alias ssh="TERM=xterm-256color ssh"
 source ~/.config/user-dirs.dirs
 
-# Source manjaro config
+# Source main OS-specific config
 source ~/.zshrc
 
 # fix for comment color on manjaro zsh theme

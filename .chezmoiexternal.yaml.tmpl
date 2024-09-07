@@ -10,6 +10,12 @@
   refreshPeriod: "168h"
   pull:
     args: ["--ff-only"]
+".config/oh-my-zsh/custom/plugins/zsh-tmux-auto-title":
+  type: "git-repo"
+  url: "https://github.com/mbenford/zsh-tmux-auto-title"
+  refreshPeriod: "168h"
+  pull:
+    args: ["--ff-only"]
 
 {{ if ne .osId "manjaro" -}}
 {{- /* Manjaro can rely on manjaro-sway/oh-my-zsh */ -}}

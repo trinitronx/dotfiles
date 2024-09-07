@@ -37,7 +37,7 @@ source ~/.config/user-dirs.dirs
 source ~/.zshrc
 
 # fix for comment color on manjaro zsh theme
-ZSH_HIGHLIGHT_STYLES[comment]='fg=blue'
+[ -n "$ZSH_HIGHLIGHT_STYLES" ] && ZSH_HIGHLIGHT_STYLES[comment]='fg=blue'
 
 ## 2023-09-20: JMC: Moved to ~/.config/profile.d/99-z-rvm-path.sh
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.

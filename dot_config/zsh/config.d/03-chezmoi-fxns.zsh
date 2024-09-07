@@ -29,7 +29,7 @@ function chezmoi-git-apply-check() {
     sed -e 's/dot_/\./g' \
         -e 's/\.tmpl$//g' -e 's/symlink_//g' \
         -e 's/executable_//g' -e 's/private_//g' -e 's/readonly_//g' | \
-    grep -v "${_ignored_file_patterns%|}" | \
+    grep -Ev "${_ignored_file_patterns%|}" | \
     sed -e 's#^#~/#' | \
     xargs chezmoi apply --verbose --dry-run --interactive
 }

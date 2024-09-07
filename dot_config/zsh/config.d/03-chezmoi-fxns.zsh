@@ -16,6 +16,8 @@
 # You should have received a copy of the GNU Affero General Public License along
 # with this program. If not, see <https://www.gnu.org/licenses/>.
 
+# chezmoi-git-apply-check: Check diffs via chezmoi apply on feature branch
+#   changed files.
 function chezmoi-git-apply-check() {
   # Escape RegEx special chars in ignored filenames
   local _ignored_file_patterns="$(chezmoi ignored | \
@@ -23,11 +25,12 @@ function chezmoi-git-apply-check() {
         -e 's/[(]/\\(/g' -e 's/\?/\\?/g' -e 's/\([+*^$|]\)/\\\1/g' | \
     tr '\n' '|' )"
   git diff --name-only $(git oldest-ancestor main)..HEAD | \
-    grep -v .chezmoi | \
+    grep -Ev '^\.chezmoi|^\.' | \
     grep -v "${_ignored_file_patterns%|}" | \
-    sed -e 's/dot_/\./g' -e 's/executable_//g' \
+    sed -e 's/dot_/\./g' \
         -e 's/\.tmpl$//g' -e 's/symlink_//g' \
-        -e 's/private_//g' -e 's#^#~/#' | \
+        -e 's/executable_//g' -e 's/private_//g' -e 's/readonly_//g' \
+        -e 's#^#~/#' | \
     xargs chezmoi apply --verbose --dry-run --interactive
 }
 

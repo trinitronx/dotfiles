@@ -41,6 +41,11 @@
 {{-   $launchpaduser = promptString "launchpaduser" -}}
 {{- end -}}
 
+{{- $osId:= .chezmoi.os -}}
+{{- if hasKey .chezmoi.osRelease "id" -}}
+{{-   $osId = printf "%s" .chezmoi.osRelease.id -}}
+{{- end -}}
+
 {{- $osIdLike := .chezmoi.os -}}
 {{- if hasKey .chezmoi.osRelease "idLike" -}}
 {{-   $osIdLike = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.idLike -}}
@@ -67,6 +72,7 @@ data:
   githubuser: "{{ $githubuser }}"
   launchpaduser: "{{ $launchpaduser }}"
   # platform-specific vars
+  osId: {{ $osId | quote }}
   osFamily: {{ $osIdLike | quote }}
   xdg_session_type: "{{ $xdg_session_type }}"
 

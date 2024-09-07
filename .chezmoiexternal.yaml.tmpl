@@ -1,0 +1,38 @@
+".config/oh-my-zsh/custom/plugins/zhooks":
+  type: "git-repo"
+  url: "https://github.com/agkozak/zhooks"
+  refreshPeriod: "168h"
+  pull:
+    args: ["--ff-only"]
+".config/oh-my-zsh/custom/plugins/zsh-sweep":
+  type: "git-repo"
+  url: "https://github.com/psprint/zsh-sweep"
+  refreshPeriod: "168h"
+  pull:
+    args: ["--ff-only"]
+".config/oh-my-zsh/custom/plugins/zsh-tmux-auto-title":
+  type: "git-repo"
+  url: "https://github.com/mbenford/zsh-tmux-auto-title"
+  refreshPeriod: "168h"
+  pull:
+    args: ["--ff-only"]
+
+{{ if ne .osId "manjaro" -}}
+{{- /* Manjaro can rely on manjaro-sway/oh-my-zsh */ -}}
+".local/share/oh-my-zsh":
+  type: "git-repo"
+  url: "https://github.com/ohmyzsh/ohmyzsh"
+  refreshPeriod: "168h"
+  pull:
+    args: ["--ff-only"]
+{{ end -}}
+{{ if ne .osFamily "linux-arch" -}}
+{{- /* Arch-based distros can use extra/zsh-theme-powerlevel10k */ -}}
+".config/oh-my-zsh/custom/themes/powerlevel10k":
+  type: "git-repo"
+  url: "https://github.com/romkatv/powerlevel10k"
+  refreshPeriod: "168h"
+  pull:
+    args: ["--ff-only"]
+
+{{- end }}

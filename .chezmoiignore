@@ -2,6 +2,11 @@
 .sublime-text
 LICENSE
 README.md
+.config/zsh/.zcompdump*
+.zsh/
+.zsh/cache
+.zsh_history
+.config/zsh/.zsh_history
 {{ if not (lookPath "ack") -}}
 .ackrc
 {{ end -}}
@@ -22,6 +27,13 @@ README.md
 .config/profile.d/01-osx-sbin-path.sh
 {{ else if not (eq .chezmoi.os "linux") -}}
 .config/profile.d/00-xdg-terminal-command.sh
+{{ end -}}
+{{- /* Manjaro uses /usr/share/zsh/p10k.zsh from extra/manjaro-zsh-config */ -}}
+{{ if eq .osId "manjaro" -}}
+.p10k.zsh
+{{ else -}}
+{{- /* Ignore the symlink to /usr/share/zsh-theme-powerlevel10k installed by extra/zsh-theme-powerlevel10k */ -}}
+.config/oh-my-zsh/custom/themes/powerlevel10k
 {{ end -}}
 {{ if not (lookPath "wayland-scanner") | or (not (eq .xdg_session_type "wayland")) -}}
 # Don't install wayland-related configs

@@ -1,0 +1,44 @@
+# 2023-08-27: JMC: Silence pyenv plugin warning
+# Fixes pyenv plugin's PATH check annoyance
+# ~/.config/profile.d/06-pyenv.sh is NOT sourced first, but later
+# in: ~/.zshrc -> ~/.config/zsh/.zprofile -> ~/.profile -> ~/.config/profile.d/*
+export ZSH_PYENV_QUIET='true'
+
+
+# base config for oh my zsh
+#source /usr/share/oh-my-zsh/zshrc
+# 2023-08-27: JMC: Override manjaro-sway-config so we can actually use plugins
+source "${XDG_CONFIG_HOME:-$HOME/.config}/oh-my-zsh/zshrc"
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+# p10k instant prompt to make terminal open a bit snappier
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+## 2024-06-03 JMC: Source this at END of zshrc!
+##  Otherwise, it breaks bash select-word-style Ctrl+w yank & paste Ctrl+y
+##  This is because /usr/share/zsh/manjaro-zsh-config includes the
+##  zsh-syntax-highlighting plugin before our seetings are applied!
+##  See: https://github.com/zsh-users/zsh-syntax-highlighting/issues/67
+# Source manjaro config
+#source ~/.zshrc
+
+# user-defined overrides
+[ -d ~/.config/zsh/config.d/ ] && source <(cat ~/.config/zsh/config.d/*)
+
+# Fix for foot terminfo not installed on most servers
+alias ssh="TERM=xterm-256color ssh"
+source ~/.config/user-dirs.dirs
+
+# Source main OS-specific config
+source ~/.zshrc
+
+# fix for comment color on manjaro zsh theme
+[ -n "$ZSH_HIGHLIGHT_STYLES" ] && ZSH_HIGHLIGHT_STYLES[comment]='fg=blue'
+
+## 2023-09-20: JMC: Moved to ~/.config/profile.d/99-z-rvm-path.sh
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+#export PATH="$PATH:$HOME/.rvm/bin"

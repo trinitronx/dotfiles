@@ -138,17 +138,8 @@ fi
 source $ZSH/oh-my-zsh.sh
 
 {{- /* Source p10k config (output of p10k configure) on everything except Manjaro */ -}}
-{{ if hasKey .chezmoi.osRelease "id" -}}
-{{   if eq .chezmoi.osRelease.id "manjaro" }}
-{{- /* noop b/c Go text/template boolean operators don't short-circuit ... so nested if */ -}}
-{{   else -}}
-{{/* Any *nix that is not Manjaro */}}
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-{{   end -}}
-{{ else -}}
-{{/* macOS (.chezmoi.osRelease is nil) */}}
+{{ if ne .osId "manjaro" -}}
+{{/* Any OS that is not Manjaro */}}
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

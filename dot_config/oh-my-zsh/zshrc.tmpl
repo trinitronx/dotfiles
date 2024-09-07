@@ -14,10 +14,7 @@ ZSH="{{ $omz_path }}"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-{{ $omz_theme := "robbyrussell" -}}
-{{ if eq .chezmoi.os "darwin" -}}
-{{   $omz_theme = "powerlevel10k/powerlevel10k" -}}
-{{ end -}}
+{{ $omz_theme := "powerlevel10k/powerlevel10k" -}}
 ZSH_THEME="{{ $omz_theme }}"
 
 # Set list of themes to pick from when loading at random

@@ -129,7 +129,10 @@ zs_set_path=1
 
 ZSH_CACHE_DIR=${XDG_CACHE_HOME:-$HOME/.cache}/oh-my-zsh
 if [[ ! -d $ZSH_CACHE_DIR ]]; then
-  mkdir $ZSH_CACHE_DIR
+  mkdir $ZSH_CACHE_DIR && chmod 0755 $ZSH_CACHE_DIR
+fi
+if [[ ! -d "${ZSH_CACHE_DIR}/completions" ]]; then
+  mkdir "${ZSH_CACHE_DIR}/completions" && chmod 0755 "${ZSH_CACHE_DIR}/completions"
 fi
 
 source $ZSH/oh-my-zsh.sh

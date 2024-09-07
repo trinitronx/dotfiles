@@ -137,9 +137,9 @@ fi
 
 source $ZSH/oh-my-zsh.sh
 
-{{- /* Source p10k config (output of p10k configure) on everything except Manjaro */ -}}
+{{- /* Manjaro uses /usr/share/zsh/p10k.zsh from extra/manjaro-zsh-config */ -}}
 {{ if ne .osId "manjaro" -}}
-{{/* Any OS that is not Manjaro */}}
+{{/* Source p10k config (output of p10k configure) on everything except Manjaro */}}
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

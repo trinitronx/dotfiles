@@ -1,0 +1,12 @@
+alias termbin="nc termbin.com 9999"
+alias vi='vim'
+# Override default oh-my-zsh dir aliases
+# Orig Defined: /usr/share/oh-my-zsh/lib/directories.zsh
+# List directory contents
+alias exa-ls='exa --icons --color-scale --classify'
+alias lsa='exa-ls -lah'
+alias l='exa-ls -lah'
+alias ll='exa-ls -lh'
+alias la='exa-ls -lah'
+alias lt='exa-ls -lh --tree'
+alias lat='exa-ls -lah --tree'

@@ -5,6 +5,13 @@
   pull:
     args: ["--ff-only"]
 {{ if ne .osId "manjaro" -}}
+{{- /* Manjaro can rely on manjaro-sway/oh-my-zsh */ -}}
+".local/share/oh-my-zsh":
+  type: "git-repo"
+  url: "https://github.com/ohmyzsh/ohmyzsh"
+  refreshPeriod: "168h"
+  pull:
+    args: ["--ff-only"]
 ".config/oh-my-zsh/custom/themes/powerlevel10k":
   type: "git-repo"
   url: "https://github.com/romkatv/powerlevel10k"

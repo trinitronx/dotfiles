@@ -5,7 +5,7 @@
 {{ if eq .osFamily "linux-arch" -}}
 {{   $omz_path = "/usr/share/oh-my-zsh/" -}}
 {{ else -}}
-{{   $omz_path = "${HOME}/.oh-my-zsh" -}}
+{{   $omz_path = "${HOME}/.local/share/oh-my-zsh" -}}
 {{ end -}}
 # Path to your oh-my-zsh installation.
 ZSH="{{ $omz_path }}"

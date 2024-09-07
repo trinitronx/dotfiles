@@ -2,6 +2,7 @@
 .sublime-text
 LICENSE
 README.md
+.pre-commit-config.yaml
 {{ if not (lookPath "ack") -}}
 .ackrc
 {{ end -}}

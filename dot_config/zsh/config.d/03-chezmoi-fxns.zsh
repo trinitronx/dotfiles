@@ -17,8 +17,14 @@
 # with this program. If not, see <https://www.gnu.org/licenses/>.
 
 function chezmoi-git-apply-check() {
+  # Escape RegEx special chars in ignored filenames
+  local _ignored_file_patterns="$(chezmoi ignored | \
+    sed -e 's/\./\\./g' -e 's/\[/\\[/g' -e 's/\]/\\]/g' -e 's/[)]/\\)/g' \
+        -e 's/[(]/\\(/g' -e 's/\?/\\?/g' -e 's/\([+*^$|]\)/\\\1/g' | \
+    tr '\n' '|' )"
   git diff --name-only $(git oldest-ancestor main)..HEAD | \
     grep -v .chezmoi | \
+    grep -v "${_ignored_file_patterns%|}" | \
     sed -e 's/dot_/\./g' -e 's/executable_//g' \
         -e 's/\.tmpl$//g' -e 's/symlink_//g' \
         -e 's/private_//g' -e 's#^#~/#' | \

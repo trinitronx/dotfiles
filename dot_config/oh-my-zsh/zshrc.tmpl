@@ -1,14 +1,24 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+{{ $omz_path := "" -}}
+{{ if eq .osFamily "linux-arch" -}}
+{{   $omz_path = "/usr/share/oh-my-zsh/" -}}
+{{ else -}}
+{{   $omz_path = "${HOME}/.oh-my-zsh" -}}
+{{ end -}}
 # Path to your oh-my-zsh installation.
-ZSH=/usr/share/oh-my-zsh/
+ZSH="{{ $omz_path }}"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+{{ $omz_theme := "robbyrussell" -}}
+{{ if eq .chezmoi.os "darwin" -}}
+{{   $omz_theme = "powerlevel10k/powerlevel10k" -}}
+{{ end -}}
+ZSH_THEME="{{ $omz_theme }}"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -123,3 +133,21 @@ if [[ ! -d $ZSH_CACHE_DIR ]]; then
 fi
 
 source $ZSH/oh-my-zsh.sh
+
+{{- /* Source p10k config (output of p10k configure) on everything except Manjaro */ -}}
+{{ if hasKey .chezmoi.osRelease "id" -}}
+{{   if eq .chezmoi.osRelease.id "manjaro" }}
+{{- /* noop b/c Go text/template boolean operators don't short-circuit ... so nested if */ -}}
+{{   else -}}
+{{/* Any *nix that is not Manjaro */}}
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+{{   end -}}
+{{ else -}}
+{{/* macOS (.chezmoi.osRelease is nil) */}}
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+{{ end -}}
+

@@ -1,7 +1,8 @@
-function mzc_termsupport_prompt_jump() {
-    print -Pn "\e]133;A\e\\"
-}
-add-zsh-hook precmd mzc_termsupport_prompt_jump
+typeset -g POWERLEVEL9K_TERM_SHELL_INTEGRATION=true
+#function mzc_termsupport_prompt_jump() {
+#    print -Pn "\e]133;A\e\\"
+#}
+#add-zsh-hook precmd mzc_termsupport_prompt_jump
 
 #precmd() {
 #    echo 'Adding precmd prompt OSC 133'

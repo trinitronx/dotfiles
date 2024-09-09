@@ -1,4 +1,23 @@
+# vim: ft=dosini
 # Default config for imv
+{{ $copy_cmd := "" -}}
+{{ $paste_cmd := "" -}}
+{{ if (eq .chezmoi.os "linux") | and ((lookPath "wayland-scanner") | or (eq .xdg_session_type "wayland")) -}}
+{{   $copy_cmd = "wl-copy" -}}
+{{   $paste_cmd = "wl-paste" -}}
+{{ else if (eq .chezmoi.os "linux") -}}
+{{   $copy_cmd = "xclip -selection clipboard -in" -}}
+{{   $paste_cmd = "xclip -selection clipboard -o" -}}
+{{ else if (eq .chezmoi.os "darwin") -}}
+{{   $copy_cmd = "pbcopy" -}}
+{{   $paste_cmd = "pbpaste" -}}
+{{ else if (eq .chezmoi.os "windows") -}}
+{{   $copy_cmd = "perl -pe 'chomp if eof' | clip.exe" -}}
+{{   $paste_cmd = "powershell.exe Get-Clipboard | sed 's/\r$//'" -}}
+{{ else -}}
+{{   $copy_cmd = "xclip -selection clipboard -in" -}}
+{{   $paste_cmd = "xclip -selection clipboard -o" -}}
+{{ end -}}
 
 [options]
 
@@ -14,7 +33,7 @@ suppress_default_binds = true
 [binds]
 # Define some key bindings
 q = quit
-y = exec echo working!
+y = exec sh -c "echo -n '$imv_current_file' | {{ $copy_cmd }}"
 
 # Image navigation
 <Left> = prev
@@ -45,7 +64,7 @@ o = zoom -1
 x = close
 f = fullscreen
 d = overlay
-p = exec echo $imv_current_file
+p = exec echo "$imv_current_file"
 c = center
 s = scaling next
 <Shift+S> = upscaling next

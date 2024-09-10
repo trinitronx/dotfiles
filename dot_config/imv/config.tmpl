@@ -1,0 +1,81 @@
+# vim: ft=dosini
+# Default config for imv
+{{ $copy_cmd := "" -}}
+{{ $paste_cmd := "" -}}
+{{ if (eq .chezmoi.os "linux") | and ((lookPath "wayland-scanner") | or (eq .xdg_session_type "wayland")) -}}
+{{   $copy_cmd = "wl-copy" -}}
+{{   $paste_cmd = "wl-paste" -}}
+{{ else if (eq .chezmoi.os "linux") -}}
+{{   $copy_cmd = "xclip -selection clipboard -in" -}}
+{{   $paste_cmd = "xclip -selection clipboard -o" -}}
+{{ else if (eq .chezmoi.os "darwin") -}}
+{{   $copy_cmd = "pbcopy" -}}
+{{   $paste_cmd = "pbpaste" -}}
+{{ else if (eq .chezmoi.os "windows") -}}
+{{   $copy_cmd = "perl -pe 'chomp if eof' | clip.exe" -}}
+{{   $paste_cmd = "powershell.exe Get-Clipboard | sed 's/\r$//'" -}}
+{{ else -}}
+{{   $copy_cmd = "xclip -selection clipboard -in" -}}
+{{   $paste_cmd = "xclip -selection clipboard -o" -}}
+{{ end -}}
+
+[options]
+
+# Suppress built-in key bindings, and specify them explicitly in this
+# config file.
+suppress_default_binds = true
+
+[aliases]
+# Define aliases here. Any arguments passed to an alias are appended to the
+# command.
+# alias = command to run
+
+[binds]
+# Define some key bindings
+q = quit
+y = exec sh -c "echo -n '$imv_current_file' | {{ $copy_cmd }}"
+
+# Image navigation
+<Left> = prev
+<bracketleft> = prev
+<Right> = next
+<bracketright> = next
+gg = goto 1
+<Shift+G> = goto -1
+
+# Panning
+j = pan 0 -50
+k = pan 0 50
+h = pan 50 0
+l = pan -50 0
+
+# Zooming
+<Up> = zoom 1
+<Shift+plus> = zoom 1
+i = zoom 1
+<Down> = zoom -1
+<minus> = zoom -1
+o = zoom -1
+
+# Rotate Clockwise by 90 degrees
+<Ctrl+r> = rotate by 90
+
+# Other commands
+x = close
+f = fullscreen
+d = overlay
+p = exec echo "$imv_current_file"
+c = center
+s = scaling next
+<Shift+S> = upscaling next
+a = zoom actual
+r = reset
+<Shift+D> = exec dragon-drop -s 400 --and-exit "$imv_current_file" &
+
+# Gif playback
+<period> = next_frame
+<space> = toggle_playing
+
+# Slideshow control
+t = slideshow +1
+<Shift+T> = slideshow -1

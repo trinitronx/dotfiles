@@ -31,9 +31,6 @@ README.md
 {{- /* Manjaro uses /usr/share/zsh/p10k.zsh from extra/manjaro-zsh-config */ -}}
 {{ if eq .osId "manjaro" -}}
 .p10k.zsh
-{{ else -}}
-{{- /* Ignore the symlink to /usr/share/zsh-theme-powerlevel10k installed by extra/zsh-theme-powerlevel10k */ -}}
-.config/oh-my-zsh/custom/themes/powerlevel10k
 {{ end -}}
 {{ if not (lookPath "wayland-scanner") | or (not (eq .xdg_session_type "wayland")) -}}
 # Don't install wayland-related configs

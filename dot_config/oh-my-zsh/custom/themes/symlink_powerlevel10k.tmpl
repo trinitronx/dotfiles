@@ -1,0 +1,7 @@
+{{ if eq .osFamily "linux-arch" -}}
+{{- /* symlink to /usr/share/zsh-theme-powerlevel10k installed by extra/zsh-theme-powerlevel10k */ -}}
+/usr/share/zsh-theme-powerlevel10k
+{{ else -}}
+{{- /* symlink to ~/.local/share/zsh-theme-powerlevel10k managed by .chezmoiexternal.yaml.tmpl */ -}}
+../../../../.local/share/zsh-theme-powerlevel10k
+{{ end -}}

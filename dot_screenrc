@@ -4,6 +4,9 @@
 # Reset to Ctrl-B + b
 escape ^Bb
 
+# Increase default scrollback history buffer
+defscrollback 100000
+
 # Fix xterm scrolling when alt text buffer is selected
 # From https://web.archive.org/web/20190411015146/http://www4.cs.fau.de/~jnweiger/screen-faq.html
 termcapinfo xterm ti@:te@

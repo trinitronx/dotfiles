@@ -17,12 +17,12 @@
 
 alias glNoGraph='git log --color=always --format="%C(auto)%h%d %s %C(brightblack)%C(bold)%cr% C(auto)%an %G?" "$@"'
 
-_gitLogLineToHash="echo {} | grep -o '[a-f0-9]\{7\}' | head -1"
+_gitLogLineToHash="echo {} | grep -o '[a-f0-9]\{7\}' | head -1 | tr -d '\n'"
 _viewGitLogLine="$_gitLogLineToHash | xargs -I % sh -c 'git show --color=always --show-signature % | delta'"
 _viewGitLogLineUnfancy="$_gitLogLineToHash | xargs -I % sh -c 'git show %'"
 
-unameOut="$(uname -s)"
-case "${unameOut}" in
+_unameOS="$(uname -s)"
+case "${_unameOS}" in
     Linux*)     if command -v wayland-scanner && [[ "$XDG_SESSION_TYPE" == *wayland* ]]; then
                   _clipboardCopyCmd="wl-copy"
                 elif [[ "$XDG_SESSION_TYPE" == ** ]]; then
@@ -90,7 +90,7 @@ gls() {
             --header "enter to view, alt-y to copy hash, alt-v to open in vim" \
             --bind "enter:execute:$_viewGitLogLine   | less -R" \
             --bind "alt-v:execute:$_viewGitLogLineUnfancy | vim -" \
-            --bind "alt-y:execute:$_gitLogLineToHash | wl-copy" \
+            --bind "alt-y:execute:$_gitLogLineToHash | ${_clipboardCopyCmd}" \
             --prompt ' > ' \
             --bind 'ctrl-/:+change-preview-window(70%|99%|hidden|)' \
             --bind 'ctrl-/:+refresh-preview' \

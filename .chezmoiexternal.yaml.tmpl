@@ -28,7 +28,7 @@
 {{ end -}}
 {{ if ne .osFamily "linux-arch" -}}
 {{- /* Arch-based distros can use extra/zsh-theme-powerlevel10k */ -}}
-".config/oh-my-zsh/custom/themes/powerlevel10k":
+".local/share/zsh-theme-powerlevel10k":
   type: "git-repo"
   url: "https://github.com/romkatv/powerlevel10k"
   refreshPeriod: "168h"

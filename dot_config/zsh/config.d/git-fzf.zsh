@@ -21,6 +21,22 @@ _gitLogLineToHash="echo {} | grep -o '[a-f0-9]\{7\}' | head -1"
 _viewGitLogLine="$_gitLogLineToHash | xargs -I % sh -c 'git show --color=always --show-signature % | delta'"
 _viewGitLogLineUnfancy="$_gitLogLineToHash | xargs -I % sh -c 'git show %'"
 
+unameOut="$(uname -s)"
+case "${unameOut}" in
+    Linux*)     if command -v wayland-scanner && [[ "$XDG_SESSION_TYPE" == *wayland* ]]; then
+                  _clipboardCopyCmd="wl-copy"
+                elif [[ "$XDG_SESSION_TYPE" == ** ]]; then
+                  _clipboardCopyCmd="xclip -selection clipboard -in"
+                fi;;
+    Darwin*)    _clipboardCopyCmd="pbcopy";;
+    CYGWIN*)    ;& # fall-through
+    MINGW*)     ;& # fall-through
+    MSYS_NT*)   _clipboardCopyCmd="perl -pe 'chomp if eof' | clip.exe";;
+    *)          # unknown OS... assume other Unix + Xorg
+                _clipboardCopyCmd="xclip -selection clipboard -in"
+                ;;
+esac
+
 # ANSI Colors
 c_reset='\033[0m'
 c_black='\033[0;30m'

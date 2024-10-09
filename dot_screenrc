@@ -10,16 +10,7 @@ defscrollback 100000
 # Fix xterm scrolling when alt text buffer is selected
 # From https://web.archive.org/web/20190411015146/http://www4.cs.fau.de/~jnweiger/screen-faq.html
 termcapinfo xterm ti@:te@
-# Fix backspace on macOS
-bindkey -d "\177" stuff ^H
 
-# fix delete key
-# From: https://web.archive.org/web/20240924210959/https://lists.gnu.org/archive/html/screen-users/2020-08/msg00012.html
-bindkey -k kD     stuff "^?"
-bindkey "\033[3~" stuff "^?"
+## Cisco Switch vt100 settings
+# Moved to ~/.config/screen/screenrc.cisco-vt100
 
-# Fix Home / End keys
-# From: https://unix.stackexchange.com/a/465362/7688
-# See: man terminfo
-markkeys "$=\205"
-markkeys "0=\201"

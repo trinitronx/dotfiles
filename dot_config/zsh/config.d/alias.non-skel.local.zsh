@@ -61,3 +61,6 @@ alias ff="fzf -m --preview \
 #preview-border:#2eb398 #Matcha Bright Teal
 #preview-border:#3b758c #Matcha Dim Teal
 # preview-label:#45ff82 #Matcha Bright Mint Green
+
+# Cisco vt100 screenrc RS-232 serial console
+alias cisco-console='screen -c ~/.config/screen/screenrc.cisco-vt100 $@'

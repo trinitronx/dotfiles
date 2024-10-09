@@ -12,15 +12,5 @@ defscrollback 100000
 termcapinfo xterm ti@:te@
 
 ## Cisco Switch vt100 settings
-# Fix backspace on macOS + Cisco
-#bindkey -d "\177" stuff ^H
-# fix delete key
-# From: https://web.archive.org/web/20240924210959/https://lists.gnu.org/archive/html/screen-users/2020-08/msg00012.html
-#bindkey -k kD     stuff "^?"
-#bindkey "\033[3~" stuff "^?"
+# Moved to ~/.config/screen/screenrc.cisco-vt100
 
-# Fix Home / End keys
-# From: https://unix.stackexchange.com/a/465362/7688
-# See: man terminfo
-markkeys "$=\205"
-markkeys "0=\201"

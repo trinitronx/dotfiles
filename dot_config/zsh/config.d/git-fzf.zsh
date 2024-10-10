@@ -17,6 +17,7 @@
 
 alias glNoGraph='git log --color=always --format="%C(auto)%h%d %s %C(brightblack)%C(bold)%cr% C(auto)%an %G?" "$@"'
 
+typeset -g _gitLogLineToHash _viewGitLogLine _viewGitLogLineUnfancy _clipboardCopyCmd _unameOS
 _gitLogLineToHash="echo {} | grep -o '[a-f0-9]\{7\}' | head -1 | tr -d '\n'"
 _viewGitLogLine="$_gitLogLineToHash | xargs -I % sh -c 'git show --color=always --show-signature % | delta'"
 _viewGitLogLineUnfancy="$_gitLogLineToHash | xargs -I % sh -c 'git show %'"
@@ -38,6 +39,7 @@ case "${_unameOS}" in
 esac
 
 # ANSI Colors
+typeset -g c_reset c_black c_red c_green c_yellow c_blue c_magenta c_cyan c_white
 c_reset='\033[0m'
 c_black='\033[0;30m'
 c_red='\033[0;31m'
@@ -48,6 +50,7 @@ c_magenta='\033[0;35m'
 c_cyan='\033[0;36m'
 c_white='\033[0;37m'
 
+typeset -g short_help_text
 short_help_text='enter to view, alt-y to copy hash, alt-v to open in vim'
 
 read -r -d '' long_help_text <<EOSHORT

@@ -15,17 +15,20 @@
 # with this program. If not, see <https://www.gnu.org/licenses/>.
 
 
-alias glNoGraph='git log --color=always --format="%C(auto)%h%d %s %C(brightblack)%C(bold)%cr% C(auto)%an %G?" "$@"'
+glNoGraph() {
+  git log --color=always --format="%C(auto)%h%d %s %C(brightblack)%C(bold)%cr% C(auto)%an %G?" "$@"
+}
 
+typeset -g _gitLogLineToHash _viewGitLogLine _viewGitLogLineUnfancy _clipboardCopyCmd _unameOS
 _gitLogLineToHash="echo {} | grep -o '[a-f0-9]\{7\}' | head -1 | tr -d '\n'"
 _viewGitLogLine="$_gitLogLineToHash | xargs -I % sh -c 'git show --color=always --show-signature % | delta'"
 _viewGitLogLineUnfancy="$_gitLogLineToHash | xargs -I % sh -c 'git show %'"
 
 _unameOS="$(uname -s)"
 case "${_unameOS}" in
-    Linux*)     if command -v wayland-scanner && [[ "$XDG_SESSION_TYPE" == *wayland* ]]; then
+    Linux*)     if command -v wayland-scanner >/dev/null 2>&1 && [[ "$XDG_SESSION_TYPE" == *wayland* ]]; then
                   _clipboardCopyCmd="wl-copy"
-                elif [[ "$XDG_SESSION_TYPE" == ** ]]; then
+                elif [[ "$XDG_SESSION_TYPE" != *wayland* ]]; then
                   _clipboardCopyCmd="xclip -selection clipboard -in"
                 fi;;
     Darwin*)    _clipboardCopyCmd="pbcopy";;
@@ -38,7 +41,9 @@ case "${_unameOS}" in
 esac
 
 # ANSI Colors
+typeset -g c_reset c_black c_red c_green c_yellow c_blue c_magenta c_cyan c_white
 c_reset='\033[0m'
+# shellcheck disable=SC2034
 c_black='\033[0;30m'
 c_red='\033[0;31m'
 c_green='\033[0;32m'
@@ -46,8 +51,10 @@ c_yellow='\033[0;33m'
 c_blue='\033[0;34m'
 c_magenta='\033[0;35m'
 c_cyan='\033[0;36m'
+# shellcheck disable=SC2034
 c_white='\033[0;37m'
 
+typeset -g short_help_text
 short_help_text='enter to view, alt-y to copy hash, alt-v to open in vim'
 
 read -r -d '' long_help_text <<EOSHORT
@@ -79,12 +86,24 @@ EOSHORT
 # View current mappings via:
 #   echo -e 'G= G\nU= U\nB= B\nY= Y\nX= X\nR= R\nN= N\nE= E' | _sigVerifyIconFilter
 # For letter meanings:  git help log  | grep -A3 -E '%G\?'
-alias _sigVerifyIconFilter="sed -e \"s/G$/$(echo -e $c_green)✔  $(echo -e $c_reset)/; s/U$/$(echo -e $c_cyan)✔   ❔$(echo -e $c_reset)/; s/B$/$(echo -e $c_red)✘ 󰝧  $(echo -e $c_reset)/; s/Y$/$(echo -e $c_green)✔$(echo -e ${c_reset}${c_yellow})   $(echo -e $c_reset)/; s/X$/$(echo -e $c_green)✔$(echo -e ${c_reset}${c_yellow})  $(echo -e $c_reset)/; s/R$/$(echo -e $c_green)✔$(echo -e ${c_reset}${c_magenta})   $(echo -e $c_reset)/; s/N$/$(echo -e $c_cyan)$(echo -e $c_reset)/;  s/E$/$(echo -e $c_blue)   ❔$(echo -e $c_reset)/;\""
+# TODO: fix unmatched double-quote error inside this
+#alias _sigVerifyIconFilter='sed -e "s/G$/$(echo -e $c_green)✔  $(echo -e $c_reset)/; s/U$/$(echo -e $c_cyan)✔   ❔$(echo -e $c_reset)/; s/B$/$(echo -e $c_red)✘ 󰝧  $(echo -e $c_reset)/; s/Y$/$(echo -e $c_green)✔$(echo -e ${c_reset}${c_yellow})   $(echo -e $c_reset)/; s/X$/$(echo -e $c_green)✔$(echo -e ${c_reset}${c_yellow})  $(echo -e $c_reset)/; s/R$/$(echo -e $c_green)✔$(echo -e ${c_reset}${c_magenta})   $(echo -e $c_reset)/; s/N$/$(echo -e $c_cyan)$(echo -e $c_reset)/;  s/E$/$(echo -e $c_blue)   ❔$(echo -e $c_reset)/;"'
 #_sigVerifyIconFilter="sed -e \"s/N$//;\""
+
+_sigVerifyIconFilter() {
+  sed -e "s/G$/$(echo -e "$c_green")✔  $(echo -e "$c_reset")/;" \
+      -e "s/U$/$(echo -e "$c_cyan")✔   ❔$(echo -e "$c_reset")/;" \
+      -e "s/B$/$(echo -e "$c_red")✘ 󰝧  $(echo -e "$c_reset")/;" \
+      -e "s/Y$/$(echo -e "$c_green")✔$(echo -e "${c_reset}${c_yellow}")   $(echo -e "$c_reset")/;" \
+      -e "s/X$/$(echo -e "$c_green")✔$(echo -e "${c_reset}${c_yellow}")  $(echo -e "$c_reset")/;" \
+      -e "s/R$/$(echo -e "$c_green")✔$(echo -e "${c_reset}${c_magenta}")   $(echo -e "$c_reset")/;" \
+      -e "s/N$/$(echo -e "$c_cyan")$(echo -e "$c_reset")/;" \
+      -e "s/E$/$(echo -e "$c_blue")   ❔$(echo -e "$c_reset")/;"
+}
 
 gls() {
 
-    glNoGraph | _sigVerifyIconFilter | \
+    glNoGraph "$@" | _sigVerifyIconFilter | \
         fzf --no-sort --reverse --tiebreak=index --no-multi \
             --ansi --preview="$_viewGitLogLine" \
             --header "enter to view, alt-y to copy hash, alt-v to open in vim" \

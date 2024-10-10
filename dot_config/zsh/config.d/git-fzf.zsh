@@ -15,7 +15,9 @@
 # with this program. If not, see <https://www.gnu.org/licenses/>.
 
 
-alias glNoGraph='git log --color=always --format="%C(auto)%h%d %s %C(brightblack)%C(bold)%cr% C(auto)%an %G?" "$@"'
+glNoGraph() {
+  git log --color=always --format="%C(auto)%h%d %s %C(brightblack)%C(bold)%cr% C(auto)%an %G?" "$@"
+}
 
 typeset -g _gitLogLineToHash _viewGitLogLine _viewGitLogLineUnfancy _clipboardCopyCmd _unameOS
 _gitLogLineToHash="echo {} | grep -o '[a-f0-9]\{7\}' | head -1 | tr -d '\n'"
@@ -87,7 +89,7 @@ alias _sigVerifyIconFilter="sed -e \"s/G$/$(echo -e $c_green)✔  $(echo -
 
 gls() {
 
-    glNoGraph | _sigVerifyIconFilter | \
+    glNoGraph "$@" | _sigVerifyIconFilter | \
         fzf --no-sort --reverse --tiebreak=index --no-multi \
             --ansi --preview="$_viewGitLogLine" \
             --header "enter to view, alt-y to copy hash, alt-v to open in vim" \

@@ -86,8 +86,20 @@ EOSHORT
 # View current mappings via:
 #   echo -e 'G= G\nU= U\nB= B\nY= Y\nX= X\nR= R\nN= N\nE= E' | _sigVerifyIconFilter
 # For letter meanings:  git help log  | grep -A3 -E '%G\?'
-alias _sigVerifyIconFilter="sed -e \"s/G$/$(echo -e $c_green)✔  $(echo -e $c_reset)/; s/U$/$(echo -e $c_cyan)✔   ❔$(echo -e $c_reset)/; s/B$/$(echo -e $c_red)✘ 󰝧  $(echo -e $c_reset)/; s/Y$/$(echo -e $c_green)✔$(echo -e ${c_reset}${c_yellow})   $(echo -e $c_reset)/; s/X$/$(echo -e $c_green)✔$(echo -e ${c_reset}${c_yellow})  $(echo -e $c_reset)/; s/R$/$(echo -e $c_green)✔$(echo -e ${c_reset}${c_magenta})   $(echo -e $c_reset)/; s/N$/$(echo -e $c_cyan)$(echo -e $c_reset)/;  s/E$/$(echo -e $c_blue)   ❔$(echo -e $c_reset)/;\""
+# TODO: fix unmatched double-quote error inside this
+#alias _sigVerifyIconFilter='sed -e "s/G$/$(echo -e $c_green)✔  $(echo -e $c_reset)/; s/U$/$(echo -e $c_cyan)✔   ❔$(echo -e $c_reset)/; s/B$/$(echo -e $c_red)✘ 󰝧  $(echo -e $c_reset)/; s/Y$/$(echo -e $c_green)✔$(echo -e ${c_reset}${c_yellow})   $(echo -e $c_reset)/; s/X$/$(echo -e $c_green)✔$(echo -e ${c_reset}${c_yellow})  $(echo -e $c_reset)/; s/R$/$(echo -e $c_green)✔$(echo -e ${c_reset}${c_magenta})   $(echo -e $c_reset)/; s/N$/$(echo -e $c_cyan)$(echo -e $c_reset)/;  s/E$/$(echo -e $c_blue)   ❔$(echo -e $c_reset)/;"'
 #_sigVerifyIconFilter="sed -e \"s/N$//;\""
+
+_sigVerifyIconFilter() {
+  sed -e "s/G$/$(echo -e "$c_green")✔  $(echo -e "$c_reset")/;" \
+      -e "s/U$/$(echo -e "$c_cyan")✔   ❔$(echo -e "$c_reset")/;" \
+      -e "s/B$/$(echo -e "$c_red")✘ 󰝧  $(echo -e "$c_reset")/;" \
+      -e "s/Y$/$(echo -e "$c_green")✔$(echo -e "${c_reset}${c_yellow}")   $(echo -e "$c_reset")/;" \
+      -e "s/X$/$(echo -e "$c_green")✔$(echo -e "${c_reset}${c_yellow}")  $(echo -e "$c_reset")/;" \
+      -e "s/R$/$(echo -e "$c_green")✔$(echo -e "${c_reset}${c_magenta}")   $(echo -e "$c_reset")/;" \
+      -e "s/N$/$(echo -e "$c_cyan")$(echo -e "$c_reset")/;" \
+      -e "s/E$/$(echo -e "$c_blue")   ❔$(echo -e "$c_reset")/;"
+}
 
 gls() {
 

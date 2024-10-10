@@ -43,6 +43,7 @@ esac
 # ANSI Colors
 typeset -g c_reset c_black c_red c_green c_yellow c_blue c_magenta c_cyan c_white
 c_reset='\033[0m'
+# shellcheck disable=SC2034
 c_black='\033[0;30m'
 c_red='\033[0;31m'
 c_green='\033[0;32m'
@@ -50,6 +51,7 @@ c_yellow='\033[0;33m'
 c_blue='\033[0;34m'
 c_magenta='\033[0;35m'
 c_cyan='\033[0;36m'
+# shellcheck disable=SC2034
 c_white='\033[0;37m'
 
 typeset -g short_help_text

@@ -26,6 +26,9 @@ README.md
 .config/profile.d/01-osx-manpath.sh
 .config/profile.d/01-osx-sbin-path.sh
 .config/profile.d/02-osx-gnu-screen-debug-path.sh
+{{   if not (eq .chezmoi.hostname "lyra") -}}
+.config/profile.d/02-osx-monterey-homebrew-freeze.sh
+{{   end -}}
 {{ else if not (eq .chezmoi.os "linux") -}}
 .config/profile.d/00-xdg-terminal-command.sh
 {{ end -}}

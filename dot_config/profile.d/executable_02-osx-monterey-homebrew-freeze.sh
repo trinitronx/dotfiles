@@ -1,0 +1,4 @@
+export HOMEBREW_NO_AUTO_UPDATE=1
+export HOMEBREW_NO_INSTALL_CLEANUP=1
+export HOMEBREW_NO_CLEANUP_FORMULAE=llvm,terraform,opentofu,ansible,openssl
+export HOMEBREW_NO_INSTALL_FROM_API=1

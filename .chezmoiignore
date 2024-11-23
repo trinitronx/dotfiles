@@ -68,6 +68,9 @@ README.md
 .config/sway/definitions.d/05-findex.conf
 .config/findex
 {{   end -}}
+{{   if not (lookPath "fuzzel") -}}
+.config/fuzzel
+{{   end -}}
 {{   if not (lookPath "nwg-wrapper") -}}
 # Sway-specific help script
 .config/nwg-wrapper/help.sh

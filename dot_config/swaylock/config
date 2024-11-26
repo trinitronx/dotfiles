@@ -8,7 +8,6 @@ ring-ver-color=#55b5db
 show-failed-attempts
 ignore-empty-password
 indicator-caps-lock
-image=/usr/share/backgrounds/manjaro-sway/manjaro-sway-small-wallpaper-edged-3840x2160.png
 inside-clear-color=#d5f0eac0
 line-clear-color=#31a852
 text-clear-color=#393634

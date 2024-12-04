@@ -1,0 +1,21 @@
+{
+    "modes": {
+        "dock": {
+            "layer": "top"
+        },
+        // show overlay bar over fullscreen applications
+        "overlay": {
+            "layer": "overlay"
+        },
+        // hide bar under the current window instead of making it invisible
+        "invisible": {
+            "passthrough": false,
+            "visible": false,
+            "layer": "bottom"
+        },
+        "hide": {
+            "layer": "top",
+            "exclusive": true
+        }
+    }
+}

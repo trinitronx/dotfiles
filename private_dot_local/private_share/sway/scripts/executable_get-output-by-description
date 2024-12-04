@@ -1,0 +1,6 @@
+#!/bin/sh
+OUTPUT_DESCRIPTION="$@"
+swaymsg -t get_outputs | \
+  jq '.[] | select(.type=="output") | { friendly_name: (.make + " " + .model + " " + .serial),  name: .name }' | \
+  jq -r "select(.friendly_name==\"${OUTPUT_DESCRIPTION}\") | .name" | \
+  tr -d '\n'

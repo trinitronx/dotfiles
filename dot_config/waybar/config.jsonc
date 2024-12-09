@@ -1,8 +1,15 @@
 [{
-    "id": "default",
+    "id": "bar-0",
+    "name": "bar-0",
+    "ipc": true,
     "include": [
-        "/usr/share/sway/templates/waybar/config.jsonc"
-    ]
+        "/usr/share/sway/templates/waybar/config.jsonc",
+        "$HOME/.config/waybar/config.modes.jsonc"
+    ],
+    "start_hidden": true,
+    "mode": "hide",
+    "modifier-reset": "release"
+
 },
 {
     "id": "bar-1",
@@ -10,6 +17,9 @@
     "ipc": true,
     "include": [
         "$HOME/.config/waybar/config.d/*.jsonc",
-        "/usr/share/sway/templates/waybar/config.jsonc"
-    ]
+        "$HOME/.config/waybar/config.modes.jsonc"
+    ],
+    "start_hidden": true,
+    "mode": "hide",
+    "modifier-reset": "release"
 }]

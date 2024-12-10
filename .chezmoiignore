@@ -71,6 +71,9 @@ README.md
 {{   if not (lookPath "fuzzel") -}}
 .config/fuzzel
 {{   end -}}
+{{   if not (lookPath "kanshi") -}}
+.config/kanshi
+{{   end -}}
 {{   if not (lookPath "nwg-wrapper") -}}
 # Sway-specific help script
 .config/nwg-wrapper/help.sh

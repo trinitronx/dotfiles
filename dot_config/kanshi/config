@@ -1,0 +1,28 @@
+# Copyright (C) © 🄯  2023-2024 James Cuzella
+# This program is free software: See LICENSE
+#
+# configure as many display profiles as you need
+# refer to "man kanshi" to find out how to configure profiles
+# https://github.com/emersion/kanshi#configuration-file
+# * get your current screen name: swaymsg -t get_outputs
+# * set the resolution and position for your screen: output HDMI1 mode 1920x1080 position 0,0
+# * set the scaling for your screen: output HDMI1 scale 2
+
+include $XDG_CONFIG_HOME/kanshi/config.d/*.conf
+
+profile default {
+	output $lg_oled_output_desc position 0,0
+}
+
+profile hdtv-extended {
+	output $lg_oled_output_desc position 0,0 scale 2
+	output $vizio_m601d_output_desc position -1920,0 scale 1
+	# NOTE: alias vars do not yet work in exec
+	#exec swaymsg workspace 10, move workspace to output '$vizio_m601d_output_desc'
+	#exec swaymsg workspace 1, move workspace to output '$lg_oled_output_desc'
+}
+
+profile pikvm-mirrored {
+	output $lg_oled_output_desc position 0,0 scale 2
+	output $pikvm_output_desc position 0,0 scale 1
+}

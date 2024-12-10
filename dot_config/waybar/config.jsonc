@@ -4,20 +4,21 @@
     "ipc": true,
     "include": [
         "/usr/share/sway/templates/waybar/config.jsonc",
-        "$HOME/.config/waybar/config.modes.jsonc"
+        "$XDG_CONFIG_HOME/waybar/config.modes.jsonc",
+        "$XDG_CONFIG_HOME/waybar/config.pikvm-mirroring.jsonc"
     ],
     "start_hidden": true,
     "mode": "hide",
     "modifier-reset": "release"
-
 },
 {
     "id": "bar-1",
     "name": "bar-1",
     "ipc": true,
     "include": [
-        "$HOME/.config/waybar/config.d/*.jsonc",
-        "$HOME/.config/waybar/config.modes.jsonc"
+        "$XDG_CONFIG_HOME/waybar/config.d/*.jsonc",
+        "$XDG_CONFIG_HOME/waybar/config.modes.jsonc",
+        "$XDG_CONFIG_HOME/waybar/config.pikvm-mirroring.jsonc"
     ],
     "start_hidden": true,
     "mode": "hide",

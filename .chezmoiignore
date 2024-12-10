@@ -91,6 +91,9 @@ README.md
 .config/sway/definitions.d/08-irssi-fnotify.conf
 .local/share/sway/scripts/irssi-fnotify-local.sh
 {{   end -}}
+{{   if not (lookPath "swaylock") -}}
+.config/swaylock
+{{   end -}}
 {{ end -}}
 {{ if not (lookPath "fzf") -}}
 .config/zsh/config.d/*-fzf*.zsh

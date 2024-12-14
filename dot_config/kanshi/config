@@ -15,8 +15,8 @@ profile default {
 }
 
 profile hdtv-extended {
-	output $lg_oled_output_desc position 0,0 scale 2
-	output $vizio_m601d_output_desc position -1920,0 scale 1
+	output $lg_oled_output_desc position 1920,0 scale 2
+	output $vizio_m601d_output_desc position 0,0 scale 1
 	# NOTE: alias vars do not yet work in exec
 	#exec swaymsg workspace 10, move workspace to output '$vizio_m601d_output_desc'
 	#exec swaymsg workspace 1, move workspace to output '$lg_oled_output_desc'

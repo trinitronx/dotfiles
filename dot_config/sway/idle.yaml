@@ -23,12 +23,13 @@ timeouts:
     ##     %power ALL = NOPASSWD: /usr/bin/pkill * cec-dpms
     command: sudo pkill -USR2 cec-dpms
     resume: sudo pkill -USR1 cec-dpms
+  ## Disable sleep/suspend/suspend-then-hibernate
   # sleep_timeout_bat
-  - timeout: 900
-    command: acpi -b | grep Discharging && systemctl sleep
+  #- timeout: 900
+  #  command: acpi -b | grep Discharging && systemctl sleep
   # sleep_timeout_ac
-  - timeout: 3600
-    command: acpi -b | grep Discharging; test $? -eq 1 && systemctl sleep
+  #- timeout: 3600
+  #  command: acpi -b | grep Discharging; test $? -eq 1 && systemctl sleep
 before-sleep: swaymsg exec \$locking
 after-resume: swaymsg "output * dpms on"
 lock: swaymsg exec \$locking

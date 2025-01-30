@@ -16,7 +16,7 @@ timeouts:
   # screen_timeout
   - timeout: 600
     command: swaymsg "output * power off"
-    resume: swaymsg "output * power on"
+    resume: swaymsg "output * power on"; swaymsg "output * enable"
   # dpms_timeout
   - timeout: 600
     ## /etc/sudoers.d/70-power-allow-cec-dpms

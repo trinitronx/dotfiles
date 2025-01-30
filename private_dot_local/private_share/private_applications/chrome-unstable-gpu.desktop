@@ -1,0 +1,22 @@
+[Desktop Entry]
+Version=1.0
+Name=Chrome  󰢮 GPU
+GenericName=Web Browser
+GenericName[en_GB]=Web Browser
+#StartupWMClass=Google-chrome
+Exec=/bin/sh -c "~/.local/bin/google-chrome-vulkan-intel-kabylake-sorta-works.sh %U"
+StartupNotify=true
+Terminal=false
+Icon=chromium-dev
+Type=Application
+Categories=Network;WebBrowser;
+MimeType=application/pdf;application/rdf+xml;application/rss+xml;application/xhtml+xml;application/xhtml_xml;application/xml;image/gif;image/jpeg;image/png;image/webp;text/html;text/xml;x-scheme-handler/http;x-scheme-handler/https;
+Actions=new-window;new-private-window;
+
+[Desktop Action new-window]
+Name=New Window
+Exec=/bin/sh -c "~/.local/bin/google-chrome-vulkan-intel-kabylake-sorta-works.sh"
+
+[Desktop Action new-private-window]
+Name=New Incognito Window
+Exec=/bin/sh -c "~/.local/bin/google-chrome-vulkan-intel-kabylake-sorta-works.sh --incognito"

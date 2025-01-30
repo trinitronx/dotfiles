@@ -1,0 +1,2 @@
+#!/bin/sh
+/opt/google/chrome/chrome --gpu-testing-vendor-id=0x8086 --gpu-testing-device-id=0x5912 --ozone-platform-hint=wayland --force-dark-mode  --enable-features=WaylandWindowDecorations,WebRTCPipeWireCapturer --disable-features=UseChromeOSDirectVideoDecoder,UseSkiaRenderer --ozone-platform=wayland --enable-features=VaapiVideoDecoder,VaapiVideoEncoder,VaapiVideoDecodeLinuxGL,VaapiIgnoreDriverChecks  --ignore-gpu-blocklist --use-vulkan $@

@@ -1,0 +1,41 @@
+---
+debug: true
+wait: false
+timeouts:
+  # idle_timeout
+  - timeout: 240
+    command: brightnessctl -s && brightnessctl set 10
+    resume: brightnessctl -r
+  # locking_timeout
+  - timeout: 300
+    command: swaymsg exec \$locking
+  # keyboard_timeout
+  - timeout: 600
+    command: /usr/share/sway/scripts/keyboard-backlight-switch.sh off
+    resume: /usr/share/sway/scripts/keyboard-backlight-switch.sh on
+  # screen_timeout
+  - timeout: 600
+    command: swaymsg "output * power off"
+    resume: swaymsg "output * power on"; swaymsg "output * enable"
+  # dpms_timeout
+  - timeout: 600
+    ## /etc/sudoers.d/70-power-allow-cec-dpms
+    ##     %power ALL = NOPASSWD: /usr/bin/pkill * cec-dpms
+    command: sudo pkill -USR2 cec-dpms
+    resume: sudo pkill -USR1 cec-dpms
+  ## Disable sleep/suspend/suspend-then-hibernate
+  # sleep_timeout_bat
+  #- timeout: 900
+  #  command: acpi -b | grep Discharging && systemctl sleep
+  # sleep_timeout_ac
+  #- timeout: 3600
+  #  command: acpi -b | grep Discharging; test $? -eq 1 && systemctl sleep
+events:
+  - before-sleep: playerctl pause
+  - before-sleep: 'swaymsg exec \$locking & sleep \$sleep_delay'
+  - after-resume: swaymsg "output * power on"
+  - lock: swaymsg exec \$locking
+before-sleep: null
+after-resume: null
+lock: null
+idlehint: '240'

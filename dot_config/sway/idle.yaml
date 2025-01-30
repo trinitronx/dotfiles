@@ -19,8 +19,10 @@ timeouts:
     resume: swaymsg "output * power on"
   # dpms_timeout
   - timeout: 600
-    command: swaymsg "output * dpms off"
-    resume: swaymsg "output * dpms on"
+    ## /etc/sudoers.d/70-power-allow-cec-dpms
+    ##     %power ALL = NOPASSWD: /usr/bin/pkill * cec-dpms
+    command: sudo pkill -USR2 cec-dpms
+    resume: sudo pkill -USR1 cec-dpms
   # sleep_timeout_bat
   - timeout: 900
     command: acpi -b | grep Discharging && systemctl sleep

@@ -133,5 +133,5 @@ README.md
 # Don't install .desktop files
 .local/share/applications
 # Don't update-desktop-database
-.chezmoiscripts/update-09-desktop-database.sh
+.chezmoiscripts/09-update-desktop-database.sh
 {{ end -}}

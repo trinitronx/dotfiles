@@ -36,6 +36,27 @@
     args: ["--ff-only"]
 
 {{- end }}
+{{ if lookPath "bat" -}}
+".config/bat/themes/Dark-Dracula-Theme":
+  type: "git-repo"
+  url: "https://github.com/krman009/Dark-Dracula-Theme"
+  refreshPeriod: "168h"
+  pull:
+    args: ["--ff-only"]
+
+".config/bat/themes/Matcha-Dark":
+  type: "git-repo"
+  url: "https://github.com/trinitronx/Matcha-Dark-Theme"
+  refreshPeriod: "168h"
+  pull:
+    args: ["--ff-only"]
+
+".config/bat/themes/sublime-snazzy":
+  type: "git-repo"
+  url: "https://github.com/greggb/sublime-snazzy"
+  refreshPeriod: "168h"
+  pull:
+    args: ["--ff-only"]
 
 ".config/bat/syntaxes/ASL-Syntax-Highlight":
   type: "git-repo"
@@ -43,3 +64,5 @@
   refreshPeriod: "168h"
   pull:
     args: ["--ff-only"]
+
+{{- end }}

@@ -119,12 +119,16 @@ README.md
 {{ if not (eq .chezmoi.os "linux") | or (not (lookPath "systemctl")) -}}
 # Don't install SystemD units
 .config/systemd
-# Don't install .desktop files
-.local/share/applications
 {{   if not (lookPath "chrome") | or (not (lookPath "google-chrome")) | or (not (findExecutable "chrome" (list "opt/google/chrome" ".local/bin"))) -}}
 .local/bin/google-chrome-vulkan-intel-kabylake-sorta-works.sh
 {{   end -}}
 {{ end -}}
 {{ if not (eq .osFamily "linux-arch") | or (not (lookPath "yay")) -}}
 .config/zsh/config.d/03-yay-fzf-search.zsh
+{{ end -}}
+{{ if not (eq .chezmoi.os "linux") -}}
+# Don't install .desktop files
+.local/share/applications
+# Don't update-desktop-database
+.chezmoiscripts/update-09-desktop-database.sh
 {{ end -}}

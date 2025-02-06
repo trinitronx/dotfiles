@@ -9,9 +9,6 @@ timeouts:
   # locking_timeout
   - timeout: 300
     command: loginctl lock-session
-    #command: >
-    #  dbus-send --session --dest=org.gnome.keyring --type=method_call --print-reply /org/freedesktop/secrets org.freedesktop.Secret.Service.LockService;
-    #  swaymsg exec \$locking
   # keyboard_timeout
   - timeout: 600
     command: /usr/share/sway/scripts/keyboard-backlight-switch.sh off
@@ -34,8 +31,10 @@ timeouts:
   #- timeout: 3600
   #  command: acpi -b | grep Discharging; test $? -eq 1 && systemctl sleep
 before-sleep: 'playerctl pause;
-  swaymsg exec \$locking & sleep \$sleep_delay'
+  loginctl lock-session & sleep \$sleep_delay'
 after-resume: swaymsg "output * power on"
 lock: 'dbus-send --session --dest=org.gnome.keyring --type=method_call --print-reply /org/freedesktop/secrets org.freedesktop.Secret.Service.LockService;
-  swaymsg exec \$locking'
+  dbus-send --system --print-reply --dest=org.freedesktop.login1 /org/freedesktop/login1/session/auto org.freedesktop.login1.Session.SetLockedHint boolean:true;
+  swaymsg exec \$swaylock'
+unlock: dbus-send --system --print-reply --dest=org.freedesktop.login1 /org/freedesktop/login1/session/auto org.freedesktop.login1.Session.SetLockedHint boolean:false
 idlehint: '240'

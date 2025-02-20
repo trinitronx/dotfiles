@@ -99,7 +99,7 @@ plugins=(git pyenv python vscode zsh-sweep zhooks)
 
 # Use p10k built-in OSC 133 semantic prompt support
 # order-of-operations: must be set before p10k is sourced (via OMZ's ZSH_THEME)
-typeset -g POWERLEVEL9K_TERM_SHELL_INTEGRATION=true
+typeset -gri __p9k_force_term_shell_integration=1
 
 # zsweep plugin
 zs_set_path=1

@@ -137,7 +137,6 @@ if [[ ! -d "${ZSH_CACHE_DIR}/completions" ]]; then
 fi
 
 source $ZSH/oh-my-zsh.sh
-
 {{- /* Manjaro uses /usr/share/zsh/p10k.zsh from extra/manjaro-zsh-config */ -}}
 {{ if ne .osId "manjaro" -}}
 {{/* Source p10k config (output of p10k configure) on everything except Manjaro */}}

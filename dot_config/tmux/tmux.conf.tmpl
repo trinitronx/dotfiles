@@ -10,18 +10,16 @@ bind-key l select-pane -R
 set-option -g default-shell $SHELL
 
 # Look good
-#set-option -g default-terminal "screen-256color"
 
 # Set terminal title from active tmux window/panes
 set-option -g allow-rename on
 set-option -g set-titles on
 set-option -g set-titles-string 'tmux #{pane_title}'
+{{ if (eq .chezmoi.os "linux") -}}
 set-option -g default-terminal "tmux-256color"
-#set-option -g default-terminal "xterm-256color"
-
-#set -g set-titles on
-#set -g set-titles-string "#W"
-#set -g default-terminal "tmux-256color"
+{{ else if (eq .chezmoi.os "darwin") -}}
+set-option -g default-terminal "screen-256color"
+{{ end -}}
 
 # Enable mouse support (works in iTerm)
 #set-window-option -g mode-mouse on

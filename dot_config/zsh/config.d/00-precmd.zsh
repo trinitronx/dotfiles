@@ -1,7 +1,8 @@
-function mzc_termsupport_prompt_jump() {
-    print -Pn "\e]133;A\e\\"
-}
-add-zsh-hook precmd mzc_termsupport_prompt_jump
+# Now using p10k OSC 133 integration in ~/.config/oh-my-zsh/zshrc
+#function mzc_termsupport_prompt_jump() {
+#    print -Pn "\e]133;A\e\\"
+#}
+#add-zsh-hook precmd mzc_termsupport_prompt_jump
 
 #precmd() {
 #    echo 'Adding precmd prompt OSC 133'

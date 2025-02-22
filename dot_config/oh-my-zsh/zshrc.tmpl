@@ -97,6 +97,10 @@ plugins=(git pyenv python vscode zsh-sweep zhooks)
 
 # User configuration
 
+# Use p10k built-in OSC 133 semantic prompt support
+# order-of-operations: must be set before p10k is sourced (via OMZ's ZSH_THEME)
+typeset -gri __p9k_force_term_shell_integration=1
+
 # zsweep plugin
 zs_set_path=1
 
@@ -133,7 +137,6 @@ if [[ ! -d "${ZSH_CACHE_DIR}/completions" ]]; then
 fi
 
 source $ZSH/oh-my-zsh.sh
-
 {{- /* Manjaro uses /usr/share/zsh/p10k.zsh from extra/manjaro-zsh-config */ -}}
 {{ if ne .osId "manjaro" -}}
 {{/* Source p10k config (output of p10k configure) on everything except Manjaro */}}

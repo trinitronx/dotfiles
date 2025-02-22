@@ -1,0 +1,118 @@
+# Act like Vim
+set-window-option -g mode-keys vi
+bind-key h select-pane -L
+bind-key j select-pane -D
+bind-key k select-pane -U
+bind-key l select-pane -R
+
+# Use zsh default
+#set-option -g default-shell /usr/bin/zsh
+set-option -g default-shell $SHELL
+
+# Look good
+
+# Set terminal title from active tmux window/panes
+set-option -g allow-rename on
+set-option -g set-titles on
+set-option -g set-titles-string 'tmux #{pane_title}'
+{{ if (eq .chezmoi.os "linux") -}}
+set-option -g default-terminal "tmux-256color"
+{{ else if (eq .chezmoi.os "darwin") -}}
+set-option -g default-terminal "screen-256color"
+{{ end -}}
+
+# Enable mouse support (works in iTerm)
+#set-window-option -g mode-mouse on
+#set-option -g mouse-select-pane on
+#set-option -g mouse-resize-pane on
+#set-option -g mouse-select-window on
+# Tmux >=2.1 deprecated above options.
+# Reference: https://stackoverflow.com/questions/11832199/tmux-set-g-mouse-mode-on-doesnt-work
+# Now there is just:
+set -g mouse on
+
+# set up layouts
+# set main-pane-width 130
+
+# scrollback buffer size increase
+set -g history-limit 500000
+
+# Copy-mode OSC 133 shell integration
+# C-z scrolls back to last old prompt
+# C-x scrolls forward to later prompt
+#bind-key -T copy-mode  /  \; send-keys -X previous-prompt \; send-keys -X previous-prompt \; send-key /
+bind-key -T copy-mode    C-z send-keys -X previous-prompt
+bind-key -T copy-mode-vi C-z send-keys -X previous-prompt
+bind-key -T copy-mode    C-x send-keys -X next-prompt
+bind-key -T copy-mode-vi C-x send-keys -X next-prompt
+
+# C-b C-b will swap to last used window
+bind-key C-b last-window
+
+# Start tab numbering at 1
+set -g base-index 1
+
+# Allows for faster key repetition
+set -s escape-time 0
+
+# Highlight active window
+# Deprecated in Tmux v2.9.x
+#set-window-option -g window-status-current-bg red
+set -g mode-style bg=red,fg=green,blink
+
+# use different keys to split vertical and horizonal
+bind | split-window -h
+bind - split-window -v
+
+# Change cursor in vim to distinguish between insert and command mode
+# Use in conjunciton with tmux-cursors.vim
+set-option -g terminal-overrides '*88col*:colors=88,*256col*:colors=256,xterm*:XT:Ms=\E]52;%p1%s;%p2%s\007:Cc=\E]12;%p1%s\007:Cr=\E]112\007:Cs=\E]50;CursorShape=%?%p1%{3}%<%t%{0}%e%p1%{2}%-%;%d\007'
+
+
+{{ $comment_str := "" -}}
+{{ $copy_cmd := "" -}}
+{{ $paste_cmd := "" -}}
+{{ if (eq .chezmoi.os "linux") | and ((lookPath "wayland-scanner") | or (eq .xdg_session_type "wayland")) -}}
+{{   $comment_str = "Wayland Linux" -}}
+{{   $copy_cmd = "wl-copy" -}}
+{{   $paste_cmd = "wl-paste" -}}
+{{ else if (eq .chezmoi.os "linux") -}}
+{{   $comment_str = "Xorg Linux" -}}
+{{   $copy_cmd = "xclip -selection clipboard -in" -}}
+{{   $paste_cmd = "xclip -selection clipboard -o" -}}
+{{ else if (eq .chezmoi.os "darwin") -}}
+{{   $comment_str = "" -}}
+{{   $copy_cmd = "pbcopy" -}}
+{{   $paste_cmd = "pbpaste" -}}
+{{   if lookPath "reattach-to-user-namespace" -}}
+{{     $copy_cmd = printf "%s%s" "reattach-to-user-namespace " $copy_cmd -}}
+{{     $paste_cmd = printf "%s%s" "reattach-to-user-namespace " $paste_cmd -}}
+{{   end -}}
+{{ else if (eq .chezmoi.os "windows") -}}
+{{   $comment_str = "Windows Subsystem for Linux" -}}
+{{   $copy_cmd = "perl -pe 'chomp if eof' | clip.exe" -}}
+{{   $paste_cmd = "powershell.exe Get-Clipboard | sed 's/\r$//'" -}}
+{{ else -}}
+{{   $comment_str = "Xorg Unknown OS" -}}
+{{   $copy_cmd = "xclip -selection clipboard -in" -}}
+{{   $paste_cmd = "xclip -selection clipboard -o" -}}
+{{ end -}}
+# tmux OSX pbcopy integration{{ if ne $comment_str "" }} => Adapted to {{ $copy_cmd }} for {{ $comment_str }}{{ end }}
+# Source: http://evertpot.com/osx-tmux-vim-copy-paste-clipboard/
+# Linux method reference: https://github.com/nicknisi/dotfiles/pull/167
+# Copy-paste integration
+#set-option -g default-command "bash"
+
+# Use vim keybindings in copy mode
+setw -g mode-keys vi
+
+# Setup 'v' to begin selection as in Vim
+bind-key -T copy-mode-vi v send-keys -X begin-selection
+bind-key -T copy-mode-vi y send-keys -X copy-pipe "{{ $copy_cmd }}"
+
+# Update default binding of `Enter` to also use copy-pipe
+unbind -T copy-mode-vi Enter
+bind-key -T copy-mode-vi Enter send-keys -X copy-pipe "{{ $copy_cmd }}"
+
+# Bind ']' to use {{ $paste_cmd }}
+bind ] run "{{ $paste_cmd }} | tmux load-buffer - && tmux paste-buffer"

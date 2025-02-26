@@ -1,0 +1,10 @@
+{{- if lookPath "lpass" -}}
+{{- $lpResults := ( lastpass "DuckDNS.org - Free DynDNS DDNS provider" ) -}}
+{{-   if $lpResults }}{{ $lpItem := index $lpResults 0 -}}
+{{-     if eq .chezmoi.hostname "saturn" | and ( eq .chezmoi.uid "1000" ) | and $lpItem -}}
+TOKEN={{ $lpItem.password | quote }}
+DOMAIN={{ $lpItem.username | quote }}
+{{-     end }}
+{{-   end -}}
+{{- end }}
+INTERVAL=300

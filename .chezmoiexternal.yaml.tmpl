@@ -65,4 +65,15 @@
   pull:
     args: ["--ff-only"]
 
-{{- end }}
+{{ end -}}
+{{ if eq .chezmoi.hostname "saturn" | and ( eq .chezmoi.uid "1000" ) -}}
+".local/share/duckdns-systemd":
+  type: "git-repo"
+  url: "https://github.com/trinitronx/duckdns-systemd"
+  refreshPeriod: "168h"
+  pull:
+    args: ["--ff-only"]
+  clone:
+    args: ["-b", "add-ipv6-support"]
+
+{{ end -}}

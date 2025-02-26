@@ -138,3 +138,9 @@ README.md
 # Don't update-desktop-database
 .chezmoiscripts/09-update-desktop-database.sh
 {{ end -}}
+{{ if not (eq .chezmoi.hostname "saturn" | and ( eq .chezmoi.uid "1000" )) -}}
+.duckdns
+.local/bin/duckdns
+.config/systemd/user/duckdns.service
+.config/systemd/user/default.target.wants/duckdns.service
+{{ end -}}

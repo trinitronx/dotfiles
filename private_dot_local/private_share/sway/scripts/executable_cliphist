@@ -131,4 +131,18 @@ fi
 # Translate non-UTF-8 chars into UTF-8 first
 #iconv -f ISO-8859-1 -t UTF-8//TRANSLIT -o - | cliphist "$@"
 # 2024-07-08: JMC: Try to simply translate / corerce into UTF-8, assuming UTF-8 input by default
-iconv -f UTF-8 -t UTF-8//TRANSLIT -o - | cliphist "$@"
+# Only pipe STDIN for commands that support it (avoids infinite STDIN read deadlock blocking)
+keywords=("store" "decode" "delete")
+for keyword in "${keywords[@]}"; do
+  if [ "$keyword" -eq "$1" ]; then
+    _stdin_pipe=1
+  else
+    _stdin_pipe=0
+  fi
+done
+
+if [ "$_stdin_pipe" -eq "1" ]; then
+  iconv -f UTF-8 -t UTF-8//TRANSLIT -o - | /usr/bin/cliphist "$@"
+else
+  /usr/bin/cliphist "$@"
+fi

@@ -122,6 +122,23 @@ README.md
 {{ if not (lookPath "qt6ct") -}}
 .config/qt6ct
 {{ end -}}
+{{- /* Omit GTK x.x settings on non-Linux OS */ -}}
+{{ if not (eq .chezmoi.os "linux") -}}
+{{- /* Omit specific GTK versioned settings when not installed */ -}}
+{{   if not (lookPath "gtk-query-immodules-2.0") -}}
+# Don't install gtk2 settings
+.config/gtk-2.0
+.gtkrc-2.0
+{{   end -}}
+{{   if not (lookPath "gtk-query-immodules-3.0") -}}
+# Don't install gtk3 settings
+.config/gtk-3.0
+{{   end -}}
+{{   if not (lookPath "gtk4-query-settings") -}}
+# Don't install gtk4 settings
+.config/gtk-4.0
+{{   end -}}
+{{ end -}}
 {{ if not (eq .chezmoi.os "linux") | or (not (lookPath "systemctl")) -}}
 # Don't install SystemD units
 .config/systemd

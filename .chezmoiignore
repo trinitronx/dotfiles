@@ -122,8 +122,10 @@ README.md
 {{ if not (lookPath "qt6ct") -}}
 .config/qt6ct
 {{ end -}}
-{{- /* Omit GTK x.x settings on non-Linux OS */ -}}
+{{- /* Omit Linux-specific settings on non-Linux OS */ -}}
 {{ if not (eq .chezmoi.os "linux") -}}
+.config/mimeapps.list
+.local/share/applications/mimeapps.list
 {{- /* Omit specific GTK versioned settings when not installed */ -}}
 {{   if not (lookPath "gtk-query-immodules-2.0") -}}
 # Don't install gtk2 settings

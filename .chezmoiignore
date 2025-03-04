@@ -166,3 +166,6 @@ README.md
 .config/systemd/user/duckdns.service
 .config/systemd/user/default.target.wants/duckdns.service
 {{ end -}}
+{{ if not (eq .chezmoi.os "linux") | or (not (lookPath "rofimoji")) -}}
+.local/share/rofimoji
+{{ end -}}

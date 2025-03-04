@@ -20,7 +20,7 @@ glNoGraph() {
 }
 
 typeset -g _gitLogLineToHash _viewGitLogLine _viewGitLogLineUnfancy _clipboardCopyCmd _unameOS
-_gitLogLineToHash="echo {} | grep -o '[a-f0-9]\{7\}' | head -1 | tr -d '\n'"
+_gitLogLineToHash="echo {} | grep -o '[a-f0-9]\{7,40\}' | head -1 | tr -d '\n'"
 _viewGitLogLine="$_gitLogLineToHash | xargs -I % sh -c 'git show --color=always --show-signature % | delta'"
 _viewGitLogLineUnfancy="$_gitLogLineToHash | xargs -I % sh -c 'git show %'"
 

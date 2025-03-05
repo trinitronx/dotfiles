@@ -1,0 +1,6 @@
+# ~/.config/git/allowed_signers
+{{ $github_email := .email -}}
+{{ $keyid_comment_map := dict "17894590" "yubikey-4-04177227" "118122680" "identity.lyra" -}}
+{{ range gitHubKeys .githubuser -}}
+{{ $github_email }} {{ .Key }} {{ get $keyid_comment_map (.ID | int | toString) }}
+{{ end -}}

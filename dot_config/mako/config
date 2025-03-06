@@ -17,3 +17,6 @@ markup=1
 format=<span foreground='#e6cd69'>󰘔 %a</span>\n<span foreground="#16a085"><b>%s</b></span>\n%b
 history=1
 max-history=10
+
+[mode=locked]
+invisible=1

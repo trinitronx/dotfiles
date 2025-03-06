@@ -165,6 +165,12 @@ README.md
 .local/bin/duckdns
 .config/systemd/user/duckdns.service
 .config/systemd/user/default.target.wants/duckdns.service
+{{ if not (lookPath "calcurse") -}}
+.config/calcurse
+.config/systemd/user/calcurse-caldav.timer
+.config/systemd/user/calcurse-caldav.service
+.config/systemd/user/timers.target.wants/calcurse-caldav.timer
+{{   end -}}
 {{ end -}}
 {{ if not (eq .chezmoi.os "linux") | or (not (lookPath "rofimoji")) -}}
 .local/share/rofimoji

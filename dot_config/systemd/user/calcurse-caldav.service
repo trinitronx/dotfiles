@@ -1,0 +1,12 @@
+[Unit]
+Description=calcurse CalDAV sync
+ConditionPathExistsGlob=%E/calcurse/caldav/oauth2_cred
+
+[Service]
+Type=oneshot
+StandardError=journal
+ExecStart=/usr/bin/calcurse-caldav
+Restart=no
+
+[Install]
+WantedBy=multi-user.target

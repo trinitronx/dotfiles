@@ -35,6 +35,8 @@ before-sleep: 'playerctl pause;
 after-resume: swaymsg "output * power on"
 lock: 'dbus-send --session --dest=org.gnome.keyring --type=method_call --print-reply /org/freedesktop/secrets org.freedesktop.Secret.Service.LockService;
   dbus-send --system --print-reply --dest=org.freedesktop.login1 /org/freedesktop/login1/session/auto org.freedesktop.login1.Session.SetLockedHint boolean:true;
+  makoctl mode -a locked;
   swaymsg exec \$swaylock'
-unlock: dbus-send --system --print-reply --dest=org.freedesktop.login1 /org/freedesktop/login1/session/auto org.freedesktop.login1.Session.SetLockedHint boolean:false
+unlock: 'dbus-send --system --print-reply --dest=org.freedesktop.login1 /org/freedesktop/login1/session/auto org.freedesktop.login1.Session.SetLockedHint boolean:false;
+  makoctl mode -r locked;'
 idlehint: '240'

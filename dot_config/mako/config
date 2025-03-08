@@ -1,0 +1,24 @@
+#font=JetBrainsMono Nerd Font 14
+#text-color=#eeeeee
+#background-color=#141a1b
+#progress-color=#444444
+#default-timeout=15000
+#padding=20
+#margin=20
+#height 200
+#width=400
+#border-color=#16a085
+#border-size=3
+border-radius=16
+icons=1
+icon-path=/usr/share/icons/Papirus-Dark-Maia/:/usr/share/icons/Papirus-Dark/:/usr/share/icons/Papirus/:/usr/share/icons/Adwaita/
+actions=1
+markup=1
+format=<span foreground='#e6cd69'>󰘔 %a</span>\n<span foreground="#16a085"><b>%s</b></span>\n%b
+history=1
+max-history=10
+
+[mode=locked]
+invisible=1
+[mode=do-not-disturb]
+invisible=1

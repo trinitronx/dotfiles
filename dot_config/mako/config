@@ -20,3 +20,5 @@ max-history=10
 
 [mode=locked]
 invisible=1
+[mode=do-not-disturb]
+invisible=1

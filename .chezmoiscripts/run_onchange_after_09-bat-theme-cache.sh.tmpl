@@ -6,5 +6,6 @@
 # sublime-snazzy sha: {{ output "git" "-C" (joinPath .chezmoi.homeDir ".config" "bat" "themes" "sublime-snazzy") "rev-parse" "HEAD" }}
 ## syntaxes
 # ASL-Syntax-Highlight sha: {{ output "git" "-C" (joinPath .chezmoi.homeDir ".config" "bat" "syntaxes" "ASL-Syntax-Highlight") "rev-parse" "HEAD" }}
+# Nftables sha: {{ output "git" "-C" (joinPath .chezmoi.homeDir ".config" "bat" "syntaxes" "Nftables") "rev-parse" "HEAD" }}
 
 bat cache --build

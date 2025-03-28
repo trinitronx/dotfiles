@@ -128,6 +128,15 @@ README.md
 {{ if not (lookPath "qt6ct") -}}
 .config/qt6ct
 {{ end -}}
+{{- /* Omit makoctl imv/mpv helper utils if not installed */ -}}
+{{ if not (lookPath "makoctl") -}}
+{{   if not (lookPath "imv") -}}
+.local/bin/imv-last-screenshot.sh
+{{   end -}}
+{{   if not (lookPath "mpv") -}}
+.local/bin/mpv-last-video.sh
+{{   end -}}
+{{ end -}}
 {{- /* Omit Linux-specific settings on non-Linux OS */ -}}
 {{ if not (eq .chezmoi.os "linux") -}}
 .config/mimeapps.list

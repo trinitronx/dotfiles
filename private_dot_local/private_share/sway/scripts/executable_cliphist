@@ -134,7 +134,7 @@ fi
 # Only pipe STDIN for commands that support it (avoids infinite STDIN read deadlock blocking)
 keywords=("store" "decode" "delete")
 for keyword in "${keywords[@]}"; do
-  if [ "$keyword" -eq "$1" ]; then
+  if [ "$keyword" = "$1" ]; then
     _stdin_pipe=1
   else
     _stdin_pipe=0

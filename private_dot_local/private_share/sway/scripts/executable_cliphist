@@ -133,11 +133,10 @@ fi
 # 2024-07-08: JMC: Try to simply translate / corerce into UTF-8, assuming UTF-8 input by default
 # Only pipe STDIN for commands that support it (avoids infinite STDIN read deadlock blocking)
 keywords=("store" "decode" "delete")
+_stdin_pipe=0
 for keyword in "${keywords[@]}"; do
   if [ "$keyword" = "$1" ]; then
     _stdin_pipe=1
-  else
-    _stdin_pipe=0
   fi
 done
 

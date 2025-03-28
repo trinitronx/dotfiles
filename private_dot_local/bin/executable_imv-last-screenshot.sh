@@ -13,4 +13,8 @@
 # You should have received a copy of the GNU Affero General Public License along
 # with this program. If not, see <https://www.gnu.org/licenses/>.
 
-makoctl history | jq -r '.data | .[] | map(select(.summary.data == "Screenshot saved")) | first | .body.data'  | imv
+makoctl history | jq -r '.data | .[] |
+    map(
+      select(.summary.data == "Screenshot saved")
+    ) | first | .body.data' | \
+  imv

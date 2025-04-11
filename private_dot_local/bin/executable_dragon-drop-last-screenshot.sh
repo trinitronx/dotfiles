@@ -13,4 +13,6 @@
 # You should have received a copy of the GNU Affero General Public License along
 # with this program. If not, see <https://www.gnu.org/licenses/>.
 
-makoctl history | jq -r '.data | .[] | map(select(.summary.data == "Screenshot saved")) | first | .body.data'  | xargs dragon-drop -s 400 --stdin
+# makoctl history disappeared! See: https://github.com/emersion/mako/releases/tag/v1.10.0
+busctl --json=short --user call  org.freedesktop.Notifications /fr/emersion/Mako fr.emersion.Mako ListHistory \
+  | jq -r '.data | .[] | map(select(.summary.data == "Screenshot saved")) | first | .body.data'  | xargs dragon-drop -s 400 --stdin

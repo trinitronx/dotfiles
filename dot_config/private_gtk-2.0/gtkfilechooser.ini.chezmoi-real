@@ -2,10 +2,10 @@
 LocationMode=filename-entry
 ShowHidden=false
 ShowSizeColumn=true
-GeometryX=0
-GeometryY=263
+GeometryX=456
+GeometryY=192
 GeometryWidth=1008
-GeometryHeight=583
-SortColumn=name
-SortOrder=ascending
+GeometryHeight=695
+SortColumn=modified
+SortOrder=descending
 StartupMode=recent

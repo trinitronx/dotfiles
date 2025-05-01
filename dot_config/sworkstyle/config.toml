@@ -1,0 +1,78 @@
+#
+# pattern: Can either be the exact "app_name" (app_id/class) of the window or a regex string in the format of `"/{regex}/"` which will match the window "title".
+# icon: Your beatiful icon
+#
+# verbose format:
+#
+# '{pattern}' = { type = 'generic' | 'exact', value = '{icon}' }
+#
+#
+# If it couldn't match something it will print:
+#
+# WARN [sworkstyle:config] No match for '{app_name}' with title '{title}'
+#
+# You can use {title} to do a generic matching
+# You can use {app_name} to do an exact match
+# You can find icons for nerd fonts here: https://www.nerdfonts.com/cheat-sheet
+# Anything added in here will override the defaults in the package.
+
+## References:
+#  - Config example w/plenty of apps
+#    - https://github.com/Lyr-7D1h/swayest_workstyle/issues/9#issuecomment-873578228
+#  - Unicode chars & NerdFont chars used here:
+#    - https://www.w3.org/TR/xml-entity-names/025.html
+#    - https://www.compart.com/en/unicode/U+2595
+#    - https://www.compart.com/en/unicode/U+2502
+#    - https://jkorpela.fi/chars/spaces.html
+#    - https://www.nerdfonts.com/cheat-sheet
+
+[matching]
+'steam' = { type = 'exact', value = ' ' }
+'Gimp-2.10' = { type = 'exact', value = ' ' }
+"rust" = { type = "generic", value = "" }
+"wireshark" = { type = "exact", value = "󰢩 󱙳" }
+"org.wireshark.Wireshark" = { type = "exact", value = "󰢩 󱙳" }
+"pavucontrol" = { type = "exact", value = " " }
+"imv" = " "
+"org.gnome.dspy" = { type = "exact", value= "" }
+"vim" = { type = "generic", value = "" }
+"irssi" = { type = "generic", value = '▕  󰻞 │' }
+"seahorse" = { type = "exact", value= "󱕵" }
+"veracrypt" = { type = "exact", value= "󱃬 " }
+"org.pwmt.zathura" = { type = "exact", value= "󰷊" }
+"io.gitlab.news_flash.NewsFlash" = { type = "exact", value= '▕ 󰑫  │' }
+"org.manjaro.pamac.manager" = { type = "exact", value= ' ' }
+"com.github.FontManager.FontManager" = { type = "exact", value= ' ' }
+"org.gnome.Fractal" = { type = "exact", value= ' ' }
+"cursor-url-handler" = { type = "exact", value= '▕ 󱀤 󰆧 │' }
+"findex" = { type = "exact", value= "󱁴 " }
+# Browser tab titles
+"archlinux" = { type = "generic", value = ' ' }
+"archwiki" = { type = "generic", value = ' ' }
+"AUR" = { type = "generic", value = ' ' }
+"gentoo" = { type = "generic", value = '󰣨 ' }
+"codeberg" = { type = "generic", value = ' ' }
+"wayland" = { type = "generic", value = ' ' }
+
+# First match wins, so order most specific match to generic
+#".* on QEMU/KVM$" = { type = "generic", value = ' ' }
+"virt-manager" = { type = "exact", value= " " }
+# VScode with unsaved ("dirty") file
+#'.*● .* - Visual Studio Code$' = { type = "generic", value = '▕ 󰨞 ●│ ' } # did not work :-(
+'code-oss' = { type = 'exact', value = '󰨞 ' }
+# mpv playing DVB Tu
+# Sequence: U+2595(Right One Eighth Block)+U+2006(SIX-PER-EM SPACE)+
+#  PLAY+U+200(EN SPACE)+TV+
+#  U+2004(THREE-PER-EM SPACE)+U+2502(Box Drawings Light Vertical)
+'/K[A-Z]{3,3}(?:-[A-Z]+?)? ([0-9.]+)?.* - mpv$/' = { type = 'generic', value = '▕   │' }
+'/^mpv .*?dvb:[/]{2,2}/' = { type = 'generic', value = '▕   │' }
+# mpv in terminal
+'/^mpv [-~/.]/' = { type = 'generic', value = '▕   │' }
+'mpv' = { type = 'exact', value = ' ' }
+# Running in tmux
+"/^tmux$/" = { type = "generic", value = '▕   │' }
+"/^tmux mpv .*?dvb:[/]{2,2}/" = { type = "generic", value = '▕    │' }
+'/^tmux mpv [-~/.]/' = { type = 'generic', value = '▕    │' }
+"/^tmux irssi/" = { type = "generic", value = '▕   󰻞 │' }
+"/^tmux.*saturn/" = { type = "generic", value = '▕    │' }
+"/^tmux.*sleep/" = { type = "generic", value = '▕   󰒲 │' }

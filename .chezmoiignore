@@ -147,6 +147,10 @@ README.md
 # Don't install gtk2 settings
 .config/gtk-2.0
 .gtkrc-2.0
+{{ else -}}
+{{- /* Omit specific GTK 2.0 externally-modified files */ -}}
+# Ignore externally modified file (will exist only in chezmoi source-path)
+.config/gtk-2.0/gtkfilechooser.ini.chezmoi-real
 {{ end -}}
 {{ if not (eq .chezmoi.os "linux") | or (not (lookPath "gtk-query-immodules-3.0")) -}}
 # Don't install gtk3 settings

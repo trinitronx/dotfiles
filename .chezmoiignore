@@ -41,6 +41,7 @@ README.md
 {{ else if not (eq .chezmoi.os "linux") -}}
 .config/profile.d/00-xdg-terminal-command.sh
 .config/fontconfig
+.local/share/bin/lsiommu
 {{ end -}}
 {{- /* Manjaro uses /usr/share/zsh/p10k.zsh from extra/manjaro-zsh-config */ -}}
 {{ if eq .osId "manjaro" -}}

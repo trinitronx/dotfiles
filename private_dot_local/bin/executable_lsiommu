@@ -1,0 +1,15 @@
+#!/bin/bash
+
+for d in $(find /sys/kernel/iommu_groups/ -type l | sort -n -k5 -t/); do
+    p=${d#*/iommu_groups/*}; n=${p%%/*}
+    echo "$p" | perl -ne 'exit 1 if !m/^.*\/devices\/\d{0,4}:.*/'
+    is_pci=$?
+
+    printf 'IOMMU Group %s ' "$n"
+    if [[ "$is_pci" -eq '0' ]]; then
+      lspci -nns "${d##*/}"
+    else
+      printf '%s non-PCI device has no lspci info (GVT-g or virtual device?)' "$d"
+    fi
+done;
+

@@ -22,7 +22,7 @@ profile hdtv-extended {
 	#exec swaymsg workspace 1, move workspace to output '$lg_oled_output_desc'
 	exec swaymsg "output 'LG Electronics LG TV SSCR2 0x01010101' enable"
 	exec swaymsg "output 'VIZIO, Inc M601d-A3/A3R 0x01010101' enable"
-	exec swaymsg "focus output 'VIZIO, Inc M601d-A3/A3R 0x01010101', workspace 10, workspace number 10 output 'VIZIO, Inc M601d-A3/A3R 0x01010101'"
+	exec swaymsg "focus output 'VIZIO, Inc M601d-A3/A3R 0x01010101', workspace number 10, workspace number 10 output 'VIZIO, Inc M601d-A3/A3R 0x01010101'"
 	exec swaymsg "focus output 'LG Electronics LG TV SSCR2 0x01010101'"
 }
 

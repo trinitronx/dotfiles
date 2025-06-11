@@ -8,10 +8,6 @@
 	interactive = auto
 	status = auto
 	ui = auto
-[diff]
-	renames = true
-	guitool = vscode
-
 [core]
 	excludesfile = {{ .chezmoi.homeDir }}/.gitignore_global
 	pager = less -FXRS -x2
@@ -55,18 +51,32 @@
 	autosquash = true
 {{- if eq .chezmoi.os "darwin" }}
 # MacOS Specific version
+[diff]
+	renames = true
+	tool = vimdiff
+	guitool = meld
 [merge]
-	tool = meld
+	tool = vimdiff
+	guitool = meld
 {{ else }}
+[diff]
+	renames = true
+	tool = vimdiff
+	guitool = void
 [merge]
-	tool = vscode
+	tool = vimdiff
+	guitool = void
 {{ end -}}
 [mergetool "meld"]
 	cmd = meld $BASE $LOCAL $REMOTE --output $MERGED
 [mergetool "vscode"]
-	cmd = code --reuse-window --wait --diff $BASE $LOCAL $REMOTE $MERGED
+	cmd = code --reuse-window --wait --merge $REMOTE $LOCAL $BASE $MERGED
 [difftool "vscode"]
 	cmd = code --reuse-window --wait --diff $BASE $LOCAL $REMOTE
+[mergetool "void"]
+	cmd = void --reuse-window --wait --merge $REMOTE $LOCAL $BASE $MERGED
+[difftool "void"]
+	cmd = void --reuse-window --wait --diff $BASE $LOCAL $REMOTE
 [push]
 	default = simple
 	autoSetupRemote = true
@@ -88,8 +98,6 @@
 	insteadOf = https://github.com/
 [url "git+ssh://{{ .launchpaduser }}@git.launchpad.net/"]
 	insteadof = lp:
-[merge]
-	guitool = meld
 [pull]
 	rebase = false
 [init]

@@ -60,6 +60,7 @@
 # VScode with unsaved ("dirty") file
 #'.*● .* - Visual Studio Code$' = { type = "generic", value = '▕ 󰨞 ●│ ' } # did not work :-(
 'code-oss' = { type = 'exact', value = '󰨞 ' }
+'void' = { type = 'exact', value = '󰆧 ' }
 # mpv playing DVB Tu
 # Sequence: U+2595(Right One Eighth Block)+U+2006(SIX-PER-EM SPACE)+
 #  PLAY+U+200(EN SPACE)+TV+

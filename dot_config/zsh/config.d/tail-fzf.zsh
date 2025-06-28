@@ -1,5 +1,18 @@
-#!/bin/bash
-PS4='+ $(date "+%s.%N") (${BASH_SOURCE}:${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
+#!/bin/zsh
+# shellcheck shell=bash
+# Set PS4 for Bash or Zsh
+if [[ "$TAIL_FZF_DEBUG" == 'true' ]]; then
+  case "$SHELL" in
+      */bash)
+          PS4='+ $(date "+%s.%N") (${BASH_SOURCE}:${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
+          ;;
+      */zsh)
+          # shellcheck disable=SC2154
+          PS4='${EPOCHREALTIME} (${(%):-%N}:${LINENO}): ${funcstack[1]:+${funcstack[1]}(): }'
+          ;;
+  esac
+  set -x
+fi
 
 # This script provides a way to interactively filter a log stream using fzf.
 # Each user-facing function is a wrapper around the _fzf_tail_mode function,

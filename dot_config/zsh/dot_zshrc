@@ -23,17 +23,17 @@ fi
 ## 2024-06-03 JMC: Source this at END of zshrc!
 ##  Otherwise, it breaks bash select-word-style Ctrl+w yank & paste Ctrl+y
 ##  This is because /usr/share/zsh/manjaro-zsh-config includes the
-##  zsh-syntax-highlighting plugin before our seetings are applied!
+##  zsh-syntax-highlighting plugin before our settings are applied!
 ##  See: https://github.com/zsh-users/zsh-syntax-highlighting/issues/67
 # Source manjaro config
 #source ~/.zshrc
 
 # user-defined overrides
-[ -d ~/.config/zsh/config.d/ ] && source <(cat ~/.config/zsh/config.d/*.zsh)
+[ -d "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/config.d/" ] && source <(cat "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/config.d/"*.zsh)
 
 # Fix for foot terminfo not installed on most servers
 alias ssh="TERM=xterm-256color ssh"
-source ~/.config/user-dirs.dirs
+source "${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs"
 
 # Source main OS-specific config
 source ~/.zshrc

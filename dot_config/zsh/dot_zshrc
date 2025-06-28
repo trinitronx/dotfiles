@@ -4,6 +4,8 @@
 # in: ~/.zshrc -> ~/.config/zsh/.zprofile -> ~/.profile -> ~/.config/profile.d/*
 export ZSH_PYENV_QUIET='true'
 
+# user-defined instant_prompt
+[ -d "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/p10k/instant.d" ] && source <(cat "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/p10k/instant.d/"*.zsh)
 
 # base config for oh my zsh
 #source /usr/share/oh-my-zsh/zshrc

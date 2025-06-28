@@ -33,7 +33,7 @@ if [ "${-//[^x]/}" = "x" ]; then
           ;;
       *zsh)
           # shellcheck disable=SC2154
-          export PS4='${EPOCHREALTIME} (${(%):-%N}:${LINENO}): ${funcstack[1]:+${funcstack[1]}(): }' ;
+          export PS4='%D{%s.%N} (${(%):-%N}:%i): ${funcstack[1]:+${funcstack[1]}(): }' ;
           setopt prompt_subst
           ;;
   esac

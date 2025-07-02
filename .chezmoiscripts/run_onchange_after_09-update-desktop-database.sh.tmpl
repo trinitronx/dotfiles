@@ -5,5 +5,5 @@
 {{- if lookPath "update-desktop-database" }}
 update-desktop-database --verbose "${XDG_DATA_HOME:-$HOME/.local/share}/applications"
 {{- else }}
-echo "$0: WARN: update-desktop-database not found"
+echo "$0: WARN: update-desktop-database not found on PATH - $PATH"
 {{- end }}

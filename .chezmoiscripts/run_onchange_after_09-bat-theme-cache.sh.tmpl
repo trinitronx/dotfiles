@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 {{- if lookPath "bat" }}
 {{-   if stat (joinPath .chezmoi.homeDir ".config" "bat" "themes") | or (stat (joinPath .chezmoi.homeDir ".config" "bat" "syntaxes")) }}

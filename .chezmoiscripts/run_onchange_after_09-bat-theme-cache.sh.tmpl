@@ -1,33 +1,38 @@
 #!/bin/bash
 
-{{- if stat (joinPath .chezmoi.homeDir ".config" "bat" "themes") | or (stat (joinPath .chezmoi.homeDir ".config" "bat" "syntaxes")) }}
+{{- if lookPath "bat" }}
+{{-   if stat (joinPath .chezmoi.homeDir ".config" "bat" "themes") | or (stat (joinPath .chezmoi.homeDir ".config" "bat" "syntaxes")) }}
 ## themes
-{{- if stat (joinPath .chezmoi.homeDir ".config" "bat" "themes") }}
-{{-   if stat (joinPath .chezmoi.homeDir ".config" "bat" "themes" "Dark-Dracula-Theme") }}
+{{-   if stat (joinPath .chezmoi.homeDir ".config" "bat" "themes") }}
+{{-     if stat (joinPath .chezmoi.homeDir ".config" "bat" "themes" "Dark-Dracula-Theme") }}
 # Dark-Dracula-Theme sha: {{ output "git" "-C" (joinPath .chezmoi.homeDir ".config" "bat" "themes" "Dark-Dracula-Theme") "rev-parse" "HEAD" "--" }}
-{{-   end }}
-{{-   if stat (joinPath .chezmoi.homeDir ".config" "bat" "themes" "Matcha-Dark") }}
+{{-     end }}
+{{-     if stat (joinPath .chezmoi.homeDir ".config" "bat" "themes" "Matcha-Dark") }}
 # Matcha-Dark sha: {{ output "git" "-C" (joinPath .chezmoi.homeDir ".config" "bat" "themes" "Matcha-Dark") "rev-parse" "HEAD" "--" }}
-{{-   end }}
-{{-   if stat (joinPath .chezmoi.homeDir ".config" "bat" "themes" "sublime-snazzy") }}
+{{-     end }}
+{{-     if stat (joinPath .chezmoi.homeDir ".config" "bat" "themes" "sublime-snazzy") }}
 # sublime-snazzy sha: {{ output "git" "-C" (joinPath .chezmoi.homeDir ".config" "bat" "themes" "sublime-snazzy") "rev-parse" "HEAD" "--" }}
-{{-   end }}
-{{- else }}
+{{-     end }}
+{{-   else }}
 # none
-{{- end }}
+{{-   end }}
 ## syntaxes
-{{- if stat (joinPath .chezmoi.homeDir ".config" "bat" "syntaxes") }}
-{{-   if stat (joinPath .chezmoi.homeDir ".config" "bat" "syntaxes" "ASL-Syntax-Highlight") }}
+{{-   if stat (joinPath .chezmoi.homeDir ".config" "bat" "syntaxes") }}
+{{-     if stat (joinPath .chezmoi.homeDir ".config" "bat" "syntaxes" "ASL-Syntax-Highlight") }}
 # ASL-Syntax-Highlight sha: {{ output "git" "-C" (joinPath .chezmoi.homeDir ".config" "bat" "syntaxes" "ASL-Syntax-Highlight") "rev-parse" "HEAD" "--" }}
-{{-   end }}
-{{-   if stat (joinPath .chezmoi.homeDir ".config" "bat" "syntaxes" "Nftables") }}
+{{-     end }}
+{{-     if stat (joinPath .chezmoi.homeDir ".config" "bat" "syntaxes" "Nftables") }}
 # Nftables sha: {{ output "git" "-C" (joinPath .chezmoi.homeDir ".config" "bat" "syntaxes" "Nftables") "rev-parse" "HEAD" "--" }}
-{{-   end }}
-{{- else }}
+{{-     end }}
+{{-   else }}
 # none
-{{- end }}
+{{-   end }}
 
 bat cache --build
-{{- else }}
+{{-   else }}
 # no-op - {{ joinPath .chezmoi.homeDir ".config" "bat" "themes" }} or {{ joinPath .chezmoi.homeDir ".config" "bat" "syntaxes" }} did not exist!
+{{-   end }}
+{{- else }}
+# no-op - bat not found on PATH
+echo "$0: WARN: bat not found on PATH - $PATH"
 {{- end }}

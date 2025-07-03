@@ -1,15 +1,18 @@
+{{- if not (env "OFFLINE") }}
 ".config/oh-my-zsh/custom/plugins/zhooks":
   type: "git-repo"
   url: "https://github.com/agkozak/zhooks"
   refreshPeriod: "168h"
   pull:
     args: ["--ff-only"]
+
 ".config/oh-my-zsh/custom/plugins/zsh-sweep":
   type: "git-repo"
   url: "https://github.com/psprint/zsh-sweep"
   refreshPeriod: "168h"
   pull:
     args: ["--ff-only"]
+
 ".config/oh-my-zsh/custom/plugins/zsh-tmux-auto-title":
   type: "git-repo"
   url: "https://github.com/mbenford/zsh-tmux-auto-title"
@@ -17,7 +20,7 @@
   pull:
     args: ["--ff-only"]
 
-{{ if ne .osId "manjaro" -}}
+{{   if ne .osId "manjaro" -}}
 {{- /* Manjaro can rely on manjaro-sway/oh-my-zsh */ -}}
 ".local/share/oh-my-zsh":
   type: "git-repo"
@@ -25,8 +28,9 @@
   refreshPeriod: "168h"
   pull:
     args: ["--ff-only"]
-{{ end -}}
-{{ if ne .osFamily "linux-arch" -}}
+
+{{   end -}}
+{{   if ne .osFamily "linux-arch" -}}
 {{- /* Arch-based distros can use extra/zsh-theme-powerlevel10k */ -}}
 ".local/share/zsh-theme-powerlevel10k":
   type: "git-repo"
@@ -35,8 +39,8 @@
   pull:
     args: ["--ff-only"]
 
-{{- end }}
-{{ if lookPath "bat" -}}
+{{   end -}}
+{{   if lookPath "bat" -}}
 ".config/bat/themes/Dark-Dracula-Theme":
   type: "git-repo"
   url: "https://github.com/krman009/Dark-Dracula-Theme"
@@ -72,8 +76,8 @@
   pull:
     args: ["--ff-only"]
 
-{{ end -}}
-{{ if eq .chezmoi.hostname "saturn" | and ( eq .chezmoi.uid "1000" ) -}}
+{{   end -}}
+{{   if eq .chezmoi.hostname "saturn" | and ( eq .chezmoi.uid "1000" ) -}}
 ".local/share/duckdns-systemd":
   type: "git-repo"
   url: "https://github.com/orazioedoardo/duckdns-systemd"
@@ -81,4 +85,5 @@
   pull:
     args: ["--ff-only"]
 
+{{   end -}}
 {{ end -}}

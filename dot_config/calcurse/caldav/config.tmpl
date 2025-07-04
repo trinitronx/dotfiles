@@ -6,8 +6,11 @@
 # Alternatively, if using ~/.calcurse, create a new directory at
 # ~/.calcurse/caldav/ and copy this file to ~/.calcurse/caldav/config and adjust
 # the configuration file below.
-{{- $lpResults := ( printf "calcurse-caldav-%s - Google CalDAV Client" .chezmoi.hostname | lastpass) -}}
-{{- $lpItem := index $lpResults 0 }}
+{{- $lpItem := false }}
+{{- if lookPath "lpass" -}}
+{{-   $lpResults := ( printf "calcurse-caldav-%s - Google CalDAV Client" .chezmoi.hostname | lastpass) -}}
+{{-   $lpItem := index $lpResults 0 }}
+{{- end }}
 
 [General]
 # Path to the calcurse binary that is used for importing/exporting items.
@@ -21,6 +24,8 @@ Hostname = apidata.googleusercontent.com
 # path following your host name in the URL.
 {{- if $lpItem }}
 Path = /caldav/v2/{{ index (regexSplit ":" (regexFind "^email:.*" $lpItem.note.notes | trim) -1) 1 | trim }}/events/
+{{- else }}
+#Path = /path/to/calendar/on/the/server/
 {{- end }}
 
 # Type of authentication to use. Must be "basic" or "oauth2"
@@ -72,6 +77,10 @@ Verbose = Yes
 # CREATED: {{ $lpItem.note.creationDate | trim | toDate "January,02,2006" | date "2006-01-02" }}
 ClientID = {{ $lpItem.note.clientID | trim }}
 ClientSecret = {{ $lpItem.note.clientsecret | trim }}
+{- else }}
+#[OAuth2]
+#ClientID = your_client_id
+#ClientSecret = your_client_secret
 {{- end }}
 
 # Scope of access for API calls. Synchronization requires read/write.

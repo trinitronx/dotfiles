@@ -12,7 +12,7 @@ fi
 {{/* Only add github.com SSH pubkeys on first bootstrap run */ -}}
 {{- /* Do not modify pre-existing ~/.ssh/known_hosts */ -}}
 {{- $sshDir := joinPath (.chezmoi.destDir | toString) ".ssh" -}}
-{{- $sshKnownHosts := joinPath $sshDir "known_hosts.modify_test" -}}
+{{- $sshKnownHosts := joinPath $sshDir "known_hosts" -}}
 if [ ! -e "{{ $sshKnownHosts }}" ]; then
   if [ ! -d "{{ $sshDir }}" ] ; then
     mkdir -p "{{ $sshDir }}"

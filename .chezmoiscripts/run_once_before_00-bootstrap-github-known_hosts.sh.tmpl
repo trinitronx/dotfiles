@@ -1,4 +1,5 @@
 #!/bin/sh
+{{/* vim: set ft=gotmpl */ -}}
 # -u bail on unset vars
 # -e bail on pipefail
 set -eu
@@ -7,10 +8,10 @@ if [[ -z "${CHEZMOI_WORKING_TREE}" ]]; then
     echo "Error, \$CHEZMOI_WORKING_TREE must be set. Please only run this script via chezmoi"
     exit 1
 fi
-{{- /* vim: set ft=gotmpl */ -}}
-{{- /* Only add github.com SSH pubkeys on first bootstrap run */ -}}
+
+{{/* Only add github.com SSH pubkeys on first bootstrap run */ -}}
 {{- /* Do not modify pre-existing ~/.ssh/known_hosts */ -}}
-{{- $sshDir := joinPath .chezmoi.destDir ".ssh" -}}
+{{- $sshDir := joinPath (.chezmoi.destDir | toString) ".ssh" -}}
 {{- $sshKnownHosts := joinPath $sshDir "known_hosts.modify_test" -}}
 if [ ! -e "{{ $sshKnownHosts }}" ]; then
   if [ ! -d "{{ $sshDir }}" ] ; then
@@ -18,8 +19,8 @@ if [ ! -e "{{ $sshKnownHosts }}" ]; then
     chmod 0700 "{{ $sshDir }}"
   fi
   cat >>{{ $sshKnownHosts }}<<-EOKH
-{{-   if stat (joinPath .chezmoi.cacheDir "github-meta-api") -}}
-{{-     $gitKeys := get (include (joinPath .chezmoi.cacheDir "github-meta-api") | fromJson) "ssh_keys" -}}
+{{    if stat (joinPath (.chezmoi.cacheDir | toString) "github-meta-api") -}}
+{{-     $gitKeys := get (include (joinPath (.chezmoi.cacheDir | toString) "github-meta-api") | fromJson) "ssh_keys" -}}
 {{      range $gitKeys }}github.com {{ . }}
 {{      end -}}
 {{-   else -}}

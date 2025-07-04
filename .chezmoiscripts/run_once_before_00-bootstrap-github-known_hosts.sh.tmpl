@@ -1,12 +1,16 @@
 #!/bin/sh
 {{/* vim: set ft=gotmpl */ -}}
-# -u bail on unset vars
 # -e bail on pipefail
-set -eu
+set -e
 
-if [[ -z "${CHEZMOI_WORKING_TREE}" ]]; then
-    echo "Error, \$CHEZMOI_WORKING_TREE must be set. Please only run this script via chezmoi"
-    exit 1
+
+if [ -z "${CHEZMOI_WORKING_TREE}" ]; then
+  echo "Error, \$CHEZMOI_WORKING_TREE must be set. Please only run this script via chezmoi" >&2
+  exit 1
+fi
+if [ "${CHEZMOI_COMMAND}" != "init" ]; then
+  [ "${CHEZMOI_VERBOSE:-0}" -eq "1" ] && echo "Skip github .ssh/known_hosts bootstrap - \$CHEZMOI_COMMAND must be 'init'" >&2
+  exit 0
 fi
 
 {{/* Only add github.com SSH pubkeys on first bootstrap run */ -}}

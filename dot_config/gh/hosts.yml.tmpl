@@ -1,7 +1,7 @@
+{{- if lookPath "lpass" -}}
 github.com:
     user: {{ .githubuser }}
     git_protocol: ssh
-{{- if lookPath "lpass" -}}
 {{- $lpResults := ( printf "GitHub: gh - GitHub token - %s" .chezmoi.hostname | lastpass) -}}
 {{-   if $lpResults }}{{ $lpItem := index $lpResults 0 }}
 {{-     if ne .chezmoi.os "darwin" | and $lpItem }}

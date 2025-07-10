@@ -94,10 +94,12 @@
 	required = true
 [bash-it]
 	hide-status = 1
+{{- if ne (index .chezmoi.args 1) "init" }}
 [url "git@github.com:"]
 	insteadOf = https://github.com/
 [url "git+ssh://{{ .launchpaduser }}@git.launchpad.net/"]
 	insteadof = lp:
+{{- end }}
 [pull]
 	rebase = false
 [init]

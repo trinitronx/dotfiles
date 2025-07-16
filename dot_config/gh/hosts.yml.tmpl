@@ -4,7 +4,7 @@ github.com:
     git_protocol: ssh
 {{-   $lpItemName :=  printf "GitHub: gh - GitHub token - %s" .chezmoi.hostname -}}
 {{-   $lpItemCmd := printf "%s '%s' 2>/dev/null || echo '[]'" "lpass show --quiet --json --fixed-strings " $lpItemName -}}
-{{-   $lpItemExists := gt ((output "/bin/sh" "-c" $lpItemCmd) | fromJson | len) 0 -}}
+{{-   $lpItemExists := not (empty ((output "/bin/sh" "-c" $lpItemCmd) | fromJson)) -}}
 {{-   if $lpItemExists -}}
 {{-     $lpResults := lastpass $lpItemName }}
 {{-     if $lpResults }}{{ $lpItem := index $lpResults 0 }}

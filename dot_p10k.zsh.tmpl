@@ -214,6 +214,13 @@
   typeset -g POWERLEVEL9K_OS_ICON_BACKGROUND=007 # #e6e6e6 white
   # Custom icon.
   # typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION=''
+{{- else if (eq .chezmoi.os "raspbian") -}}
+  # https://bits.raspberrypi.org/#!/Colours
+  # Closest match to: #bc1142 or #c51d4a = #d7005f
+  typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=161 # #d7005f red4
+  typeset -g POWERLEVEL9K_OS_ICON_BACKGROUND=007 # #e6e6e6 white
+  # Custom icon.
+  # typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION='
 {{- else if (eq .chezmoi.os "freebsd") -}}
   # https://freebsdfoundation.org/brand/
   # Closest match to: #eb0028 = #cd3f45 (manjaro foot theme)

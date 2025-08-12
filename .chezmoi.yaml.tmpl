@@ -51,6 +51,11 @@
 {{-   $osIdLike = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.idLike -}}
 {{- end -}}
 
+{{- if eq $osId "debian" | and (stat (joinPath "/" "etc" "apt" "sources.list.d" "raspi.list")) -}}
+{{-   $osId = "raspbian" -}}
+{{-   $osIdLike = "raspbian-debian" -}}
+{{- end -}}
+
 {{- $xdg_session_type := "" -}}
 {{- if hasKey . "xdg_session_type" -}}
 {{-   $xdg_session_type = .xdg_session_type -}}

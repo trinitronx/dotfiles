@@ -189,10 +189,59 @@
 
   #################################[ os_icon: os identifier ]##################################
   # OS identifier color.
-  typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=232
-  typeset -g POWERLEVEL9K_OS_ICON_BACKGROUND=7
+{{- if (eq .osId "manjaro") }}
+{{- /*  # https://htmlcolors.com/brand-color/manjaro-linux */ -}}
+{{- /*  # Closest match to: #34be5b = #00af5f */ -}}
+{{- /*  # typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=035 # #00af5f manjaro green */ -}}
+{{- /*  # Closest match to: #297d6e = #008787 */ -}}
+{{- /*  # typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=036 # #00af87 darkcyan */}}
+  # Closest match to: #297d6e = #008787
+  typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=030 # #008787 turquoise4 / matcha green
+  typeset -g POWERLEVEL9K_OS_ICON_BACKGROUND=7   # #d6d6d6 white
   # Custom icon.
-  # typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION='⭐'
+  # typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION=''
+{{- else if (eq .osId "darwin") -}}
+  # https://developer.apple.com/design/human-interface-guidelines/color
+  # Closest match to: systemGray5 #2c2c2e = #303030
+  typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=7   # #d6d6d6 white
+  typeset -g POWERLEVEL9K_OS_ICON_BACKGROUND=236 # #303030 grey19
+  # Custom icon.
+  # typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION=''
+{{- else if (eq .osId "ubuntu") -}}
+  # https://design.ubuntu.com/brand/colour-palette
+  # Closest match to: #e95420 = #ff5f00
+  typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=202 # #ff5f00 orangered1
+  typeset -g POWERLEVEL9K_OS_ICON_BACKGROUND=007 # #e6e6e6 white
+  # Custom icon.
+  # typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION=''
+{{- else if (eq .osId "raspbian") -}}
+  # https://bits.raspberrypi.org/#!/Colours
+  # Closest match to: #bc1142 or #c51d4a = #d7005f
+  typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=161 # #d7005f red4
+  typeset -g POWERLEVEL9K_OS_ICON_BACKGROUND=007 # #e6e6e6 white
+  # Custom icon.
+  # typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION='
+{{- else if (eq .osId "freebsd") -}}
+  # https://freebsdfoundation.org/brand/
+  # Closest match to: #eb0028 = #cd3f45 (manjaro foot theme)
+  # Or: 160 #d70000 red3 (default foot theme)
+  typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=009 # #cd3f45 bright red / maroon
+  typeset -g POWERLEVEL9K_OS_ICON_BACKGROUND=234 # #1c1c1c grey11
+  # Custom icon.
+  # typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION=''
+{{- else if (eq .osId "windows") -}}
+  # https://www.color-hex.com/color-palette/1023458
+  # Closest match to: #004fe1 = #005fd7
+  typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=026 # #005fd7 dodgerblue3
+  typeset -g POWERLEVEL9K_OS_ICON_BACKGROUND=153 # #afd7ff lightskyblue1
+  # Custom icon.
+  # typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION=''
+{{- else -}}
+  typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=232 # #080808 grey3
+  typeset -g POWERLEVEL9K_OS_ICON_BACKGROUND=7   # #d6d6d6 white
+  # Custom icon.
+  # typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION=''
+{{- end }}
 
   ################################[ prompt_char: prompt symbol ]################################
   # Transparent background.

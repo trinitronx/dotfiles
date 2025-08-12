@@ -2,15 +2,20 @@
 github.com:
     user: {{ .githubuser }}
     git_protocol: ssh
-{{- $lpResults := ( printf "GitHub: gh - GitHub token - %s" .chezmoi.hostname | lastpass) -}}
-{{-   if $lpResults }}{{ $lpItem := index $lpResults 0 }}
-{{-     if ne .chezmoi.os "darwin" | and $lpItem }}
+{{-   $lpItemName :=  printf "GitHub: gh - GitHub token - %s" .chezmoi.hostname -}}
+{{-   $lpItemCmd := printf "%s '%s' 2>/dev/null || echo '[]'" "lpass show --quiet --json --fixed-strings " $lpItemName -}}
+{{-   $lpItemExists := not (empty ((output "/bin/sh" "-c" $lpItemCmd) | fromJson)) -}}
+{{-   if $lpItemExists -}}
+{{-     $lpResults := lastpass $lpItemName }}
+{{-     if $lpResults }}{{ $lpItem := index $lpResults 0 }}
+{{-       if ne .chezmoi.os "darwin" | and $lpItem }}
     oauth_token: {{ $lpItem.note.clientsecret | trim }}
-{{-     end }}
+{{-       end }}
     users:
         # {{ $lpItem.note.name | trim }}
         # CREATED: {{ $lpItem.note.creationDate | trim | toDate "January,02,2006" | date "2006-01-02" }}
         {{ .githubuser }}: {{ if eq .chezmoi.os "darwin" | or (not $lpItem) }}{}{{ else }}
             oauth_token: {{ $lpItem.note.clientsecret | trim }}{{ end }}
-{{-   end -}}
+{{-     end -}}
+{{-   end }}
 {{- end }}

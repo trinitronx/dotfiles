@@ -92,3 +92,12 @@
 
 {{   end -}}
 {{ end -}}
+{{ if lookPath "mpv" | and ( lookPath "rofi" | or ( lookPath "wofi" )) -}}
+".local/share/rofi-mpv-dvb":
+  type: "git-repo"
+  url: "https://github.com/trinitronx/rofi-mpv-dvb"
+  refreshPeriod: "168h"
+  pull:
+    args: ["--ff-only"]
+
+{{ end -}}

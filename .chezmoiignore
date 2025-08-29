@@ -19,6 +19,9 @@ README.md
 {{ if not (lookPath "bat") -}}
 .config/bat
 {{ end -}}
+{{ if not (lookPath "foot") -}}
+.config/foot
+{{ end -}}
 {{ if not (lookPath "nwg-wrapper") -}}
 .config/nwg-wrapper
 {{ end -}}

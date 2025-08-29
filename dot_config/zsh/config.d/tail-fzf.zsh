@@ -1,5 +1,5 @@
-#!/bin/bash
-PS4='+ $(date "+%s.%N") (${BASH_SOURCE}:${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
+#!/bin/zsh
+# shellcheck shell=bash
 
 # This script provides a way to interactively filter a log stream using fzf.
 # Each user-facing function is a wrapper around the _fzf_tail_mode function,

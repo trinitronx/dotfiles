@@ -28,6 +28,7 @@
 
 [matching]
 'steam' = { type = 'exact', value = ' ' }
+'gimp' = { type = 'exact', value = ' ' }
 'Gimp-2.10' = { type = 'exact', value = ' ' }
 "rust" = { type = "generic", value = "" }
 "wireshark" = { type = "exact", value = "󰢩 󱙳" }

@@ -1,0 +1,44 @@
+[cursor]
+# style=block
+#color= 141a1b bd93f9 # Purple
+color= 141a1b 2eb398 # Matcha Teal
+
+[colors]
+alpha=0.9
+foreground=eeeeee
+background=141a1b
+regular0=2a3538  # black
+## regular0=141a1B  # black ## 2023-08-01: JMC: Too dark & blends into background
+regular1=cd3f45  # red
+regular2=9fca56  # green
+regular3=e6cd69  # yellow
+regular4=16a085  # blue
+regular5=a074c4  # magenta
+regular6=55b5db  # cyan
+regular7=d6d6d6  # white
+bright0=41535B   # bright black
+bright1=cd3f45  # red
+bright2=9fca56  # green
+bright3=e6cd69  # yellow
+bright4=16a085  # blue
+bright5=a074c4  # magenta
+bright6=55b5db  # cyan
+bright7=ffffff   # bright white
+# 16 = <256-color palette #16>
+# ...
+# 255 = <256-color palette #255>
+# selection-foreground=<inverse foreground/background>
+# selection-background=<inverse foreground/background>
+# jump-labels=<regular0> <regular3>
+# urls=<regular3>
+
+[csd]
+# preferred=server
+# size=26
+# color=<foreground color>
+# button-width=26
+# button-color=<background color>
+# button-minimize-color=<regular4>
+# button-maximize-color=<regular2>
+# button-close-color=<regular1>
+

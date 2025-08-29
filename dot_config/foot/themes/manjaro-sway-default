@@ -1,12 +1,9 @@
-[cursor]
-# style=block
-#color= 141a1b bd93f9 # Purple
-color= 141a1b 2eb398 # Matcha Teal
-
 [colors]
 alpha=0.9
 foreground=eeeeee
 background=141a1b
+#cursor= 141a1b bd93f9 # Purple
+cursor= 141a1b 2eb398 # Matcha Teal
 regular0=2a3538  # black
 ## regular0=141a1B  # black ## 2023-08-01: JMC: Too dark & blends into background
 regular1=cd3f45  # red

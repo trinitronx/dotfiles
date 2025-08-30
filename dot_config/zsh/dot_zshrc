@@ -4,6 +4,8 @@
 # in: ~/.zshrc -> ~/.config/zsh/.zprofile -> ~/.profile -> ~/.config/profile.d/*
 export ZSH_PYENV_QUIET='true'
 
+# user-defined instant_prompt
+[ -d "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/p10k/instant.d" ] && source <(cat "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/p10k/instant.d/"*.zsh)
 
 # base config for oh my zsh
 #source /usr/share/oh-my-zsh/zshrc
@@ -21,17 +23,17 @@ fi
 ## 2024-06-03 JMC: Source this at END of zshrc!
 ##  Otherwise, it breaks bash select-word-style Ctrl+w yank & paste Ctrl+y
 ##  This is because /usr/share/zsh/manjaro-zsh-config includes the
-##  zsh-syntax-highlighting plugin before our seetings are applied!
+##  zsh-syntax-highlighting plugin before our settings are applied!
 ##  See: https://github.com/zsh-users/zsh-syntax-highlighting/issues/67
 # Source manjaro config
 #source ~/.zshrc
 
 # user-defined overrides
-[ -d ~/.config/zsh/config.d/ ] && source <(cat ~/.config/zsh/config.d/*.zsh)
+[ -d "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/config.d/" ] && source <(cat "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/config.d/"*.zsh)
 
 # Fix for foot terminfo not installed on most servers
 alias ssh="TERM=xterm-256color ssh"
-source ~/.config/user-dirs.dirs
+source "${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs"
 
 # Source main OS-specific config
 source ~/.zshrc
@@ -42,3 +44,7 @@ source ~/.zshrc
 ## 2023-09-20: JMC: Moved to ~/.config/profile.d/99-z-rvm-path.sh
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 #export PATH="$PATH:$HOME/.rvm/bin"
+
+# To customize prompt, run `p10k configure` or edit .p10k.zsh.
+[[ ! -f ${ZDOTDIR:-~}/.p10k.zsh ]] || source ${ZDOTDIR:-~}/.p10k.zsh
+

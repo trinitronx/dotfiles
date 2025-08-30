@@ -24,6 +24,8 @@ if [[ -e /usr/share/zsh/manjaro-zsh-prompt ]]; then
 #  source /usr/share/zsh/manjaro-zsh-prompt
 ## 2024-06-03 JMC: Trying to test a bugfix
 ##  Using: https://github.com/zsh-users/zsh-autosuggestions/pull/551
+## 2025-06-27 JMC: New PR posted
+##  Using: https://github.com/zsh-users/zsh-autosuggestions/pull/795
   source /home/trinitronx/src/pub/zsh-autosuggestions/manjaro-zsh-prompt
 fi
 

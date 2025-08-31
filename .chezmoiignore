@@ -46,6 +46,19 @@ README.md
 .config/fontconfig
 .local/bin/lsiommu
 {{ end -}}
+{{- /* Different file paths for mailvelope gpgme config on Linux vs MacOS */ -}}
+{{ if ne .chezmoi.os "darwin" | or (not (lookPath "gpgme-json")) -}}
+Library
+Library/Application Support
+Library/Application Support/Mozilla
+Library/Application Support/Mozilla/NativeMessagingHosts
+Library/Application Support/Mozilla/NativeMessagingHosts/gpgmejson.json
+{{ end -}}
+{{ if ne .chezmoi.os "linux" | or (not (lookPath "gpgme-json")) -}}
+.mozilla
+.mozilla/native-messaging-hosts
+.mozilla/native-messaging-hosts/gpgmejson.json
+{{ end -}}
 {{- /* Manjaro uses /usr/share/zsh/p10k.zsh from extra/manjaro-zsh-config */ -}}
 {{ if eq .osId "manjaro" -}}
 .p10k.zsh

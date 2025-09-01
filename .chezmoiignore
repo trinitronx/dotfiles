@@ -214,3 +214,6 @@ Library/Application Support/Mozilla/NativeMessagingHosts/gpgmejson.json
 {{ if not (eq .chezmoi.os "linux") | or (not (lookPath "rofimoji")) -}}
 .local/share/rofimoji
 {{ end -}}
+{{ if not (lookPath "mpv") | or (not (lookPath "rofi") | and (not (lookPath "wofi"))) -}}
+.local/bin/rofi-mpv-dvb
+{{ end -}}

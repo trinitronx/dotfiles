@@ -1,5 +1,49 @@
 
 # shellcheck shell=sh
+# Function to detect ps variant
+detect_ps() {
+  # Detect ps supported args
+  if ps --help 2>&1 | grep -q "Try 'ps --help <simple|list|output"; then
+    # GNU variant procps(-ng)
+    if ps --help list 2>&1 | grep -q '\-p'; then
+      ps_p_arg='-p $$'
+      ps_ucomm_alias=ucomm
+      ps_o_arg="-o ${ps_ucomm_alias}="
+      ps_shell_detect_args="${ps_p_arg} ${ps_o_arg}"
+      shell_detect_cmd="\\command \\ps ${ps_shell_detect_args}"
+    elif ps --help output 2>&1 | grep -q '\-o'; then
+      # No -p arg available, fallback to grep & comm
+      ps_p_arg=''
+      ps_ucomm_alias=comm
+      ps_o_arg="-o pid=,${ps_ucomm_alias}="
+      ps_shell_detect_args="${ps_p_arg} ${ps_o_arg}"
+      shell_detect_cmd="\\command \\ps ${ps_shell_detect_args} | grep -E \"^ *\$\$ +\" | awk \"{ print \\\$2 }\" " ;
+    else
+      # No ps available or detection failed.  Fallback to /proc/
+      shell_detect_cmd='\command \gawk '\''BEGIN{RS=""}; NR==1{print; exit}'\'' /proc/$$/cmdline | sed -e '\''s/\x00/ /g'\'' | cut -f1 -d" "  ' ;
+    fi
+  else
+    # Some other variant ps
+    # Assume ucomm is not available & fallback to more portable comm
+    if ps --help 2>&1 | grep -q '\-p' ; then
+      ps_p_arg='-p $$'
+      ps_ucomm_alias=comm
+      ps_o_arg="-o ${ps_ucomm_alias}="
+      ps_shell_detect_args="${ps_p_arg} ${ps_o_arg}"
+      shell_detect_cmd="\\command \\ps ${ps_shell_detect_args}"
+    elif ps -h 2>&1 | grep -q '\-o'; then
+      # No -p arg available, fallback to grep
+      ps_p_arg=''
+      ps_ucomm_alias=comm
+      ps_o_arg="-o pid=,${ps_ucomm_alias}="
+      ps_shell_detect_args="${ps_p_arg} ${ps_o_arg}"
+      shell_detect_cmd="\\command \\ps ${ps_shell_detect_args} | grep -E \"^ *\$\$ +\" |  awk \"{ print \$2 }\" " ;
+    else
+      # No ps available or detection failed.  Fallback to /proc/
+      shell_detect_cmd='\command \gawk '\''BEGIN{RS=""}; NR==1{print; exit}'\'' /proc/$$/cmdline | sed -e '\''s/\x00/ /g'\'' | cut -f1 -d" "  ' ;
+    fi
+  fi
+}
 # Function to detect the current shell
 # Heuristics needed. See: https://stackoverflow.com/q/3327013/645491
 detect_shell() {
@@ -18,7 +62,8 @@ detect_shell() {
         echo "sh"
     else
         # Fallback: use process name
-        command ps -p "$$" -o comm=
+        detect_ps
+        eval $shell_detect_cmd
     fi
 }
 

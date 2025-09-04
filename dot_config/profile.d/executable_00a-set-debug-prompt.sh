@@ -80,7 +80,7 @@ if [ "${-//[^x]/}" = "x" ]; then
       *zsh)
           # shellcheck disable=SC2154
           # export PS4='%D{%s.%N} (%x:%i): %(0l,%0<${psvar[1]::=}${psvar[1]::=${${(%)__percentN__:-%N}:#${(%)_filePercent_x_:-%x}}}<,) %2(L.%{%G%}%{󰶻 %G%}[%L].) '$'\n''%{ '$'\b''%}  %1(V.%1v().%35<…<%N(%))  %(0l,%0<${psvar::=${psvar:#${_eval_::=(eval)}}}<,)' ;
-          export PS4=$'\n''%b%f%K{239}%D{%s.%N} %k%K{018}%F{239}%{ %G%}%f%k%K{018} %{󰈮 %G%}(%x:%i) %k%K{221}%F{018}%{ %G%}%f%k%F{black}%K{221} %(0l,%0<${psvar[1]::=}${psvar[1]::=${${(%)__percentN__:-%N}:#${(%)_filePercent_x_:-%x}}}<,)%2(L.%{%G%}%{󰶻 %G%}[%B%L%b].) %k%f%F{221}%{ %G%}%f '$'\n''%{ '$'\b''%}%B%K{030}  %{ %G%}%1(V.%1v%{()%G%}.%35<…<%N) %k%b%F{030}%{ %G%}%f %(0l,%0<${psvar::=${psvar:#${_eval_::=(eval)}}}<,)%B%F{249}' ;
+          export PS4=$'\n''%b%f%K{239}%D{%s.%N} %k%K{018}%F{239}%{ %G%}%f%k%K{018} %{󰈮 %G%}('$'\e]8;;void://file/''%x:%i:0'$'\a''%x:%i'$'\e]8;;\a'') %k%K{221}%F{018}%{ %G%}%f%k%F{black}%K{221} %(0l,%0<${psvar[1]::=}${psvar[1]::=${${(%)__percentN__:-%N}:#${(%)_filePercent_x_:-%x}}}<,)%2(L.%{%G%}%{󰶻 %G%}[%B%L%b].) %k%f%F{221}%{ %G%}%f '$'\n''%{ '$'\b''%}%B%K{030}  %{ %G%}%1(V.%1v%{()%G%}.%35<…<%N) %k%b%F{030}%{ %G%}%f %(0l,%0<${psvar::=${psvar:#${_eval_::=(eval)}}}<,)%B%F{249}' ;
           setopt prompt_subst
           ;;
   esac

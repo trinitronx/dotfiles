@@ -64,6 +64,7 @@ detect_shell() {
         # Fallback: use process name
         detect_ps
         eval $shell_detect_cmd
+        #command ps -p "$$" -o comm=
     fi
 }
 
@@ -78,7 +79,9 @@ if [ "${-//[^x]/}" = "x" ]; then
           ;;
       *zsh)
           # shellcheck disable=SC2154
-          export PS4='%D{%s.%N} (${(%):-%N}:%i): ${funcstack[1]:+${funcstack[1]}(): }' ;
+          #export PS4='%D{%s.%N} (%x:%i): %2(e.${(%)%N:#x}(%).): %N  ${funcstack[1]}' ;
+          #export PS4='%D{%s.%N} (%x:%i): %2(e|${(%)==funcstack[1]:#${(%%)_null_:-%x}}()|): %N  ${funcstack[@]} -- ' ;
+          export PS4='%D{%s.%N} (%x:%i): %%N= ${(%)_percentN_:-%N} %%x= ${(%)_null_:-%x} ##--> ${${(%)__percentN__:-%N}:#${(%)_filePercent_x_:-%x}} <-- (): late %%N= %N -- '$'\n''    ${funcstack[@]} -- ' ;
           setopt prompt_subst
           ;;
   esac

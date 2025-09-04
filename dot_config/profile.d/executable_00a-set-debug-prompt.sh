@@ -79,11 +79,7 @@ if [ "${-//[^x]/}" = "x" ]; then
           ;;
       *zsh)
           # shellcheck disable=SC2154
-          #export PS4='%D{%s.%N} (%x:%i): %2(e.${(%)%N:#x}(%).): %N  ${funcstack[1]}' ;
-          #export PS4='%D{%s.%N} (%x:%i): %2(e|${(%)==funcstack[1]:#${(%%)_null_:-%x}}()|): %N  ${funcstack[@]} -- ' ;
-          export PS4='%D{%s.%N} (%x:%i): %%N= ${(%)_percentN_:-%N} %%x= ${(%)_null_:-%x} ##--> ${${(%)__percentN__:-%N}:#${(%)_filePercent_x_:-%x}} <-- (): late %%N= %N -- '$'\n''    ${funcstack[@]} -- ' ;
-          export _clear_300='                                                                                                                                                                                                                                                                                                            '$'\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b\b'
-          export PS4='%D{%s.%N} (%x:%i): '$'\n''${psvar[1]::=}${psvar[1]::=${${(%)__percentN__:-%N}:#${(%)_filePercent_x_:-%x}}}%{'$'\e[300D'''${_clear_300}'%}%{'$'\b''%}  %1(V.%1v():.) ' ;
+          export PS4='%D{%s.%N} (%x:%i): %(0l,%0<${psvar[1]::=}${psvar[1]::=${${(%)__percentN__:-%N}:#${(%)_filePercent_x_:-%x}}}<,) %2(L.%{%G%}%{󰶻 %G%}[%L].) '$'\n''%{ '$'\b''%}  %1(V.%1v().%35<…<%N(%))  %(0l,%0<${psvar::=${psvar:#${_eval_::=(eval)}}}<,)' ;
           setopt prompt_subst
           ;;
   esac

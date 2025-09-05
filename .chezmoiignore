@@ -22,6 +22,9 @@ README.md
 {{ if not (lookPath "foot") -}}
 .config/foot
 {{ end -}}
+{{ if not (lookPath "lpass") -}}
+.config/05-lpass-settings.sh
+{{ end -}}
 {{ if not (lookPath "nwg-wrapper") -}}
 .config/nwg-wrapper
 {{ end -}}

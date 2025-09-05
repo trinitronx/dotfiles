@@ -31,6 +31,9 @@ README.md
 {{ if not (lookPath "makoctl") -}}
 .config/mako
 {{ end -}}
+{{ if not (lookPath "tex") -}}
+.config/profile.d/08-texlive.sh
+{{ end -}}
 {{ if not (lookPath "tmux") -}}
 .config/tmux
 {{ end -}}

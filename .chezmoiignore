@@ -151,6 +151,9 @@ Library/Application Support/Mozilla/NativeMessagingHosts/gpgmejson.json
 {{ if not (lookPath "qt6ct") -}}
 .config/qt6ct
 {{ end -}}
+{{ if not (isExecutable (joinPath .chezmoi.homeDir ".qlty" "bin" "qlty")) -}}
+.config/profile.d/06-qlty-path.sh
+{{ end -}}
 {{- /* Omit makoctl imv/mpv helper utils if not installed */ -}}
 {{ if not (lookPath "makoctl") -}}
 {{   if not (lookPath "imv") -}}

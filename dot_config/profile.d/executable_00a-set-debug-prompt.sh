@@ -78,9 +78,14 @@ if [ "${-//[^x]/}" = "x" ]; then
           export PS4='+ $(date "+%s.%N") (${BASH_SOURCE}:${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
           ;;
       *zsh)
-          # shellcheck disable=SC2154
-          # export PS4='%D{%s.%N} (%x:%I): %(0l,%0<${psvar[1]::=}${psvar[1]::=${${(%)__percentN__:-%N}:#${(%)_filePercent_x_:-%x}}}<,) %2(L.%{%G%}%{󰶻 %G%}[%L].) '$'\n''%{ '$'\b''%}  %1(V.%1v:%i().%35<…<%N(%):%i)  %(0l,%0<${psvar::=${psvar:#${_eval_::=(eval)}}}<,)' ;
-          export PS4=$'\n''%b%f%K{239}%D{%s.%N} %k%K{018}%F{239}%{ %G%}%f%k%K{018} %{󰈮 %G%}('$'\e]8;;void://file/''%x:%I:0'$'\a''%x:%I'$'\e]8;;\a'') %k%K{221}%F{018}%{ %G%}%f%k%F{black}%K{221} %(0l,%0<${psvar[1]::=}${psvar[1]::=${${(%)__percentN__:-%N}:#${(%)_filePercent_x_:-%x}}}<,)%2(L.%{%G%}%{󰶻 %G%}[%B%L%b].%{%G%}) %k%f%F{221}%{ %G%}%f '$'\n''%{ '$'\b''%}%B%K{030}  %{ %G%}%1(V.%1v:%i%{()%G%}.%35<…<%N:%i) %k%b%F{030}%{ %G%}%f %(0l,%0<${psvar::=${psvar:#${_eval_::=(eval)}}}<,)%B%F{249}' ;
+          # Use color + p10k powerline glyphs if interactive
+          if [ "${-//[^i]/}" = "i" ]; then
+              # shellcheck disable=SC2154
+              export PS4=$'\n''%b%f%K{239}%D{%s.%N} %k%K{018}%F{239}%{ %G%}%f%k%K{018} %{󰈮 %G%}('$'\e]8;;void://file/''%x:%I:0'$'\a''%x:%I'$'\e]8;;\a'') %k%K{221}%F{018}%{ %G%}%f%k%F{black}%K{221} %(0l,%0<${psvar[1]::=}${psvar[1]::=${${(%)__percentN__:-%N}:#${(%)_filePercent_x_:-%x}}}<,)%2(L.%{%G%}%{󰶻 %G%}[%B%L%b].%{%G%}) %k%f%F{221}%{ %G%}%f '$'\n''%{ '$'\b''%}%B%K{030}  %{ %G%}%1(V.%1v:%i%{()%G%}.%35<…<%N:%i) %k%b%F{030}%{ %G%}%f %(0l,%0<${psvar::=${psvar:#${_eval_::=(eval)}}}<,)%B%F{249}' ;
+          else
+              # shellcheck disable=SC2154
+              export PS4='%D{%s.%N} (%x:%I): %(0l,%0<${psvar[1]::=}${psvar[1]::=${${(%)__percentN__:-%N}:#${(%)_filePercent_x_:-%x}}}<,) %2(L.%{%G%}%{󰶻 %G%}[%L].) '$'\n''%{ '$'\b''%}  %1(V.%1v:%i().%35<…<%N(%):%i)  %(0l,%0<${psvar::=${psvar:#${_eval_::=(eval)}}}<,)' ;
+          fi
           setopt prompt_subst
           ;;
   esac

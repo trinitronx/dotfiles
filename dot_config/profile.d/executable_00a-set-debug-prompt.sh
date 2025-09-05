@@ -83,8 +83,14 @@ if [ "${-//[^x]/}" = "x" ]; then
               # shellcheck disable=SC2154
               export PS4=$'\n''%b%f%K{239}%D{%s.%N} %k%K{018}%F{239}%{ %G%}%f%k%K{018} %{󰈮 %G%}('$'\e]8;;void://file/''%x:%I:0'$'\a''%x:%I'$'\e]8;;\a'') %k%K{221}%F{018}%{ %G%}%f%k%F{black}%K{221} %(0l,%0<${psvar[1]::=}${psvar[1]::=${${(%)__percentN__:-%N}:#${(%)_filePercent_x_:-%x}}}<,)%2(L.%{%G%}%{󰶻 %G%}[%B%L%b].%{%G%}) %k%f%F{221}%{ %G%}%f '$'\n''%{ '$'\b''%}%B%K{030}  %{ %G%}%1(V.%1v:%i%{()%G%}.%35<…<%N:%i) %k%b%F{030}%{ %G%}%f %(0l,%0<${psvar::=${psvar:#${_eval_::=(eval)}}}<,)%B%F{249}' ;
           else
-              # shellcheck disable=SC2154
-              export PS4='%D{%s.%N} (%x:%I): %(0l,%0<${psvar[1]::=}${psvar[1]::=${${(%)__percentN__:-%N}:#${(%)_filePercent_x_:-%x}}}<,) %2(L.%{%G%}%{󰶻 %G%}[%L].) '$'\n''%{ '$'\b''%}  %1(V.%1v:%i().%35<…<%N(%):%i)  %(0l,%0<${psvar::=${psvar:#${_eval_::=(eval)}}}<,)' ;
+              if [ "$COLORTERM" = "truecolor" ] || [ "$COLORTERM" = 24bit ] || [ "$(\command tput colors 2> /dev/null)" -ge 255 ] || \command infocmp -1 | grep -q -iE 'colors.*0x100'; then
+                  # shellcheck disable=SC2154
+                  export PS4='%F{239}%D{%s.%N}%f (%B%F{075}%x:%I%f%b): %(0l,%0<${psvar[1]::=}${psvar[1]::=${${(%)__percentN__:-%N}:#${(%)_filePercent_x_:-%x}}}<,) %B%F{003}%2(L.%{%G%}%{󰶻 %G%}[%L].)%f%b '$'\n''%B%F{149}  %1(V.%1v:%i().%35<…<%N(%):%i)%f%b  %(0l,%0<${psvar::=${psvar:#${_eval_::=(eval)}}}<,)' ;
+              elif [ "$COLORTERM" = 8bit ] || [ "$(\command tput colors 2> /dev/null)" -lt 255 -a "$(\command tput colors 2> /dev/null)" -ge 8 ] || \command infocmp -1 | grep -q -iE 'colors.*0x008'; then
+                  export PS4='%B%F{008}%D{%s.%N}%f%b (%B%x:%I%b): %(0l,%0<${psvar[1]::=}${psvar[1]::=${${(%)__percentN__:-%N}:#${(%)_filePercent_x_:-%x}}}<,) %B%F{003}%2(L.%{%G%}%{󰶻 %G%}[%L].)%f%b '$'\n''%{ '$'\b''%}  %B%F{002}%1(V.%1v:%i().%35<…<%N(%):%i)%f%b  %(0l,%0<${psvar::=${psvar:#${_eval_::=(eval)}}}<,)' ;
+              else
+                  export PS4='%B%D{%s.%N}%b (%B%x:%I%b): %(0l,%0<${psvar[1]::=}${psvar[1]::=${${(%)__percentN__:-%N}:#${(%)_filePercent_x_:-%x}}}<,) %B%2(L.%{%G%}%{󰶻 %G%}[%L].)%b '$'\n''%{ '$'\b''%}  %B%1(V.%1v:%i().%35<…<%N(%):%i)%b  %(0l,%0<${psvar::=${psvar:#${_eval_::=(eval)}}}<,)' ;
+              fi
           fi
           setopt prompt_subst
           ;;

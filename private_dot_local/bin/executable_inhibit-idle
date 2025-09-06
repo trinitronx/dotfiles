@@ -1,0 +1,36 @@
+#!/usr/bin/env sh
+
+status() {
+    ps -ef | grep -v grep | grep -m 1 -q "systemd-inhibit --what=idle"
+}
+
+inhibit() {
+    systemd-inhibit --what=idle --who=swayidle-inhibit --why=commanded --mode=block sleep $1 &
+    waybar-signal idle
+}
+
+case $1'' in
+'interactive')
+    MINUTES=$(echo -e "1\n10\n15\n20\n30\n45\n60\n90\n120\n180\n240\n300\n360\n420\n480\ninfinity" | rofi -l 17 -dmenu -p "Select how many minutes to inhibit idle:")
+    case $MINUTES in
+        ''|*[!0-9]*) : ;; # Pass through string 'infinity'
+        *) MINUTES=$((MINUTES * 60)) ;;
+    esac
+    inhibit ${MINUTES}
+    ;;
+'off')
+    pkill -f "systemd-inhibit --what=idle" || true
+    waybar-signal idle
+    ;;
+esac
+
+#Returns data for Waybar
+if status; then
+    class="on"
+    text="Inhibiting idle (Mid click to clear)"
+else
+    class="off"
+    text="Idle not inhibited"
+fi
+
+printf '{"alt":"%s","tooltip":"%s"}\n' "$class" "$text"

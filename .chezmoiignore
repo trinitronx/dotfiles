@@ -227,6 +227,12 @@ Library/Application Support/Mozilla/NativeMessagingHosts/gpgmejson.json
 {{ if not (eq .osFamily "linux-arch") | or (not (lookPath "yay")) -}}
 .config/zsh/config.d/03-yay-fzf-search.zsh
 {{ end -}}
+{{ if not (eq .osFamily "linux-arch") | or (not (glob "/opt/vscode-exploration-build/*/bin/code-exploration")) -}}
+.config/code-exploration-flags.conf
+{{ end -}}
+{{ if not (eq .osFamily "linux-arch") | or (not (lookPath "code")) -}}
+.config/code-flags.conf
+{{ end -}}
 {{ if not (eq .osFamily "linux-arch") | or (not (lookPath "google-chrome-stable")) -}}
 .config/chrome*-flags.conf
 .config/chromium-flags.conf

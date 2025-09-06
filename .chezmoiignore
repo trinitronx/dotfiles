@@ -19,6 +19,9 @@ README.md
 {{ if not (lookPath "bat") -}}
 .config/bat
 {{ end -}}
+{{ if not (lookPath "doctl") -}}
+.config/doctl
+{{ end -}}
 {{ if not (lookPath "foot") -}}
 .config/foot
 {{ end -}}

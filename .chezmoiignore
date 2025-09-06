@@ -108,6 +108,9 @@ Library/Application Support/Mozilla/NativeMessagingHosts/gpgmejson.json
 .config/sov
 .config/nwg-wrapper/sway-time.sh
 .config/nwg-wrapper/timezones.css
+{{   if not (lookPath "swayidle-conf") -}}
+.config/sway/idle.yaml
+{{   end -}}
 {{   if not (lookPath "dragon-drop") -}}
 .config/sway/config.d/04-dragon-drop.conf
 .config/sway/definitions.d/05-dragon-drop.conf

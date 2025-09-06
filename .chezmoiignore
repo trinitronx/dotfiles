@@ -108,6 +108,13 @@ Library/Application Support/Mozilla/NativeMessagingHosts/gpgmejson.json
 .config/sov
 .config/nwg-wrapper/sway-time.sh
 .config/nwg-wrapper/timezones.css
+.local/bin/idle_inhibitor_windows
+{{   if not (lookPath "swayidle-conf") -}}
+.config/sway/idle.yaml
+{{   end -}}
+{{   if not (lookPath "systemd-inhibit") | or (not (lookPath "waybar-signal")) | or (not (lookPath "rofi")) -}}
+.local/bin/inhibit-idle
+{{   end -}}
 {{   if not (lookPath "dragon-drop") -}}
 .config/sway/config.d/04-dragon-drop.conf
 .config/sway/definitions.d/05-dragon-drop.conf
@@ -212,6 +219,9 @@ Library/Application Support/Mozilla/NativeMessagingHosts/gpgmejson.json
 .config/systemd
 {{   if not (lookPath "chrome") | or (not (lookPath "google-chrome")) | or (not (findExecutable "chrome" (list "opt/google/chrome" ".local/bin"))) -}}
 .local/bin/google-chrome-vulkan-intel-kabylake-sorta-works.sh
+{{   end -}}
+{{   if not (lookPath "/usr/lib/systemd/user/idlehack.service") | or (not (lookPath "idlehack")) -}}
+.config/systemd/user/default.target.wants/idlehack.service
 {{   end -}}
 {{ end -}}
 {{ if not (eq .osFamily "linux-arch") | or (not (lookPath "yay")) -}}

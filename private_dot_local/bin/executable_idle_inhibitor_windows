@@ -1,0 +1,2 @@
+#!/bin/sh
+swaymsg -t get_tree | jq 'recurse(.nodes[]) |= {fullscreen_mode, nodes, focus, focused, id, name, app_id, inhibit_idle, idle_inhibitors} | select(.inhibit_idle == true)'

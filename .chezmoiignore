@@ -22,11 +22,17 @@ README.md
 {{ if not (lookPath "foot") -}}
 .config/foot
 {{ end -}}
+{{ if not (lookPath "lpass") -}}
+.config/05-lpass-settings.sh
+{{ end -}}
 {{ if not (lookPath "nwg-wrapper") -}}
 .config/nwg-wrapper
 {{ end -}}
 {{ if not (lookPath "makoctl") -}}
 .config/mako
+{{ end -}}
+{{ if not (lookPath "tex") -}}
+.config/profile.d/08-texlive.sh
 {{ end -}}
 {{ if not (lookPath "tmux") -}}
 .config/tmux
@@ -150,6 +156,9 @@ Library/Application Support/Mozilla/NativeMessagingHosts/gpgmejson.json
 {{ end -}}
 {{ if not (lookPath "qt6ct") -}}
 .config/qt6ct
+{{ end -}}
+{{ if not (isExecutable (joinPath .chezmoi.homeDir ".qlty" "bin" "qlty")) -}}
+.config/profile.d/06-qlty-path.sh
 {{ end -}}
 {{- /* Omit makoctl imv/mpv helper utils if not installed */ -}}
 {{ if not (lookPath "makoctl") -}}

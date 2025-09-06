@@ -1,0 +1,73 @@
+{{ $copy_cmd := "" -}}
+{{ $clear_cmd := "" -}}
+{{ $pinentry_cmd := "" -}}
+{{ if (eq .chezmoi.os "linux") | and ((lookPath "wayland-scanner") | or (eq .xdg_session_type "wayland")) -}}
+{{   $copy_cmd = lookPath "wl-copy" -}}
+{{   $clear_cmd = cat (lookPath "wl-copy") "--clear" -}}
+{{   $pinentry_cmd = lookPath "pinentry-gnome3" -}}
+{{ else if (eq .chezmoi.os "linux") -}}
+{{   $copy_cmd = cat (lookPath "xclip") "-selection clipboard -in -sensitive" -}}
+{{   if lookPath "pinentry-gnome3" -}}
+{{     $pinentry_cmd = lookPath "pinentry-gnome3" -}}
+{{   else if lookPath "pinentry-curses" -}}
+{{     $pinentry_cmd = lookPath "pinentry-curses" -}}
+{{   else if lookPath "pinentry-tty" -}}
+{{     $pinentry_cmd = lookPath "pinentry-tty" -}}
+{{   else if lookPath "pinentry" -}}
+{{     $pinentry_cmd = lookPath "pinentry" -}}
+{{   end -}}
+{{ else if (eq .chezmoi.os "darwin") -}}
+{{   if lookPath "pbcopy" -}}
+{{     $copy_cmd = lookPath "pbcopy" -}}
+{{     $clear_cmd = cat "echo -n '' |" (lookPath "pbcopy") -}}
+{{   end -}}
+{{   if isExecutable "/usr/local/MacGPG2/libexec/pinentry-mac.app/Contents/MacOS/pinentry-mac" -}}
+{{     $pinentry_cmd = "/usr/local/MacGPG2/libexec/pinentry-mac.app/Contents/MacOS/pinentry-mac" -}}
+{{   else if lookPath "pinentry-curses" -}}
+{{     $pinentry_cmd = lookPath "pinentry-curses" -}}
+{{   else if lookPath "pinentry-tty" -}}
+{{     $pinentry_cmd = lookPath "pinentry-tty" -}}
+{{   else if lookPath "pinentry" -}}
+{{     $pinentry_cmd = lookPath "pinentry" -}}
+{{   end -}}
+{{ else if (eq .chezmoi.os "windows") -}}
+{{   if lookPath "clip.exe" -}}
+{{     $copy_cmd = cat (lookPath "perl") "-pe 'chomp if eof' |" (lookPath "clip.exe") -}}
+{{     $clear_cmd = cat "echo off |" (lookPath "clip.exe") -}}
+{{   end -}}
+{{   if isExecutable (joinPath "C:" "Program Files (x86)" "Gpg4win" "bin" "pinentry.exe") -}}
+{{     $pinentry_cmd = joinPath "C:" "Program Files (x86)" "Gpg4win" "bin" "pinentry.exe" -}}
+{{   else -}}
+{{     $pinentry_cmd = lookPath "pinentry.exe" -}}
+{{   end -}}
+{{ else -}}
+{{   if lookPath "xclip" -}}
+{{     $copy_cmd = cat (lookPath "xclip") "-selection clipboard -in -sensitive" -}}
+{{   end -}}
+{{   if lookPath "pinentry-gnome3" -}}
+{{     $pinentry_cmd = lookPath "pinentry-gnome3" -}}
+{{   else if lookPath "pinentry-curses" -}}
+{{     $pinentry_cmd = lookPath "pinentry-curses" -}}
+{{   else if lookPath "pinentry-tty" -}}
+{{     $pinentry_cmd = lookPath "pinentry-tty" -}}
+{{   else if lookPath "pinentry" -}}
+{{     $pinentry_cmd = lookPath "pinentry" -}}
+{{   end -}}
+{{ end -}}
+{{ if (eq .chezmoi.os "windows") -}}
+{{   if $copy_cmd | and $clear_cmd -}}
+export LPASS_CLIPBOARD_COMMAND='{{ $copy_cmd }} && timeout 30 && {{ $clear_cmd }}'
+{{   end -}}
+{{   if $pinentry_cmd -}}
+export LPASS_PINENTRY={{ $pinentry_cmd }}
+{{   end -}}
+{{ else -}}
+{{   if $copy_cmd | and $clear_cmd -}}
+export LPASS_CLIPBOARD_COMMAND='{{ $copy_cmd }} && ( sleep 30 && {{ $clear_cmd }}) & disown'
+{{   else if $copy_cmd -}}
+export LPASS_CLIPBOARD_COMMAND='{{ $copy_cmd }}'
+{{   end -}}
+{{   if $pinentry_cmd -}}
+export LPASS_PINENTRY={{ $pinentry_cmd }}
+{{   end -}}
+{{ end -}}

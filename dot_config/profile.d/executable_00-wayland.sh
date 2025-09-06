@@ -17,7 +17,7 @@ export ELECTRON_OZONE_PLATFORM_HINT=wayland
 
 # Disable hardware cursors. This might fix issues with
 # disappearing cursors
-if systemd-detect-virt -q; then
+if command -v systemd-detect-virt 1>/dev/null 2>&1 && systemd-detect-virt -q; then
     # if the system is running inside a virtual machine, disable hardware cursors
     export WLR_NO_HARDWARE_CURSORS=1
 fi

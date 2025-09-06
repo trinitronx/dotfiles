@@ -1,5 +1,49 @@
 
 # shellcheck shell=sh
+# Function to detect ps variant
+detect_ps() {
+  # Detect ps supported args
+  if ps --help 2>&1 | grep -q "Try 'ps --help <simple|list|output"; then
+    # GNU variant procps(-ng)
+    if ps --help list 2>&1 | grep -q '\-p'; then
+      ps_p_arg='-p $$'
+      ps_ucomm_alias=ucomm
+      ps_o_arg="-o ${ps_ucomm_alias}="
+      ps_shell_detect_args="${ps_p_arg} ${ps_o_arg}"
+      shell_detect_cmd="\\command \\ps ${ps_shell_detect_args}"
+    elif ps --help output 2>&1 | grep -q '\-o'; then
+      # No -p arg available, fallback to grep & comm
+      ps_p_arg=''
+      ps_ucomm_alias=comm
+      ps_o_arg="-o pid=,${ps_ucomm_alias}="
+      ps_shell_detect_args="${ps_p_arg} ${ps_o_arg}"
+      shell_detect_cmd="\\command \\ps ${ps_shell_detect_args} | grep -E \"^ *\$\$ +\" | awk \"{ print \\\$2 }\" " ;
+    else
+      # No ps available or detection failed.  Fallback to /proc/
+      shell_detect_cmd='\command \gawk '\''BEGIN{RS=""}; NR==1{print; exit}'\'' /proc/$$/cmdline | sed -e '\''s/\x00/ /g'\'' | cut -f1 -d" "  ' ;
+    fi
+  else
+    # Some other variant ps
+    # Assume ucomm is not available & fallback to more portable comm
+    if ps --help 2>&1 | grep -q '\-p' ; then
+      ps_p_arg='-p $$'
+      ps_ucomm_alias=comm
+      ps_o_arg="-o ${ps_ucomm_alias}="
+      ps_shell_detect_args="${ps_p_arg} ${ps_o_arg}"
+      shell_detect_cmd="\\command \\ps ${ps_shell_detect_args}"
+    elif ps -h 2>&1 | grep -q '\-o'; then
+      # No -p arg available, fallback to grep
+      ps_p_arg=''
+      ps_ucomm_alias=comm
+      ps_o_arg="-o pid=,${ps_ucomm_alias}="
+      ps_shell_detect_args="${ps_p_arg} ${ps_o_arg}"
+      shell_detect_cmd="\\command \\ps ${ps_shell_detect_args} | grep -E \"^ *\$\$ +\" |  awk \"{ print \$2 }\" " ;
+    else
+      # No ps available or detection failed.  Fallback to /proc/
+      shell_detect_cmd='\command \gawk '\''BEGIN{RS=""}; NR==1{print; exit}'\'' /proc/$$/cmdline | sed -e '\''s/\x00/ /g'\'' | cut -f1 -d" "  ' ;
+    fi
+  fi
+}
 # Function to detect the current shell
 # Heuristics needed. See: https://stackoverflow.com/q/3327013/645491
 detect_shell() {
@@ -18,7 +62,9 @@ detect_shell() {
         echo "sh"
     else
         # Fallback: use process name
-        command ps -p "$$" -o comm=
+        detect_ps
+        eval $shell_detect_cmd
+        #command ps -p "$$" -o comm=
     fi
 }
 
@@ -32,8 +78,20 @@ if [ "${-//[^x]/}" = "x" ]; then
           export PS4='+ $(date "+%s.%N") (${BASH_SOURCE}:${LINENO}): ${FUNCNAME[0]:+${FUNCNAME[0]}(): }'
           ;;
       *zsh)
-          # shellcheck disable=SC2154
-          export PS4='%D{%s.%N} (${(%):-%N}:%i): ${funcstack[1]:+${funcstack[1]}(): }' ;
+          # Use color + p10k powerline glyphs if interactive
+          if [ "${-//[^i]/}" = "i" ]; then
+              # shellcheck disable=SC2154
+              export PS4=$'\n''%b%f%K{239}%D{%s.%N} %k%K{018}%F{239}%{ %G%}%f%k%K{018} %{󰈮 %G%}('$'\e]8;;void://file/''%x:%I:0'$'\a''%x:%I'$'\e]8;;\a'') %k%K{221}%F{018}%{ %G%}%f%k%F{black}%K{221} %(0l,%0<${psvar[1]::=}${psvar[1]::=${${(%)__percentN__:-%N}:#${(%)_filePercent_x_:-%x}}}<,)%2(L.%{%G%}%{󰶻 %G%}[%B%L%b].%{%G%}) %k%f%F{221}%{ %G%}%f '$'\n''%{ '$'\b''%}%B%K{030}  %{ %G%}%1(V.%1v:%i%{()%G%}.%35<…<%N:%i) %k%b%F{030}%{ %G%}%f %(0l,%0<${psvar::=${psvar:#${_eval_::=(eval)}}}<,)%B%F{249}' ;
+          else
+              if [ "$COLORTERM" = "truecolor" ] || [ "$COLORTERM" = 24bit ] || [ "$(\command tput colors 2> /dev/null)" -ge 255 ] || \command infocmp -1 | grep -q -iE 'colors.*0x100'; then
+                  # shellcheck disable=SC2154
+                  export PS4='%F{239}%D{%s.%N}%f (%B%F{075}%x:%I%f%b): %(0l,%0<${psvar[1]::=}${psvar[1]::=${${(%)__percentN__:-%N}:#${(%)_filePercent_x_:-%x}}}<,) %B%F{003}%2(L.%{%G%}%{󰶻 %G%}[%L].)%f%b '$'\n''%B%F{149}  %1(V.%1v:%i().%35<…<%N(%):%i)%f%b  %(0l,%0<${psvar::=${psvar:#${_eval_::=(eval)}}}<,)' ;
+              elif [ "$COLORTERM" = 8bit ] || [ "$(\command tput colors 2> /dev/null)" -lt 255 -a "$(\command tput colors 2> /dev/null)" -ge 8 ] || \command infocmp -1 | grep -q -iE 'colors.*0x008'; then
+                  export PS4='%B%F{008}%D{%s.%N}%f%b (%B%x:%I%b): %(0l,%0<${psvar[1]::=}${psvar[1]::=${${(%)__percentN__:-%N}:#${(%)_filePercent_x_:-%x}}}<,) %B%F{003}%2(L.%{%G%}%{󰶻 %G%}[%L].)%f%b '$'\n''%{ '$'\b''%}  %B%F{002}%1(V.%1v:%i().%35<…<%N(%):%i)%f%b  %(0l,%0<${psvar::=${psvar:#${_eval_::=(eval)}}}<,)' ;
+              else
+                  export PS4='%B%D{%s.%N}%b (%B%x:%I%b): %(0l,%0<${psvar[1]::=}${psvar[1]::=${${(%)__percentN__:-%N}:#${(%)_filePercent_x_:-%x}}}<,) %B%2(L.%{%G%}%{󰶻 %G%}[%L].)%b '$'\n''%{ '$'\b''%}  %B%1(V.%1v:%i().%35<…<%N(%):%i)%b  %(0l,%0<${psvar::=${psvar:#${_eval_::=(eval)}}}<,)' ;
+              fi
+          fi
           setopt prompt_subst
           ;;
   esac

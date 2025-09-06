@@ -227,6 +227,10 @@ Library/Application Support/Mozilla/NativeMessagingHosts/gpgmejson.json
 {{ if not (eq .osFamily "linux-arch") | or (not (lookPath "yay")) -}}
 .config/zsh/config.d/03-yay-fzf-search.zsh
 {{ end -}}
+{{ if not (eq .osFamily "linux-arch") | or (not (lookPath "google-chrome-stable")) -}}
+.config/chrome*-flags.conf
+.config/chromium-flags.conf
+{{ end -}}
 {{ if not (eq .chezmoi.os "linux") -}}
 # Don't install .desktop files
 .local/share/applications

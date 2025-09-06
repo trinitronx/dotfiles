@@ -40,6 +40,9 @@ README.md
 {{ if not (lookPath "waybar") -}}
 .config/waybar
 {{ end -}}
+{{ if not (lookPath "wob") -}}
+.config/wob.ini
+{{ end -}}
 {{ if not (eq .chezmoi.os "darwin") -}}
 .config/profile.d/01-osx-manpath.sh
 .config/profile.d/01-osx-sbin-path.sh

@@ -1,3 +1,4 @@
+# shellcheck shell=sh
 {{ if (eq .chezmoi.os "linux") -}}
 export SSH_AUTH_SOCK="${SSH_AUTH_SOCK:-${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/gnupg/S.gpg-agent.ssh}"
 {{ else if (eq .chezmoi.os "darwin") -}}

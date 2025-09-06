@@ -1,15 +1,15 @@
-{{- $lpItem := "" }}
+{{- $lpItem := "" -}}
 {{- if lookPath "lpass" -}}
 {{-   $lpItemName :=  printf "DigitalOcean API token: doctl-%s-%s-rw" .chezmoi.hostname .osId -}}
 {{-   $lpItemCmd := printf "%s '%s' 2>/dev/null || echo '[]'" "lpass show --quiet --json --fixed-strings " $lpItemName -}}
 {{-   $lpItemExists := not (empty ((output "/bin/sh" "-c" $lpItemCmd) | fromJson)) -}}
 {{-   if $lpItemExists -}}
-{{-     $lpResults := lastpass $lpItemName }}
-{{-     if $lpResults }}
-{{-       $lpItem = index $lpResults 0 }}
+{{-     $lpResults := lastpass $lpItemName -}}
+{{-     if $lpResults -}}
+{{-       $lpItem = index $lpResults 0 -}}
 {{-     end -}}
-{{-   end }}
-{{- end }}
+{{-   end -}}
+{{- end -}}
 1-click:
   install:
     1-clicks: []

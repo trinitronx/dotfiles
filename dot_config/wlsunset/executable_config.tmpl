@@ -1,0 +1,31 @@
+#!/bin/sh
+# wlsunset config - Manjaro sway
+# Sourced by: /usr/share/sway/scripts/sunset.sh
+{{- if lookPath "lpass" -}}
+{{-   $lpItemName :=  printf "wlsunset: GPS location - %s %s" .osId .chezmoi.hostname -}}
+{{-   $lpItemCmd := printf "%s '%s' 2>/dev/null || echo '[]'" "lpass show --quiet --json --fixed-strings " $lpItemName -}}
+{{-   $lpItemExists := not (empty ((output "/bin/sh" "-c" $lpItemCmd) | fromJson)) -}}
+{{-   if $lpItemExists -}}
+{{-     $lpResults := lastpass $lpItemName }}
+{{-     if $lpResults }}{{ $lpItem := index $lpResults 0 }}
+{{-       if $lpItem }}
+# Fallback lat & long if GeoIP fails during waybar+wlsunset startup (network not ready)
+# Only used if location=on
+fallback_latitude={{ $lpItem.note.latitude | trim }}
+fallback_longitude={{ $lpItem.note.longitude | trim }}
+{{-       end }}
+{{-     end -}}
+{{-   end }}
+{{- end }}
+
+# Defaults
+#location=on
+# Manual animation time (seconds)
+#duration=900
+# Low and High Color Temperature (Kelvin)
+#temp_low=4000
+#temp_high=6500
+# Sunrise / Sunset times (24hr) - Only used if location=off
+#sunrise=07:00
+#sunset=19:00
+

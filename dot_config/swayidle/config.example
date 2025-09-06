@@ -1,0 +1,7 @@
+idlehint 240
+timeout  240 'light -G > /tmp/brightness && light -S 10' resume 'light -S $([ -f /tmp/brightness ] && cat /tmp/brightness || echo 100%)'
+timeout  300 'exec swaylock --daemonize'
+timeout  600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"'
+timeout  600 'sudo pkill -USR2 cec-dpms'  resume 'sudo pkill -USR1 cec-dpms'
+before-sleep 'playerctl pause'
+before-sleep 'exec swaylock --daemonize & sleep 2'

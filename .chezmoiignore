@@ -240,6 +240,15 @@ Library/Application Support/Mozilla/NativeMessagingHosts/gpgmejson.json
 {{ if not (eq .osFamily "linux-arch") | or (not (lookPath "brave-browser") | and (not (lookPath "brave"))) -}}
 .config/brave-flags.conf
 {{ end -}}
+{{ if not (eq .osFamily "linux-arch") | or (not (lookPath "microsoft-edge-stable")) -}}
+.config/microsoft-edge-stable-flags.conf
+{{ end -}}
+{{ if not (eq .osFamily "linux-arch") | or (not (lookPath "microsoft-edge-beta")) -}}
+.config/microsoft-edge-beta-flags.conf
+{{ end -}}
+{{ if not (eq .osFamily "linux-arch") | or (not (lookPath "microsoft-edge-dev")) -}}
+.config/microsoft-edge-dev-flags.conf
+{{ end -}}
 {{ if not (eq .osFamily "linux-arch") | or (not (glob "/usr/lib/electron*/electron")) -}}
 .config/electron*-flags.conf
 {{ end -}}

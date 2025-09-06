@@ -112,6 +112,9 @@ Library/Application Support/Mozilla/NativeMessagingHosts/gpgmejson.json
 {{   if not (lookPath "swayidle-conf") -}}
 .config/sway/idle.yaml
 {{   end -}}
+{{   if not (lookPath "systemd-inhibit") | or (not (lookPath "waybar-signal")) | or (not (lookPath "rofi")) -}}
+.local/bin/inhibit-idle
+{{   end -}}
 {{   if not (lookPath "dragon-drop") -}}
 .config/sway/config.d/04-dragon-drop.conf
 .config/sway/definitions.d/05-dragon-drop.conf

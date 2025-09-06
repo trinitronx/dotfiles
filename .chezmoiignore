@@ -52,6 +52,9 @@ README.md
 {{ if not (lookPath "wofi") -}}
 .config/wofi
 {{ end -}}
+{{ if not (lookPath "zsweep") -}}
+.config/zsweep
+{{ end -}}
 {{ if not (eq .chezmoi.os "darwin") -}}
 .config/profile.d/01-osx-manpath.sh
 .config/profile.d/01-osx-sbin-path.sh

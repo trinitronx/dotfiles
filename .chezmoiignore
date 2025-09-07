@@ -28,6 +28,9 @@ README.md
 {{ if not (lookPath "lpass") -}}
 .config/05-lpass-settings.sh
 {{ end -}}
+{{ if not (lookPath "nm-applet") -}}
+.config/sway/definitions.d/05-nm-applet.conf
+{{ end -}}
 {{ if not (lookPath "nwg-wrapper") -}}
 .config/nwg-wrapper
 {{ end -}}
@@ -36,6 +39,18 @@ README.md
 {{ end -}}
 {{ if not (lookPath "opencv_version") -}}
 .config/profile.d/06-opencv.sh
+{{ end -}}
+{{ if not (lookPath "remotestash") | or (not (lookPath "sway")) -}}
+.config/sway/config.d/04-remotestash.conf
+.config/sway/definitions.d/05-remotestash.conf
+{{ end -}}
+{{ if not (lookPath "rofi-lpass") | or (not (lookPath "lpass")) -}}
+.config/sway/definitions.d/05-rofi-lpass.conf
+.config/sway/config.d/04-rofi-lpass.conf
+{{ end -}}
+{{ if not (lookPath "rofi-mpv-dvb") | or (not (lookPath "mpv")) -}}
+.config/sway/definitions.d/05-rofi-mpv-dvb.conf
+.config/sway/config.d/04-rofi-mpv-dvb.conf
 {{ end -}}
 {{ if not (lookPath "tex") -}}
 .config/profile.d/08-texlive.sh
@@ -48,6 +63,11 @@ README.md
 {{ end -}}
 {{ if not (lookPath "waybar") -}}
 .config/waybar
+.config/sway/config.d/01-waybar-reset.conf
+.config/sway/config.d/96-waybar-config.conf
+.config/sway/definitions.d/02-override-swaybar-systemd.conf
+.local/share/sway/scripts/waybar-sway-launcher.sh
+.local/share/sway/scripts/waybar-debug.sh
 {{ end -}}
 {{ if not (lookPath "wlsunset") | or (not (isExecutable "/usr/share/sway/scripts/sunset.sh")) -}}
 .config/wlsunset
@@ -72,6 +92,10 @@ README.md
 .config/profile.d/00-xdg-terminal-command.sh
 .config/fontconfig
 .local/bin/lsiommu
+.local/bin/remotestash
+{{ end -}}
+{{ if not (eq .chezmoi.os "linux") | or (not (lookPath "systemctl")) | or (not (lookPath "remotestash")) -}}
+.config/systemd/user/remotestash.service
 {{ end -}}
 {{- /* Different file paths for mailvelope gpgme config on Linux vs MacOS */ -}}
 {{ if ne .chezmoi.os "darwin" | or (not (lookPath "gpgme-json")) -}}
@@ -116,6 +140,7 @@ Library/Application Support/Mozilla/NativeMessagingHosts/gpgmejson.json
 .config/nwg-wrapper/timezones.css
 .local/bin/idle_inhibitor_windows
 .config/xdg-desktop-portal*
+.local/share/sway/scripts/set-session-locked-hint.sh
 {{   if not (lookPath "swayidle-conf") -}}
 .config/sway/idle.yaml
 {{   end -}}
@@ -158,11 +183,19 @@ Library/Application Support/Mozilla/NativeMessagingHosts/gpgmejson.json
 .config/sway/definitions.d/08-irssi-fnotify.conf
 .local/share/sway/scripts/irssi-fnotify-local.sh
 {{   end -}}
+{{   if not (lookPath "sov") -}}
+.config/sov
+.config/sway/definitions.d/06-sway-overview.conf
+.config/sway/config.d/03-sway-overview.conf
+{{   end -}}
 {{   if not (lookPath "swaylock") -}}
 .config/swaylock
 {{   end -}}
 {{   if not (lookPath "sworkstyle") -}}
 .config/sworkstyle
+{{   end -}}
+{{   if not (lookPath "vscode") -}}
+.config/sway/config.d/98-vscode-no-initial-focus.conf
 {{   end -}}
 {{ end -}}
 {{ if not (lookPath "fzf") -}}
@@ -224,13 +257,33 @@ Library/Application Support/Mozilla/NativeMessagingHosts/gpgmejson.json
 {{ if not (eq .chezmoi.os "linux") | or (not (lookPath "systemctl")) -}}
 # Don't install SystemD units
 .config/systemd
-{{   if not (lookPath "chrome") | or (not (lookPath "google-chrome")) | or (not (findExecutable "chrome" (list "opt/google/chrome" ".local/bin"))) -}}
+{{ end -}}
+{{   if not (eq .chezmoi.os "linux") | or (not (lookPath "chrome") | or (not (lookPath "google-chrome"))) | or (not (findExecutable "chrome" (list "opt/google/chrome" ".local/bin"))) -}}
 .local/bin/google-chrome-vulkan-intel-kabylake-sorta-works.sh
 {{   end -}}
-{{   if not (lookPath "/usr/lib/systemd/user/idlehack.service") | or (not (lookPath "idlehack")) -}}
+{{   if not (eq .chezmoi.os "linux") | or (not (lookPath "findex-daemon")) -}}
+.config/systemd/user/sway-session.target.wants/findex-daemon.service
+.config/systemd/user/findex-daemon.service
+{{   end -}}
+{{   if not (eq .chezmoi.os "linux") | or (not (glob "/etc/xdg/systemd/user/foot-server.service")) | or (not (lookPath "foot")) -}}
+.config/systemd/user/wayland-session.target.wants/foot-server.service
+.config/systemd/user/foot-server.service
+{{   end -}}
+{{   if not (eq .chezmoi.os "linux") | or (not (glob "/usr/lib/systemd/user/idlehack.service")) | or (not (lookPath "idlehack")) -}}
 .config/systemd/user/default.target.wants/idlehack.service
 {{   end -}}
-{{ end -}}
+{{   if not (eq .chezmoi.os "linux") | or (not (glob "/usr/lib/systemd/user/swayrd.service")) | or (not (lookPath "swayrd")) -}}
+.config/systemd/user/sway-session.target.wants/swayrd.service
+.config/systemd/user/swayrd.service
+{{   end -}}
+{{   if not (eq .chezmoi.os "linux") | or (not (glob "/usr/lib/systemd/user/swayidle.service")) | or (not (lookPath "swayidle")) -}}
+.config/systemd/user/wayland-session.target.wants/swayidle.service
+.config/systemd/user/swayidle.service
+{{   end -}}
+{{   if not (eq .chezmoi.os "linux") | or (not (glob "/etc/xdg/systemd/user/sworkstyle.service")) | or (not (lookPath "sworkstyle")) -}}
+.config/systemd/user/sway-session.target.wants/sworkstyle.service
+.config/systemd/user/sworkstyle.service
+{{   end -}}
 {{ if not (eq .osFamily "linux-arch") | or (not (lookPath "yay")) -}}
 .config/zsh/config.d/03-yay-fzf-search.zsh
 {{ end -}}
@@ -288,4 +341,7 @@ Library/Application Support/Mozilla/NativeMessagingHosts/gpgmejson.json
 {{ end -}}
 {{ if not (lookPath "mpv") | or (not (lookPath "rofi") | and (not (lookPath "wofi"))) -}}
 .local/bin/rofi-mpv-dvb
+{{ end -}}
+{{ if not (lookPath "lpass") | or (not (lookPath "rofi") | and (not (lookPath "wofi"))) -}}
+.local/bin/rofi-lpass
 {{ end -}}

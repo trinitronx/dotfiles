@@ -37,6 +37,10 @@ README.md
 {{ if not (lookPath "opencv_version") -}}
 .config/profile.d/06-opencv.sh
 {{ end -}}
+{{ if not (lookPath "remotestash") | or (not (lookPath "sway")) -}}
+.config/sway/config.d/04-remotestash.conf
+.config/sway/definitions.d/05-remotestash.conf
+{{ end -}}
 {{ if not (lookPath "tex") -}}
 .config/profile.d/08-texlive.sh
 {{ end -}}
@@ -73,6 +77,7 @@ README.md
 .config/profile.d/00-xdg-terminal-command.sh
 .config/fontconfig
 .local/bin/lsiommu
+.local/bin/remotestash
 {{ end -}}
 {{- /* Different file paths for mailvelope gpgme config on Linux vs MacOS */ -}}
 {{ if ne .chezmoi.os "darwin" | or (not (lookPath "gpgme-json")) -}}

@@ -45,6 +45,17 @@
     args: ["--ff-only"]
 
 {{   end -}}
+{{   if eq .chezmoi.os "linux" -}}
+".local/share/remotestash":
+  type: "git-repo"
+  url: "https://github.com/trinitronx/remotestash"
+  refreshPeriod: "168h"
+  pull:
+    args: ["--ff-only"]
+  clone:
+    args: ["-b", "fix-all-the-things"]
+
+{{   end -}}
 {{   if lookPath "bat" -}}
 ".config/bat/themes/Dark-Dracula-Theme":
   type: "git-repo"

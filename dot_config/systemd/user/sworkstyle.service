@@ -1,0 +1,6 @@
+[Unit]
+Description=Renames workspaces to the icons configured
+
+[Service]
+ExecStart=/usr/bin/sworkstyle -d -l debug
+

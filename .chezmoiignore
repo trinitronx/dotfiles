@@ -115,6 +115,7 @@ Library/Application Support/Mozilla/NativeMessagingHosts/gpgmejson.json
 .config/nwg-wrapper/sway-time.sh
 .config/nwg-wrapper/timezones.css
 .local/bin/idle_inhibitor_windows
+.config/xdg-desktop-portal*
 {{   if not (lookPath "swayidle-conf") -}}
 .config/sway/idle.yaml
 {{   end -}}

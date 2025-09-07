@@ -1,0 +1,5 @@
+open_file = "Gtk"
+save_file = "Gtk"
+
+[tips]
+open_file_when_folder = "Gtk"

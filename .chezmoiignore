@@ -64,6 +64,10 @@ README.md
 {{ if not (lookPath "waybar") -}}
 .config/waybar
 .config/sway/config.d/01-waybar-reset.conf
+.config/sway/config.d/96-waybar-config.conf
+.config/sway/definitions.d/02-override-swaybar-systemd.conf
+.local/share/sway/scripts/waybar-sway-launcher.sh
+.local/share/sway/scripts/waybar-debug.sh
 {{ end -}}
 {{ if not (lookPath "wlsunset") | or (not (isExecutable "/usr/share/sway/scripts/sunset.sh")) -}}
 .config/wlsunset

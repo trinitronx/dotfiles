@@ -140,6 +140,7 @@ Library/Application Support/Mozilla/NativeMessagingHosts/gpgmejson.json
 .config/nwg-wrapper/timezones.css
 .local/bin/idle_inhibitor_windows
 .config/xdg-desktop-portal*
+.local/share/sway/scripts/set-session-locked-hint.sh
 {{   if not (lookPath "swayidle-conf") -}}
 .config/sway/idle.yaml
 {{   end -}}

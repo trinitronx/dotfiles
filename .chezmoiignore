@@ -28,6 +28,9 @@ README.md
 {{ if not (lookPath "lpass") -}}
 .config/05-lpass-settings.sh
 {{ end -}}
+{{ if not (lookPath "nm-applet") -}}
+.config/sway/definitions.d/05-nm-applet.conf
+{{ end -}}
 {{ if not (lookPath "nwg-wrapper") -}}
 .config/nwg-wrapper
 {{ end -}}

@@ -265,6 +265,11 @@ Library/Application Support/Mozilla/NativeMessagingHosts/gpgmejson.json
 .config/systemd/user/sway-session.target.wants/findex-daemon.service
 .config/systemd/user/findex-daemon.service
 {{   end -}}
+{{   if not (eq .chezmoi.os "linux") | or (not (lookPath "systemctl")) | or (not (lookPath "gpg-agent")) -}}
+.config/systemd/user/default.target.wants/gpg-agent-env-import.service
+.config/systemd/user/gpg-agent-env-import.service
+.local/bin/gpg-agent-import-env
+{{   end -}}
 {{   if not (eq .chezmoi.os "linux") | or (not (glob "/etc/xdg/systemd/user/foot-server.service")) | or (not (lookPath "foot")) -}}
 .config/systemd/user/wayland-session.target.wants/foot-server.service
 .config/systemd/user/foot-server.service

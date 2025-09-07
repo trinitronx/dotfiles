@@ -259,6 +259,10 @@ Library/Application Support/Mozilla/NativeMessagingHosts/gpgmejson.json
 .config/systemd/user/sway-session.target.wants/swayrd.service
 .config/systemd/user/swayrd.service
 {{   end -}}
+{{   if not (eq .chezmoi.os "linux") | or (not (glob "/usr/lib/systemd/user/swayidle.service")) | or (not (lookPath "swayidle")) -}}
+.config/systemd/user/wayland-session.target.wants/swayidle.service
+.config/systemd/user/swayidle.service
+{{   end -}}
 {{   if not (eq .chezmoi.os "linux") | or (not (glob "/etc/xdg/systemd/user/sworkstyle.service")) | or (not (lookPath "sworkstyle")) -}}
 .config/systemd/user/sway-session.target.wants/sworkstyle.service
 .config/systemd/user/sworkstyle.service

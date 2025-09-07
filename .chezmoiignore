@@ -189,6 +189,9 @@ Library/Application Support/Mozilla/NativeMessagingHosts/gpgmejson.json
 {{   if not (lookPath "sworkstyle") -}}
 .config/sworkstyle
 {{   end -}}
+{{   if not (lookPath "vscode") -}}
+.config/sway/config.d/98-vscode-no-initial-focus.conf
+{{   end -}}
 {{ end -}}
 {{ if not (lookPath "fzf") -}}
 .config/zsh/config.d/*-fzf*.zsh

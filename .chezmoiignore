@@ -248,6 +248,10 @@ Library/Application Support/Mozilla/NativeMessagingHosts/gpgmejson.json
 {{   if not (eq .chezmoi.os "linux") | or (not (lookPath "chrome") | or (not (lookPath "google-chrome"))) | or (not (findExecutable "chrome" (list "opt/google/chrome" ".local/bin"))) -}}
 .local/bin/google-chrome-vulkan-intel-kabylake-sorta-works.sh
 {{   end -}}
+{{   if not (eq .chezmoi.os "linux") | or (not (lookPath "findex-daemon")) -}}
+.config/systemd/user/sway-session.target.wants/findex-daemon.service
+.config/systemd/user/findex-daemon.service
+{{   end -}}
 {{   if not (eq .chezmoi.os "linux") | or (not (glob "/usr/lib/systemd/user/idlehack.service")) | or (not (lookPath "idlehack")) -}}
 .config/systemd/user/default.target.wants/idlehack.service
 {{   end -}}

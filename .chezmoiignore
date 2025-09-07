@@ -34,6 +34,9 @@ README.md
 {{ if not (lookPath "makoctl") -}}
 .config/mako
 {{ end -}}
+{{ if not (lookPath "opencv_version") -}}
+.config/profile.d/06-opencv.sh
+{{ end -}}
 {{ if not (lookPath "tex") -}}
 .config/profile.d/08-texlive.sh
 {{ end -}}

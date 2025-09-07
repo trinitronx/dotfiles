@@ -178,6 +178,11 @@ Library/Application Support/Mozilla/NativeMessagingHosts/gpgmejson.json
 .config/sway/definitions.d/08-irssi-fnotify.conf
 .local/share/sway/scripts/irssi-fnotify-local.sh
 {{   end -}}
+{{   if not (lookPath "sov") -}}
+.config/sov
+.config/sway/definitions.d/06-sway-overview.conf
+.config/sway/config.d/03-sway-overview.conf
+{{   end -}}
 {{   if not (lookPath "swaylock") -}}
 .config/swaylock
 {{   end -}}

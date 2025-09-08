@@ -1,0 +1,12 @@
+[Unit]
+Description=cec-dpms for CEC adapter %f
+Documentation=https://github.com/manio/cec-dpms
+After=local-fs.target
+
+[Service]
+Restart=always
+Environment="RUST_BACKTRACE=full"
+ExecStart={{ .chezmoi.homeDir }}/src/pub/cec-dpms/target/debug/cec-dpms --debug --input %f
+
+[Install]
+WantedBy=multi-user.target

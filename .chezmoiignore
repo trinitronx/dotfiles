@@ -263,6 +263,10 @@ Library/Application Support/Mozilla/NativeMessagingHosts/gpgmejson.json
 .config/systemd/user/appimagelauncherd.service
 .config/systemd/user/appimagelauncherd.service.d
 {{ end -}}
+{{ if not (eq .chezmoi.os "linux") | or (not (lookPath "systemctl")) | or (not (lookPath "cec-dpms")) -}}
+.config/systemd/user/graphical-session.target.wants/cec-dpms@dev-ttyACM0.service
+.config/systemd/user/cec-dpms@.service
+{{ end -}}
 {{   if not (eq .chezmoi.os "linux") | or (not (lookPath "chrome") | or (not (lookPath "google-chrome"))) | or (not (findExecutable "chrome" (list "opt/google/chrome" ".local/bin"))) -}}
 .local/bin/google-chrome-vulkan-intel-kabylake-sorta-works.sh
 {{   end -}}

@@ -1,0 +1,21 @@
+#!/bin/bash
+
+SOCK_PATH="$(systemctl show --user --property='Listen' gpg-agent-ssh.socket | cut -d= -f2 | cut -d' ' -f1)"
+
+ORIG_ENV="$(systemctl show-environment --user | grep 'SSH_AUTH_SOCK=' | cut -d= -f2)"
+
+if [[ -n "$SOCK_PATH" && -S "$SOCK_PATH" ]]; then
+  if [[ -n "$ORIG_ENV" && "$ORIG_ENV" != "$SOCK_PATH" ]]; then
+    systemctl --user unset-environment SSH_AUTH_SOCK
+    echo "Info: Unset pre-existing SSH_AUTH_SOCK=$ORIG_ENV" >&2
+  fi
+    systemctl --user set-environment SSH_AUTH_SOCK="$SOCK_PATH"
+    ret=$?
+    echo "Info: Set systemd user session env SSH_AUTH_SOCK=$SOCK_PATH" >&2
+    exit $ret
+elif [[ -n "$SSH_AUTH_SOCK" && -S "$SSH_AUTH_SOCK" ]]; then
+  systemctl --user import-environment SSH_AUTH_SOCK
+else
+  echo "Error: SSH_AUTH_SOCK path could not be found or is not a valid readable socket: $SOCK_PATH" >&2
+  exit 1
+fi

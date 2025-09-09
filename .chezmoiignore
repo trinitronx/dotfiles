@@ -96,6 +96,7 @@ README.md
 {{ end -}}
 {{ if not (eq .chezmoi.os "linux") | or (not (lookPath "systemctl")) | or (not (lookPath "remotestash")) -}}
 .config/systemd/user/remotestash.service
+.config/systemd/user/multi-user.target.wants/remotestash.service
 {{ end -}}
 {{- /* Different file paths for mailvelope gpgme config on Linux vs MacOS */ -}}
 {{ if ne .chezmoi.os "darwin" | or (not (lookPath "gpgme-json")) -}}
@@ -257,6 +258,17 @@ Library/Application Support/Mozilla/NativeMessagingHosts/gpgmejson.json
 {{ if not (eq .chezmoi.os "linux") | or (not (lookPath "systemctl")) -}}
 # Don't install SystemD units
 .config/systemd
+.config/systemd/**
+{{ end -}}
+{{ if not (eq .chezmoi.os "linux") | or (not (lookPath "systemctl")) | or (not (glob "/usr/lib/systemd/user/appimagelauncherd.service"))  | or (not (lookPath "appimagelauncherd")) -}}
+.config/systemd/user/default.target.wants/appimagelauncherd.service
+.config/systemd/user/appimagelauncherd.service
+.config/systemd/user/appimagelauncherd.service.d
+.config/systemd/user/appimagelauncherd.service.d/**
+{{ end -}}
+{{ if not (eq .chezmoi.os "linux") | or (not (lookPath "systemctl")) | or (not (lookPath "cec-dpms")) -}}
+.config/systemd/user/graphical-session.target.wants/cec-dpms@dev-ttyACM0.service
+.config/systemd/user/cec-dpms@.service
 {{ end -}}
 {{   if not (eq .chezmoi.os "linux") | or (not (lookPath "chrome") | or (not (lookPath "google-chrome"))) | or (not (findExecutable "chrome" (list "opt/google/chrome" ".local/bin"))) -}}
 .local/bin/google-chrome-vulkan-intel-kabylake-sorta-works.sh
@@ -265,13 +277,34 @@ Library/Application Support/Mozilla/NativeMessagingHosts/gpgmejson.json
 .config/systemd/user/sway-session.target.wants/findex-daemon.service
 .config/systemd/user/findex-daemon.service
 {{   end -}}
+{{   if not (eq .chezmoi.os "linux") | or (not (lookPath "systemctl")) | or (not (lookPath "gpg-agent")) -}}
+.config/systemd/user/default.target.wants/gpg-agent-env-import.service
+.config/systemd/user/gpg-agent-env-import.service
+.local/bin/gpg-agent-import-env
+{{   end -}}
 {{   if not (eq .chezmoi.os "linux") | or (not (glob "/etc/xdg/systemd/user/foot-server.service")) | or (not (lookPath "foot")) -}}
 .config/systemd/user/wayland-session.target.wants/foot-server.service
 .config/systemd/user/foot-server.service
 {{   end -}}
+{{   if not (eq .chezmoi.os "linux") | or (ne .chezmoi.hostname "saturn") | or (not (lookPath "git")) -}}
+.config/systemd/user/.config/systemd/user/timers.target.wants/git-maintenance@*.timer
+.config/systemd/user/.config/systemd/user/git-maintenance@*.timer
+{{   end -}}
 {{   if not (eq .chezmoi.os "linux") | or (not (glob "/usr/lib/systemd/user/idlehack.service")) | or (not (lookPath "idlehack")) -}}
 .config/systemd/user/default.target.wants/idlehack.service
 {{   end -}}
+{{ $system_services := dict
+    "flashfocus" "/usr/lib/systemd/user/flashfocus.service"
+    "foot" "/usr/lib/systemd/user/foot-server.service"
+    "foot" "/usr/lib/systemd/user/foot-server.socket"
+    "pcmanfm" "/etc/xdg/systemd/user/pcmanfm.service"
+    "poweralertd" "/usr/lib/systemd/user/poweralertd.service"
+ -}}
+{{ range $cmd, $path := $system_services -}}
+{{   if not (eq $.chezmoi.os "linux") | or (not (glob $path)) | or (not (lookPath $cmd)) -}}
+.config/systemd/user/graphical-session.target.wants/{{ osBase $path }}
+{{   end -}}
+{{ end -}}
 {{   if not (eq .chezmoi.os "linux") | or (not (glob "/usr/lib/systemd/user/swayrd.service")) | or (not (lookPath "swayrd")) -}}
 .config/systemd/user/sway-session.target.wants/swayrd.service
 .config/systemd/user/swayrd.service

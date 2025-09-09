@@ -1,0 +1,11 @@
+[Unit]
+Description=Import gpg-agent SSH_AUTH_SOCK into user session env
+After=sockets.target gpg-agent-ssh.socket gpg-agent.service
+Before=sway.service
+
+[Service]
+Type=oneshot
+ExecStart={{ .chezmoi.homeDir }}/.local/bin/gpg-agent-import-env
+
+[Install]
+WantedBy=default.target

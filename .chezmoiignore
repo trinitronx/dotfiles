@@ -283,6 +283,10 @@ Library/Application Support/Mozilla/NativeMessagingHosts/gpgmejson.json
 .config/systemd/user/wayland-session.target.wants/foot-server.service
 .config/systemd/user/foot-server.service
 {{   end -}}
+{{   if not (eq .chezmoi.os "linux") | or (ne .chezmoi.hostname "saturn") | or (not (lookPath "git")) -}}
+.config/systemd/user/.config/systemd/user/timers.target.wants/git-maintenance@*.timer
+.config/systemd/user/.config/systemd/user/git-maintenance@*.timer
+{{   end -}}
 {{   if not (eq .chezmoi.os "linux") | or (not (glob "/usr/lib/systemd/user/idlehack.service")) | or (not (lookPath "idlehack")) -}}
 .config/systemd/user/default.target.wants/idlehack.service
 {{   end -}}

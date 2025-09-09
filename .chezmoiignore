@@ -257,11 +257,13 @@ Library/Application Support/Mozilla/NativeMessagingHosts/gpgmejson.json
 {{ if not (eq .chezmoi.os "linux") | or (not (lookPath "systemctl")) -}}
 # Don't install SystemD units
 .config/systemd
+.config/systemd/**
 {{ end -}}
 {{ if not (eq .chezmoi.os "linux") | or (not (lookPath "systemctl")) | or (not (glob "/usr/lib/systemd/user/appimagelauncherd.service"))  | or (not (lookPath "appimagelauncherd")) -}}
 .config/systemd/user/default.target.wants/appimagelauncherd.service
 .config/systemd/user/appimagelauncherd.service
 .config/systemd/user/appimagelauncherd.service.d
+.config/systemd/user/appimagelauncherd.service.d/**
 {{ end -}}
 {{ if not (eq .chezmoi.os "linux") | or (not (lookPath "systemctl")) | or (not (lookPath "cec-dpms")) -}}
 .config/systemd/user/graphical-session.target.wants/cec-dpms@dev-ttyACM0.service

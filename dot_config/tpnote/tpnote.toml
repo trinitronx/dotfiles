@@ -1,175 +1,81 @@
-version = "1.21.7"
-
 [arg_default]
-debug = "ERROR"
+
+### Default value for the command line option `--debug`. Determines the maximum
+### debug level events must have, to be logged. If the command line option
+### `--debug` is present, its value will be used instead.
+debug = "Error"
+
+### Default value for the command line flag `--edit` to disable file watcher,
+### (Markdown)-renderer, HTML server and a web browser launcher set to `true`.
 edit = false
+
+### Default value for the command line flag `--no-filename-sync` to disable
+### the title to filename synchronization mechanism permanently.
+### If set to `true`, the corresponding command line flag is ignored.
 no_filename_sync = false
+
+### Default value for the command line flag `--popup`. If the command line flag
+### `--popup` or `POPUP` is `true`, all log events will also trigger the
+### appearance of a popup alert window. Note, that error level debug events
+### will always pop up, regardless of `--popup` and `POPUP` (unless
+### `--debug=off`).
 popup = true
+
+### This is the default scheme for new note files. Shipped schemes are
+### `default` and `zettel` (for _Zettelkasten_). See `[[scheme]] name` for
+### more schemes. Not to be confused with `scheme_sync_default`!
+scheme = "default"
+
+### Default value for the command line flag `--tty`. _Tp-Note_ tries different
+### heuristics to detect weather a graphic environment is available or not. For
+### example, under Linux, the '`DISPLAY`' environment variable is evaluated. The
+### '`--tty`' flag disables the automatic detection and sets _Tp-Note_ in
+### "console" mode, where only the non GUI editor (see configuration variable:
+### '`app_args.editor_console`') and no viewer is launched. If this is set
+### to `true` _Tp-Note_ starts in console mode permanently.
 tty = false
+
+### Default value for the command line flag `--add-header`. If unset,
+### _Tp-Note_ exits of when it tries to open a text file without a YAML
+### header. When this flag is set, the missing header is constructed by
+### means of the text file's filename and creation date.
 add_header = true
+
+### Rewrite relative local links. 
+### Base: `FILENAME_ROOT_PATH_MARKER=".tpnote.toml"`.
 export_link_rewriting = "Long"
 
-[filename]
-root_path_marker = ".tpnote.toml"
-sort_tag_chars = "0123456789.-_ \t"
-sort_tag_extra_separator = "'"
-copy_counter_extra_separator = "-"
-copy_counter_opening_brackets = "("
-copy_counter_closing_brackets = ")"
-extension_default = "md"
-extensions_md = [
-    "txt",
-    "md",
-    "markdown",
-    "markdn",
-    "mdown",
-    "mdtxt",
-]
-extensions_rst = [
-    "rst",
-    "rest",
-]
-extensions_html = ["htmlnote"]
-extensions_txt = [
-    "txtnote",
-    "adoc",
-    "asciidoc",
-    "mediawiki",
-    "mw",
-]
-extensions_no_viewer = ["t2t"]
+
 
 [clipboard]
+
+### By default clipboard support is enabled, can be disabled
+### in config file. A false value here will set `empty_clipboard` to
+### false.
 read_enabled = true
+
+### Should the clipboard be emptied when Tp-Note closes?
+### Default value.
 empty_enabled = true
 
-[tmpl]
-filter_get_lang = [
-    "en",
-    "fr",
-    "de",
-]
-filter_map_lang = [
-    [
-    "de",
-    "de-DE",
-],
-    [
-    "et",
-    "et-ET",
-],
-]
-compulsory_header_field = "title"
-new_content = """
-{%- set title_text = dir_path | trim_file_sort_tag -%}
----
-title:      {{ title_text | cut | json_encode }}
-subtitle:   {{ 'Note' | json_encode }}
-author:     {{ username | capitalize | json_encode }}
-date:       {{ now() | date(format='%Y-%m-%d') | json_encode }}
-lang:       {{ title_text | get_lang | map_lang(default=lang) | json_encode }}
----
 
-
-"""
-new_filename = "{{ now() | date(format='%Y%m%d-') }}{{ fm_title | sanit(force_alpha=true) }}{{ fm_subtitle | default(value='') | sanit | prepend(with='--') }}{{ extension_default | prepend(with='.') }}"
-from_clipboard_yaml_content = """
----
-title:      {{ fm_title | default(value = path|trim_file_sort_tag) | cut | json_encode }}
-subtitle:   {{ fm_subtitle | default(value = 'Note') | cut | json_encode }}
-author:     {{ fm_author | default(value=username | capitalize) | json_encode }}
-date:       {{ fm_date | default(value = now()|date(format='%Y-%m-%d')) | json_encode }}
-{% for k, v in fm_all|remove(var='fm_title')|remove(var='fm_subtitle')|remove(var='fm_author')|remove(var='fm_date')|remove(var='fm_lang')%}{{ k }}:\t\t{{ v | json_encode }}
-{% endfor -%}
-lang:       {{ fm_lang | default(value = fm_title| default(value=stdin~clipboard|heading)| get_lang | map_lang(default=lang) ) | json_encode }}
----
-
-{{ stdin ~ clipboard }}
-
-"""
-from_clipboard_yaml_filename = "{{ fm_sort_tag | default(value = now() | date(format='%Y%m%d-')) }}{{ fm_title | sanit(force_alpha=true) }}{{ fm_subtitle | default(value='') | sanit | prepend(with='--') }}{{ fm_file_ext | default(value = extension_default ) | prepend(with='.') }}"
-from_clipboard_content = """
-{%- set lname = stdin ~ clipboard | link_text -%}
-{%- set is_link_text =
-        lname !='' and
-        not lname is starting_with(\"http\")
-        and not lname is starting_with(\"HTTP\") -%}
-{%- if is_link_text -%}
-    {%- set title_text = stdin ~ clipboard | link_text -%}
-{%- else -%}
-    {%- set title_text = stdin ~ clipboard | heading -%}
-{% endif -%}
----
-title:      {{ title_text | cut | json_encode }}
-{% if stdin ~ clipboard | link_text !='' and
-      stdin ~ clipboard | cut | linebreaksbr == stdin ~ clipboard | cut -%}
-  subtitle:   {{ 'URL' | json_encode -}}
-{%- else -%}
-  subtitle:   {{ 'Note' | json_encode -}}
-{%- endif %}
-author:     {{ username | capitalize | json_encode }}
-date:       {{ now() | date(format='%Y-%m-%d') | json_encode }}
-lang:       {{ title_text | get_lang | map_lang(default=lang) | json_encode }}
----
-
-{{ stdin ~ clipboard }}
-
-"""
-from_clipboard_filename = "{{ now() | date(format='%Y%m%d-') }}{{ fm_title | sanit(force_alpha=true) }}{{ fm_subtitle | default(value='') | sanit | prepend(with='--') }}{{ extension_default | prepend(with='.') }}"
-from_text_file_content = """
----
-title:      {{ path | file_stem | split(pat='--') | first | cut | json_encode }}
-subtitle:   {{ path | file_stem | split(pat='--') | nth(n=1) | cut | json_encode }}
-author:     {{ username | capitalize | json_encode }}
-date:       {{ note_file_date | default(value='') | date(format='%Y-%m-%d') | json_encode }}
-orig_name:  {{ path | file_name | json_encode }}
-lang:       {{ note_body_text | get_lang | map_lang(default=lang) | json_encode }}
----
-
-{{ note_body_text }}
-"""
-from_text_file_filename = """
-{%- if path | file_sort_tag != '' -%}
-  {{ path | file_sort_tag }}
-{%- else -%}
-  {{ note_file_date | date(format='%Y%m%d-') }}{%- endif -%}{{ fm_title | sanit(force_alpha=true) }}{{ fm_subtitle | default(value='') | sanit | prepend(with='--') }}{{ path | file_ext | prepend(with='.') }}"""
-annotate_file_content = """
-{%- set body_text = stdin ~ clipboard -%}
-{%- if body_text != '' -%}
-   {%- set lang_test_text = body_text | cut -%}
-{%- else -%}
-   {%- set lang_test_text = path | file_stem  -%}
-{%- endif -%}
----
-title:      {{ path | trim_file_sort_tag | json_encode }}
-{% if body_text | link_text !='' and
-      body_text | heading == body_text -%}
-  subtitle:   {{ 'URL' | json_encode -}}
-{%- else -%}
-  subtitle:   {{ 'Note' | json_encode -}}
-{%- endif %}
-author:     {{ username | capitalize | json_encode }}
-date:       {{ now() | date(format='%Y-%m-%d') | json_encode }}
-lang:       {{ lang_test_text | get_lang | map_lang(default=lang) | json_encode }}
----
-
-[{{ path | file_name }}](<{{ path | file_name }}>)
-{% if body_text != '' -%}
-{%- if body_text != body_text | heading %}
----
-{% endif %}
-{{ body_text }}
-{% endif %}
-"""
-annotate_file_filename = "{{ path | file_sort_tag }}{{ fm_title | sanit(force_alpha=true) }}{{ fm_subtitle | default(value='') | sanit | prepend(with='--') }}{{ extension_default | prepend(with='.') }}"
-sync_filename = "{{ fm_sort_tag | default(value = path | file_sort_tag) }}{{ fm_title | default(value='No title') | sanit(force_alpha=true) }}{{ fm_subtitle | default(value='') | sanit | prepend(with='--') }}{{ fm_file_ext | default(value = path | file_ext) | prepend(with='.') }}"
 
 [app_args]
-browser = [
+
+### Default command line argument list when launching the web browser.
+### The list is executed item by item until an installed web browser is found.
+### `unix`-defaults are valid under Unix like target operating systems:
+### aix, android, dragonfly, emscripten, espidf, freebsd, fuchsia, haiku, horizon,
+### illumos, ios, l4re, linux, netbsd, nto, openbsd, redox, solaris, tvos,
+### unknown, vita, vxworks, wasi, watchos.
+unix.browser = [
     [
-    "flatpak",
-    "run",
-    "org.mozilla.firefox",
+    "librewolf",
+    "--new-window",
+    "--private-window",
+],
+    [
+    "firefox-esr",
     "--new-window",
     "--private-window",
 ],
@@ -179,9 +85,16 @@ browser = [
     "--private-window",
 ],
     [
-    "firefox-esr",
+    "flatpak",
+    "run",
+    "org.mozilla.firefox",
     "--new-window",
     "--private-window",
+],
+    [
+    "chromium",
+    "--new-window",
+    "--incognito",
 ],
     [
     "flatpak",
@@ -198,670 +111,191 @@ browser = [
     "--incognito",
 ],
     [
-    "chromium-browser",
-    "--new-window",
-    "--incognito",
-],
-    [
     "chrome",
     "--new-window",
     "--incognito",
 ],
 ]
-editor = [
-    [
-    "foot",
-    "-e",
-    "vim",
-],
-    [
-    "alacritty",
-    "-e",
-    "hx",
-],
-    [
-    "alacritty",
-    "-e",
-    "nvim",
-],
-    [
-    "codium",
-    "-w",
-    "-n",
-],
-    [
-    "flatpak",
-    "run",
-    "com.vscodium.codium",
-    "-w",
-    "-n",
-],
-    [
-    "code",
-    "-w",
-    "-n",
-],
-    [
-    "flatpak",
-    "run",
-    "com.visualstudio.code",
-    "-w",
-    "-n",
-],
-    [
-    "flatpak",
-    "run",
-    "org.gnome.gitlab.somas.Apostrophe",
-],
+
+### Default command line argument list when launching external editor.
+### The editor list is executed item by item until an editor is found.
+unix.editor = [
+    [ "alacritty", "-e", "hx", ],
+    [ "alacritty", "-e", "nvim", ],
+    [ "codium", "-w", "-n", ],
+    [ "flatpak", "run", "com.vscodium.codium", "-w", "-n", ],
+    [ "code", "-w", "-n", ],
+    [ "flatpak", "run", "com.visualstudio.code", "-w", "-n", ],
+    [ "subl", "-w", ],
+    [ "flatpak", "run", "org.gnome.gitlab.somas.Apostrophe", ],
     ["retext"],
-    [
-    "nvim-qt",
-    "--nofork",
-],
-    [
-    "gvim",
-    "--nofork",
-],
-    [
-    "geany",
-    "-s",
-    "-i",
-    "-m",
-],
-    [
-    "gedit",
-    "-w",
-],
-    [
-    "mousepad",
-    "--disable-server",
-],
-    ["leafpad"],
+    [ "nvim-qt", "--nofork", ],
+    [ "gvim", "--nofork", ],
+    [ "geany", "-s", "-i", "-m", ],
+    [ "gedit", "-w", ],
+    [ "mousepad", "--disable-server", ],
+    [ "leafpad" ],
 ]
-editor_console = [
+
+### Default command line argument list when launching an external editor
+### and no graphical environment is available (`DISPLAY=''`).
+### This lists console file editors only.
+### The editor list is executed item by item until an editor is found.
+unix.editor_console = [
     ["hx"],
     ["nvim"],
+    ["mcedit"],
     ["nano"],
     ["vim"],
     ["emacs"],
     ["vi"],
 ]
 
-[viewer]
-startup_delay = 500
-missing_header_disables = false
-notify_period = 200
-tcp_connections_max = 16
-served_mime_types = [
+### Defaults valid under Windows:
+windows.browser = [
     [
-    "md",
-    "text/x-markdown",
-],
+        "C:\\Program Files\\LibreWolf\\librewolf.exe",
+        "--new-window",
+        "--private-window",
+    ],
     [
-    "txt",
-    "text/plain",
-],
+        "C:\\Program Files\\Mozilla Firefox\\firefox.exe",
+        "--new-window",
+        "--private-window",
+    ],
     [
-    "apng",
-    "image/apng",
-],
+        "C:\\Program Files\\Google\\Chrome\\Application\\chrome",
+        "--new-window",
+        "--incognito",
+    ],
     [
-    "avif",
-    "image/avif",
-],
-    [
-    "bmp",
-    "image/bmp",
-],
-    [
-    "gif",
-    "image/gif",
-],
-    [
-    "html",
-    "text/html",
-],
-    [
-    "htm",
-    "text/html",
-],
-    [
-    "ico",
-    "image/vnd.microsoft.icon",
-],
-    [
-    "jpeg",
-    "image/jpeg",
-],
-    [
-    "jpg",
-    "image/jpeg",
-],
-    [
-    "pdf",
-    "application/pdf",
-],
-    [
-    "png",
-    "image/png",
-],
-    [
-    "svg",
-    "image/svg+xml",
-],
-    [
-    "tiff",
-    "image/tiff",
-],
-    [
-    "tif",
-    "image/tiff",
-],
-    [
-    "webp",
-    "image/webp",
-],
-    [
-    "mp3",
-    "audio/mp3",
-],
-    [
-    "ogg",
-    "audio/ogg",
-],
-    [
-    "oga",
-    "audio/ogg",
-],
-    [
-    "weba",
-    "audio/webm",
-],
-    [
-    "flac",
-    "audio/flac",
-],
-    [
-    "wav",
-    "audio/wav",
-],
-    [
-    "opus",
-    "audio/opus",
-],
-    [
-    "mp4",
-    "video/mp4",
-],
-    [
-    "ogv",
-    "video/ogg",
-],
-    [
-    "webm",
-    "video/webm",
-],
-    [
-    "ogx",
-    "application/ogg",
-],
+        "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+        "--inprivate",
+    ],
 ]
+
+windows.editor = [
+    [
+        "C:\\Program Files\\Mark Text\\Mark Text.exe",
+        "--new-window",
+    ],
+    [
+        "{{get_env(name=\"LOCALAPPDATA\")}}\\Programs\\Microsoft VS Code\\Code.exe",
+        "-n",
+        "-w",
+    ],
+    [
+        "{{get_env(name=\"LOCALAPPDATA\")}}\\Programs\\VSCodium\\VSCodium.exe",
+        "-n",
+        "-w",
+    ],
+    ["C:\\Program Files\\Microsoft VS Code\\Code.exe", "-n", "-w"],
+    [
+        "C:\\Program Files\\Notepad++\\notepad++.exe",
+        "-nosession",
+        "-multiInst",
+    ],
+    ["C:\\Windows\\notepad.exe"],
+]
+
+windows.editor_console = [
+    ["hx"],
+    ["nvim"],
+]
+
+
+### Defaults valid under MacOs:
+macos.browser = [[]]
+
+macos.editor = [
+    ["code", "-w", "-n"],
+    ["typora"],
+    ["marktext", "--no-sandbox"],
+    ["gvim", "--nofork"],
+    ["mate"],
+    ["open", "-a", "TextEdit"],
+    ["open", "-a", "TextMate"],
+    ["open"],
+]
+macos.editor_console = [
+    ["hx"],
+    ["nvim"],
+    ["mcedit"],
+    ["nano"],
+    ["pico"],
+    ["vim"],
+    ["emacs"],
+    ["vi"],
+]
+
+
+
+[viewer]
+
+### When Tp-Note starts, it launches two external applications: some text editor
+### and the viewer (web browser). By default, the two programs are launched at
+### the same time (`VIEWER_STARTUP_DELAY==0`). If `VIEWER_STARTUP_DELAY>0` the
+### viewer (web browser) will be launched `VIEWER_STARTUP_DELAY` milliseconds
+### after the text editor. If `VIEWER_STARTUP_DELAY<0` the viewer will be
+### started first. Common values are `-1000`, `0` and `1000`.
+startup_delay = 500
+
+### When set to true, the viewer feature is automatically disabled when
+### _Tp-Note_ encounters an `.md` file without header. Experienced users can
+### set this to `true`. This setting is ignored, meaning is considered `false`,
+### if `ARG_DEFAULT_ADD_HEADER=true` or `ARGS.add_header=true` or
+### `ARGS.viewer=true`.
+missing_header_disables = false
+
+### How often should the file watcher check for changes?
+### Delay in milliseconds. Maximum value is 2000.
+notify_period = 200
+
+### The maximum number of TCP connections the HTTP server can handle at the same
+### time. In general, the serving and live update of the HTML rendition of the
+### note file, requires normally 3 TCP connections: 1 old event channel (that is
+### still open from the previous update), 1 TCP connection to serve the HTML,
+### the local images (and referenced documents), and 1 new event channel.  In
+### practice, stale connection are not always closed immediately. Hence, 4 open
+### connections are not uncommon.
+tcp_connections_max = 16
+
+### Served file types with corresponding mime types.
+### The first entry per line is the file extension in lowercase(!), the second
+### the corresponding mime type. Embedded files with types other than those
+### listed here are silently ignored. Note, that image files must be located in
+### the same or in the note's parent directory.
+### NB: The list is ordered to look for the most common extensions first.
+served_mime_types = [
+    ["jpeg", "image/jpeg"],
+    ["jpg", "image/jpeg"],
+    ["png", "image/png"],
+    ["tiff", "image/tiff"],
+    ["tif", "image/tiff"],
+    ["gif", "image/gif"],
+    ["pdf", "application/pdf"],
+    ["svg", "image/svg+xml"],
+    ["apng", "image/apng"],
+    ["webp", "image/webp"],
+    ["avif", "image/avif"],
+    ["bmp", "image/bmp"],
+    ["ico", "image/vnd.microsoft.icon"],
+    ["html", "text/html"],
+    ["htm", "text/html"],
+    ["mp3", "audio/mp3"],
+    ["ogg", "audio/ogg"],
+    ["oga", "audio/ogg"],
+    ["weba", "audio/webm"],
+    ["flac", "audio/flac"],
+    ["wav", "audio/wav"],
+    ["opus", "audio/opus"],
+    ["mp4", "video/mp4"],
+    ["ogv", "video/ogg"],
+    ["webm", "video/webm"],
+    ["ogx", "application/ogg"],
+]
+
+### For security reasons, Tp-Note's internal viewer only displays a limited
+### number of Tp-Note files when browsing between files. This variable limits
+### this number.
 displayed_tpnote_count_max = 20
-
-[tmpl_html]
-viewer = """
-<!DOCTYPE html>
-<html lang=\"{{ fm_lang | default(value='en') }}\">
-<head>
-<meta charset=\"UTF-8\">
-<title>{{ fm_title }}</title>
-<link rel=\"stylesheet\" href=\"{{ note_css_path }}\">
-<style>
-<!-- Customize the viewer CSS here -->
-</style>
-  </head>
-  <body>
-  <table class=\"center\">
-    <tr>
-    <th class=\"key\">title:</th>
-    <th class=\"val\"><b>{{ fm_title }}</b></th>
-  </tr>
-    <tr>
-    <th class=\"key\">subtitle:</th>
-    <th class=\"val\">{{ fm_subtitle | default(value='') }}</th>
-  </tr>
-    <tr>
-    <th class=\"keygrey\">date:</th>
-    <th class=\"valgrey\">{{ fm_date | default(value='') }}</th>
-  </tr>
-  {% for k, v in fm_all| remove(var='fm_title')|
-                         remove(var='fm_subtitle')|
-                         remove(var='fm_date')
-  %}
-    <tr>
-    <th class=\"keygrey\">{{ k }}:</th>
-    <th class=\"valgrey\">{{ v }}</th>
-  </tr>
-  {% endfor %}
-  </table>
-  <div class=\"note-body\">{{ note_body_html }}</div>
-  <script>{{ note_js }}</script>
-</body>
-</html>
-"""
-viewer_error = """
-<!DOCTYPE html>
-<html lang=\"en\">
-<head>
-<meta charset=\"UTF-8\">
-<title>Syntax error</title>
-<style>
-.note-error { color: #523626; }
-pre { white-space: pre-wrap; }
-a { color: #316128; }
-h1, h2, h3, h4, h5, h6 { color: #d3af2c; font-family:sans-serif; }
-</style>
-</head>
-<body>
-<h3>Syntax error</h3>
-<p> in note file: <pre>{{ path }}</pre><p>
-<div class=\"note-error\">
-<hr>
-<pre>{{ note_error }}</pre>
-<hr>
-</div>
-{{ note_erroneous_content_html }}
-<script>{{ note_js }}</script>
-</body>
-</html>
-"""
-exporter = """
-<!DOCTYPE html>
-<html lang=\"{{ fm_lang | default(value='en') }}\">
-<head>
-<meta charset=\"utf-8\">
-<title>{{ fm_title }}</title>
-<style>
-{{ note_css }}
-<!-- Customize the exporter CSS here -->
-</style>
-  </head>
-  <body>
-  <table class=\"center\">
-    <tr>
-    <th class=\"key\">title:</th>
-    <th class=\"val\"><b>{{ fm_title }}</b></th>
-  </tr>
-    <tr>
-    <th class=\"key\">subtitle:</th>
-    <th class=\"val\">{{ fm_subtitle | default(value='') }}</th>
-  </tr>
-    <tr>
-    <th class=\"keygrey\">date:</th>
-    <th class=\"valgrey\">{{ fm_date | default(value='') }}</th>
-  </tr>
-  {% for k, v in fm_all|
-        remove(var='fm_title')|
-        remove(var='fm_subtitle')|
-        remove(var='fm_date')
-    %}
-    <tr>
-    <th class=\"keygrey\">{{ k }}:</th>
-    <th class=\"valgrey\">{{ v }}</th>
-  </tr>
-  {% endfor %}
-  </table>
-  <div class=\"note-body\">{{ note_body_html }}</div>
-</body>
-</html>
-"""
-css = """
-/*
- * theme \"Solarized (light)\" generated by syntect
- */
-
-.code {
- color: #657b83;
- background-color: #fdf6e3;
-}
-
-.comment, .meta.documentation {
- color: #93a1a1;
-}
-.string {
- color: #2aa198;
-}
-.string.regexp {
- color: #2aa198;
-}
-.constant.character.escape {
- color: #dc322f;
-}
-.constant.numeric {
- color: #6c71c4;
-}
-.variable {
- color: #268bd2;
-}
-.variable.function {
- color: #b58900;
-}
-.variable.language {
- color: #d33682;
-}
-.keyword {
- color: #859900;
-}
-.meta.import .keyword, .keyword.control.import, .keyword.control.import.from, .keyword.other.import, .keyword.control.at-rule.include, .keyword.control.at-rule.import {
- color: #cb4b16;
-}
-.keyword.operator.comparison, .keyword.operator.assignment, .keyword.operator.arithmetic {
- color: #657b83;
-}
-.storage {
- color: #859900;
-}
-.storage.modifier {
- color: #586e75;
-}
-.keyword.control.class, .entity.name, .entity.name.class, .entity.name.type.class {
- color: #b58900;
-}
-.entity.other.inherited-class {
- color: #268bd2;
-}
-.entity.other.attribute-name {
- color: #b58900;
-}
-.support, .support.type, .support.class {
- color: #859900;
-}
-.entity.name.function {
- color: #b58900;
-}
-.punctuation.definition.variable {
- color: #859900;
-}
-.constant, .constant.language, .meta.preprocessor {
- color: #b58900;
-}
-.entity.name.section {
- color: #cb4b16;
-}
-.support.function.construct, .keyword.other.new {
- color: #dc322f;
-}
-.constant.character, .constant.other {
- color: #cb4b16;
-}
-.entity.name.tag {
- color: #268bd2;
-}
-.punctuation.definition.tag.html, .punctuation.definition.tag.begin, .punctuation.definition.tag.end {
- color: #93a1a1;
-}
-.support.function {
- color: #859900;
-}
-.punctuation.separator.continuation {
- color: #dc322f;
-}
-.storage.type {
- color: #268bd2;
-}
-.support.type.exception {
- color: #cb4b16;
-}
-.keyword.other.special-method {
- color: #cb4b16;
-}
-.invalid {
- background-color: #ec9489;
-}
-.string.quoted.double, .string.quoted.single {
- color: #2aa198;
-}
-.punctuation.definition.string {
- color: #839496;
-}
-.meta.brace.square, .punctuation.section.brackets {
- color: #268bd2;
-}
-.meta.brace.round, .meta.brace.curly, .punctuation.section, .punctuation.section.block, .punctuation.definition.parameters, .punctuation.section.group {
- color: #657b83;
-}
-.support.constant.color, .invalid.deprecated.color.w3c-non-standard-color-name.scss {
- color: #b58900;
-}
-.meta.selector.css {
- color: #657b83;
-}
-.entity.name.tag.css, .entity.name.tag.scss, .source.less .keyword.control.html.elements, .source.sass .keyword.control.untitled {
- color: #b58900;
-}
-.entity.other.attribute-name.class {
- color: #b58900;
-}
-.entity.other.attribute-name.id {
- color: #b58900;
-}
-.entity.other.attribute-name.pseudo-element, .entity.other.attribute-name.tag.pseudo-element, .entity.other.attribute-name.pseudo-class, .entity.other.attribute-name.tag.pseudo-class {
- color: #268bd2;
-}
-.text.html.basic .meta.tag.other.html, .text.html.basic .meta.tag.any.html, .text.html.basic .meta.tag.block.any, .text.html.basic .meta.tag.inline.any, .text.html.basic .meta.tag.structure.any.html, .text.html.basic .source.js.embedded.html, .punctuation.separator.key-value.html {
- color: #657b83;
-}
-.text.html.basic .entity.other.attribute-name.html, .meta.tag.xml .entity.other.attribute-name {
- color: #b58900;
-}
-.keyword.other.special-method.ruby {
- color: #859900;
-}
-.variable.other.constant.ruby {
- color: #b58900;
-}
-.constant.other.symbol.ruby {
- color: #2aa198;
-}
-.keyword.other.special-method.ruby {
- color: #cb4b16;
-}
-.meta.array .support.function.construct.php {
- color: #b58900;
-}
-.entity.name.function.preprocessor.c, .meta.preprocessor.c.include, .meta.preprocessor.macro.c {
- color: #cb4b16;
-}
-.meta.preprocessor.c.include .string.quoted.other.lt-gt.include.c, .meta.preprocessor.c.include .punctuation.definition.string.begin.c, .meta.preprocessor.c.include .punctuation.definition.string.end.c {
- color: #2aa198;
-}
-.other.package.exclude, .other.remove {
- color: #dc322f;
-}
-.other.add {
- color: #2aa198;
-}
-.punctuation.section.group.tex, .punctuation.definition.arguments.begin.latex, .punctuation.definition.arguments.end.latex, .punctuation.definition.arguments.latex {
- color: #dc322f;
-}
-.meta.group.braces.tex {
- color: #b58900;
-}
-.string.other.math.tex {
- color: #b58900;
-}
-.variable.parameter.function.latex {
- color: #cb4b16;
-}
-.punctuation.definition.constant.math.tex {
- color: #dc322f;
-}
-.text.tex.latex .constant.other.math.tex, .constant.other.general.math.tex, .constant.other.general.math.tex, .constant.character.math.tex {
- color: #2aa198;
-}
-.string.other.math.tex {
- color: #b58900;
-}
-.punctuation.definition.string.begin.tex, .punctuation.definition.string.end.tex {
- color: #dc322f;
-}
-.keyword.control.label.latex, .text.tex.latex .constant.other.general.math.tex {
- color: #2aa198;
-}
-.variable.parameter.definition.label.latex {
- color: #dc322f;
-}
-.support.function.be.latex {
- color: #859900;
-}
-.support.function.section.latex {
- color: #cb4b16;
-}
-.support.function.general.tex {
- color: #2aa198;
-}
-.keyword.control.ref.latex {
- color: #2aa198;
-}
-.storage.type.class.python, .storage.type.function.python, .storage.modifier.global.python {
- color: #859900;
-}
-.support.type.exception.python {
- color: #b58900;
-}
-.meta.scope.for-in-loop.shell, .variable.other.loop.shell {
- color: #586e75;
-}
-.meta.scope.case-block.shell, .meta.scope.case-body.shell {
- color: #586e75;
-}
-.punctuation.definition.logical-expression.shell {
- color: #dc322f;
-}
-.storage.modifier.c++ {
- color: #859900;
-}
-.support.function.perl {
- color: #268bd2;
-}
-.meta.diff, .meta.diff.header {
- color: #93a1a1;
-}
-.meta.diff.range {
- color: #268bd2;
-}
-.markup.deleted {
- color: #dc322f;
-}
-.markup.changed {
- color: #2aa198;
-}
-.markup.inserted {
- color: #859900;
-}
-.markup.heading, .punctuation.definition.heading.markdown {
- color: #b58900;
-}
-.markup.quote {
- color: #859900;
-}
-.markup.italic {
-font-style: italic;
-}
-.markup.bold {
-font-weight: bold;
-}
-.markup.underline.link.markdown, .meta.link.reference .constant.other.reference.link.markdown {
- color: #2aa198;
-}
-.constant.other.reference.link.markdown {
- color: #6c71c4;
-}
-.meta.paragraph.markdown .meta.dummy.line-break {
- background-color: #eee8d5;
-}
-.sublimelinter.notes {
- color: #eee8d5;
- background-color: #eee8d5;
-}
-.sublimelinter.outline.illegal {
- color: #93a1a1;
- background-color: #93a1a1;
-}
-.sublimelinter.underline.illegal {
- background-color: #dc322f;
-}
-.sublimelinter.outline.warning {
- color: #839496;
- background-color: #839496;
-}
-.sublimelinter.underline.warning {
- background-color: #b58900;
-}
-.sublimelinter.outline.violation {
- color: #657b83;
- background-color: #657b83;
-}
-.sublimelinter.underline.violation {
- background-color: #cb4b16;
-}
-.sublimelinter.mark.warning {
- color: #b58900;
-}
-.sublimelinter.mark.error {
- color: #dc322f;
-}
-.sublimelinter.gutter-mark {
- color: #657b83;
-}
-.brackethighlighter.all {
- color: #93a1a1;
-}
-.entity.name.filename.find-in-files {
- color: #2aa198;
-}
-.constant.numeric.line-number.find-in-files {
- color: #93a1a1;
-}
-.markup.deleted.git_gutter {
- color: #dc322f;
-}
-.markup.inserted.git_gutter {
- color: #859900;
-}
-.markup.changed.git_gutter {
- color: #b58900;
-}
-.variable.other.readwrite.js, .variable.other.object.js, .variable.other.constant.js {
- color: #657b83;
-}
-/* Tp-Note's CSS */
-table, th, td { font-weight: normal; }
-table.center {
-  margin-left: auto;
-  margin-right: auto;
-  background-color: #f3f2e4;
-  border:1px solid grey;
-}
-th, td {
-  padding: 3px;
-  padding-left:15px;
-  padding-right:15px;
-}
-th.key{ color:#444444; text-align:right; }
-th.val{
-  color:#316128;
-  text-align:left;
-  font-family:sans-serif;
-}
-th.keygrey{ color:grey; text-align:right; }
-th.valgrey{ color:grey; text-align:left; }
-pre { white-space: pre-wrap; }
-em { color: #523626; }
-a { color: #316128; }
-h1 { font-size: 150% }
-h2 { font-size: 132% }
-h3 { font-size: 115% }
-h4, h5, h6 { font-size: 100% }
-h1, h2, h3, h4, h5, h6 { color: #263292; font-family:sans-serif; }
-"""

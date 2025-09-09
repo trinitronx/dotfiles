@@ -293,6 +293,18 @@ Library/Application Support/Mozilla/NativeMessagingHosts/gpgmejson.json
 {{   if not (eq .chezmoi.os "linux") | or (not (glob "/usr/lib/systemd/user/idlehack.service")) | or (not (lookPath "idlehack")) -}}
 .config/systemd/user/default.target.wants/idlehack.service
 {{   end -}}
+{{ $system_services := dict
+    "flashfocus" "/usr/lib/systemd/user/flashfocus.service"
+    "foot" "/usr/lib/systemd/user/foot-server.service"
+    "foot" "/usr/lib/systemd/user/foot-server.socket"
+    "pcmanfm" "/etc/xdg/systemd/user/pcmanfm.service"
+    "poweralertd" "/usr/lib/systemd/user/poweralertd.service"
+ -}}
+{{ range $cmd, $path := $system_services -}}
+{{   if not (eq $.chezmoi.os "linux") | or (not (glob $path)) | or (not (lookPath $cmd)) -}}
+.config/systemd/user/graphical-session.target.wants/{{ osBase $path }}
+{{   end -}}
+{{ end -}}
 {{   if not (eq .chezmoi.os "linux") | or (not (glob "/usr/lib/systemd/user/swayrd.service")) | or (not (lookPath "swayrd")) -}}
 .config/systemd/user/sway-session.target.wants/swayrd.service
 .config/systemd/user/swayrd.service

@@ -58,6 +58,9 @@ README.md
 {{ if not (lookPath "tmux") -}}
 .config/tmux
 {{ end -}}
+{{ if not (lookPath "tpnote") -}}
+.config/tpnote
+{{ end -}}
 {{ if not (lookPath "virt-viewer") -}}
 .config/virt-viewer
 {{ end -}}

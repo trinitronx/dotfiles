@@ -112,3 +112,11 @@
     args: ["--ff-only"]
 
 {{ end -}}
+{{ if eq .chezmoi.arch "amd64" | and (or (eq .chezmoi.os "linux") | or (eq .chezmoi.os "darwin") | or (eq .chezmoi.os "windows")) -}}
+".local/bin/tpnote":
+  type: "archive-file"
+  url: {{ gitHubLatestReleaseAssetURL "getreu/tp-note" (printf "tpnote-*-%s-*%s*" (replace "amd64" "x86_64" .chezmoi.arch) .chezmoi.os) | quote }}
+  refreshPeriod: "168h"
+  executable: true
+  path: "tpnote{{ eq .chezmoi.os "windows" | ternary ".exe" "" }}"
+{{ end -}}

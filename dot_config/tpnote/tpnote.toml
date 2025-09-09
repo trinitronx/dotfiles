@@ -307,3 +307,148 @@ served_mime_types = [
 ### number of Tp-Note files when browsing between files. This variable limits
 ### this number.
 displayed_tpnote_count_max = 20
+
+
+[base_scheme.tmpl]
+### Default content template used when the command line argument `<sanit>`
+### is a directory. Can be changed through editing the configuration
+### file. The following variables are defined:
+### Clipboard data may be available.
+### This template needs `Context<ReadyForContentTemplate`.
+from_dir_content = """
+{%- set stdin = stdin.body |default(value = '') -%}
+{%- set html_clipboard = html_clipboard.body |default(value = '') -%}
+{%- set txt_clipboard = txt_clipboard.body |default(value = '') -%}
+
+{%- set title_text = fm.fm_title | default(value = '')
+     | replace_empty(with = stdin | html_heading )
+     | replace_empty(with = stdin | link_text_picky )
+     | replace_empty(with = stdin | link_text )
+     | replace_empty(with = stdin | heading )
+     | replace_empty(with = html_clipboard | html_heading )
+     | replace_empty(with = html_clipboard | link_text_picky )
+     | replace_empty(with = txt_clipboard | link_text_picky )
+     | replace_empty(with = html_clipboard | link_text )
+     | replace_empty(with = txt_clipboard | link_text )
+     | replace_empty(with = txt_clipboard | heading )
+     | replace_empty(with = path | trim_file_sort_tag )
+     | trim  -%}
+        
+{%- set stdin = stdin
+     | html_to_markup(extension=extension_default, default=stdin)
+     | append(newline=true) -%}
+{%- set clipboard = html_clipboard
+     | html_to_markup(extension=extension_default, default=txt_clipboard) -%}
+{%- set input = stdin ~ clipboard | trim -%}
+
+{%- set languages = fm.fm_languages
+     | default(value = [force_lang])
+     | replace_empty(with = input | replace_empty(with = path | trim_file_sort_tag )
+                             | get_lang | map_lang(default=lang) ) -%}
+{%- set lang = fm.fm_lang | default(value = languages | first ) -%}
+
+---
+{{ title_text | trunc | to_yaml(key='fm_title') }}
+{{ fm.fm_subtitle | default(value = 'Note') | trunc | to_yaml(key='fm_subtitle') }}
+{{ fm.fm_author | default(value=username | capitalize) | to_yaml(key='fm_author') }}
+{{ fm.fm_date | default(value = now()|date(format='%Y-%m-%d')) | to_yaml(key='fm_date') }}
+{{ lang | to_yaml(key='fm_lang') }}
+{% if languages | length > 1 -%}
+  {{ languages | to_yaml(key='fm_languages') | append(newline=true) }}
+{%- endif -%}
+{#- We deliberately ignore `fm.fm_scheme` from clipboards -#}
+{% if scheme_sync_default != current_scheme -%}
+  {{ current_scheme | to_yaml(key='fm_scheme') | append(newline=true) }}
+{%- endif -%}
+{% if fm.fm_sort_tag -%}
+  {{ fm.fm_sort_tag | to_yaml(key='fm_sort_tag') | append(newline=true) }}
+{%- endif -%}
+{%- if fm -%}
+  {{- fm 
+    | remove(key='fm_title')
+    | remove(key='fm_subtitle')
+    | remove(key='fm_author')
+    | remove(key='fm_date')
+    | remove(key='fm_lang')
+    | remove(key='fm_languages')
+    | remove(key='fm_scheme')
+    | remove(key='fm_sort_tag')
+    | to_yaml 
+    | prepend(newline=true) 
+    | append(newline=true) -}}
+{%- endif -%}
+---
+
+{{ input | append(newline=true) }}
+"""
+
+### Default template used, when the opened text file (with a known file
+### extension) is missing a YAML front matter section. This template prepends
+### such a header. The template inserts information extracted from the input
+### filename and its creation date. `{{ path }}` points to the text file,
+### `{{ dir_path }}` to the directory where it is located.
+from_text_file_content = """
+{%- set languages = [force_lang]
+   | replace_empty(with = doc.body | get_lang | map_lang(default=lang)) -%}
+{%- set lang = languages | first -%}
+---
+{{ path | file_stem | split(pat='--') | first | trunc | to_yaml(key='fm_title') }}
+{{ path | file_stem | split(pat='--') | nth(n=1) | trunc
+     | to_yaml(key='fm_subtitle') }}
+{{ username | capitalize | to_yaml(key='fm_author') }}
+{{ doc_file_date | default(value=now()) | date(format='%Y-%m-%d') | to_yaml(key='fm_date') }}
+{{ lang | to_yaml(key='fm_lang') }}
+{% if languages | length > 1 -%}
+{{ languages | to_yaml(key='fm_languages') | append(newline=true) }}
+{%- endif -%}
+# {{ path | file_name | to_yaml(key='fm_orig_name', tab=12) }}
+{% if scheme_sync_default != current_scheme -%}
+{{ current_scheme | to_yaml(key='fm_scheme') | append(newline=true) }}
+{%- endif -%}
+---
+
+{{ doc.body }}
+"""
+
+### Default template used when the command line `<path>` parameter points to an
+### existing - to be annotated - non-`.md`-file. `{{ path}}` points to that
+### file, `{{ dir_path }}` to the directory where it is located.
+annotate_file_content = """
+{%- set stdin = stdin.body |default(value = '') -%}
+{%- set html_clipboard = html_clipboard.body |default(value = '') -%}
+{%- set txt_clipboard = txt_clipboard.body |default(value = '') -%}
+
+{%- set stdin = stdin | html_to_markup(extension=extension_default, default=stdin) | append(newline=true) -%}
+{%- set clipboard = html_clipboard
+      | html_to_markup(extension=extension_default, default=txt_clipboard) -%}
+{%- set input = stdin ~ clipboard | trim_end -%}
+{%- set languages = [force_lang]
+      | replace_empty(with = input | replace_empty(with = path | file_stem) | get_lang | map_lang(default=lang)) -%}
+{%- set lang = languages | first -%}
+
+{%- set fname = path | file_name -%}
+{%- if extension_default != 'rst' -%}
+   {%- set link = '[' ~ fname ~ '](<' ~ fname ~ '>)' -%}
+{%- else -%}
+   {%- set link = '`<' ~ fname ~ '>`_' -%}
+  {%- endif -%}
+---
+{{ path | trim_file_sort_tag | to_yaml(key='fm_title') }}
+{{ 'Note' | to_yaml(key='fm_subtitle') }}
+{{ username | capitalize | to_yaml(key='fm_author') }}
+{{ now() | date(format='%Y-%m-%d') | to_yaml(key='fm_date') }}
+{{ lang | to_yaml(key='fm_lang') }}
+{% if languages | length > 1 -%}
+{{ languages | to_yaml(key='fm_languages') | append(newline=true) }}
+{%- endif -%}
+{% if scheme_sync_default != current_scheme -%}
+{{ current_scheme | to_yaml(key='fm_scheme') | append(newline=true) }}
+{%- endif -%}
+---
+
+{{ link }}
+{{- input | prepend(with='\n____\n\n')}}
+
+"""
+
+

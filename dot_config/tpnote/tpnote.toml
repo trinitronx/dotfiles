@@ -45,6 +45,14 @@ add_header = true
 ### Base: `FILENAME_ROOT_PATH_MARKER=".tpnote.toml"`.
 export_link_rewriting = "Long"
 
+[base_scheme.tmpl.filter]
+get_lang.language_candidates = [ "en", "fr" ]
+map_lang = [
+  [ "en", "en-US" ],
+  [ "de", "de-DE" ],
+  [ "et", "et-ET" ],
+]
+to_yaml_tab = 2
 
 
 [clipboard]

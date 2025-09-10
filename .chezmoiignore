@@ -345,13 +345,13 @@ Library/Application Support/Void
 {{ if not (eq .osFamily "linux-arch") | or (not (lookPath "yay")) -}}
 .config/zsh/config.d/03-yay-fzf-search.zsh
 {{ end -}}
-{{ if not (eq .osFamily "linux") | or (not (lookPath "code")) -}}
+{{ if not (eq .chezmoi.os "linux") | or (not (lookPath "code")) -}}
 .config/Code
 {{ end -}}
-{{ if not (eq .osFamily "linux") | or (not (lookPath "cursor")) -}}
+{{ if not (eq .chezmoi.os "linux") | or (not (lookPath "cursor")) -}}
 .config/Cursor
 {{ end -}}
-{{ if not (eq .osFamily "linux") | or (not (lookPath "void")) -}}
+{{ if not (eq .chezmoi.os "linux") | or (not (lookPath "void")) -}}
 .config/Void
 {{ end -}}
 {{ if not (eq .osFamily "linux-arch") | or (not (glob "/opt/vscode-exploration-build/*/bin/code-exploration")) -}}

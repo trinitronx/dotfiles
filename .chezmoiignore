@@ -7,6 +7,8 @@ README.md
 .zsh/cache
 .zsh_history
 .config/zsh/.zsh_history
+app_modified
+app_modified/**
 {{ if not (lookPath "ack") -}}
 .ackrc
 {{ end -}}

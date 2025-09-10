@@ -138,6 +138,12 @@ Library/Application Support/Cursor
 {{ if ne .chezmoi.os "darwin" | or (not (lookPath "void")) -}}
 Library/Application Support/Void
 {{ end -}}
+{{ if ne .chezmoi.os "darwin" | or (not (glob "/Applications/VLC.app")) | or (not (lookPath "vlc")) -}}
+Library/Preferences/org.videolan.vlc/vlcrc
+{{ end -}}
+{{ if ne .chezmoi.os "linux" | or (not (lookPath "vlc")) -}}
+.config/vlc/vlcrc
+{{ end -}}
 {{- /* Manjaro uses /usr/share/zsh/p10k.zsh from extra/manjaro-zsh-config */ -}}
 {{ if eq .osId "manjaro" -}}
 .p10k.zsh

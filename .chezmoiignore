@@ -123,6 +123,12 @@ Library/Application Support/Mozilla/NativeMessagingHosts/gpgmejson.json
 .mozilla/native-messaging-hosts
 .mozilla/native-messaging-hosts/gpgmejson.json
 {{ end -}}
+{{ if ne .chezmoi.os "darwin" | or (not (lookPath "code")) -}}
+Library/Application Support/Code
+{{ end -}}
+{{ if ne .chezmoi.os "darwin" | or (not (lookPath "void")) -}}
+Library/Application Support/Void
+{{ end -}}
 {{- /* Manjaro uses /usr/share/zsh/p10k.zsh from extra/manjaro-zsh-config */ -}}
 {{ if eq .osId "manjaro" -}}
 .p10k.zsh
@@ -207,7 +213,7 @@ Library/Application Support/Mozilla/NativeMessagingHosts/gpgmejson.json
 {{   if not (lookPath "sworkstyle") -}}
 .config/sworkstyle
 {{   end -}}
-{{   if not (lookPath "vscode") -}}
+{{   if not (lookPath "code") -}}
 .config/sway/config.d/98-vscode-no-initial-focus.conf
 {{   end -}}
 {{ end -}}
@@ -335,6 +341,12 @@ Library/Application Support/Mozilla/NativeMessagingHosts/gpgmejson.json
 {{   end -}}
 {{ if not (eq .osFamily "linux-arch") | or (not (lookPath "yay")) -}}
 .config/zsh/config.d/03-yay-fzf-search.zsh
+{{ end -}}
+{{ if not (eq .osFamily "linux") | or (not (lookPath "code")) -}}
+.config/Code
+{{ end -}}
+{{ if not (eq .osFamily "linux") | or (not (lookPath "void")) -}}
+.config/Void
 {{ end -}}
 {{ if not (eq .osFamily "linux-arch") | or (not (glob "/opt/vscode-exploration-build/*/bin/code-exploration")) -}}
 .config/code-exploration-flags.conf

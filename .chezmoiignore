@@ -403,6 +403,49 @@ Library/Application Support/Void
 # Don't update-desktop-database
 .chezmoiscripts/09-update-desktop-database.sh
 {{ end -}}
+{{ if .xdg_config_home -}}
+# Ignore cache & data paths in XDG_CONFIG_HOME
+{{ osBase .xdg_config_home }}/qalculate/qalc.history
+{{ osBase .xdg_config_home }}/qalculate/qalculate-gtk.history
+## VSCode + forks cache & data files
+{{ $code_editors := list
+  "Code"
+  "Code - Exploration"
+  "Code - OSS"
+  "Cursor"
+  "Void"
+ -}}
+{{ range $code_editor := $code_editors -}}
+# {{ $code_editor }}
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/.org.chromium.Chromium.*
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/Backups
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/blob_storage
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/Cookies
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/Cookies-journal
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/*Cache*
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/Crashpad
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/DIPS
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/Dictionaries
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/Local Storage
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/logs
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/machineid
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/Network Persistent State
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/Preferences
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/Service Worker
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/Session Storage
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/Shared Dictionary
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/SharedStorage
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/TransportSecurity
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/Trust Tokens
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/Trust Tokens-journal
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/WebStorage
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/Workspaces
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/User/History
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/User/globalStorage
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/User/sync
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/User/workspaceStorage
+{{   end -}}
+{{ end -}}
 {{ if not (eq .chezmoi.hostname "saturn" | and ( eq .chezmoi.uid "1000" )) -}}
 .duckdns
 .local/bin/duckdns

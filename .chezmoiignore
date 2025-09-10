@@ -153,6 +153,9 @@ Library/Application Support/Void
 .config/ripgrep
 .config/profile.d/07-ripgrep-conf.sh
 {{ end -}}
+{{ if ne .chezmoi.os "linux" | or (not (lookPath "solaar")) -}}
+.config/solaar
+{{ end -}}
 {{ if not (lookPath "sway") -}}
 # Don't install sway-related configs
 .config/sway

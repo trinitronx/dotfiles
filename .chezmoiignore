@@ -60,6 +60,7 @@ README.md
 {{ end -}}
 {{ if not (lookPath "tpnote") -}}
 .config/tpnote
+.config/profile.d/08-tpnote.sh
 {{ end -}}
 {{ if not (lookPath "virt-viewer") -}}
 .config/virt-viewer

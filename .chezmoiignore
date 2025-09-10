@@ -241,6 +241,9 @@ Library/Application Support/Void
 {{ if not (lookPath "mpvpaper") -}}
 .config/mpvpaper
 {{ end -}}
+{{ if not (lookPath "pcmanfm") -}}
+.config/pcmanfm
+{{ end -}}
 {{ if not (lookPath "qt5ct") | or (not (lookPath "qt6ct")) -}}
 .config/kdeglobals
 {{ end -}}

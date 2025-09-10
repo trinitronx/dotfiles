@@ -82,6 +82,9 @@ README.md
 {{ if not (lookPath "wofi") -}}
 .config/wofi
 {{ end -}}
+{{ if not (lookPath "zathura") -}}
+.config/zathura
+{{ end -}}
 {{ if not (lookPath "zsweep") -}}
 .config/zsweep
 {{ end -}}

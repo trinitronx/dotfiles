@@ -1,0 +1,307 @@
+{
+    "args": {
+        "password-store": "gnome-libsecret",
+        "enable-proposed-api": [
+            "GitHub.vscode-pull-request-github",
+            "command line flag",
+            "ms-python.python",
+            "GitHub.copilot-chat"
+        ]
+    },
+    "workbench.colorTheme": "Default Dark Modern",
+    "editor.fontFamily": "'JetBrainsMono Nerd Font Mono', 'JetBrainsMono Nerd Font', 'FiraCode Nerd Font Mono', 'Monoid Nerd Font Mono', 'Droid Sans Mono',  monospace, 'Droid Sans Fallback'",
+    "terminal.integrated.fontFamily": "'JetBrainsMono Nerd Font', monospace",
+    "terminal.integrated.allowChords": false,
+    "editor.fontLigatures": "'cv02', 'cv04', 'cv05', 'cv07', 'cv08', 'cv11', 'cv14', 'cv99', 'ss19', 'zero', 'calt', 'ss04', 'ss08', 'ss09', 'cv23'",
+    "window.zoomLevel": 1,
+    "redhat.telemetry.enabled": true,
+    "git.openRepositoryInParentFolders": "always",
+    "evenBetterToml.formatter.alignComments": true,
+    "evenBetterToml.formatter.alignEntries": true,
+    "evenBetterToml.formatter.allowedBlankLines": 2,
+    "evenBetterToml.formatter.arrayAutoCollapse": true,
+    "evenBetterToml.formatter.columnWidth": 90,
+    "evenBetterToml.formatter.indentTables": true,
+    "evenBetterToml.schema.links": true,
+    "evenBetterToml.semanticTokens": true,
+    "evenBetterToml.formatter.trailingNewline": true,
+    "evenBetterToml.formatter.reorderArrays": true,
+    "evenBetterToml.formatter.arrayTrailingComma": true,
+    "evenBetterToml.formatter.arrayAutoExpand": true,
+    "license.author": "James Cuzella, LyraPhase LLC",
+    "license.default": "gpl-3.0",
+    "license.extension": ".md",
+    "markdownlint.lintWorkspaceGlobs": [
+        "**/*.{md,mkd,mdwn,mdown,markdown,markdn,mdtxt,mdtext,workbook}",
+        "!**/bower_components",
+        "!**/node_modules",
+        "!**/vendor",
+        "!**/.git",
+        "!**/LICENSE.md"
+    ],
+    "python.linting.banditArgs": [
+        "-c",
+        "pyproject.toml",
+        "-v",
+        "-r"
+    ],
+    "python.terminal.launchArgs": [],
+    "mypy-type-checker.args": [
+        "--follow-imports=normal",
+        "--ignore-missing-imports",
+        "--show-column-numbers",
+        "--no-pretty"
+    ],
+    "python.linting.banditEnabled": false,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit"
+    },
+    "isort.args": [
+        "--profile",
+        "black"
+    ],
+    "flake8.ignorePatterns": [
+        "**/site-packages/**/*.py",
+        ".vscode/*.py",
+        "**/usr/bin/*",
+        "**/usr/local/bin/*"
+    ],
+    "python.formatting.provider": "none",
+    "[python]": {
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.fixAll": "explicit",
+            "source.organizeImports": "explicit"
+        },
+        "editor.defaultFormatter": "charliermarsh.ruff"
+    },
+    "ruff.organizeImports": true,
+    "ruff.exclude": [
+        ".vscode/**/*.py",
+        "Python/lib/**/*.py",
+        "/**/3rdparty_repositories/**/*.py",
+        "/**/site-packages/**/*.py",
+        "/usr/**/*.py",
+        "/usr/local/**/*.py",
+        "/opt/**/*.py",
+        "c:/Users/*/AppData/**/*",
+        "c:/Users/*/.vscode/**/*"
+    ],
+    "rust.all_features": true,
+    "rust.jobs": 8,
+    "git.enableCommitSigning": true,
+    "git.allowForcePush": true,
+    "git.alwaysShowStagedChangesResourceGroup": true,
+    "git.branchProtection": [
+        "master",
+        "main",
+        "upstream",
+        "trunk"
+    ],
+    "git.allowNoVerifyCommit": true,
+    "git.mergeEditor": true,
+    "git.repositoryScanIgnoredFolders": [
+        "node_modules",
+        "vendor"
+    ],
+    "git.timeline.showUncommitted": true,
+    "git.untrackedChanges": "separate",
+    "git.useCommitInputAsStashMessage": true,
+    "git.verboseCommit": true,
+    "hexeditor.columnWidth": 32,
+    "hexeditor.showDecodedText": true,
+    "hexeditor.defaultEndianness": "little",
+    "hexeditor.inspectorType": "aside",
+    "rust-analyzer.lens.references.enumVariant.enable": true,
+    "rust-analyzer.debug.openDebugPane": true,
+    "rust-analyzer.hover.actions.references.enable": true,
+    "rust-analyzer.inlayHints.bindingModeHints.enable": true,
+    "rust-analyzer.inlayHints.closureCaptureHints.enable": true,
+    "rust-analyzer.inlayHints.closureReturnTypeHints.enable": "with_block",
+    "rust-analyzer.assist.expressionFillDefault": "default",
+    "editor.formatOnType": true,
+    "rust-analyzer.inlayHints.discriminantHints.enable": "always",
+    "[rust]": {
+        "editor.defaultFormatter": "rust-lang.rust-analyzer",
+        "editor.formatOnSave": true,
+        "editor.formatOnSaveMode": "file"
+    },
+    "[ruby]": {
+        "editor.defaultFormatter": "Shopify.ruby-lsp",
+        "editor.formatOnSave": true,
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true,
+        "editor.semanticHighlighting.enabled": true,
+        "editor.formatOnType": true
+    },
+    "yaml.schemas": {
+        "file://${userHome}/.cursor/extensions/atlassian.atlascode-3.8.3/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+    },
+    "gitlens.graph.dimMergeCommits": true,
+    "gitlens.views.repositories.showIncomingActivity": true,
+    "gitlens.graph.minimap.additionalTypes": [
+        "localBranches",
+        "stashes",
+        "remoteBranches",
+        "tags"
+    ],
+    "git.defaultCloneDirectory": "${env:HOME}/src/pub",
+    "git.terminalGitEditor": true,
+    "github.gitProtocol": "ssh",
+    "gitlens.modes": {
+        "zen": {
+            "name": "Zen",
+            "statusBarItemName": "Zen",
+            "description": "for a zen-like experience, disables many visual features",
+            "codeLens": false,
+            "currentLine": false,
+            "hovers": false,
+            "statusBar": false
+        },
+        "review": {
+            "name": "Review",
+            "statusBarItemName": "Reviewing",
+            "description": "for reviewing code, enables many visual features",
+            "codeLens": true,
+            "currentLine": true,
+            "hovers": true
+        }
+    },
+    "terminal.integrated.commandsToSkipShell": [
+        "-workbench.action.quickOpen"
+    ],
+    "terminal.integrated.profiles.linux": {
+        "bash": {
+            "path": "bash",
+            "args": [
+                "-l"
+            ],
+            "icon": "terminal-bash"
+        },
+        "zsh": {
+            "path": "zsh",
+            "args": [
+                "-l"
+            ]
+        },
+        "fish": {
+            "path": "fish",
+            "args": [
+                "-l"
+            ]
+        },
+        "tmux": {
+            "path": "tmux",
+            "args": [
+                "-l"
+            ],
+            "icon": "terminal-tmux"
+        },
+        "pwsh": {
+            "path": "pwsh",
+            "args": [
+                "-l"
+            ],
+            "icon": "terminal-powershell"
+        }
+    },
+    "terminal.integrated.defaultProfile.linux": "zsh",
+    "task.allowAutomaticTasks": "on",
+    "diffEditor.experimental.showMoves": true,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "ruby.languageServer": {},
+    "solargraph.diagnostics": true,
+    "ruby.rubocop.useBundler": true,
+    "direnv.restart.automatic": true,
+    "ruby.useBundler": true,
+    "ruby.lint": {
+        "rubocop": true
+    },
+    "ruby.format": false,
+    "remote.localPortHost": "allInterfaces",
+    "remote.SSH.remoteServerListenOnSocket": true,
+    "rubyTestExplorer.debugCommand": "bundle exec rdebug-ide",
+    "rubyTestExplorer.logpanel": true,
+    "solargraph.logLevel": "debug",
+    "solargraph.useBundler": true,
+    "solargraph.transport": "external",
+    "github.copilot.enable": {
+        "*": true,
+        "plaintext": false,
+        "markdown": false,
+        "scminput": false
+    },
+    "gopls": {
+        "ui.semanticTokens": true
+    },
+    "mesonbuild.downloadLanguageServer": true,
+    "cmake.pinnedCommands": [
+        "workbench.action.tasks.configureTaskRunner",
+        "workbench.action.tasks.runTask"
+    ],
+    "C_Cpp.intelliSenseEngine": "disabled",
+    "cmake.options.statusBarVisibility": "icon",
+    "cmake.showOptionsMovedNotification": false,
+    "git.suggestSmartCommit": false,
+    "gitlens.ai.experimental.provider": "openai",
+    "gitlens.ai.experimental.openai.model": "gpt-4o",
+    "C_Cpp.codeAnalysis.clangTidy.enabled": true,
+    "solidity.telemetry": true,
+    "gitlens.autolinks": [],
+    "firedbg.showWelcome": false,
+    "python.experiments.optInto": [
+        "pythonDebuggerAutoReload"
+    ],
+    "debugpy.debugJustMyCode": false,
+    "[shellscript]": {
+        "files.eol": "\n",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.fixAll.shellcheck": "explicit"
+        }
+    },
+    "shellformat.path": "/usr/bin/shfmt",
+    "shellformat.effectLanguages": [
+        "shellscript",
+        "dockerfile",
+        "dotenv",
+        "hosts",
+        "jvmoptions",
+        "ignore",
+        "gitignore",
+        "properties",
+        "spring-boot-properties",
+        "azcli",
+        "bats"
+    ],
+    "shellformat.useEditorConfig": true,
+    "cursor.cpp.disabledLanguages": [
+        "plaintext",
+        "markdown",
+        "scminput"
+    ],
+    "workbench.activityBar.orientation": "vertical",
+    "cursor.aipreview.enabled": true,
+    "git.autofetch": true,
+    "xml.server.vmargs": "-Xmx512m",
+    "cursor.chat.showSuggestedFiles": true,
+    "cursor.diffs.useCharacterLevelDiffs": true,
+    "editor.cursorSmoothCaretAnimation": "explicit",
+    "python.analysis.ignore": [
+        "**/.virtualenvs/**",
+        "**/.pyenv/**",
+        "**/.venv/**"
+    ],
+    "atlascode.jira.lastCreateSiteAndProject": {
+        "siteId": "",
+        "projectKey": ""
+    },
+    "terminal.integrated.automationProfile.windows": {},
+    "acpihelper.configPath": "/home/trinitronx/src/pub/williamwu-hj.AcpiHelper/AcpiCfg.json",
+    "acpihelper.includeUserConfig": true,
+    "dotnetAcquisitionExtension.existingDotnetPath": [],
+    "cursor.cpp.enablePartialAccepts": true,
+    "cursor.composer.shouldAllowCustomModes": true,
+    "window.titleBarStyle": "native",
+    "window.customTitleBarVisibility": "auto"
+}

@@ -126,6 +126,9 @@ Library/Application Support/Mozilla/NativeMessagingHosts/gpgmejson.json
 {{ if ne .chezmoi.os "darwin" | or (not (lookPath "code")) -}}
 Library/Application Support/Code
 {{ end -}}
+{{ if ne .chezmoi.os "darwin" | or (not (lookPath "cursor")) -}}
+Library/Application Support/Cursor
+{{ end -}}
 {{ if ne .chezmoi.os "darwin" | or (not (lookPath "void")) -}}
 Library/Application Support/Void
 {{ end -}}
@@ -345,6 +348,9 @@ Library/Application Support/Void
 {{ if not (eq .osFamily "linux") | or (not (lookPath "code")) -}}
 .config/Code
 {{ end -}}
+{{ if not (eq .osFamily "linux") | or (not (lookPath "cursor")) -}}
+.config/Cursor
+{{ end -}}
 {{ if not (eq .osFamily "linux") | or (not (lookPath "void")) -}}
 .config/Void
 {{ end -}}
@@ -353,6 +359,9 @@ Library/Application Support/Void
 {{ end -}}
 {{ if not (eq .osFamily "linux-arch") | or (not (lookPath "code")) -}}
 .config/code-flags.conf
+{{ end -}}
+{{ if not (eq .osFamily "linux-arch") | or (not (lookPath "cursor")) -}}
+.config/cursor-flags.conf
 {{ end -}}
 {{ if not (eq .osFamily "linux-arch") | or (not (lookPath "void")) -}}
 .config/void-flags.conf

@@ -407,6 +407,9 @@ Library/Application Support/Void
 # Ignore cache & data paths in XDG_CONFIG_HOME
 {{ osBase .xdg_config_home }}/qalculate/qalc.history
 {{ osBase .xdg_config_home }}/qalculate/qalculate-gtk.history
+# Cursor-only
+{{ osBase .xdg_config_home }}/Cursor/.updaterId
+{{ osBase .xdg_config_home }}/Cursor/sentry
 ## VSCode + forks cache & data files
 {{ $code_editors := list
   "Code"

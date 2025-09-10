@@ -350,7 +350,7 @@ from_dir_content = """
 ---
 {{ title_text | trunc | to_yaml(key='fm_title') }}
 {{ fm.fm_subtitle | default(value = 'Note') | trunc | to_yaml(key='fm_subtitle') }}
-{{ fm.fm_author | default(value=username | capitalize) | to_yaml(key='fm_author') }}
+{{ fm.fm_author | default(value=username | title) | to_yaml(key='fm_author') }}
 {{ fm.fm_date | default(value = now()|date(format='%Y-%m-%d')) | to_yaml(key='fm_date') }}
 {{ lang | to_yaml(key='fm_lang') }}
 {% if languages | length > 1 -%}
@@ -395,7 +395,7 @@ from_text_file_content = """
 {{ path | file_stem | split(pat='--') | first | trunc | to_yaml(key='fm_title') }}
 {{ path | file_stem | split(pat='--') | nth(n=1) | trunc
      | to_yaml(key='fm_subtitle') }}
-{{ username | capitalize | to_yaml(key='fm_author') }}
+{{ username | title | to_yaml(key='fm_author') }}
 {{ doc_file_date | default(value=now()) | date(format='%Y-%m-%d') | to_yaml(key='fm_date') }}
 {{ lang | to_yaml(key='fm_lang') }}
 {% if languages | length > 1 -%}
@@ -435,7 +435,7 @@ annotate_file_content = """
 ---
 {{ path | trim_file_sort_tag | to_yaml(key='fm_title') }}
 {{ 'Note' | to_yaml(key='fm_subtitle') }}
-{{ username | capitalize | to_yaml(key='fm_author') }}
+{{ username | title | to_yaml(key='fm_author') }}
 {{ now() | date(format='%Y-%m-%d') | to_yaml(key='fm_date') }}
 {{ lang | to_yaml(key='fm_lang') }}
 {% if languages | length > 1 -%}

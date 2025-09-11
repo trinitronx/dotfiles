@@ -138,7 +138,7 @@ Library/Application Support/Cursor
 {{ if ne .chezmoi.os "darwin" | or (not (lookPath "void")) -}}
 Library/Application Support/Void
 {{ end -}}
-{{ if ne .chezmoi.os "darwin" | or (not (glob "/Applications/VLC.app")) | or (not (lookPath "vlc")) -}}
+{{ if ne .chezmoi.os "darwin" | or ((not (glob "/Applications/VLC.app")) | and (not (lookPath "vlc"))) -}}
 Library/Preferences/org.videolan.vlc/vlcrc
 {{ end -}}
 {{ if ne .chezmoi.os "linux" | or (not (lookPath "vlc")) -}}

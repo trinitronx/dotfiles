@@ -1548,6 +1548,12 @@ qt-privacy-ask=0
 # Caching value (ms) (integer)
 #sout-rtp-caching=300
 
+# SRTP key (hexadecimal) (string)
+#sout-rtp-key=
+
+# SRTP salt (hexadecimal) (string)
+#sout-rtp-salt=
+
 # MP4A LATM (boolean)
 #sout-rtp-mp4a-latm=0
 

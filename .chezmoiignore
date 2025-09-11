@@ -45,6 +45,9 @@ app_modified/**
 {{ if not (lookPath "opencv_version") -}}
 .config/profile.d/06-opencv.sh
 {{ end -}}
+{{ if not (lookPath "qalculate-qt") | or (not (lookPath "qalculate-gtk")) -}}
+.config/qalculate
+{{ end -}}
 {{ if not (lookPath "qalculate-qt") -}}
 .config/qalculate/qalc.cfg
 {{ end -}}

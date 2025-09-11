@@ -24,6 +24,9 @@ app_modified/**
 {{ if not (lookPath "doctl") -}}
 .config/doctl
 {{ end -}}
+{{ if not (lookPath "filelight") -}}
+.config/filelightrc
+{{ end -}}
 {{ if not (lookPath "foot") -}}
 .config/foot
 {{ end -}}

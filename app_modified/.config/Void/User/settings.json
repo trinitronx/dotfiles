@@ -1,0 +1,324 @@
+{
+    "args": {
+      "password-store": "gnome-libsecret",
+      "enable-proposed-api": [
+        "GitHub.vscode-pull-request-github",
+        "command line flag",
+        "ms-python.python",
+        "ms-python.vscode-python-envs'",
+        "GitHub.copilot-chat"
+      ]
+    },
+    "window.titleBarStyle": "native",
+    "workbench.colorTheme": "Default Dark Modern",
+    "editor.fontFamily": "'JetBrainsMono Nerd Font Mono', 'JetBrainsMono Nerd Font', 'FiraCode Nerd Font Mono', 'Monoid Nerd Font Mono', 'Droid Sans Mono',  monospace, 'Droid Sans Fallback'",
+    "terminal.integrated.fontFamily": "'JetBrainsMono Nerd Font', monospace",
+    "terminal.integrated.allowChords": false,
+    "editor.fontLigatures": "'cv02', 'cv04', 'cv05', 'cv07', 'cv08', 'cv11', 'cv14', 'cv99', 'ss19', 'zero', 'calt', 'ss04', 'ss08', 'ss09', 'cv23'",
+    "window.zoomLevel": 1,
+    "redhat.telemetry.enabled": true,
+    "sonarlint.disableTelemetry": true,
+    "git.openRepositoryInParentFolders": "always",
+    "evenBetterToml.formatter.alignComments": true,
+    "evenBetterToml.formatter.alignEntries": true,
+    "evenBetterToml.formatter.allowedBlankLines": 2,
+    "evenBetterToml.formatter.arrayAutoCollapse": true,
+    "evenBetterToml.formatter.columnWidth": 90,
+    "evenBetterToml.formatter.indentTables": true,
+    "evenBetterToml.schema.links": true,
+    "evenBetterToml.semanticTokens": true,
+    "evenBetterToml.formatter.trailingNewline": true,
+    "evenBetterToml.formatter.reorderArrays": true,
+    "evenBetterToml.formatter.arrayTrailingComma": true,
+    "evenBetterToml.formatter.arrayAutoExpand": true,
+    "license.author": "James Cuzella, LyraPhase LLC",
+    "license.default": "gpl-3.0",
+    "license.extension": ".md",
+    "markdownlint.lintWorkspaceGlobs": [
+      "**/*.{md,mkd,mdwn,mdown,markdown,markdn,mdtxt,mdtext,workbook}",
+      "!**/bower_components",
+      "!**/node_modules",
+      "!**/vendor",
+      "!**/.git",
+      "!**/LICENSE.md"
+    ],
+    "python.linting.banditArgs": [
+      "-c",
+      "pyproject.toml",
+      "-v",
+      "-r"
+    ],
+    "python.terminal.launchArgs": [],
+    "mypy-type-checker.args": [
+      "--follow-imports=normal",
+      "--ignore-missing-imports",
+      "--show-column-numbers",
+      "--no-pretty"
+    ],
+    "python.linting.banditEnabled": false,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    },
+    "isort.args": [
+      "--profile",
+      "black"
+    ],
+    "flake8.ignorePatterns": [
+      "**/site-packages/**/*.py",
+      ".vscode/*.py",
+      "**/usr/bin/*",
+      "**/usr/local/bin/*"
+    ],
+    "python.analysis.logLevel": "Trace",
+    // Disable Pylance (proprietary) and use Jedi instead
+    // NOTE: Use KylinIDETeam.kylin-python on OSS builds of VSCode
+    //       because Jedi is broken on official ms-python.python.
+    //       Yet, other extensions depend on ms-python.python so it's a catch-22.
+    "python.languageServer": "Jedi",
+    "python.analysis.diagnosticsSource": "Pyright",
+    "python.analysis.diagnosticMode": "openFilesOnly",
+    "python.analysis.indexing": true,
+    "python.trace.server": "verbose",
+    "[python]": {
+      "editor.formatOnSave": true,
+      "editor.codeActionsOnSave": {
+        "source.fixAll": "explicit",
+        "source.organizeImports": "explicit"
+      },
+      // "editor.defaultFormatter": "ms-python.black-formatter"
+      "editor.defaultFormatter": "charliermarsh.ruff"
+      // "editor.defaultFormatter": "ms-python.python"
+    },
+    "python.experiments.enabled": true,
+    "python.experiments.optInto": [
+      "pythonTestAdapter"
+      // "pythonTerminalEnvVarActivation"
+    ],
+    "python.terminal.activateEnvironment": true,
+    "debugpy.debugJustMyCode": false,
+    "python.analysis.exclude": [
+      "**/node_modules",
+      "**/__pycache__",
+      "**/.git"
+      // "**/site-packages",
+      // "**/3rdparty_repositories",
+      // "**/usr/lib/python3.*/dist-packages",
+      // "**/usr/lib/python3.*/site-packages",
+      // "**/usr/local/lib/python3.*/dist-packages",
+      // "**/usr/local/lib/python3.*/site-packages"
+    ],
+    "ruff.organizeImports": true,
+    "ruff.exclude": [
+      ".vscode/**/*.py",
+      "Python/lib/**/*.py",
+      "/**/3rdparty_repositories/**/*.py",
+      "/**/site-packages/**/*.py",
+      "/usr/**/*.py",
+      "/usr/local/**/*.py",
+      "/opt/**/*.py",
+      "c:/Users/*/AppData/**/*",
+      "c:/Users/*/.vscode/**/*"
+    ],
+    "rust.all_features": true,
+    "rust.jobs": 8,
+    "git.enableCommitSigning": true,
+    "git.allowForcePush": true,
+    "git.alwaysShowStagedChangesResourceGroup": true,
+    "git.branchProtection": [
+      "master",
+      "main",
+      "upstream",
+      "trunk"
+    ],
+    "git.allowNoVerifyCommit": true,
+    "git.mergeEditor": true,
+    "git.repositoryScanIgnoredFolders": [
+      "node_modules",
+      "vendor"
+    ],
+    "git.timeline.showUncommitted": true,
+    "git.untrackedChanges": "separate",
+    "git.useCommitInputAsStashMessage": true,
+    "git.verboseCommit": true,
+    "hexeditor.columnWidth": 16,
+    "hexeditor.showDecodedText": true,
+    "hexeditor.defaultEndianness": "little",
+    "hexeditor.inspectorType": "aside",
+    "rust-analyzer.lens.references.enumVariant.enable": true,
+    "rust-analyzer.debug.openDebugPane": true,
+    "rust-analyzer.hover.actions.references.enable": true,
+    "rust-analyzer.inlayHints.bindingModeHints.enable": true,
+    "rust-analyzer.inlayHints.closureCaptureHints.enable": true,
+    "rust-analyzer.inlayHints.closureReturnTypeHints.enable": "with_block",
+    "rust-analyzer.assist.expressionFillDefault": "default",
+    "editor.formatOnType": true,
+    "rust-analyzer.inlayHints.discriminantHints.enable": "always",
+    "[rust]": {
+      "editor.defaultFormatter": "rust-lang.rust-analyzer",
+      "editor.formatOnSave": true,
+      "editor.formatOnSaveMode": "file"
+    },
+    // All of these settings are scoped only to the Ruby language
+    "[ruby]": {
+      "editor.defaultFormatter": "LoranKloeze.ruby-rubocop-revived", // Use the Ruby LSP as the default formatter
+      "editor.formatOnSave": true, // Format files automatically when saving
+      "editor.tabSize": 2, // Use 2 spaces for indentation
+      "editor.insertSpaces": true, // Use spaces and not tabs for indentantion
+      "editor.semanticHighlighting.enabled": true, // Enable semantic highlighting
+      "editor.formatOnType": true // Enable formatting while typing
+    },
+    "yaml.schemas": {
+      "file://${userHome}/.void-editor/extensions/atlassian.atlascode-3.8.15/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+    },
+    "gitlens.graph.dimMergeCommits": true,
+    "gitlens.views.repositories.showIncomingActivity": true,
+    "gitlens.graph.minimap.additionalTypes": [
+      "localBranches",
+      "stashes",
+      "remoteBranches",
+      "tags"
+    ],
+    "git.defaultCloneDirectory": "${env:HOME}/src/pub",
+    "git.terminalGitEditor": true,
+    "github.gitProtocol": "ssh",
+    "gitlens.modes": {
+      "zen": {
+        "name": "Zen",
+        "statusBarItemName": "Zen",
+        "description": "for a zen-like experience, disables many visual features",
+        "codeLens": false,
+        "currentLine": false,
+        "hovers": false,
+        "statusBar": false
+      },
+      "review": {
+        "name": "Review",
+        "statusBarItemName": "Reviewing",
+        "description": "for reviewing code, enables many visual features",
+        "codeLens": true,
+        "currentLine": true,
+        "hovers": true
+      }
+    },
+    "terminal.integrated.commandsToSkipShell": [
+      "-workbench.action.quickOpen"
+    ],
+    "terminal.integrated.profiles.linux": {
+      "bash": {
+          "path": "bash",
+          "args": ["-l"],
+          "icon": "terminal-bash"
+      },
+      "zsh": {
+          "path": "zsh",
+          "args": ["-l"]
+      },
+      "fish": {
+          "path": "fish",
+          "args": ["-l"]
+      },
+      "tmux": {
+          "path": "tmux",
+          "args": ["-l"],
+          "icon": "terminal-tmux"
+      },
+      "pwsh": {
+          "path": "pwsh",
+          "args": ["-l"],
+          "icon": "terminal-powershell"
+      }
+    },
+    "terminal.integrated.defaultProfile.linux": "zsh",
+    "task.allowAutomaticTasks": "on",
+    "diffEditor.experimental.showMoves": true,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "ruby.languageServer": {},
+    "solargraph.diagnostics": true,
+    "ruby.rubocop.useBundler": true,
+    "direnv.restart.automatic": true,
+    "ruby.useBundler": true,
+    "ruby.lint": {
+      "rubocop": true
+    },
+    "ruby.format": false,
+    "remote.localPortHost": "allInterfaces",
+    "remote.SSH.remoteServerListenOnSocket": true,
+    "rubyTestExplorer.debugCommand": "bundle exec rdebug-ide",
+    "solargraph.useBundler": true,
+    "solargraph.transport": "external",
+    "github.copilot.enable": {
+      "*": true,
+      "plaintext": false,
+      "markdown": false,
+      "scminput": false
+    },
+    "gopls": {
+      "ui.semanticTokens": true
+    },
+    "mesonbuild.downloadLanguageServer": true,
+    "cmake.pinnedCommands": [
+      "workbench.action.tasks.configureTaskRunner",
+      "workbench.action.tasks.runTask"
+    ],
+    "C_Cpp.intelliSenseEngine": "disabled",
+    "cmake.options.statusBarVisibility": "icon",
+    "cmake.showOptionsMovedNotification": false,
+    "git.suggestSmartCommit": false,
+    "gitlens.ai.experimental.provider": "openai",
+    "gitlens.ai.experimental.openai.model": "gpt-4o",
+    "C_Cpp.codeAnalysis.clangTidy.enabled": true,
+    "solidity.telemetry": false,
+    "gitlens.autolinks": [],
+    "firedbg.showWelcome": false,
+    "[shellscript]": {
+      "files.eol": "\n",
+      "editor.formatOnSave": false,
+      "editor.codeActionsOnSave": {
+        "source.fixAll.shellcheck": "explicit"
+      }
+      // "editor.defaultFormatter": "foxundermoon.shell-format" // TODO: This doesn't yet work... maybe contribute to this extension?
+    },
+    "shellformat.path": "/usr/bin/shfmt",
+    "window.commandCenter": false,
+    "atlascode.jira.enabled": true,
+    "atlascode.bitbucket.enabled": true,
+    "chat.mcp.discovery.enabled": true,
+    "git.blame.editorDecoration.enabled": true,
+    "gitlens.ai.model": "vscode",
+    "files.autoSave": "afterDelay",
+    "git.autofetch": true,
+    "rubyLsp.formatter": "auto",
+    "rubyLsp.featureFlags": {
+      "fullTestDiscovery": false
+    },
+    "rubyLsp.rubyVersionManager": {
+      "identifier": "rvm"
+    },
+    "rubyTestExplorer.rspecCommand": "rvm-auto-ruby -r bundler -e \"Bundler.require\" -e \"system(\\\"rspec \\\" + ARGV.join(\\\" \\\"))\" -- ",
+    "testing.coverageToolbarEnabled": true,
+    "sonarlint.testFilePattern": "**/test/**,**/tests/**,**/*test,**/spec/**",
+    "sonarlint.analysisExcludesStandalone": "**/node_modules/**,**/vendor,**/__pycache__/**,**/site-packages/**",
+    "sonarlint.focusOnNewCode": true,
+    "python.locator": "native",
+    "mesonbuild.linter.muon.enabled": true,
+    "sonarlint.output.showVerboseLogs": true,
+    // "python.defaultInterpreterPath": "/bin/python",
+    // "python-envs.defaultEnvManager": "ms-python.python:pyenv",
+    "telemetry.telemetryLevel": "all",
+    "workbench.tree.enableStickyScroll": false,
+    "python.useEnvironmentsExtension": true,
+    "atlascode.jira.lastCreateSiteAndProject": {
+      "siteId": "0cf91bcd-95a2-4137-be0f-653eb2908f55",
+      "projectKey": "LPSPRIG"
+    },
+    "scss.lint.duplicateProperties": "warning",
+    "scss.lint.universalSelector": "warning",
+    "custom-language-properties": {
+      "scss.comments.lineComment": ""
+    },
+    "python.defaultInterpreterPath": "/bin/python",
+    "solargraph.externalServer": {
+      "host": "localhost",
+      "port": 7658
+    }
+}

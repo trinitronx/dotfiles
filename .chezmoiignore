@@ -7,6 +7,8 @@ README.md
 .zsh/cache
 .zsh_history
 .config/zsh/.zsh_history
+app_modified
+app_modified/**
 {{ if not (lookPath "ack") -}}
 .ackrc
 {{ end -}}
@@ -21,6 +23,9 @@ README.md
 {{ end -}}
 {{ if not (lookPath "doctl") -}}
 .config/doctl
+{{ end -}}
+{{ if not (lookPath "filelight") -}}
+.config/filelightrc
 {{ end -}}
 {{ if not (lookPath "foot") -}}
 .config/foot
@@ -39,6 +44,15 @@ README.md
 {{ end -}}
 {{ if not (lookPath "opencv_version") -}}
 .config/profile.d/06-opencv.sh
+{{ end -}}
+{{ if not (lookPath "qalculate-qt") | or (not (lookPath "qalculate-gtk")) -}}
+.config/qalculate
+{{ end -}}
+{{ if not (lookPath "qalculate-qt") -}}
+.config/qalculate/qalc.cfg
+{{ end -}}
+{{ if not (lookPath "qalculate-gtk") -}}
+.config/qalculate/qalculate-gtk.cfg
 {{ end -}}
 {{ if not (lookPath "remotestash") | or (not (lookPath "sway")) -}}
 .config/sway/config.d/04-remotestash.conf
@@ -121,6 +135,21 @@ Library/Application Support/Mozilla/NativeMessagingHosts/gpgmejson.json
 .mozilla/native-messaging-hosts
 .mozilla/native-messaging-hosts/gpgmejson.json
 {{ end -}}
+{{ if ne .chezmoi.os "darwin" | or (not (lookPath "code")) -}}
+Library/Application Support/Code
+{{ end -}}
+{{ if ne .chezmoi.os "darwin" | or (not (lookPath "cursor")) -}}
+Library/Application Support/Cursor
+{{ end -}}
+{{ if ne .chezmoi.os "darwin" | or (not (lookPath "void")) -}}
+Library/Application Support/Void
+{{ end -}}
+{{ if ne .chezmoi.os "darwin" | or ((not (glob "/Applications/VLC.app")) | and (not (lookPath "vlc"))) -}}
+Library/Preferences/org.videolan.vlc/vlcrc
+{{ end -}}
+{{ if ne .chezmoi.os "linux" | or (not (lookPath "vlc")) -}}
+.config/vlc/vlcrc
+{{ end -}}
 {{- /* Manjaro uses /usr/share/zsh/p10k.zsh from extra/manjaro-zsh-config */ -}}
 {{ if eq .osId "manjaro" -}}
 .p10k.zsh
@@ -141,6 +170,9 @@ Library/Application Support/Mozilla/NativeMessagingHosts/gpgmejson.json
 {{ if not (lookPath "rg") -}}
 .config/ripgrep
 .config/profile.d/07-ripgrep-conf.sh
+{{ end -}}
+{{ if ne .chezmoi.os "linux" | or (not (lookPath "solaar")) -}}
+.config/solaar
 {{ end -}}
 {{ if not (lookPath "sway") -}}
 # Don't install sway-related configs
@@ -205,7 +237,7 @@ Library/Application Support/Mozilla/NativeMessagingHosts/gpgmejson.json
 {{   if not (lookPath "sworkstyle") -}}
 .config/sworkstyle
 {{   end -}}
-{{   if not (lookPath "vscode") -}}
+{{   if not (lookPath "code") -}}
 .config/sway/config.d/98-vscode-no-initial-focus.conf
 {{   end -}}
 {{ end -}}
@@ -220,6 +252,9 @@ Library/Application Support/Mozilla/NativeMessagingHosts/gpgmejson.json
 {{ end -}}
 {{ if not (lookPath "mpvpaper") -}}
 .config/mpvpaper
+{{ end -}}
+{{ if not (lookPath "pcmanfm") -}}
+.config/pcmanfm
 {{ end -}}
 {{ if not (lookPath "qt5ct") | or (not (lookPath "qt6ct")) -}}
 .config/kdeglobals
@@ -334,11 +369,23 @@ Library/Application Support/Mozilla/NativeMessagingHosts/gpgmejson.json
 {{ if not (eq .osFamily "linux-arch") | or (not (lookPath "yay")) -}}
 .config/zsh/config.d/03-yay-fzf-search.zsh
 {{ end -}}
+{{ if not (eq .chezmoi.os "linux") | or (not (lookPath "code")) -}}
+.config/Code
+{{ end -}}
+{{ if not (eq .chezmoi.os "linux") | or (not (lookPath "cursor")) -}}
+.config/Cursor
+{{ end -}}
+{{ if not (eq .chezmoi.os "linux") | or (not (lookPath "void")) -}}
+.config/Void
+{{ end -}}
 {{ if not (eq .osFamily "linux-arch") | or (not (glob "/opt/vscode-exploration-build/*/bin/code-exploration")) -}}
 .config/code-exploration-flags.conf
 {{ end -}}
 {{ if not (eq .osFamily "linux-arch") | or (not (lookPath "code")) -}}
 .config/code-flags.conf
+{{ end -}}
+{{ if not (eq .osFamily "linux-arch") | or (not (lookPath "cursor")) -}}
+.config/cursor-flags.conf
 {{ end -}}
 {{ if not (eq .osFamily "linux-arch") | or (not (lookPath "void")) -}}
 .config/void-flags.conf
@@ -370,6 +417,52 @@ Library/Application Support/Mozilla/NativeMessagingHosts/gpgmejson.json
 .local/share/applications
 # Don't update-desktop-database
 .chezmoiscripts/09-update-desktop-database.sh
+{{ end -}}
+{{ if .xdg_config_home -}}
+# Ignore cache & data paths in XDG_CONFIG_HOME
+{{ osBase .xdg_config_home }}/qalculate/qalc.history
+{{ osBase .xdg_config_home }}/qalculate/qalculate-gtk.history
+# Cursor-only
+{{ osBase .xdg_config_home }}/Cursor/.updaterId
+{{ osBase .xdg_config_home }}/Cursor/sentry
+## VSCode + forks cache & data files
+{{ $code_editors := list
+  "Code"
+  "Code - Exploration"
+  "Code - OSS"
+  "Cursor"
+  "Void"
+ -}}
+{{ range $code_editor := $code_editors -}}
+# {{ $code_editor }}
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/.org.chromium.Chromium.*
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/Backups
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/blob_storage
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/Cookies
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/Cookies-journal
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/*Cache*
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/Crashpad
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/DIPS
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/Dictionaries
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/Local Storage
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/logs
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/machineid
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/Network Persistent State
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/Preferences
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/Service Worker
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/Session Storage
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/Shared Dictionary
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/SharedStorage
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/TransportSecurity
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/Trust Tokens
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/Trust Tokens-journal
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/WebStorage
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/Workspaces
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/User/History
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/User/globalStorage
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/User/sync
+{{ osBase $.xdg_config_home }}/{{ $code_editor }}/User/workspaceStorage
+{{   end -}}
 {{ end -}}
 {{ if not (eq .chezmoi.hostname "saturn" | and ( eq .chezmoi.uid "1000" )) -}}
 .duckdns

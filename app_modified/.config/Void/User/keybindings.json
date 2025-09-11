@@ -1,0 +1,232 @@
+// Place your key bindings in this file to override the defaultsauto[]
+[
+    {
+        "key": "ctrl+e",
+        "command": "-workbench.action.quickOpen"
+    },
+    {
+        "key": "alt+`",
+        "command": "workbench.action.toggleMaximizedPanel",
+        "when": "terminal.active"
+    },
+    {
+        // Commit staged changes (editor is focused && git enabled)
+        "key": "ctrl+shift+g c",
+        "command": "git.commitStaged",
+        "when": "config.git.enabled && !gitlens:disabled && config.gitlens.keymap == 'chorded' && !git.missing && gitOpenRepositoryCount >= 1 && editorFocus"
+    },
+    {
+        // Commit All changes (editor is focused && git enabled)
+        "key": "ctrl+shift+g ctrl+shift+alt+c",
+        "command": "git.commitAll",
+        "when": "config.git.enabled && !gitlens:disabled && config.gitlens.keymap == 'chorded' && !git.missing && gitOpenRepositoryCount >= 1 && editorFocus"
+    },
+    {
+        // Commit staged changes Amend (editor is focused && git enabled)
+        "key": "ctrl+shift+g a",
+        "command": "git.commitStagedAmend",
+        "when": "config.git.enabled && !gitlens:disabled && config.gitlens.keymap == 'chorded' && !git.missing && gitOpenRepositoryCount >= 1 && editorFocus"
+    },
+    {
+        // Commit All Amend (editor is focused && git enabled)
+        "key": "ctrl+shift+g ctrl+shift+alt+a",
+        "command": "git.commitAllAmend",
+        "when": "config.git.enabled && !gitlens:disabled && config.gitlens.keymap == 'chorded' && !git.missing && gitOpenRepositoryCount >= 1 && editorFocus"
+    },
+    {
+        // Stage selected file ( editor does NOT have selection && editor is focused && git enabled)
+        "key": "ctrl+shift+g alt+s",
+        "command": "git.stage",
+        "when": "config.git.enabled && !gitlens:disabled && config.gitlens.keymap == 'chorded' && !git.missing && gitOpenRepositoryCount >= 1 && editorFocus && !editorHasSelection"
+    },
+    {
+        // Stage selected ranges ( editor has selection && editor text is focused && git enabled)
+        "key": "ctrl+shift+g alt+s",
+        "command": "git.stageSelectedRanges",
+        "when": "config.git.enabled && !gitlens:disabled && config.gitlens.keymap == 'chorded' && !git.missing && gitOpenRepositoryCount >= 1 && editorTextFocus && editorHasSelection"
+    },
+    {
+        // Unstage selected file ( editor does NOT have selection && editor is focused && git enabled)
+        "key": "ctrl+shift+g u",
+        "command": "git.unstage",
+        "when": "config.git.enabled && !gitlens:disabled && config.gitlens.keymap == 'chorded' && !git.missing && gitOpenRepositoryCount >= 1 && !operationInProgress && editorFocus && !editorHasSelection"
+    },
+    {
+        // Unstage selected ranges ( in Diff Editor (required) && editor has selection && editor text is focused && git enabled)
+        // Note: Diff editor MUST be the Staged Changes version
+        "key": "ctrl+shift+g u",
+        "command": "git.unstageSelectedRanges",
+        "when": "config.git.enabled && !gitlens:disabled && config.gitlens.keymap == 'chorded' && !git.missing && gitOpenRepositoryCount >= 1 && isInDiffEditor && !operationInProgress && editorTextFocus && editorHasSelection"
+    },
+    {
+        // Unstage All ( editor does NOT have selection && editor is focused && git enabled)
+        "key": "ctrl+shift+g ctrl+shift+alt+u",
+        "command": "git.unstageAll",
+        "when": "config.git.enabled && !gitlens:disabled && config.gitlens.keymap == 'chorded' && !git.missing && gitOpenRepositoryCount >= 1 && !operationInProgress && editorFocus && !editorHasSelection"
+    },
+    {
+        // Commit ALL shortcut when not dirty
+        // When no open files are dirty (unsaved), still save actively focused one to format it & stage any changes
+        "key": "ctrl+shift+g ctrl+c",
+        "command": "runCommands",
+        "args": {
+            "commands": [
+                // "workbench.action.logWorkingCopies",
+                "workbench.action.files.save",
+                "git.stageAll",
+                "git.commitStaged"
+            ]
+        },
+        "when": "config.git.enabled && editorFocus && !dirtyWorkingCopies && !git.missing && !gitlens:disabled && config.gitlens.keymap == 'chorded' && gitOpenRepositoryCount >= 1"
+    },
+    {
+        // Commit ALL shortcut when dirty
+        // When any files are dirty (unsaved), save all, stage, and commit
+        // Note: saveAll only formats currently active file
+        // Reference: https://github.com/microsoft/vscode/issues/166505#issuecomment-1319034083
+        "key": "ctrl+shift+g ctrl+c",
+        "command": "runCommands",
+        "args": {
+            "commands": [
+                // "workbench.action.logWorkingCopies",
+                "workbench.action.files.saveAll",
+                "git.stageAll",
+                "git.commitStaged"
+            ]
+        },
+        "when": "config.git.enabled && dirtyWorkingCopies && editorFocus && !git.missing && !gitlens:disabled && config.gitlens.keymap == 'chorded' && gitOpenRepositoryCount >= 1"
+    },
+    {
+        // Switch GitLens show Commit File Details to ctrl+shift+g l
+        "key": "ctrl+shift+g l",
+        "command": "gitlens.showQuickCommitFileDetails",
+        "when": "editorTextFocus && !gitlens:disabled && config.gitlens.keymap == 'chorded'"
+    },
+    {
+        // Unbind default for ctrl+shift+g c to use our commit shortcut instead
+        "key": "ctrl+shift+g c",
+        "command": "-gitlens.showQuickCommitFileDetails",
+        "when": "editorTextFocus && !gitlens:disabled && config.gitlens.keymap == 'chorded'"
+    },
+    {
+        "key": "ctrl+shift+g alt+c",
+        "command": "workbench.panel.chat.view.copilot.focus",
+        "when": "editorFocus"
+    },
+    {
+        "key": "ctrl+shift+g alt+c",
+        "command": "workbench.action.focusActiveEditorGroup",
+        "when": "!editorFocus"
+    },
+    {
+        "key": "ctrl+shift+f",
+        "command": "workbench.action.findInFiles",
+        "when": "editorFocus"
+    },
+    {
+        "key": "ctrl+shift+f",
+        "command": "-workbench.action.findInFiles"
+    },
+    {
+        "key": "ctrl+shift+f",
+        "command": "workbench.action.terminal.focusFind",
+        "when": "terminalFindFocused && terminalHasBeenCreated || terminalFindFocused && terminalProcessSupported || terminalFocusInAny && terminalHasBeenCreated || terminalFocusInAny && terminalProcessSupported"
+    },
+    {
+        "key": "ctrl+f",
+        "command": "-workbench.action.terminal.focusFind",
+        "when": "terminalFindFocused && terminalHasBeenCreated || terminalFindFocused && terminalProcessSupported || terminalFocusInAny && terminalHasBeenCreated || terminalFocusInAny && terminalProcessSupported"
+    },
+    {
+        "key": "ctrl+alt+l",
+        "command": "workbench.action.toggleAuxiliaryBar",
+        "when": "!editorHasSelection"
+    },
+    {
+        "key": "ctrl+alt+tab",
+        "command": "editor.action.reindentlines",
+        "when": "!editorHasSelection && editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+alt+tab",
+        "command": "editor.action.reindentselectedlines",
+        "when": "editorHasSelection && editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+alt+l",
+        "command": "void.ctrlLAction",
+        "when": "editorHasSelection && editorTextFocus && !sideBarFocus"
+    },
+    {
+        "key": "ctrl+l",
+        "command": "-void.ctrlLAction"
+    },
+    {
+        "key": "ctrl+shift+alt+l",
+        "command": "workbench.action.quickchat.toggle",
+        "when": "chatIsEnabled"
+    },
+    {
+        "key": "ctrl+shift+alt+l",
+        "command": "-workbench.action.quickchat.toggle",
+        "when": "chatIsEnabled"
+    },
+    {
+        "key": "ctrl+e",
+        "command": "void.ctrlKAction",
+        "when": "editorFocus && !terminalFocus"
+    },
+    {
+        "key": "ctrl+k",
+        "command": "-void.ctrlKAction",
+        "when": "editorFocus && !terminalFocus"
+    },
+    {
+        "key": "ctrl+shift+g r",
+        "command": "github-actions.explorer.current-branch.refresh",
+        "when": "config.git.enabled && github-actions.current-branch.visible && !git.missing && gitOpenRepositoryCount >= 1"
+    },
+    {
+        "key": "ctrl+shift+g ctrl+shift+a",
+        "command": "workbench.view.extension.github-actions",
+        "when": "config.git.enabled && !git.missing && gitOpenRepositoryCount >= 1"
+    },
+    {
+        "key": "ctrl+shift+alt+down",
+        "command": "void.goToNextDiff",
+        "when": "inlineChatEditing"
+    },
+    {
+        "key": "ctrl+shift+alt+down",
+        "command": "-void.goToNextDiff"
+    },
+    {
+        "key": "ctrl+shift+alt+up",
+        "command": "void.goToPrevDiff",
+        "when": "inlineChatEditing"
+    },
+    {
+        "key": "ctrl+shift+alt+up",
+        "command": "-void.goToPrevDiff"
+    },
+    {
+        "key": "ctrl+shift+alt+up",
+        "command": "editor.action.copyLinesUpAction",
+        "when": "editorTextFocus && !editorReadonly && !inlineChatEditing"
+    },
+    {
+        "key": "ctrl+shift+alt+up",
+        "command": "-editor.action.copyLinesUpAction",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+shift+alt+down",
+        "command": "editor.action.copyLinesDownAction",
+        "when": "editorTextFocus && !editorReadonly && !inlineChatEditing"
+    },
+    {
+        "key": "ctrl+shift+alt+down",
+        "command": "-editor.action.copyLinesDownAction",
+        "when": "editorTextFocus && !editorReadonly"
+    }
+]

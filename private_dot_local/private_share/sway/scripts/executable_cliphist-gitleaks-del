@@ -1,0 +1,12 @@
+#!/bin/bash
+cliphist list 2>/dev/null | \
+  gitleaks stdin --no-banner --no-color --redact=0 --max-decode-depth=3 \
+    --report-path=- --report-format=template \
+    --report-template="${XDG_DATA_HOME:-${HOME}/.local/share}/gitleaks/jsonextra.tmpl" 2>/dev/null | \
+  jq -r '.[] | select(.Line) | .Line' | \
+  grep -vE '^$' | \
+  tr '\n' '\0' | \
+  while read -r -d $'\0' line ;
+  do
+    echo "$line" | cliphist delete 2>/dev/null ;
+  done

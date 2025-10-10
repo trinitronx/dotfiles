@@ -120,3 +120,17 @@
   executable: true
   path: "tpnote{{ eq .chezmoi.os "windows" | ternary ".exe" "" }}"
 {{ end -}}
+{{ if eq .chezmoi.os "darwin" -}}
+{{ $nerdFontsChecksumURL := gitHubLatestReleaseAssetURL "ryanoasis/nerd-fonts" "SHA-256.txt" -}}
+{{ $mesloChecksumCommand := printf "curl -Ls -o - '%s' | grep -i Meslo.tar.xz | awk '{ print $1 }'" $nerdFontsChecksumURL -}}
+"Library/Fonts":
+  type: "archive"
+  url: {{ gitHubLatestReleaseAssetURL "ryanoasis/nerd-fonts" "Meslo.tar.xz" | quote }}
+  decompress: "xz"
+  refreshPeriod: "168h"
+  exclude: [ "LICENSE.txt", "README.md" ]
+  include: [ "*.ttf" ]
+  exact: false
+  checksum:
+    sha256: {{ (output "/bin/sh" "-c" $mesloChecksumCommand) | trim }}
+{{ end -}}

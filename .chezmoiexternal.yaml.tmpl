@@ -126,11 +126,11 @@
 "Library/Fonts":
   type: "archive"
   url: {{ gitHubLatestReleaseAssetURL "ryanoasis/nerd-fonts" "Meslo.tar.xz" | quote }}
-  decompress: "xz"
   refreshPeriod: "168h"
   exclude: [ "LICENSE.txt", "README.md" ]
   include: [ "*.ttf" ]
   exact: false
-  checksum:
-    sha256: {{ (output "/bin/sh" "-c" $mesloChecksumCommand) | trim }}
+  private: true
+  readonly: true
+  checksum.sha256: {{ (output "/bin/sh" "-c" $mesloChecksumCommand) | trim }}
 {{ end -}}

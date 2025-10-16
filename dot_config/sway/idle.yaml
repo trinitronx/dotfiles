@@ -38,5 +38,5 @@ lock: 'dbus-send --session --dest=org.gnome.keyring --type=method_call --print-r
   makoctl mode -a locked;
   swaymsg exec \$swaylock'
 unlock: 'dbus-send --system --print-reply --dest=org.freedesktop.login1 /org/freedesktop/login1/session/auto org.freedesktop.login1.Session.SetLockedHint boolean:false;
-  makoctl mode -r locked;'
+  makoctl mode -r locked; pkill -x -SIGUSR2 waybar;'
 idlehint: '240'

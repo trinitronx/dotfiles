@@ -1,0 +1,2 @@
+#!/bin/sh
+swaymsg -t get_tree | jq -r '.. | select(.type?) | select(.idle_inhibitors and (.idle_inhibitors.user!="none" or .idle_inhibitors.application!="none")) | { shell: .shell, name: .name, title: .title, app_id: .app_id, type: .type, urgent: .urgent, pid: .pid, rect: .rect, window_properties: .window_properties, idle_inhibitors: .idle_inhibitors}'

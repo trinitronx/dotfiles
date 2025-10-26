@@ -188,6 +188,7 @@ Library/Preferences/org.videolan.vlc/vlcrc
 .config/nwg-wrapper/sway-time.sh
 .config/nwg-wrapper/timezones.css
 .local/bin/idle_inhibitor_windows
+.local/bin/idle_inhibitor_windows_user_or_app
 .config/xdg-desktop-portal*
 .local/share/sway/scripts/set-session-locked-hint.sh
 {{   if not (lookPath "swayidle-conf") -}}

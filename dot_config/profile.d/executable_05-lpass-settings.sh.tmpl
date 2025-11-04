@@ -1,7 +1,9 @@
+{{ $sh_wrap := false -}}
 {{ $copy_cmd := "" -}}
 {{ $clear_cmd := "" -}}
 {{ $pinentry_cmd := "" -}}
 {{ if (eq .chezmoi.os "linux") | and ((lookPath "wayland-scanner") | or (eq .xdg_session_type "wayland")) -}}
+{{   $sh_wrap = true -}}
 {{   $copy_cmd = lookPath "wl-copy" -}}
 {{   $clear_cmd = cat (lookPath "wl-copy") "--clear" -}}
 {{   $pinentry_cmd = lookPath "pinentry-gnome3" -}}
@@ -62,7 +64,9 @@ export LPASS_CLIPBOARD_COMMAND='{{ $copy_cmd }} && timeout 30 && {{ $clear_cmd }
 export LPASS_PINENTRY={{ $pinentry_cmd }}
 {{   end -}}
 {{ else -}}
-{{   if $copy_cmd | and $clear_cmd -}}
+{{   if $sh_wrap | and $copy_cmd | and $clear_cmd -}}
+export LPASS_CLIPBOARD_COMMAND="{{ lookPath "sh" | default "/bin/sh" }} -c 'export CLIPBOARD_STATE=sensitive && {{ $copy_cmd }} && ( sleep 30 && {{ $clear_cmd }}) & disown'"
+{{   else if $copy_cmd | and $clear_cmd -}}
 export LPASS_CLIPBOARD_COMMAND='{{ $copy_cmd }} && ( sleep 30 && {{ $clear_cmd }}) & disown'
 {{   else if $copy_cmd -}}
 export LPASS_CLIPBOARD_COMMAND='{{ $copy_cmd }}'

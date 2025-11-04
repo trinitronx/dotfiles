@@ -2,7 +2,7 @@
 {{ $clear_cmd := "" -}}
 {{ $pinentry_cmd := "" -}}
 {{ if (eq .chezmoi.os "linux") | and ((lookPath "wayland-scanner") | or (eq .xdg_session_type "wayland")) -}}
-{{   $copy_cmd = lookPath "wl-copy" -}}
+{{   $copy_cmd = cat (lookPath "wl-copy") "--sensitive" -}}
 {{   $clear_cmd = cat (lookPath "wl-copy") "--clear" -}}
 {{   $pinentry_cmd = lookPath "pinentry-gnome3" -}}
 {{ else if (eq .chezmoi.os "linux") -}}

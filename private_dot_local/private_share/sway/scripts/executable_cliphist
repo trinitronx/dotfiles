@@ -19,7 +19,7 @@ _done=0
 count=0
 rofi_lpass_pid=0
 # Close stdin to prevent any potential interference from subshell pgrep
-while ! [ "$_done" -eq 1 ] && ! rofi_lpass_pid=$(exec 0<&-; pgrep --full '.*bash.*/rofi-lpass finalize-progress-dialog' 2>/dev/null) ; do
+while ! [ "$_done" -eq 1 ] && ! rofi_lpass_pid=$(exec 0<&-; pgrep --full '.*bash.*/rofi-lpass finalize-progress-dialog' 2>/dev/null | head -n1 | tr -d '\n') ; do
   # Waiting for rofi-lpass clipboard watcher to start
   sleep 0.01
   count=$((count+1))

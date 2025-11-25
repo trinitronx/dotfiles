@@ -60,6 +60,9 @@ app_modified/**
 {{ if not (lookPath "qalculate-gtk") -}}
 .config/qalculate/qalculate-gtk.cfg
 {{ end -}}
+{{ if not (lookPath "ranger") -}}
+.config/ranger
+{{ end -}}
 {{ if not (lookPath "remotestash") | or (not (lookPath "sway")) -}}
 .config/sway/config.d/04-remotestash.conf
 .config/sway/definitions.d/05-remotestash.conf

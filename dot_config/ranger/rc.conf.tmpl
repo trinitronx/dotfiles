@@ -1,3 +1,30 @@
+{{ $preview_images_method := "" -}}
+{{ if eq .chezmoi.os "linux" -}}
+{{   if lookPath "foot" | or (lookPath "yakuake") | or (lookPath "konsole" ) | or (lookPath "mintty" ) | or (lookPath "xfce-terminal") | or (lookPath "xterm") -}}
+{{     $preview_images_method = "sixel" -}}
+{{   else if lookPath "kitty" -}}
+{{     $preview_images_method = "kitty" -}}
+{{   else if lookPath "w3mimgpreview" -}}
+{{     $preview_images_method = "w3m" -}}
+{{   else if lookPath "ueberzug" -}}
+{{     $preview_images_method = "ueberzug" -}}
+{{   else if lookPath "urxvt" -}}
+{{     $preview_images_method = "urxvt" -}}
+{{   end -}}
+{{ else if (eq .chezmoi.os "darwin") -}}
+{{   if glob "/Applications/iTerm.app" -}}
+{{     $preview_images_method = "iterm" -}}
+{{   else if lookPath "w3mimgpreview" -}}
+{{     $preview_images_method = "w3m" -}}
+{{   end -}}
+{{ else if (eq .chezmoi.os "windows") -}}
+{{/* Supported as of microsoft/terminal#17510 */}}
+{{/* arewesixelyet.com not yet updated */}}
+{{     $preview_images_method = "sixel" -}}
+{{ else -}}
+{{/* Fallback to default */}}
+{{     $preview_images_method = "w3m" -}}
+{{ end -}}
 # ===================================================================
 # This file contains the default startup commands for ranger.
 # To change them, it is recommended to create either /etc/ranger/rc.conf
@@ -124,7 +151,7 @@ set preview_images false
 #   Preview images in full color with the external command "ueberzug".
 #   Images are shown by using a child window.
 #   Only for users who run X11 in GNU/Linux.
-set preview_images_method w3m
+set preview_images_method {{ $preview_images_method | default "w3m" }}
 
 # Delay in seconds before displaying an image with the w3m method.
 # Increase it in case of experiencing display corruption.

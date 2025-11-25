@@ -61,7 +61,8 @@
     },
     "isort.args": [
       "--profile",
-      "black"
+      "black",
+      "--lines-after-import", "2"
     ],
     "flake8.ignorePatterns": [
       "**/site-packages/**/*.py",

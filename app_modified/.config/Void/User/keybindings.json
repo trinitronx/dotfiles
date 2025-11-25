@@ -228,5 +228,15 @@
         "key": "ctrl+shift+alt+down",
         "command": "-editor.action.copyLinesDownAction",
         "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+shift+m",
+        "command": "amp.agent.switchAgentMode",
+        "when": "amp.activated && amp.agent.active && amp.agent.activeView == 'sidebar' && amp.hasMultipleVisibleModes"
+    },
+    {
+        "key": "ctrl+shift+m",
+        "command": "-amp.agent.switchAgentMode",
+        "when": "amp.activated && amp.hasMultipleVisibleModes"
     }
 ]

@@ -298,7 +298,7 @@
     "rubyTestExplorer.rspecCommand": "rvm-auto-ruby -r bundler -e \"Bundler.require\" -e \"system(\\\"rspec \\\" + ARGV.join(\\\" \\\"))\" -- ",
     "testing.coverageToolbarEnabled": true,
     "sonarlint.testFilePattern": "**/test/**,**/tests/**,**/*test,**/spec/**",
-    "sonarlint.analysisExcludesStandalone": "**/node_modules/**,**/vendor,**/__pycache__/**,**/site-packages/**",
+    "sonarlint.analysisExcludesStandalone": "**/node_modules/**,**/vendor,**/__pycache__/**,**/site-packages/**,**/.void-editor/**",
     "sonarlint.focusOnNewCode": true,
     "python.locator": "native",
     "mesonbuild.linter.muon.enabled": true,

@@ -1,0 +1,657 @@
+# Warning: this is an internal resource file, *not* a template.
+# Using it as your personal config.toml isn't recommended; if you still
+# decide to do so, search for [cmd] and delete everything that comes after
+# it or you'll get a million warnings on startup.
+
+[start]
+visual-home = "about:chawan"
+startup-script = ""
+headless = false
+console-buffer = true
+
+[buffer]
+styling = true
+images = false
+scripting = false
+referer-from = false
+cookie = false
+meta-refresh = "ask"
+history = true
+mark-links = false
+user-style = ""
+
+[search]
+wrap = true
+ignore-case = "auto"
+
+[encoding]
+document-charset = ["utf-8", "sjis", "euc-jp", "latin2"]
+display-charset = "auto"
+
+[external]
+mailcap = [
+	"~/.mailcap",
+	"/etc/mailcap",
+	"/usr/etc/mailcap",
+	"/usr/local/etc/mailcap"
+]
+auto-mailcap = "auto.mailcap"
+mime-types = [
+	"~/.mime.types",
+	"/etc/mime.types",
+	"/usr/etc/mime.types",
+	"/usr/local/etc/mime.types"
+]
+urimethodmap = [
+	"~/.urimethodmap",
+	"~/.w3m/urimethodmap",
+	"/etc/urimethodmap",
+	"/usr/local/etc/w3m/urimethodmap"
+]
+bookmark = "$CHA_DATA_DIR/bookmark.md"
+history-file = "$CHA_DATA_DIR/history.uri"
+history-size = 100
+cookie-file = "$CHA_DATA_DIR/cookies.txt"
+tmpdir = "${TMPDIR:-/tmp}/cha-tmp-$LOGNAME"
+editor = "${VISUAL:-${EDITOR:-vi}}"
+cgi-dir = ["cgi-bin", "$CHA_LIBEXEC_DIR/cgi-bin"]
+download-dir = "${TMPDIR:-/tmp}/"
+show-download-panel = true
+w3m-cgi-compat = false
+copy-cmd = 'xsel -bi'
+paste-cmd = 'xsel -bo'
+
+[network]
+max-redirect = 10
+max-net-connections = 12
+prepend-scheme = "https://"
+default-headers = {
+	User-Agent = "chawan",
+	Accept = "text/html, text/*;q=0.5, */*;q=0.4",
+	Accept-Encoding = "gzip, deflate, br",
+	Accept-Language = "en;q=1.0",
+	Pragma = "no-cache",
+	Cache-Control = "no-cache"
+}
+allow-http-from-file = false
+
+[input]
+vi-numeric-prefix = true
+use-mouse = 'auto'
+osc52-copy = 'auto'
+osc52-primary = 'auto'
+bracketed-paste = 'auto'
+wheel-scroll = 5
+side-wheel-scroll = 5
+link-hint-chars = 'abcdefghijklmnoprstuvxyz'
+
+[status]
+show-cursor-position = true
+show-hover-link = true
+format-mode = ["reverse"]
+
+[display]
+color-mode = "auto"
+format-mode = "auto"
+no-format-mode = "overline"
+image-mode = "auto"
+sixel-colors = "auto"
+alt-screen = "auto"
+highlight-color = "-cha-ansi(bright-cyan)"
+highlight-marks = true
+double-width-ambiguous = false
+minimum-contrast = 100
+force-clear = false
+set-title = "auto"
+default-background-color = "auto"
+default-foreground-color = "auto"
+columns = 80
+lines = 24
+pixels-per-column = 9
+pixels-per-line = 18
+force-columns = false
+force-lines = false
+force-pixels-per-column = false
+force-pixels-per-line = false
+
+[omnirule.ddg]
+match = '^ddg:'
+substitute-url = 'x => "https://lite.duckduckgo.com/lite/?kp=-1&kd=-1&q=" + encodeURIComponent(x.split(":").slice(1).join(":"))'
+
+[omnirule.br]
+match = '^br:'
+substitute-url = 'x => "https://search.brave.com/search?q=" + encodeURIComponent(x.split(":").slice(1).join(":"))'
+
+[omnirule.wk]
+match = '^wk:'
+substitute-url = '''
+x => "https://en.wikipedia.org/wiki/Special:Search?search=" +
+	encodeURIComponent(x.split(":").slice(1).join(":"))
+'''
+
+[omnirule.wd]
+match = '^wd:'
+substitute-url = '''
+x => "https://en.wiktionary.org/w/index.php?title=Special:Search&search=" +
+	encodeURIComponent(x.split(":").slice(1).join(":"))
+'''
+
+[omnirule.mo]
+match = '^mo:'
+substitute-url = '''
+x => "https://mojeek.com/search?q=" +
+	encodeURIComponent(x.split(":").slice(1).join(":"));
+'''
+
+[siteconf.downloads]
+url = 'about:downloads'
+meta-refresh = "always"
+
+[page]
+# pager commands, but define them before y so that they actually work.
+yu = 'copyCursorLink'
+yI = 'copyCursorImage'
+
+# buffer commands
+h = 'cursorLeft'
+j = 'cursorDown'
+k = 'cursorUp'
+l = 'cursorRight'
+'M-[D' = 'cursorLeft'
+'M-[B' = 'cursorDown'
+'M-[A' = 'cursorUp'
+'M-[C' = 'cursorRight'
+C-n = 'cursorDown'
+C-p = 'cursorUp'
+'0' = 'cursorLineBegin'
+'M-[H' = 'cursorLineBegin'
+'^' = 'cursorLineTextStart'
+'$' = 'cursorLineEnd'
+'M-[F' = 'cursorLineEnd'
+b = 'cursorViWordBegin'
+e = 'cursorViWordEnd'
+w = 'cursorNextViWord'
+B = 'cursorBigWordBegin'
+E = 'cursorBigWordEnd'
+W = 'cursorNextBigWord'
+'[' = 'cursorPrevLink'
+']' = 'cursorNextLink'
+'{' = 'cursorPrevParagraph'
+'}' = 'cursorNextParagraph'
+H = 'cursorTop'
+M = 'cursorMiddle'
+L = 'cursorBottom'
+g0 = 'cursorLeftEdge'
+gc = 'cursorMiddleColumn'
+'g$' = 'cursorRightEdge'
+C-d = 'halfPageDown'
+C-u = 'halfPageUp'
+C-f = 'pageDown'
+C-b = 'pageUp'
+'M-[6~' = 'pageDown'
+'M-[5~' = 'pageUp'
+'zH'= 'pageLeft'
+'zL' = 'pageRight'
+'<' = 'pageLeft'
+'>' = 'pageRight'
+C-e = 'scrollDown'
+C-y = 'scrollUp'
+J = 'scrollDown'
+K = 'scrollUp'
+sE = 'sourceEdit'
+sC-m = 'saveLink'
+sC-j = 'saveLink'
+sS = 'saveSource'
+m = 'mark'
+'`' = 'gotoMark'
+"'" = 'gotoMarkY'
+'zh'= 'scrollLeft'
+'zl' = 'scrollRight'
+'-'= 'scrollLeft'
+'+' = 'scrollRight'
+C-m = 'click'
+C-j = 'click'
+c = 'rightClick'
+C = 'toggleMenu'
+I = 'viewImage'
+sI = 'saveImage'
+M-i = 'toggleImages'
+M-j = 'toggleScripting'
+M-k = 'toggleCookie'
+':' = 'markURL'
+r = 'redraw'
+R = 'reshape'
+C-c = 'cancel'
+gg = 'gotoLineOrStart'
+G = 'gotoLineOrEnd'
+'|' = 'gotoColumnOrBegin'
+'z.' = 'centerLineBegin'
+'zC-m' = 'raisePageBegin'
+'zC-j' = 'raisePageBegin'
+'z-' = 'lowerPageBegin'
+zz = 'centerLine'
+'zt' = 'raisePage'
+'zb' = 'lowerPage'
+'z+' = 'nextPageBegin'
+'z^' = 'previousPageBegin'
+y = 'copySelection'
+v = 'cursorToggleSelection'
+V = 'cursorToggleSelectionLine'
+C-v = 'cursorToggleSelectionBlock'
+
+# pager commands
+q = 'quit'
+C-z = 'suspend'
+C-l = 'load'
+M-l = 'loadCursor'
+C-k = 'webSearch'
+M-a = 'addBookmark'
+M-b = 'openBookmarks'
+C-h = 'openHistory'
+M-u = 'dupeBuffer'
+U = 'reloadBuffer'
+C-g = 'lineInfo'
+'\' = 'toggleSource'
+D = 'discardBuffer'
+'d,' = 'discardBufferPrev'
+'d.' = 'discardBufferNext'
+M-d = 'discardTree'
+',' = 'prevBuffer'
+'M-,' = 'prevSiblingBuffer'
+'.' = 'nextBuffer'
+'M-.' = 'nextSiblingBuffer'
+'M-/' = 'parentBuffer'
+M-c = 'enterCommand'
+'/' = 'isearchForward'
+'?' = 'isearchBackward'
+n = 'searchNext'
+N = 'searchPrev'
+u = 'peekCursor'
+su = 'showFullAlert'
+C-w = 'toggleWrap'
+M-y = 'copyURL'
+M-p = 'gotoClipboardURL'
+f = 'toggleLinkHints'
+
+[line]
+C-m = 'line.submit'
+C-j = 'line.submit'
+C-h = 'line.backspace'
+'C-?' = 'line.backspace'
+C-d = 'line.delete'
+C-c = 'line.cancel'
+C-g = 'line.cancel'
+M-b = 'line.prevWord'
+M-f = 'line.nextWord'
+C-b = 'line.backward'
+C-f = 'line.forward'
+C-u = 'line.clear'
+'C-xC-?' = 'line.clear'
+C-xC-e = 'line.openEditor'
+C-_ = 'line.clear'
+M-k = 'line.clear'
+C-k = 'line.kill'
+C-w = 'line.clearWord'
+M-C-h = 'line.clearWord'
+'M-C-?' = 'line.clearWord'
+M-d = 'line.killWord'
+C-a = 'line.begin'
+'M-[H' = 'line.begin'
+C-e = 'line.end'
+'M-[F' = 'line.end'
+C-v = 'line.escape'
+C-p = 'line.prevHist'
+C-n = 'line.nextHist'
+M-c = 'toggleCommandMode'
+'M-[D' = 'line.backward'
+'M-[B' = 'line.nextHist'
+'M-[A' = 'line.prevHist'
+'M-[C' = 'line.forward'
+
+# When adding new built-in commands, make sure it has an upper-case letter.
+# To users: when adding new custom commands, put it in your own namespace,
+# e.g. [cmd.me].
+[cmd]
+quit = '() => quit()'
+suspend = '() => suspend()'
+copyURL = '''
+() => {
+	if (pager.clipboardWrite(pager.url))
+		pager.alert("Copied URL to clipboard.");
+	else
+		pager.alert("Error; please install xsel or adjust external.copy-cmd");
+}
+'''
+copyCursorLink = '''
+() => {
+	const link = pager.hoverLink;
+	if (!link)
+		pager.alert("Please move the cursor above a link and try again.");
+	else if (pager.clipboardWrite(link))
+		pager.alert("Copied URL to clipboard.");
+	else
+		pager.alert("Error; please install xsel or adjust external.copy-cmd");
+}
+'''
+copyCursorImage = '''
+() => {
+	const link = pager.hoverImage;
+	if (!link)
+		pager.alert("Please move the cursor above an image and try again.");
+	else if (pager.clipboardWrite(link))
+		pager.alert("Copied URL to clipboard.");
+	else
+		pager.alert("Error; please install xsel or adjust external.copy-cmd");
+}
+'''
+gotoClipboardURL = '''
+() => {
+	const s = pager.externCapture(config.external.pasteCmd);
+	if (s === null)
+		pager.alert("Error; please install xsel or adjust external.paste-cmd");
+	else
+		pager.loadSubmit(s);
+}
+'''
+peek = '() => pager.alert(pager.url)'
+peekCursor = 'n => pager.peekCursor(n)'
+toggleWrap = '''
+() => {
+	config.search.wrap = !config.search.wrap;
+	pager.alert("Wrap search " + (config.search.wrap ? "on" : "off"));
+}
+'''
+dupeBuffer = '() => pager.dupeBuffer()'
+load = '() => pager.load()'
+loadCursor = '() => pager.load(pager.hoverLink || pager.hoverImage)'
+loadEmpty = '() => pager.load("")'
+webSearch = '() => pager.load("br:")'
+addBookmark = '() => pager.gotoURL(`cgi-bin:chabookmark?url=${encodeURIComponent(pager.url)}&title=${encodeURIComponent(pager.title)}`)'
+openBookmarks = '() => pager.gotoURL(`cgi-bin:chabookmark?action=view`, {history: false})'
+openHistory = '() => pager.gotoURL(pager.getHistoryURL(), {contentType: `text/uri-list;title="History Page"`, history: false})'
+reloadBuffer = '() => pager.reload()'
+lineInfo = '() => pager.lineInfo()'
+toggleSource = '() => pager.toggleSource()'
+discardBuffer = '() => pager.discardBuffer()'
+discardBufferPrev = '() => pager.discardBuffer(pager.buffer, "prev")'
+discardBufferNext = '() => pager.discardBuffer(pager.buffer, "next")'
+discardTree = '() => pager.discardTree()'
+prevBuffer = '() => pager.prevBuffer()'
+prevSiblingBuffer = '() => pager.prevSiblingBuffer()'
+nextBuffer = '() => pager.nextBuffer()'
+nextSiblingBuffer = '() => pager.nextSiblingBuffer()'
+parentBuffer = '() => pager.parentBuffer()'
+enterCommand = '() => pager.command()'
+searchForward = '() => pager.searchForward()'
+searchBackward = '() => pager.searchBackward()'
+isearchForward = '() => pager.isearchForward()'
+isearchBackward = '() => pager.isearchBackward()'
+searchNext = 'n => pager.searchNext(n)'
+searchPrev = 'n => pager.searchPrev(n)'
+toggleCommandMode = '''
+() => {
+	if ((pager.commandMode = consoleBuffer != pager.buffer))
+		console.show();
+	else
+		console.hide();
+}
+'''
+showFullAlert = '() => pager.showFullAlert()'
+toggleLinkHints = '''
+async () => {
+	pager.markPos0();
+	const urls = await pager.showLinkHints();
+	if (urls.length == 0) {
+		pager.alert("No links on page");
+		return;
+	}
+	const chars = config.input.linkHintChars;
+	function hint(n) {
+		let tmp = [];
+		for (n--; n >= 0; n = Math.floor(n / chars.length) - 1)
+			tmp.push(chars[n % chars.length]);
+		return tmp.reverse().join("");
+	}
+	const map = {};
+	let offset = Math.floor((urls.length + chars.length - 2) / (chars.length - 1));
+	for (let i = 0, j = offset; i < urls.length; i++, j++) {
+		let h = hint(j);
+		let it = map;
+		for (let k = 0, L = h.length - 1; k < L; k++)
+			it = it[h[k]] ?? (it[h[k]] = {});
+		urls[i].leaf = true;
+		it[h.at(-1)] = urls[i];
+	}
+	let s = "";
+	let it = map;
+	let alert = true;
+	while (it && !it.leaf) {
+		const c = await pager.askChar(s);
+		if (c == '\b' || c == '\x7f') {
+			if (s.length == 0) {
+				alert = false;
+				break;
+			}
+			s = s.substring(0, s.length - 1);
+			it = map;
+			for (const c2 of s)
+				it = it[c2];
+		} else if (c == '\x03') {
+			alert = false;
+			break;
+		} else {
+			it = it[c];
+			s += c;
+		}
+	}
+	pager.hideLinkHints();
+	if (it?.leaf) {
+		pager.setCursorXY(it.x, it.y);
+		pager.markPos();
+	} else if (alert)
+		pager.alert("No such hint");
+}
+'''
+cursorLeft = 'n => pager.cursorLeft(n)'
+cursorDown = 'n => pager.cursorDown(n)'
+cursorUp = 'n => pager.cursorUp(n)'
+cursorRight = 'n => pager.cursorRight(n)'
+cursorLineBegin = '() => pager.cursorLineBegin()'
+cursorLineTextStart = '() => pager.cursorLineTextStart()'
+cursorLineEnd = '() => pager.cursorLineEnd()'
+cursorNextWord = '() => pager.cursorNextWord()'
+cursorNextViWord = '() => pager.cursorNextViWord()'
+cursorNextBigWord = '() => pager.cursorNextBigWord()'
+cursorWordBegin = '() => pager.cursorWordBegin()'
+cursorViWordBegin = '() => pager.cursorViWordBegin()'
+cursorBigWordBegin = '() => pager.cursorBigWordBegin()'
+cursorWordEnd = '() => pager.cursorWordEnd()'
+cursorViWordEnd = '() => pager.cursorViWordEnd()'
+cursorBigWordEnd = '() => pager.cursorBigWordEnd()'
+cursorPrevLink = 'n => pager.cursorPrevLink(n)'
+cursorNextLink = 'n => pager.cursorNextLink(n)'
+cursorPrevParagraph = 'n => pager.cursorPrevParagraph(n)'
+cursorNextParagraph = 'n => pager.cursorNextParagraph(n)'
+cursorTop = 'n => pager.cursorTop(n)'
+cursorMiddle = '() => pager.cursorMiddle()'
+cursorBottom = 'n => pager.cursorBottom(n)'
+cursorLeftEdge = '() => pager.cursorLeftEdge()'
+cursorMiddleColumn = '() => pager.cursorMiddleColumn()'
+cursorRightEdge = '() => pager.cursorRightEdge()'
+halfPageDown = 'n => pager.halfPageDown(n)'
+halfPageUp = 'n => pager.halfPageUp(n)'
+halfPageLeft = 'n => pager.halfPageLeft(n)'
+halfPageRight = 'n => pager.halfPageRight(n)'
+pageDown = 'n => pager.pageDown(n)'
+pageUp = 'n => pager.pageUp(n)'
+pageLeft = 'n => pager.pageLeft(n)'
+pageRight = 'n => pager.pageRight(n)'
+scrollDown = 'n => pager.scrollDown(n)'
+scrollUp = 'n => pager.scrollUp(n)'
+scrollLeft = 'n => pager.scrollLeft(n)'
+scrollRight = 'n => pager.scrollRight(n)'
+click = 'n => pager.click(n)'
+rightClick = '''
+async () => {
+	if (!pager.menu) {
+		const canceled = await pager.contextMenu();
+		if (!canceled)
+			pager.openMenu();
+	} else
+		pager.closeMenu()
+}
+'''
+toggleMenu = '() => pager.menu ? pager.closeMenu() : pager.openMenu()'
+viewImage = '''
+(_, save) => {
+	let contentType = null;
+	let url = null;
+	if (pager.hoverCachedImage) {
+		[url, contentType] = pager.hoverCachedImage.split(' ');
+		url = 'file:' + pager.getCacheFile(url, pager.buffer.process);
+	} else if (pager.hoverImage)
+		url = new Request(pager.hoverImage, {headers: {Accept: "*/*"}});
+	if (url)
+		pager.gotoURL(url, {contentType: contentType, save: save});
+}
+'''
+toggleImages = '() => pager.toggleImages()'
+toggleScripting = '''
+() => {
+	const buffer = pager.buffer;
+	const buffer2 = pager.gotoURL(buffer.url, {
+		contentType: buffer.contentType,
+		history: buffer.history,
+		replace: buffer,
+		scripting: !buffer.scripting,
+		cookie: buffer.cookie
+	});
+	if (buffer2)
+		buffer2.copyCursorPos(buffer)
+}
+'''
+toggleCookie = '''
+() => {
+	const buffer = pager.buffer;
+	pager.gotoURL(buffer.url, {
+		contentType: buffer.contentType,
+		history: buffer.history,
+		replace: buffer,
+		scripting: buffer.scripting,
+		cookie: !buffer.cookie
+	});
+	if (buffer2)
+		buffer2.copyCursorPos(buffer)
+}
+'''
+markURL = '() => pager.markURL()'
+redraw = '() => pager.redraw()'
+reshape = '() => pager.reshape()'
+cancel = '() => pager.cancel()'
+# vi G
+gotoLineOrEnd = 'n => n ? pager.gotoLine(n) : pager.cursorLastLine()'
+# vim gg
+gotoLineOrStart = 'n => n ? pager.gotoLine(n) : pager.cursorFirstLine()'
+# vi |
+gotoColumnOrBegin = 'n => n ? pager.setCursorXCenter(n - 1) : pager.cursorLineBegin()'
+gotoColumnOrEnd = 'n => n ? pager.setCursorXCenter(n - 1) : pager.cursorLineEnd()'
+# vi z. z^M z-
+centerLineBegin = 'n => pager.centerLineBegin(n)'
+raisePageBegin = 'n => pager.raisePageBegin(n)'
+lowerPageBegin = 'n => pager.lowerPageBegin(n)'
+# vi z+ z^
+nextPageBegin = 'n => pager.nextPageBegin(n)'
+previousPageBegin = 'n => pager.previousPageBegin(n)'
+# vim zz zb zt
+centerLine = 'n => pager.centerLine(n)'
+raisePage = 'n => pager.raisePage(n)'
+lowerPage = 'n => pager.lowerPage(n)'
+cursorToggleSelection = 'n => pager.cursorToggleSelection(n)'
+selectOrCopy = '''
+n => {
+	if (pager.currentSelection)
+		cmd.buffer.copySelection();
+	else
+		pager.cursorToggleSelection(n)
+}
+'''
+cursorToggleSelectionLine = 'n => pager.cursorToggleSelection(n, {selectionType: "line"})'
+cursorToggleSelectionBlock = 'n => pager.cursorToggleSelection(n, {selectionType: "block"})'
+sourceEdit = '''
+() => {
+	const url = pager.url;
+	pager.extern(pager.getEditorCommand(url.protocol == "file:" ?
+		decodeURIComponent(url.pathname) :
+		pager.cacheFile));
+}
+'''
+saveLink = '() => pager.saveLink()'
+saveSource = '() => pager.saveSource()'
+saveImage = '() => cmd.buffer.viewImage(1, true);'
+mark = '''
+async () => {
+	const c = await pager.askChar("m");
+	if (c.charCodeAt() != 3) /* ctrl-c */
+		pager.setMark(c);
+}
+'''
+gotoMark = '''
+async () => {
+	const c = await pager.askChar('`');
+	if (c.charCodeAt() != 3) /* C-c */
+		pager.gotoMark(c);
+}
+'''
+gotoMarkY = '''
+async () => {
+	const c = await pager.askChar('`');
+	if (c.charCodeAt() != 3) /* C-c */
+		pager.gotoMarkY(c);
+}
+'''
+copySelection = '''
+async () => {
+	if (!pager.currentSelection) {
+		feedNext();
+		return;
+	}
+	const text = await pager.getSelectionText(pager.currentSelection);
+	const s = text.length != 1 ? "s" : "";
+	if (pager.clipboardWrite(text))
+		pager.alert(`Copied ${text.length} character${s}.`);
+	else
+		pager.alert("Error; please install xsel or adjust external.copy-cmd");
+	pager.cursorToggleSelection();
+}
+'''
+cursorNthLink = 'n => pager.cursorNthLink(n)'
+cursorRevNthLink = 'n => pager.cursorRevNthLink(n)'
+
+[cmd.line]
+submit = '() => line.submit()'
+backspace = '() => line.backspace()'
+delete = '() => line.delete()'
+cancel = '() => line.cancel()'
+prevWord = '() => line.prevWord()'
+nextWord = '() => line.nextWord()'
+backward = '() => line.backward()'
+forward = '() => line.forward()'
+clear = '() => line.clear()'
+kill = '() => line.kill()'
+clearWord = '() => line.clearWord()'
+killWord = '() => line.killWord()'
+begin = '() => line.begin()'
+end = '() => line.end()'
+escape = '() => line.escape()'
+prevHist = '() => line.prevHist()'
+nextHist = '() => line.nextHist()'
+openEditor = '''
+() => {
+	const res = pager.openEditor(line.text);
+	if (res != null) {
+		line.end();
+		line.clear();
+		line.write(res);
+	}
+}
+'''

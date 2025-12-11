@@ -11,7 +11,7 @@ console-buffer = true
 
 [buffer]
 styling = true
-images = false
+images = true
 scripting = false
 referer-from = false
 cookie = false

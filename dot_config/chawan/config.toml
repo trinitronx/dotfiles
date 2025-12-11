@@ -143,6 +143,12 @@ x => "https://mojeek.com/search?q=" +
 	encodeURIComponent(x.split(":").slice(1).join(":"));
 '''
 
+[siteconf.ddg]
+url = 'https?://((html|lite|www).)?duckduckgo.com/.*'
+# on current master, stylesheet is deprecated in favor of user-style
+#user-style = '* { background: -cha-ansi(default) !important }'
+user-style = '*, *::before, *::after { color: revert !important; background-color: revert !important }'
+
 [siteconf.downloads]
 url = 'about:downloads'
 meta-refresh = "always"

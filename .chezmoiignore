@@ -433,6 +433,9 @@ Library/Preferences/org.videolan.vlc/vlcrc
 {{ if not (eq .osFamily "linux-arch") | or (not (lookPath "youtube-music")) -}}
 .config/youtube-music-flags.conf
 {{ end -}}
+{{ if not (eq .osFamily "linux-debian") | or (not (lookPath "debsign")) -}}
+.devscripts
+{{ end -}}
 {{ if not (eq .chezmoi.os "linux") -}}
 # Don't install .desktop files
 .local/share/applications

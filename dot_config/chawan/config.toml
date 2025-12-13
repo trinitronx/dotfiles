@@ -279,6 +279,14 @@ M-y = 'copyURL'
 M-p = 'gotoClipboardURL'
 f = 'toggleLinkHints'
 
+# pager commands - w3m-esque bindings
+# Reference: https://todo.sr.ht/~bptato/chawan/30
+# Tab
+C-i = 'cursorNextLink'
+# Shift + Tab
+'M-[Z' = 'cursorPrevLink'
+
+
 [line]
 C-m = 'line.submit'
 C-j = 'line.submit'

@@ -1,0 +1,14 @@
+# Set name and email for use by debchange/dch and other debian tools
+# Also set key for signing
+# See Debian Maintainer's Guide:
+# http://www.debian.org/doc/maint-guide/ch-build.en.html
+export DEBFULLNAME='{{ .name }}'
+export DEBEMAIL='{{ .email }}'
+export DEBSIGN_KEYID='{{ .signingkey }}'
+# For special options to pass to dpkg-buildpackage
+#DEBUILD_DPKG_BUILDPACKAGE_OPTS="-i -ICVS -I.svn"
+export DEBUILD_DPKG_BUILDPACKAGE_OPTS="-sa -k${DEBSIGN_KEYID}"
+export DEBUILD_LINTIAN_OPTS='-i -I --show-overrides'
+export EDITOR="vim"
+export QUILT_PATCHES=debian/patches
+export QUILT_REFRESH_ARGS="-p ab --no-timestamps --no-index"

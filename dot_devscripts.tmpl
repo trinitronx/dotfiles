@@ -1,0 +1,3 @@
+# Force devsign to use my key!!!
+DEBSIGN_KEYID='{{ .signingkey }}'
+DEBUILD_DPKG_BUILDPACKAGE_OPTS="-sa -k${DEBSIGN_KEYID}"

@@ -442,6 +442,9 @@ Library/Preferences/org.videolan.vlc/vlcrc
 {{ if not (eq .osFamily "linux-debian") | or (not (lookPath "gbp")) -}}
 .gbp.conf
 {{ end -}}
+{{ if not (eq .osFamily "linux-debian") | or (not (lookPath "pbuilder")) -}}
+.pbuilderrc
+{{ end -}}
 {{ if not (eq .chezmoi.os "linux") -}}
 # Don't install .desktop files
 .local/share/applications

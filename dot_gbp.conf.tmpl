@@ -1,0 +1,18 @@
+[DEFAULT]
+
+# Manage a "pristine-tar" branch:
+pristine-tar = True
+pristine-tar-commit = True
+
+# Use Debian-style branch names:
+upstream-branch=upstream/latest
+debian-branch=debian/latest
+
+# Build packages with pbuilder:
+pbuilder = True
+# Or use sbuild:
+#builder = sbuild
+
+# Sign tags (optional):
+sign-tags = True
+keyid = {{ .signingkey }}

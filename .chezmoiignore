@@ -25,6 +25,9 @@ app_modified/**
 .config/broot
 .config/profile.d/08-broot-br-func.sh
 {{ end -}}
+{{ if not (lookPath "cha") -}}
+.config/chawan
+{{ end -}}
 {{ if not (lookPath "sway") | or (not (lookPath "gitleaks")) | or (not (lookPath "cliphist")) -}}
 .config/sway/config.d/04-cliphist-gitleaks.conf
 .local/share/sway/scripts/cliphist-gitleaks-del

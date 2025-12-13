@@ -436,6 +436,9 @@ Library/Preferences/org.videolan.vlc/vlcrc
 {{ if not (eq .osFamily "linux-debian") | or (not (lookPath "debsign")) -}}
 .devscripts
 {{ end -}}
+{{ if not (eq .osFamily "linux-debian") | or (not (lookPath "debuild")) -}}
+.config/profile.d/07-debuild-conf.sh
+{{ end -}}
 {{ if not (eq .chezmoi.os "linux") -}}
 # Don't install .desktop files
 .local/share/applications

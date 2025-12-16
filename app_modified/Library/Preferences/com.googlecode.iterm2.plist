@@ -847,6 +847,16 @@ Marks and Annotations.Previous Mark</string>
 	<integer>2</integer>
 	<key>MaxVertically</key>
 	<false/>
+	<key>NSSplitView Subview Frames NSColorPanelSplitView</key>
+	<array>
+		<string>0.000000, 0.000000, 224.000000, 258.000000, NO, NO</string>
+		<string>0.000000, 259.000000, 224.000000, 48.000000, NO, NO</string>
+	</array>
+	<key>NSToolbar Configuration com.apple.NSColorPanel</key>
+	<dict>
+		<key>TB Is Shown</key>
+		<integer>1</integer>
+	</dict>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -3510,6 +3520,15 @@ Marks and Annotations.Previous Mark</string>
 			<string>/Users/pivotal</string>
 		</dict>
 	</array>
+	<key>NoSyncFrame_SharedPreferences</key>
+	<dict>
+		<key>screenFrame</key>
+		<string>{{0, 0}, {1280, 800}}</string>
+		<key>topLeft</key>
+		<string>{178, 636}</string>
+	</dict>
+	<key>NoSyncIgnoreSystemWindowRestoration</key>
+	<true/>
 	<key>NumberOfSpacesPerTab</key>
 	<integer>2</integer>
 	<key>OnlyWhenMoreTabs</key>

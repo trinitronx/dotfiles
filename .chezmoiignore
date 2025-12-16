@@ -162,6 +162,8 @@ Library/Application Support/Void
 {{ end -}}
 {{ if ne .chezmoi.os "darwin" | or (not (glob "/Applications/iTerm.app")) -}}
 Library/Preferences/com.googlecode.iterm2.plist
+# Don't run iTerm custom config setup if not macOS or not installed
+.chezmoiscripts/05-iterm2-custom-config.sh
 {{ end -}}
 {{ if ne .chezmoi.os "darwin" | or ((not (glob "/Applications/VLC.app")) | and (not (lookPath "vlc"))) -}}
 Library/Preferences/org.videolan.vlc/vlcrc

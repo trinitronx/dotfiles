@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# Run once if iTerm.app installation state changed since last runonce check
+# glob /Applications/iTerm.app  hash: {{ glob "/Applications/iTerm.app" | toString | sha256sum }}
+
+{{- if (not (glob "/Applications/iTerm.app")) }}
+echo "$0: WARN: /Applications/iTerm.app not installed... skipping"
+{{- else }}
+# Specify the preferences directory
+defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "{{ .chezmoi.sourceDir }}/app_modified/Library/Preferences"
+# Tell iTerm2 to use the custom preferences in the directory
+defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
+{{- end }}

@@ -18,8 +18,11 @@ app_modified/**
 {{ if not (lookPath "azap") -}}
 .azap
 {{ end -}}
-{{ if not (lookPath "bat") -}}
+{{ if not (lookPath "bat") | and (not (lookPath "batcat")) -}}
 .config/bat
+{{ end -}}
+{{ if not (lookPath "batcat") -}}
+.profile.d/09-alias-batcat.sh
 {{ end -}}
 {{ if not (lookPath "broot") -}}
 .config/broot

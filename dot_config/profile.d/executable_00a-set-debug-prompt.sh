@@ -71,7 +71,12 @@ detect_shell() {
 # Detect the current shell
 CURRENT_SHELL="$(detect_shell)"
 
-if [ "${-//[^x]/}" = "x" ]; then
+case "$-" in
+  *x*) _xtrace_enabled=true ;;
+  *)   _xtrace_enabled=false ;;
+esac
+
+if [ "$_xtrace_enabled" = "true" ]; then
 # Set PS4 for Bash or Zsh
   case "$CURRENT_SHELL" in
       *bash)

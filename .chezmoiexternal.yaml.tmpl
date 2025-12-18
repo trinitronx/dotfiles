@@ -136,7 +136,7 @@
 # Darwin OR (Linux AND non-existent fonts path): {{ glob "/usr/share/fonts/TTF/MesloLGS-NF-*.ttf" }}
 {{ $nerdFontsChecksumURL := gitHubLatestReleaseAssetURL "ryanoasis/nerd-fonts" "SHA-256.txt" -}}
 {{ $mesloChecksumCommand := printf "curl -Ls -o - '%s' | grep -i Meslo.tar.xz | awk '{ print $1 }'" $nerdFontsChecksumURL -}}
-"{{ $fonts_dir }}":
+"{{ $fonts_dir }}/MesloNF":
   type: "archive"
   url: {{ gitHubLatestReleaseAssetURL "ryanoasis/nerd-fonts" "Meslo.tar.xz" | quote }}
   refreshPeriod: "168h"
@@ -151,7 +151,7 @@
 # Darwin OR (Linux AND non-existent fonts path): {{ glob "/usr/share/fonts/TTF/MesloLGS-NF-*.ttf" }}
 {{ $nerdFontsChecksumURL := gitHubLatestReleaseAssetURL "ryanoasis/nerd-fonts" "SHA-256.txt" -}}
 {{ $jetBrainsMonoChecksumCommand := printf "curl -Ls -o - '%s' | grep -i JetBrainsMono.tar.xz | awk '{ print $1 }'" $nerdFontsChecksumURL -}}
-"{{ $fonts_dir }}":
+"{{ $fonts_dir }}/JetBrainsMonoNF":
   type: "archive"
   url: {{ gitHubLatestReleaseAssetURL "ryanoasis/nerd-fonts" "JetBrainsMono.tar.xz" | quote }}
   refreshPeriod: "168h"

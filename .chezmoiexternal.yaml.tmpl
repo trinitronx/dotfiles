@@ -120,22 +120,23 @@
   executable: true
   path: "tpnote{{ eq .chezmoi.os "windows" | ternary ".exe" "" }}"
 {{ end -}}
+{{/* Set OS-specific fonts dir */}}
 {{ $fonts_dir := joinPath (trimPrefix .chezmoi.homeDir .xdg_data_home) "fonts" -}}
+{{ if eq .chezmoi.os "darwin" -}}
+# Darwin
+{{   $fonts_dir = joinPath (trimPrefix .chezmoi.homeDir .xdg_data_home | trimPrefix .chezmoi.pathSeparator) "Fonts" -}}
+{{ else if eq .chezmoi.os "linux" -}}
+# Linux
+{{   $fonts_dir = joinPath (trimPrefix .chezmoi.homeDir .xdg_data_home | trimPrefix .chezmoi.pathSeparator) "fonts" -}}
+{{ else if eq .chezmoi.os "windows" -}}
+# Windows
+{{   $fonts_dir = joinPath (trimPrefix .chezmoi.homeDir .xdg_data_home | trimPrefix .chezmoi.pathSeparator) "Microsoft" "Windows" "Fonts" -}}
+{{ end -}}
 {{ if eq .chezmoi.os "darwin" | or (eq .chezmoi.os "linux" | and (not (glob "/usr/share/fonts/TTF/MesloLGS-NF-*.ttf"))) -}}
 # Darwin OR (Linux AND non-existent fonts path): {{ glob "/usr/share/fonts/TTF/MesloLGS-NF-*.ttf" }}
 {{ $nerdFontsChecksumURL := gitHubLatestReleaseAssetURL "ryanoasis/nerd-fonts" "SHA-256.txt" -}}
 {{ $mesloChecksumCommand := printf "curl -Ls -o - '%s' | grep -i Meslo.tar.xz | awk '{ print $1 }'" $nerdFontsChecksumURL -}}
-{{   if eq .chezmoi.os "darwin" -}}
-# Darwin
-{{     $fonts_dir = joinPath (trimPrefix .chezmoi.homeDir .xdg_data_home | trimPrefix .chezmoi.pathSeparator) "Fonts" -}}
-{{   else if eq .chezmoi.os "linux" -}}
-# Linux
-{{     $fonts_dir = joinPath (trimPrefix .chezmoi.homeDir .xdg_data_home | trimPrefix .chezmoi.pathSeparator) "fonts" -}}
-{{   else if eq .chezmoi.os "windows" -}}
-# Windows
-{{     $fonts_dir = joinPath (trimPrefix .chezmoi.homeDir .xdg_data_home | trimPrefix .chezmoi.pathSeparator) "Microsoft" "Windows" "Fonts" -}}
-{{   end -}}
-"{{ $fonts_dir }}":
+"{{ $fonts_dir }}/MesloNF":
   type: "archive"
   url: {{ gitHubLatestReleaseAssetURL "ryanoasis/nerd-fonts" "Meslo.tar.xz" | quote }}
   refreshPeriod: "168h"
@@ -145,4 +146,19 @@
   private: true
   readonly: true
   checksum.sha256: {{ (output "/bin/sh" "-c" $mesloChecksumCommand) | trim }}
+{{ end -}}
+{{ if eq .chezmoi.os "darwin" | or (eq .chezmoi.os "linux" | and (not (glob "/usr/share/fonts/TTF/JetBrainsMonoNerdFontMono-*.ttf"))) -}}
+# Darwin OR (Linux AND non-existent fonts path): {{ glob "/usr/share/fonts/TTF/MesloLGS-NF-*.ttf" }}
+{{ $nerdFontsChecksumURL := gitHubLatestReleaseAssetURL "ryanoasis/nerd-fonts" "SHA-256.txt" -}}
+{{ $jetBrainsMonoChecksumCommand := printf "curl -Ls -o - '%s' | grep -i JetBrainsMono.tar.xz | awk '{ print $1 }'" $nerdFontsChecksumURL -}}
+"{{ $fonts_dir }}/JetBrainsMonoNF":
+  type: "archive"
+  url: {{ gitHubLatestReleaseAssetURL "ryanoasis/nerd-fonts" "JetBrainsMono.tar.xz" | quote }}
+  refreshPeriod: "168h"
+  exclude: [ "LICENSE.txt", "README.md" ]
+  include: [ "*.ttf" ]
+  exact: false
+  private: true
+  readonly: true
+  checksum.sha256: {{ (output "/bin/sh" "-c" $jetBrainsMonoChecksumCommand) | trim }}
 {{ end -}}

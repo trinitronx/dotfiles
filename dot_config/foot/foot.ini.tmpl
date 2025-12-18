@@ -5,6 +5,18 @@
 {{ $supports_colors_cursor_schema := semverCompare ">1.22.x" $footclient_version -}}
 ## footclient version: {{ $footclient_version }}
 ## supports colors.cursor: {{ $supports_colors_cursor_schema }}
+{{/* $cpuinfo_model := output "/bin/sh" "-c" "grep -iE '^Model' /proc/cpuinfo" */ -}}
+{{ $is_raspi := regexMatch "Raspberry Pi" (output "/bin/sh" "-c" "grep -iE '^Model' /proc/cpuinfo") -}}
+{{/* ## cpuinfo Model: {{ $cpuinfo_model */ -}}
+## Is on Raspberry Pi? : {{ $is_raspi }}
+{{/* Set default browser to firefox, but use chromium on Raspberry Pi instead (ff is too slow) */ -}}
+{{ $browser := "firefox" -}}
+{{ if $is_raspi -}}
+{{ $browser = "chromium" -}}
+{{ else -}}
+{{ $browser = "firefox" -}}
+{{ end -}}
+## Browser: {{ $browser }}
 
 # shell=$SHELL (if set, otherwise user's default shell from /etc/passwd)
 term=foot-extra #(or xterm-256color if built with -Dterminfo=disabled)
@@ -113,14 +125,14 @@ scrollback-down-line=Control+Shift+j
 # maximize=none
 # fullscreen=none
 #-font 'Roboto 11'  -lines 10 -width 35 
-#pipe-visible=[sh -c "xurls | rofi -p '  ❯   ' -font 'JetBrainsMono Nerd Font 12' -width 80 -dmenu -multi-select | xargs -r firefox"] Control+Shift+p
-pipe-visible=[sh -c "xurls | fuzzel --dmenu -p '  ❯   ' --width 80 | xargs -r firefox"] Control+Shift+p
-# pipe-scrollback=[sh -c "xurls | fuzzel | xargs -r firefox"] none
+#pipe-visible=[sh -c "xurls | rofi -p '  ❯   ' -font 'JetBrainsMono Nerd Font 12' -width 80 -dmenu -multi-select | xargs -r {{ $browser }}"] Control+Shift+p
+pipe-visible=[sh -c "xurls | fuzzel --dmenu -p '  ❯   ' --width 80 | xargs -r {{ $browser }}"] Control+Shift+p
+# pipe-scrollback=[sh -c "xurls | fuzzel | xargs -r {{ $browser }}"] none
 ## 2024-05-30 JMC: Package update somehow broke DPI handling
 ## Disable DPI handling for now and default to sway's display scale
-#pipe-scrollback=[sh -c "xurls | rofi -p '  ❯   ' -font 'JetBrainsMono Nerd Font 12' -width 80 -dpi 36 -dmenu -multi-select | xargs -r firefox"] Control+Mod1+p
-pipe-scrollback=[sh -c "xurls | rofi -p '  ❯   ' -font 'JetBrainsMono Nerd Font 12' -width 120          -dmenu -multi-select | xargs -r firefox"] Control+Mod1+p
-# pipe-selected=[xargs -r firefox] none
+#pipe-scrollback=[sh -c "xurls | rofi -p '  ❯   ' -font 'JetBrainsMono Nerd Font 12' -width 80 -dpi 36 -dmenu -multi-select | xargs -r {{ $browser }}"] Control+Mod1+p
+pipe-scrollback=[sh -c "xurls | rofi -p '  ❯   ' -font 'JetBrainsMono Nerd Font 12' -width 120          -dmenu -multi-select | xargs -r {{ $browser }}"] Control+Mod1+p
+# pipe-selected=[xargs -r {{ $browser }}] none
 # show-urls-launch=Control+Shift+o
 show-urls-persistent=Control+Mod1+o
 show-urls-copy=Control+Mod1+c

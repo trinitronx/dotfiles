@@ -56,7 +56,7 @@
     args: ["-b", "fix-all-the-things"]
 
 {{   end -}}
-{{   if lookPath "bat" -}}
+{{   if lookPath "bat" | or (lookPath "batcat") -}}
 ".config/bat/themes/Dark-Dracula-Theme":
   type: "git-repo"
   url: "https://github.com/krman009/Dark-Dracula-Theme"

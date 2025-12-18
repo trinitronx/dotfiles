@@ -1,6 +1,6 @@
 #!/bin/sh
 
-{{- if lookPath "bat" }}
+{{- if lookPath "bat" | or (lookPath "batcat") }}
 {{-   if stat (joinPath .chezmoi.homeDir ".config" "bat" "themes") | or (stat (joinPath .chezmoi.homeDir ".config" "bat" "syntaxes")) }}
 ## themes
 {{-   if stat (joinPath .chezmoi.homeDir ".config" "bat" "themes") }}
@@ -28,7 +28,11 @@
 # none
 {{-   end }}
 
+{{-   if lookPath "bat" }}
 bat cache --build
+{{-   else if lookPath "batcat" }}
+batcat cache --build
+{{-   end }}
 {{-   else }}
 # no-op - {{ joinPath .chezmoi.homeDir ".config" "bat" "themes" }} or {{ joinPath .chezmoi.homeDir ".config" "bat" "syntaxes" }} did not exist!
 {{-   end }}

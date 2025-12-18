@@ -1,7 +1,28 @@
-# Warning: this is an internal resource file, *not* a template.
-# Using it as your personal config.toml isn't recommended; if you still
-# decide to do so, search for [cmd] and delete everything that comes after
-# it or you'll get a million warnings on startup.
+# vim: ft=dosini
+# Chawan / cha TUI Web Browser Config
+{{ $copy_cmd := "" -}}
+{{ $paste_cmd := "" -}}
+{{ if (eq .chezmoi.os "linux") | and ((lookPath "wayland-scanner") | or (eq .xdg_session_type "wayland")) -}}
+{{   $copy_cmd = "wl-copy" -}}
+{{   $paste_cmd = "wl-paste" -}}
+{{ else if (eq .chezmoi.os "linux") -}}
+{{   if lookPath "xclip" -}}
+{{   $copy_cmd = "xclip -selection clipboard -in" -}}
+{{   $paste_cmd = "xclip -selection clipboard -o" -}}
+{{   else if lookPath "xsel" -}}
+{{   $copy_cmd = "xsel -bi" -}}
+{{   $paste_cmd = "xsel -bo" -}}
+{{   end -}}
+{{ else if (eq .chezmoi.os "darwin") -}}
+{{   $copy_cmd = "pbcopy" -}}
+{{   $paste_cmd = "pbpaste" -}}
+{{ else if (eq .chezmoi.os "windows") -}}
+{{   $copy_cmd = "perl -pe 'chomp if eof' | clip.exe" -}}
+{{   $paste_cmd = "powershell.exe Get-Clipboard | sed 's/\r$//'" -}}
+{{ else -}}
+{{   $copy_cmd = "xclip -selection clipboard -in" -}}
+{{   $paste_cmd = "xclip -selection clipboard -o" -}}
+{{ end -}}
 
 [start]
 visual-home = "about:chawan"
@@ -58,8 +79,8 @@ cgi-dir = ["cgi-bin", "$CHA_LIBEXEC_DIR/cgi-bin"]
 download-dir = "${TMPDIR:-/tmp}/"
 show-download-panel = true
 w3m-cgi-compat = false
-copy-cmd = 'xsel -bi'
-paste-cmd = 'xsel -bo'
+copy-cmd = '{{ $copy_cmd }}'
+paste-cmd = '{{ $paste_cmd }}'
 
 [network]
 max-redirect = 10

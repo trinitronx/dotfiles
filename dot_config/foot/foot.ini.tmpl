@@ -1,4 +1,10 @@
 # -*- conf -*-
+# vim: ft=dosini
+{{ $footclient_version_out := output "/bin/sh" "-c" "footclient --version" -}}
+{{ $footclient_version := regexReplaceAll "^footclient version: ([0-9.]+) .*" $footclient_version_out "${1}" | trim | toString -}}
+{{ $supports_colors_cursor_schema := semverCompare ">1.22.x" $footclient_version -}}
+## footclient version: {{ $footclient_version }}
+## supports colors.cursor: {{ $supports_colors_cursor_schema }}
 
 # shell=$SHELL (if set, otherwise user's default shell from /etc/passwd)
 term=foot-extra #(or xterm-256color if built with -Dterminfo=disabled)
@@ -65,6 +71,11 @@ lines=100000
 # blink=no
 # beam-thickness=1.5
 # underline-thickness=<font underline thickness>
+{{ if not $supports_colors_cursor_schema -}}
+color= 141a1b 2eb398 # Matcha Teal
+#color= 141a1b eeeeee
+#color= 141a1b bd93f9 # Purple
+{{- end }}
 
 [mouse]
 # hide-when-typing=no
@@ -76,10 +87,12 @@ lines=100000
 #include=/usr/share/foot/themes/material-design
 include=/home/trinitronx/.config/foot/themes/manjaro-sway-default
 
+{{ if $supports_colors_cursor_schema -}}
 [colors]
 cursor= 141a1b 2eb398 # Matcha Teal
 #cursor= 141a1b eeeeee
 #cursor= 141a1b bd93f9 # Purple
+{{- end }}
 
 [key-bindings]
 # scrollback-up-page=Shift+Page_Up

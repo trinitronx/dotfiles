@@ -1,9 +1,17 @@
+# vim: ft=dosini
+{{ $footclient_version_out := output "/bin/sh" "-c" "footclient --version" -}}
+{{ $footclient_version := regexReplaceAll "^footclient version: ([0-9.]+) .*" $footclient_version_out "${1}" | trim | toString -}}
+{{ $supports_colors_cursor_schema := semverCompare ">1.22.x" $footclient_version -}}
+## footclient version: {{ $footclient_version }}
+## supports colors.cursor: {{ $supports_colors_cursor_schema }}
 [colors]
 alpha=0.9
 foreground=eeeeee
 background=141a1b
+{{ if $supports_colors_cursor_schema -}}
 #cursor= 141a1b bd93f9 # Purple
 cursor= 141a1b 2eb398 # Matcha Teal
+{{ end -}}
 regular0=2a3538  # black
 ## regular0=141a1B  # black ## 2023-08-01: JMC: Too dark & blends into background
 regular1=cd3f45  # red

@@ -2,7 +2,13 @@
 {{ $clear_cmd := "" -}}
 {{ $pinentry_cmd := "" -}}
 {{ if (eq .chezmoi.os "linux") | and ((lookPath "wayland-scanner") | or (eq .xdg_session_type "wayland")) -}}
-{{   $copy_cmd = cat (lookPath "wl-copy") "--sensitive" -}}
+{{   $wl_copy_supports_sensitive := regexMatch "--sensitive" (output "/bin/sh" "-c" "wl-copy --help") -}}
+# wl-copy supports --sensitive flag? : {{ $wl_copy_supports_sensitive }}
+{{   if $wl_copy_supports_sensitive -}}
+{{     $copy_cmd = cat (lookPath "wl-copy") "--sensitive" -}}
+{{   else -}}
+{{     $copy_cmd = lookPath "wl-copy" -}}
+{{   end -}}
 {{   $clear_cmd = cat (lookPath "wl-copy") "--clear" -}}
 {{   $pinentry_cmd = lookPath "pinentry-gnome3" -}}
 {{ else if (eq .chezmoi.os "linux") -}}

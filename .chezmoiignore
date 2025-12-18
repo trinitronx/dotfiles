@@ -22,7 +22,7 @@ app_modified/**
 .config/bat
 {{ end -}}
 {{ if not (lookPath "batcat") -}}
-.profile.d/09-alias-batcat.sh
+.config/profile.d/09-alias-batcat.sh
 {{ end -}}
 {{ if not (lookPath "broot") -}}
 .config/broot

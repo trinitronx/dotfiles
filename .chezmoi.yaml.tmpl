@@ -87,6 +87,23 @@
 {{-   $xdg_runtime_dir = output "/bin/sh" "-c" "getconf DARWIN_USER_TEMP_DIR || echo -n ''" | or (env "TMPDIR") -}}
 {{- end -}}
 
+{{- $xdg_data_home := "" -}}
+{{- if hasKey . "xdg_data_home" -}}
+{{-   $xdg_data_home = .xdg_data_home -}}
+{{- else if eq .chezmoi.os "linux" | and (env "XDG_DATA_HOME") -}}
+{{-   $xdg_data_home = env "XDG_DATA_HOME" -}}
+{{- else if eq .chezmoi.os "linux" -}}
+{{-   $xdg_data_home = joinPath .chezmoi.homeDir ".local" "share" -}}
+{{- else if eq .chezmoi.os "windows" | and (env "LOCALAPPDATA") -}}
+{{-   $xdg_data_home = env "LOCALAPPDATA" -}}
+{{- else if eq .chezmoi.os "windows" -}}
+{{-   $xdg_data_home = joinPath .chezmoi.homeDir "AppData" "Local" -}}
+{{- else if eq .chezmoi.os "darwin" | and (env "XDG_DATA_HOME") -}}
+{{-   $xdg_data_home =  env "XDG_DATA_HOME" -}}
+{{- else if eq .chezmoi.os "darwin" -}}
+{{-   $xdg_data_home = joinPath .chezmoi.homeDir "Library" -}}
+{{- end -}}
+
 {{- if $interactive -}}
 {{-   writeToStdout "💡 Tip: you can re-enter your data with `chezmoi init --data=false`.\n" -}}
 {{- end -}}
@@ -106,4 +123,5 @@ data:
   xdg_session_type: "{{ $xdg_session_type }}"
   xdg_config_home: "{{ osClean (default (joinPath .chezmoi.homeDir ".config") $xdg_config_home) }}"
   xdg_runtime_dir: "{{ osClean (default (joinPath "/" "run" "user" .chezmoi.uid) $xdg_runtime_dir) }}"
+  xdg_data_home: "{{ osClean (default (joinPath .chezmoi.homeDir ".local" "share") $xdg_data_home) }}"
 

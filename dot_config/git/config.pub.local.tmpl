@@ -1,0 +1,8 @@
+[user]
+	name = {{ .name }}
+{{- if hasKey . "personal_email" }}
+	email = {{ .personal_email }}
+{{- end }}
+{{- if hasKey . "personal_signingkey" }}
+	signingkey = {{ .personal_signingkey }}
+{{- end }}

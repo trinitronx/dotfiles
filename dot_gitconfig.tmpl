@@ -3,13 +3,13 @@
 	email = {{ .email }}
 	signingkey = {{ .signingkey }}
 {{- if hasKey . "work_srcdir" }}
-[includeIf "gitdir:{{ .work_srcdir }}"]
+[includeIf "gitdir:{{ .work_srcdir }}/"]
 	path = {{ .xdg_config_home }}/git/config.work.local
 {{- end }}
 {{- if hasKey . "personal_email" }}
-[includeIf "gitdir:~/src/pub"]
+[includeIf "gitdir:~/src/pub/"]
 	path = {{ .xdg_config_home }}/git/config.pub.local
-[includeIf "gitdir:{{ .chezmoi.sourceDir }}"]
+[includeIf "gitdir:{{ .chezmoi.sourceDir }}/"]
 	path = {{ .xdg_config_home }}/git/config.pub.local
 {{- end }}
 [color]

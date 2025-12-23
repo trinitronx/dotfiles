@@ -1,0 +1,31 @@
+#!/bin/sh
+
+[ $# '<' 1 ] && {
+	echo "Insufficient arguments." > /dev/stderr
+	echo "Syntax:" > /dev/stderr
+	echo "	$0 [USER/KEY-ID]" > /dev/stderr
+	exit -1
+}
+
+KEYID=$1
+
+GPG=${GPG-gpg}
+
+GPGCONF=${GPGCONF-gpgconf}
+
+GNUPGHOME=${GNUPGHOME-`$GPGCONF --list-dirs homedir`}
+
+GPGCONNECTAGENT=${GPGCONNECTAGENT-gpg-connect-agent}
+
+KEYGRIP_AWK_EXTRACT='BEGIN { is_ssb_sc=0 ; } is_ssb_sc==1 && $1~/Keygrip/ && $2~/=/ { print $3; is_ssb_sc=0; } { if ( $1=="ssb>" ) { is_ssb_sc=1; } else { is_ssb_sc=0; } }'
+
+KEYGRIPS="`${GPG} --with-keygrip --list-secret-keys "${KEYID}" | awk "${KEYGRIP_AWK_EXTRACT}"`"
+
+for keygrip in ${KEYGRIPS}
+do {
+	keygrip_file="${GNUPGHOME}/private-keys-v1.d/${keygrip}.key"
+	rm "${keygrip_file}"
+}
+done
+
+${GPG} --card-status

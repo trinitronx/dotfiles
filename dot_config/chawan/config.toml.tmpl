@@ -170,22 +170,6 @@ url = 'https?://((html|lite|www).)?duckduckgo.com/.*'
 #user-style = '* { background: -cha-ansi(default) !important }'
 user-style = '*, *::before, *::after { color: revert !important; background-color: revert !important }'
 
-[siteconf.google]
-url = 'https?://(www.)?google.com/.*'
-# Google now requires javascript or reCAPTCHA inside iframe support... try lynx?
-default-headers = {
-    User-Agent = "Lynx/2.8.6rel.5 libwww-FM/2.14",
-    Accept = "*/*",
-    Accept-Encoding = "gzip, deflate",
-    Accept-Language = "en;q=1.0",
-    Pragma = "no-cache",
-    Cache-Control = "no-cache"
-}
-meta-refresh = "never"
-#user-style = '* { background: -cha-ansi(default) !important }'
-user-style = '*, *::before, *::after { color: revert !important; background-color: revert !important }'
-scripting = false
-
 [siteconf.downloads]
 url = 'about:downloads'
 meta-refresh = "always"

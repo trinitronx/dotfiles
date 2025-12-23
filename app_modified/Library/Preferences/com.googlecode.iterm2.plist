@@ -4169,7 +4169,7 @@ Marks and Annotations.Previous Mark</string>
 			<key>Guid</key>
 			<string>4EFD343C-DF08-43C4-97E1-18FA8361D9D2</string>
 			<key>Has Hotkey</key>
-			<true/>
+			<false/>
 			<key>Hide After Opening</key>
 			<false/>
 			<key>Horizontal Spacing</key>

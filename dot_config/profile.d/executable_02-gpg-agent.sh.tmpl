@@ -2,7 +2,10 @@
 {{ if (eq .chezmoi.os "linux") -}}
 export SSH_AUTH_SOCK="${SSH_AUTH_SOCK:-${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/gnupg/S.gpg-agent.ssh}"
 {{ else if (eq .chezmoi.os "darwin") -}}
-export SSH_AUTH_SOCK="${SSH_AUTH_SOCK:-$HOME/.gnupg/S.gpg-agent.ssh}"
+case "$SSH_AUTH_SOCK" in
+  *"/tmp/com.apple.launchd."*"/Listeners"*) export SSH_AUTH_SOCK="$HOME/.gnupg/S.gpg-agent.ssh" ;;
+  *) export SSH_AUTH_SOCK="${SSH_AUTH_SOCK:-$HOME/.gnupg/S.gpg-agent.ssh}" ;;
+esac
 {{ else if (eq .chezmoi.os "windows") -}}
 export SSH_AUTH_SOCK=\\.\pipe\openssh-ssh-agent
 {{ end -}}

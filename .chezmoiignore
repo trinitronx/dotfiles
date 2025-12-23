@@ -46,6 +46,12 @@ app_modified/**
 {{ if not (lookPath "foot") -}}
 .config/foot
 {{ end -}}
+{{ if not (hasKey . "work_srcdir") -}}
+{{ osBase .xdg_config_home }}/git/config.work.local
+{{ end -}}
+{{ if not (hasKey . "personal_email") -}}
+{{ osBase .xdg_config_home }}/git/config.pub.local
+{{ end -}}
 {{ if not (lookPath "lpass") -}}
 .config/05-lpass-settings.sh
 {{ end -}}

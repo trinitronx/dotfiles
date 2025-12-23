@@ -41,6 +41,47 @@
 {{-   $launchpaduser = promptString "launchpaduser" -}}
 {{- end -}}
 
+{{- $work_email := "" -}}
+{{- if hasKey . "work_email" -}}
+{{-   $work_email = .work_email -}}
+{{- else if (env "GIT_CONFIG_USER_WORK_EMAIL") -}}
+{{-   $work_email = env "GIT_CONFIG_USER_WORK_EMAIL" -}}
+{{- else if $interactive -}}
+{{-   $work_email = promptString "work email" $work_email -}}
+{{- end -}}
+
+{{- $work_signingkey := "" -}}
+{{- if hasKey . "work_signingkey" -}}
+{{-   $work_signingkey = .work_signingkey -}}
+{{- else if $interactive -}}
+{{-   $work_signingkey = promptString "work signingkey" -}}
+{{- end -}}
+
+{{- $work_srcdir := joinPath .chezmoi.homeDir "src" "work" -}}
+{{- if hasKey . "work_srcdir" -}}
+{{-   $work_srcdir = .work_srcdir -}}
+{{- else if (env "GIT_CONFIG_USER_WORK_SRCDIR") -}}
+{{-   $work_srcdir = env "GIT_CONFIG_USER_WORK_SRCDIR" -}}
+{{- else if $interactive -}}
+{{-   $work_srcdir = promptString "work src dir" $work_srcdir -}}
+{{- end -}}
+
+{{- $personal_email := "" -}}
+{{- if hasKey . "personal_email" -}}
+{{-   $personal_email = .personal_email -}}
+{{- else if (env "GIT_CONFIG_USER_PERSONAL_EMAIL") -}}
+{{-   $personal_email = env "GIT_CONFIG_USER_PERSONAL_EMAIL" -}}
+{{- else if $interactive -}}
+{{-   $personal_email = promptString "personal email" $personal_email -}}
+{{- end -}}
+
+{{- $personal_signingkey := "" -}}
+{{- if hasKey . "personal_signingkey" -}}
+{{-   $personal_signingkey = .personal_signingkey -}}
+{{- else if $interactive -}}
+{{-   $personal_signingkey = promptString "personal_signingkey" -}}
+{{- end -}}
+
 {{- $osId:= .chezmoi.os -}}
 {{- if hasKey .chezmoi.osRelease "id" -}}
 {{-   $osId = printf "%s" .chezmoi.osRelease.id -}}
@@ -117,6 +158,21 @@ data:
   signingkey: "{{ $signingkey }}"
   githubuser: "{{ $githubuser }}"
   launchpaduser: "{{ $launchpaduser }}"
+{{- if $work_email }}
+  work_email: "{{ $work_email }}"
+{{- end }}
+{{- if $work_signingkey }}
+  work_signingkey: "{{ $work_signingkey }}"
+{{- end }}
+{{- if $work_srcdir }}
+  work_srcdir: "{{ $work_srcdir }}"
+{{- end }}
+{{- if $personal_email }}
+  personal_email: "{{ $personal_email }}"
+{{- end }}
+{{- if $personal_signingkey }}
+  personal_signingkey: "{{ $personal_signingkey }}"
+{{- end }}
   # platform-specific vars
   osId: {{ $osId | quote }}
   osFamily: {{ $osIdLike | quote }}

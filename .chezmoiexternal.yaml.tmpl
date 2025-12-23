@@ -132,6 +132,15 @@
 # Windows
 {{   $fonts_dir = joinPath (trimPrefix .chezmoi.homeDir .xdg_data_home | trimPrefix .chezmoi.pathSeparator) "Microsoft" "Windows" "Fonts" -}}
 {{ end -}}
+{{ if eq .chezmoi.os "darwin" -}}
+".local/share/iterm_open_with":
+  type: "git-repo"
+  url: "https://gist.github.com/f59a8308d42d71fdba41.git"
+  refreshPeriod: "168h"
+  pull:
+    args: ["--ff-only"]
+
+{{ end -}}
 {{ if eq .chezmoi.os "darwin" | or (eq .chezmoi.os "linux" | and (not (glob "/usr/share/fonts/TTF/MesloLGS-NF-*.ttf"))) -}}
 # Darwin OR (Linux AND non-existent fonts path): {{ glob "/usr/share/fonts/TTF/MesloLGS-NF-*.ttf" }}
 {{ $nerdFontsChecksumURL := gitHubLatestReleaseAssetURL "ryanoasis/nerd-fonts" "SHA-256.txt" -}}

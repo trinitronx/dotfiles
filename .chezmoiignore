@@ -207,6 +207,9 @@ Library/Preferences/org.videolan.vlc/vlcrc
 {{ if ne .chezmoi.os "linux" | or (not (lookPath "solaar")) -}}
 .config/solaar
 {{ end -}}
+{{  if not (lookPath "labwc") -}}
+.config/labwc
+{{  end -}}
 {{ if not (lookPath "sway") -}}
 # Don't install sway-related configs
 .config/sway

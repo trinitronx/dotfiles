@@ -26,6 +26,17 @@
       <action name="Execute" command="footclient" />
     </keybind>
 {{- end }}
+{{- if lookPath "rofimoji" | and (lookPath "rofi")  }}
+    <keybind key="A-S-e">
+      <action name="Execute" command="rofimoji -a clipboard" />
+    </keybind>
+    <keybind key="W-semicolon">
+      <action name="Execute" command="rofimoji --action=menu" />
+    </keybind>
+    <keybind key="W-apostrophe">
+      <action name="Execute" command="rofimoji --action=menu --files=kaomoji" />
+    </keybind>
+{{- end }}
 {{- if lookPath "rofi-lpass" | and (lookPath "rofi" | or (lookPath "wofi")) }}
     <keybind key="W-S-g">
       <action name="Execute" command="rofi -combi  -modi lpass:rofi-lpass -show lpass -normal-window -no-steal-focus" />

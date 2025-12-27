@@ -47,10 +47,10 @@
 {{- end }}
 {{- if lookPath "remotestash" }}
     <keybind key="W-S-x">
-      <action name="Execute" command="remotestash pull --name iPhone | wl-copy" />
+      <action name="Execute" command="/bin/sh -c 'remotestash pull --name iPhone | wl-copy'" />
     </keybind>
     <keybind key="W-S-v">
-      <action name="Execute" command="iconv -f UTF-8 -t UTF-8//TRANSLIT <(wl-paste) -o - | remotestash push --name iPhone" />
+      <action name="Execute" command="/bin/bash -c 'iconv -f UTF-8 -t UTF-8//TRANSLIT &lt;(wl-paste) -o - | remotestash push --name iPhone'" />
     </keybind>
 {{- end }}
   </keyboard>

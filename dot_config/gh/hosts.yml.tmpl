@@ -17,5 +17,8 @@ github.com:
         {{ .githubuser }}: {{ if eq .chezmoi.os "darwin" | or (not $lpItem) }}{}{{ else }}
             oauth_token: {{ $lpItem.note.clientsecret | trim }}{{ end }}
 {{-     end -}}
+{{-   else if hasKey . "githubuser" }}
+    users:
+        {{ .githubuser }}:
 {{-   end }}
 {{- end }}

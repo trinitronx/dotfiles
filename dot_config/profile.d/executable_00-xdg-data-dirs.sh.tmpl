@@ -1,0 +1,12 @@
+{{ $default_xdg_data_dirs := "/usr/local/share:/usr/share" -}}
+{{ if eq .osId "raspbian" -}}
+{{  $default_xdg_data_dirs = "~/.local/share:/usr/local/share:/usr/share/raspi-ui-overrides:/usr/share:/usr/share/gdm:/var/lib/menu-xdg" -}}
+{{ end -}}
+{{ if lookPath "flatpak" -}}
+{{  $default_xdg_data_dirs = list "~/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share" $default_xdg_data_dirs | join ":" -}}
+{{ end -}}
+case ":${XDG_DATA_DIRS}:" in
+  *:"${XDG_DATA_HOME:-$HOME/.local/share}":*) : ;; # no-op
+  *) export XDG_DATA_DIRS="${XDG_DATA_HOME:-$HOME/.local/share}:${XDG_DATA_DIRS:-{{ $default_xdg_data_dirs }}}" ;;
+esac
+

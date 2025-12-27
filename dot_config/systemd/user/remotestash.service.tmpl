@@ -19,4 +19,8 @@ Restart=always
 RestartSec=10
 #KillMode=mixed
 [Install]
+{{ if eq .osId "raspbian" -}}
+WantedBy=graphical-session.target
+{{ else -}}
 WantedBy=multi-user.target
+{{ end -}}

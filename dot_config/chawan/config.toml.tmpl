@@ -164,11 +164,55 @@ x => "https://mojeek.com/search?q=" +
 	encodeURIComponent(x.split(":").slice(1).join(":"));
 '''
 
+[omnirule.gh]
+match = '^gh:'
+substitute-url = '''
+x => "https://github.com/search?q=" +
+	encodeURIComponent(x.split(":").slice(1).join(":"));
+'''
+
 [siteconf.ddg]
 url = 'https?://((html|lite|www).)?duckduckgo.com/.*'
 # on current master, stylesheet is deprecated in favor of user-style
 #user-style = '* { background: -cha-ansi(default) !important }'
 user-style = '*, *::before, *::after { color: revert !important; background-color: revert !important }'
+autofocus = true
+
+[siteconf.gh]
+host = '(.*\.)?github(assets|usercontent)?.com'
+cookie = "save"
+share-cookie-jar = 'github.com'
+scripting = true
+images = true
+autofocus = true
+history = true
+# Workaround for no U2f/webauthn support: redirect to TOTP 2FA app URL
+rewrite-url = '''
+(x) => {
+    if (x.host == "github.com" && x.pathname == "/sessions/two-factor/webauthn") {
+      x.pathname = "/sessions/two-factor/app";
+    }
+    /* No need to return; URL objects are passed by reference. */
+}
+'''
+
+[siteconf.sr-ht]
+host = '(.*\.)?sr\.ht'
+cookie = "save"
+share-cookie-jar = 'sr.ht'
+scripting = true
+images = true
+autofocus = true
+history = true
+
+[siteconf.google]
+host = '(.*\.)?(google|gmail)?.com'
+cookie = "save"
+share-cookie-jar = 'google.com'
+scripting = true
+images = true
+autofocus = true
+history = true
 
 [siteconf.downloads]
 url = 'about:downloads'

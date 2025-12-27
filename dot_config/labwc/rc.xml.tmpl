@@ -3,15 +3,15 @@
   <keyboard>
     <default />
     <!-- The W- prefix refers to the Super key, and the S refers to Shift key -->
-{{ if lookPath "rofi" -}}
+{{- if lookPath "rofi" }}
     <keybind key="W-d">
       <action name="Execute" command="rofi -show combi -combi-modi 'drun,run' -terminal 'footclient' -ssh-command '{terminal} {ssh-client} {host} [-p {port}]' -run-shell-command '{terminal} {cmd}' -show-icons -font 'Nunito Sans Light 12' -lines 10" />
     </keybind>
-{{ end -}}
-{{ if lookPath "rofi-lpass" | and (lookPath "rofi" | or (lookPath "wofi")) -}}
+{{- end }}
+{{- if lookPath "rofi-lpass" | and (lookPath "rofi" | or (lookPath "wofi")) }}
     <keybind key="W-S-g">
       <action name="Execute" command="rofi -combi  -modi lpass:rofi-lpass -show lpass -normal-window -no-steal-focus" />
     </keybind>
-{{ end -}}
+{{- end }}
   </keyboard>
 </labwc_config>

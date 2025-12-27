@@ -26,7 +26,7 @@ _viewGitLogLineUnfancy="$_gitLogLineToHash | xargs -I % sh -c 'git show %'"
 
 _unameOS="$(uname -s)"
 case "${_unameOS}" in
-    Linux*)     if command -v wayland-scanner >/dev/null 2>&1 && [[ "$XDG_SESSION_TYPE" == *wayland* ]]; then
+    Linux*)     if command -v wayland-scanner >/dev/null 2>&1 || [[ "$XDG_SESSION_TYPE" == *wayland* ]]; then
                   _clipboardCopyCmd="wl-copy"
                 elif [[ "$XDG_SESSION_TYPE" != *wayland* ]]; then
                   _clipboardCopyCmd="xclip -selection clipboard -in"

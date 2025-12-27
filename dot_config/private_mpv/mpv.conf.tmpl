@@ -60,5 +60,9 @@ load-select=no
 [interactive]
 profile-cond=not current_vo:find('libmpv')
 script = /etc/mpv/scripts/mpris.so
+{{ if eq .osId "raspbian" -}}
+vo = gpu
+{{ else -}}
 vo = gpu-next
+{{- end }}
 

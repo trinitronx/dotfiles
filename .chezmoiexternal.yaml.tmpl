@@ -112,6 +112,15 @@
     args: ["--ff-only"]
 
 {{ end -}}
+{{ if lookPath "lpass" | and ( lookPath "rofi" | or ( lookPath "wofi" )) -}}
+".local/share/rofi-lpass":
+  type: "git-repo"
+  url: "https://github.com/trinitronx/rofi-lpass"
+  refreshPeriod: "168h"
+  pull:
+    args: ["--ff-only"]
+
+{{ end -}}
 {{ if eq .chezmoi.arch "amd64" | and (or (eq .chezmoi.os "linux") | or (eq .chezmoi.os "darwin") | or (eq .chezmoi.os "windows")) -}}
 ".local/bin/tpnote":
   type: "archive-file"

@@ -92,7 +92,7 @@
 {{-   $osIdLike = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.idLike -}}
 {{- end -}}
 
-{{- if eq $osId "debian" | and (stat (joinPath "/" "etc" "apt" "sources.list.d" "raspi.list")) -}}
+{{- if eq $osId "debian" | and (stat (joinPath "/" "etc" "apt" "sources.list.d" "raspi.list") | or (stat (joinPath "/" "etc" "apt" "sources.list.d" "raspi.sources")) | or (stat (joinPath "/" "etc" "rpi-issue"))) -}}
 {{-   $osId = "raspbian" -}}
 {{-   $osIdLike = "raspbian-debian" -}}
 {{- end -}}

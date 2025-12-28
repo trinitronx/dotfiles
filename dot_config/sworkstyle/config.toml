@@ -47,6 +47,7 @@
 "org.gnome.Fractal" = { type = "exact", value= ' ' }
 "cursor-url-handler" = { type = "exact", value= '▕ 󱀤 󰆧 │' }
 "findex" = { type = "exact", value= "󱁴 " }
+"org.speedcrunch.speedcrunch" = { type = "exact", value= " " }
 # Browser tab titles
 "archlinux" = { type = "generic", value = ' ' }
 "archwiki" = { type = "generic", value = ' ' }

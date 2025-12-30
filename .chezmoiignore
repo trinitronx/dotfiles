@@ -135,14 +135,16 @@ app_modified/**
 .config/profile.d/01-osx-sbin-path.sh
 .config/profile.d/02-osx-gnu-screen-debug-path.sh
 .local/bin/iterm_open_with
-{{   if not (eq .chezmoi.hostname "lyra") -}}
-.config/profile.d/02-osx-monterey-homebrew-freeze.sh
-{{   end -}}
 {{ else if not (eq .chezmoi.os "linux") -}}
 .config/profile.d/00-xdg-terminal-command.sh
 .config/fontconfig
 .local/bin/lsiommu
 .local/bin/remotestash
+{{ end -}}
+{{ if eq .chezmoi.os "darwin" -}}
+{{   if not (eq .chezmoi.hostname "lyra") -}}
+.config/profile.d/02-osx-monterey-homebrew-freeze.sh
+{{   end -}}
 {{ end -}}
 {{ if not (eq .chezmoi.os "linux") | or (not (lookPath "systemctl")) | or (not (lookPath "remotestash")) -}}
 .config/systemd/user/remotestash.service

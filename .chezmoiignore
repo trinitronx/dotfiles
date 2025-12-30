@@ -145,6 +145,9 @@ app_modified/**
 {{   if not (eq .chezmoi.hostname "lyra") -}}
 .config/profile.d/02-osx-monterey-homebrew-freeze.sh
 {{   end -}}
+{{   if not (hasKey . "work_email") -}}
+.config/profile.d/02-osx-gcloud-homebrew-python.sh
+{{   end -}}
 {{ end -}}
 {{ if not (eq .chezmoi.os "linux") | or (not (lookPath "systemctl")) | or (not (lookPath "remotestash")) -}}
 .config/systemd/user/remotestash.service

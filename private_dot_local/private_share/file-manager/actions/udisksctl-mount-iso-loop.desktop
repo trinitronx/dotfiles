@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Action
+Profiles=mount-loop;
+Name=Mount ISO via udisksctl loop-setup
+Icon=folder-cd
+TargetContext=true
+[X-Action-Profile mount-loop]
+MimeTypes=application/vnd.efi.iso;
+Exec=udisksctl loop-setup -f %f

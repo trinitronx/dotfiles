@@ -143,6 +143,7 @@ app_modified/**
 .config/fontconfig
 .local/bin/lsiommu
 .local/bin/remotestash
+.local/share/file-manager
 {{ end -}}
 {{ if not (eq .chezmoi.os "linux") | or (not (lookPath "systemctl")) | or (not (lookPath "remotestash")) -}}
 .config/systemd/user/remotestash.service

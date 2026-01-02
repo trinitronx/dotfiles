@@ -382,6 +382,20 @@ from_dir_content = """
 {{ input | append(newline=true) }}
 """
 
+### Default filename template for a new note file on disk. It implements the
+### sync criteria for note metadata in front matter and filename.
+### This template needs `Context<ReadyForFilenameTemplate>`.
+from_dir_filename = """
+{%- if fm.fm_sort_tag -%}
+  {%- set tag = fm.fm_sort_tag | as_str -%}
+{%- else -%}
+  {%- set tag = dir_path | find_last_created_file
+        | incr_sort_tag(default=now() | date(format='%Y-%m-%d')) -%}
+{%- endif -%}
+{{ fm.fm_title | sanit | prepend(with_sort_tag=tag) }}\
+{{ fm.fm_subtitle | sanit | prepend(with='--') }}\
+{{ fm.fm_file_ext | default(value = extension_default ) | prepend(with='.') }}"""
+
 ### Default template used, when the opened text file (with a known file
 ### extension) is missing a YAML front matter section. This template prepends
 ### such a header. The template inserts information extracted from the input
@@ -409,6 +423,19 @@ from_text_file_content = """
 
 {{ doc.body }}
 """
+
+### Default filename template used when the input file (with a known
+### file extension) is missing a YAML front matter section.
+### The text file's sort-tag and file extension are preserved.
+from_text_file_filename = """
+{%- if path | file_sort_tag != '' -%}
+  {%- set tag = path | file_sort_tag -%}
+{%- else -%}
+  {%- set tag = doc_file_date | default(value=now()) | date(format='%Y-%m-%d') -%}
+{%- endif -%}
+{{ fm.fm_title | sanit | prepend(with_sort_tag=tag) }}\
+{{ fm.fm_subtitle | default(value='') | sanit | prepend(with='--') }}\
+{{ path | file_ext | prepend(with='.') }}"""
 
 ### Default template used when the command line `<path>` parameter points to an
 ### existing - to be annotated - non-`.md`-file. `{{ path}}` points to that
@@ -450,5 +477,209 @@ annotate_file_content = """
 {{- input | prepend(with='\n____\n\n')}}
 
 """
+
+[[scheme]]
+name = "zettel"
+
+[scheme.filename]
+
+sort_tag.separator = "--"
+
+[scheme.tmpl]
+
+from_dir_content = """
+{%- set stdin = stdin.body |default(value = '') -%}
+{%- set html_clipboard = html_clipboard.body |default(value = '') -%}
+{%- set txt_clipboard = txt_clipboard.body |default(value = '') -%}
+
+{%- set title_text = fm.fm_title | default(value = '')
+     | replace_empty(with = stdin | html_heading )
+     | replace_empty(with = stdin | link_text_picky )
+     | replace_empty(with = stdin | link_text )
+     | replace_empty(with = stdin | heading )
+     | replace_empty(with = html_clipboard | html_heading )
+     | replace_empty(with = html_clipboard | link_text_picky )
+     | replace_empty(with = txt_clipboard | link_text_picky )
+     | replace_empty(with = html_clipboard | link_text )
+     | replace_empty(with = txt_clipboard | link_text )
+     | replace_empty(with = txt_clipboard | heading )
+     | replace_empty(with = path | trim_file_sort_tag )
+     | trim  -%}
+        
+{%- set stdin = stdin
+     | html_to_markup(extension=extension_default, default=stdin)
+     | append(newline=true) -%}
+{%- set clipboard = html_clipboard
+     | html_to_markup(extension=extension_default, default=txt_clipboard) -%}
+{%- set input = stdin ~ clipboard | trim -%}
+
+{%- set languages = fm.fm_languages
+      | default(value = [force_lang])
+      | replace_empty(with = input
+          | replace_empty(with = path | trim_file_sort_tag )
+          | get_lang
+          | map_lang(default=lang) ) -%}
+{%- set lang = fm.fm_lang | default(value=languages | first ) -%}
+
+{%- if fm.fm_sort_tag -%}
+  {%- set tag = fm.fm_sort_tag -%}
+{%- else -%}
+  {%- set tag_default = now() | date(format='%Y-%m-%d') -%}
+  {%- set tag = dir_path
+        | find_last_created_file
+        | incr_sort_tag(default=tag_default) -%}
+{%- endif -%}
+---
+{{ title_text | trunc | to_yaml(key='fm_title') }}
+{{ fm.fm_keywords | default(value = ['note']) | to_yaml(key='fm_keywords') }}
+{{ fm.fm_author | default(value=username | title) | to_yaml(key='fm_author') }}
+{{ fm.fm_date | default(value = now()|date(format='%Y-%m-%d')) | to_yaml(key='fm_date') }}
+{{ lang | to_yaml(key='fm_lang') }}
+{% if languages | length > 1 -%}
+  {{ languages | to_yaml(key='fm_languages') | append(newline=true) }}
+{%- endif -%}
+{#- We deliberately ignore `fm.fm_scheme` from clipboards -#}
+{{ 'zettel' | to_yaml(key='fm_scheme') }}
+{{ tag | to_yaml(key='fm_sort_tag') }}
+{% if fm -%}
+  {{- fm 
+    | remove(key='fm_title')
+    | remove(key='fm_keywords')
+    | remove(key='fm_author')
+    | remove(key='fm_date')
+    | remove(key='fm_lang')
+    | remove(key='fm_languages')
+    | remove(key='fm_scheme')
+    | remove(key='fm_sort_tag')
+    | to_yaml
+    | prepend(newline=true)
+    | append(newline=true) -}}
+{%- endif -%}
+---
+
+{{ input | append(newline=true) }}
+"""
+
+from_dir_filename = """
+{%- set keywords = '' -%}
+{%- for sub in fm.fm_keywords | default(value=[]) -%}
+{%- set_global keywords = keywords~sub~'_' -%}
+{%- endfor -%}
+
+{%- if fm.fm_sort_tag -%}
+  {%- set tag = fm.fm_sort_tag | as_str -%}
+{%- else -%}
+  {%- set tag_default = now() | date(format='%Y-%m-%d') -%}
+  {%- set tag = dir_path
+        | find_last_created_file
+        | incr_sort_tag(default=tag_default) -%}
+{%- endif -%}
+
+{{ fm.fm_title | sanit | prepend(with_sort_tag=tag) }}\
+{{ keywords | default(value='') | sanit | prepend(with='__') }}\
+{{ fm.fm_file_ext | default(value = extension_default ) | prepend(with='.') }}"""
+
+from_text_file_content = """
+{%- set file = path | file_name -%}
+{%- if file is containing('==')-%}
+  {%- set file = file | split(pat='==') | nth(n=1) -%}
+{%- endif -%}
+
+{%- if path | file_sort_tag != '' -%}
+  {%- set tag = path | file_sort_tag -%}
+{%- else -%}
+  {%- set tag = doc_file_date | default(value=now()) | date(format='%Y-%m-%d') -%}
+{%- endif -%}
+
+{%- set file = file | file_stem -%}
+{%- set title = file | split(pat='__') | first -%}
+{%- set keywords = file | split(pat='__') | nth(n=1) -%}
+{%- set languages = [force_lang]
+   | replace_empty(with = doc.body | get_lang | map_lang(default=lang)) -%}
+{%- set lang = languages | first -%}
+---
+{{ title | trunc | to_yaml(key='fm_title') }}
+{{ keywords | split(pat='_') | to_yaml(key='fm_keywords') }}
+{{ username | capitalize | to_yaml(key='fm_author') }}
+{{ doc_file_date | default(value=now()) | date(format='%Y-%m-%d') | to_yaml(key='fm_date') }}
+{{ lang | to_yaml(key='fm_lang') }}
+{% if languages | length > 1 -%}
+{{ languages | to_yaml(key='fm_languages') | append(newline=true) }}
+{%- endif -%}
+{{ 'zettel' | to_yaml(key='fm_scheme') }}
+{{ tag | to_yaml(key='fm_sort_tag') }}
+# {{ path | file_name | to_yaml(key='fm_orig_name', tab=12) }}
+---
+
+{{ doc.body }}
+"""
+
+from_text_file_filename = """
+{%- if fm.fm_sort_tag -%}
+  {%- set tag = fm.fm_sort_tag -%}
+{%- else -%}
+  {%- if path | file_sort_tag != '' -%}
+    {%- set tag = path | file_sort_tag -%}
+  {%- else -%}
+    {%- set tag = doc_file_date | default(value=now()) | date(format='%Y-%m-%d') -%}
+  {%- endif -%}
+{%- endif -%}
+
+{%- set keywords = '' -%}
+{%- if fm.fm_keywords | as_str == fm.fm_keywords -%}
+  {%- set keywords = fm.fm_keywords -%}
+{%- else -%}
+  {%- for sub in fm.fm_keywords | default(value=[]) -%}
+    {%- set_global keywords = keywords~sub~'_' -%}
+  {%- endfor -%}
+{%- endif -%}
+
+{{ fm.fm_title | sanit | prepend(with_sort_tag=tag) }}\
+{{ keywords | sanit | prepend(with='__') }}\
+{{ path | file_ext | prepend(with='.') }}"""
+
+annotate_file_content = """
+{%- set stdin = stdin.body |default(value = '') -%}
+{%- set html_clipboard = html_clipboard.body |default(value = '') -%}
+{%- set txt_clipboard = txt_clipboard.body |default(value = '') -%}
+
+{%- set stdin = stdin
+      | html_to_markup(extension=extension_default, default=stdin)
+      | append(newline=true) -%}
+{%- set clipboard = html_clipboard
+      | html_to_markup(extension=extension_default, default=txt_clipboard) -%}
+{%- set input = stdin ~ clipboard | trim_end -%}
+{%- set languages = [force_lang]
+      | replace_empty(with = input | replace_empty(with = path | file_stem) | get_lang | map_lang(default=lang)) -%}
+{%- set lang = languages | first -%}
+
+{%- set fname = path | file_name -%}
+{%- if extension_default != 'rst' -%}
+   {%- set link = '[' ~ fname ~ '](<' ~ fname ~ '>)' -%}
+{%- else -%}
+   {%- set link = '`<' ~ fname ~ '>`_' -%}
+  {%- endif -%}
+---
+{{ path | trim_file_sort_tag | to_yaml(key='fm_title') }}
+{{ ['note'] | to_yaml(key='fm_keywords') }}
+{{ username | capitalize | to_yaml(key='fm_author') }}
+{{ now() | date(format='%Y-%m-%d') | to_yaml(key='fm_date') }}
+{{ lang | to_yaml(key='fm_lang') }}
+{% if languages | length > 1 -%}
+{{ languages | to_yaml(key='fm_languages') | append(newline=true) }}
+{%- endif -%}
+{{ 'zettel' | to_yaml(key='fm_scheme') }}
+{{ path | file_sort_tag | to_yaml(key='fm_sort_tag') }}
+---
+
+{{ link }}
+{{- input | prepend(with='\n____\n\n')}}
+
+"""
+
+### This is the end of scheme "zettel"
+
+
+
 
 

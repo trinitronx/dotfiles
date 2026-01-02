@@ -1,9 +1,0 @@
-[Desktop Entry]
-Type=Action
-Profiles=unmount-loop;
-Name=Unmount ISO via udisksctl loop-delete
-Icon=folder-cd
-TargetContext=true
-[X-Action-Profile unmount-loop]
-MimeTypes=application/vnd.efi.iso;
-Exec=/bin/sh -c 'udisksctl loop-delete --block-device $(losetup -O NAME --noheadings --associated %f)'

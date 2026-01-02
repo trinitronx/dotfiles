@@ -133,8 +133,10 @@ app_modified/**
 {{ if not (eq .chezmoi.os "darwin") -}}
 .config/profile.d/01-osx-manpath.sh
 .config/profile.d/01-osx-sbin-path.sh
+.config/profile.d/02-osx-gcloud-homebrew-python.sh
 .config/profile.d/02-osx-gnu-screen-debug-path.sh
 .config/profile.d/02-osx-homebrew-shellenv.sh
+.config/profile.d/02-osx-monterey-homebrew-freeze.sh
 .local/bin/iterm_open_with
 {{ else if not (eq .chezmoi.os "linux") -}}
 .config/profile.d/00-xdg-terminal-command.sh

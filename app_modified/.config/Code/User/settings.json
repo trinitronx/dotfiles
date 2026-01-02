@@ -138,7 +138,7 @@
       "editor.formatOnType": true // Enable formatting while typing
     },
     "yaml.schemas": {
-      "file://${userHome}/.vscode/extensions/atlassian.atlascode-3.8.15-universal/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+      "file://${userHome}/.vscode/extensions/atlassian.atlascode-4.0.13-universal/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
     "gitlens.graph.dimMergeCommits": true,
     "gitlens.views.repositories.showIncomingActivity": true,

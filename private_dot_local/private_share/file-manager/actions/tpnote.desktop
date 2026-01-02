@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Action
+Name=Convert to Tp-Note
+Name[en]=Convert to Tp-Note
+Icon=note
+Profiles=tpnote-open;
+
+[X-Action-Profile tpnote-open]
+Name[en]=Convert to Tp-Note
+MimeTypes=text/plain;text/markdown;text/x-rst;
+Exec=tpnote %f
+

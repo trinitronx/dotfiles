@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Action
+Name=View with Tp-Note
+Name[en]=View with Tp-Note
+Icon=document-preview
+Profiles=tpnote-view;
+
+[X-Action-Profile tpnote-view]
+Name[en]=View with Tp-Note
+MimeTypes=text/plain;text/markdown;text/x-rst;
+Exec=tpnote -v -n %f
+

@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Action
+Name=Export Tp-Note
+Name[en]=Export Tp-Note
+Icon=note
+Profiles=tpnote-export;
+
+[X-Action-Profile tpnote-export]
+Name[en]=Export Tp-Note
+MimeTypes=text/plain;text/markdown;text/x-rst;
+Exec=tpnote --export . %f
+

@@ -156,14 +156,7 @@ app_modified/**
 {{ end -}}
 {{ if not (eq .chezmoi.os "linux") | or (not (lookPath "systemctl")) | or (not (lookPath "remotestash")) -}}
 .config/systemd/user/remotestash.service
-.config/systemd/user/multi-user.target.wants/remotestash.service
-.config/systemd/user/graphical-session.target.wants/remotestash.service
-{{ end -}}
-{{ if eq .osId "raspbian" -}}
-.config/systemd/user/multi-user.target.wants
-.config/systemd/user/multi-user.target.wants/remotestash.service
-{{ else -}}
-.config/systemd/user/graphical-session.target.wants/remotestash.service
+.config/systemd/user/default.target.wants/remotestash.service
 {{ end -}}
 {{- /* Different file paths for mailvelope gpgme config on Linux vs MacOS */ -}}
 {{ if ne .chezmoi.os "darwin" | or (not (lookPath "gpgme-json")) -}}

@@ -8,6 +8,8 @@
 
 [Unit]
 Description=RemoteStash Service
+After=avahi-daemon.socket
+
 [Service]
 Type=simple
 PIDFile={{ .xdg_runtime_dir }}/remotestash.pid
@@ -18,9 +20,6 @@ WorkingDirectory={{ .xdg_config_home }}/remotestash
 Restart=always
 RestartSec=10
 #KillMode=mixed
+
 [Install]
-{{ if eq .osId "raspbian" -}}
-WantedBy=graphical-session.target
-{{ else -}}
-WantedBy=multi-user.target
-{{ end -}}
+WantedBy=default.target

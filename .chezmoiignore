@@ -9,6 +9,7 @@ README.md
 .config/zsh/.zsh_history
 app_modified
 app_modified/**
+.gitkeep
 {{ if not (lookPath "ack") -}}
 .ackrc
 {{ end -}}

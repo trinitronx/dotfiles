@@ -8,6 +8,8 @@
 
 [Unit]
 Description=RemoteStash Service
+After=avahi-daemon.socket
+
 [Service]
 Type=simple
 PIDFile={{ .xdg_runtime_dir }}/remotestash.pid

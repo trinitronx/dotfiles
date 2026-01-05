@@ -15,6 +15,14 @@ app_modified/**
 {{ if not (lookPath "ag") -}}
 .config/ag
 {{ end -}}
+{{   if not (lookPath "amp") -}}
+.config/amp
+{{   end -}}
+{{ if .xdg_config_home -}}
+{{   if not (glob (joinPath .xdg_config_home "amp" "bin" "amp")) -}}
+.local/bin/amp
+{{   end -}}
+{{ end -}}
 {{ if not (lookPath "azap") -}}
 .azap
 {{ end -}}

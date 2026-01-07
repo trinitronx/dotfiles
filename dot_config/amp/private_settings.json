@@ -55,6 +55,15 @@
       "action": "reject",
       "matches": {
         "cmd": [
+          "/\\b(cat|grep|head|tail|less|more|bat|see)\\b([\\s\"']*?|.+?)\\/etc\\/shadow[-~]*([\\s\"']*)$/"
+        ]
+      }
+    },
+    {
+      "tool": "Bash",
+      "action": "reject",
+      "matches": {
+        "cmd": [
           "/\\b(cat|grep|head|tail|less|more|bat|see)\\b([\\s\"']*?|.+?)\\.config\\/gcloud\\/logs\\/.*?([\\s\"']*)$/"
         ]
       }

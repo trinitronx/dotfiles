@@ -25,6 +25,51 @@
   "amp.permissions": [
     {
       "tool": "Bash",
+      "action": "reject",
+      "matches": {
+        "cmd": [
+          "/\\b(cat|grep|head|tail|less|more|bat|see)\\b([\\s\"']*?|.+?)google_application_credentials\\.json([\\s\"']*)$/"
+        ]
+      }
+    },
+    {
+      "tool": "Bash",
+      "action": "reject",
+      "matches": {
+        "cmd": [
+          "/\\b(cat|grep|head|tail|less|more|bat|see)\\b([\\s\"']*?|.+?)application_default_credentials\\.json([\\s\"']*)$/"
+        ]
+      }
+    },
+    {
+      "tool": "Bash",
+      "action": "reject",
+      "matches": {
+        "cmd": [
+          "/\\b(cat|grep|head|tail|less|more|bat|see)\\b([\\s\"']*?|.+?)\\.config\\/gcloud\\/logs\\/.*?([\\s\"']*)$/"
+        ]
+      }
+    },
+    {
+      "tool": "Bash",
+      "action": "reject",
+      "matches": {
+        "cmd": [
+          "/\\b(cat|grep|head|tail|less|more|bat|see)\\b([\\s\"']*?|.+?)\\.config\\/op\\/.*?([\\s\"']*)$/"
+        ]
+      }
+    },
+    {
+      "tool": "Bash",
+      "action": "reject",
+      "matches": {
+        "cmd": [
+          "/\\b(cat|grep|head|tail|less|more|bat|see)\\b([\\s\"']*?|.+?)\\.config\\/gcloud\\/legacy_credentials\\/.*?([\\s\"']*)$/"
+        ]
+      }
+    },
+    {
+      "tool": "Bash",
       "action": "ask",
       "matches": {
         "cmd": [

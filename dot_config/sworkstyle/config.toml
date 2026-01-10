@@ -48,6 +48,14 @@
 "cursor-url-handler" = { type = "exact", value= '▕ 󱀤 󰆧 │' }
 "findex" = { type = "exact", value= "󱁴 " }
 "org.speedcrunch.speedcrunch" = { type = "exact", value= " " }
+"libreoffice-writer" = { type = "exact", value= "󰈙 " }
+"libreoffice-calc" = { type = "exact", value= "󰓱 " }
+"libreoffice-draw" = { type = "exact", value= " " }
+"libreoffice-base" = { type = "exact", value= "󰆼 " }
+"libreoffice-impress" = { type = "exact", value= "󱜤 " }
+"libreoffice-math" = { type = "exact", value= "▕ 󰡱  │" }
+"libreoffice-startcenter" = { type = "exact", value= "󱂪 " }
+"soffice" = { type = "exact", value= "󱕕 " }
 # Browser tab titles
 "archlinux" = { type = "generic", value = ' ' }
 "archwiki" = { type = "generic", value = ' ' }

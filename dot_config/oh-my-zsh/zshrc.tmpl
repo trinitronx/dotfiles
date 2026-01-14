@@ -2,7 +2,6 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 {{ $omz_path := "" -}}
-{{ $omz_plugins := list "git" "pyenv" "python" "vscode" "zsh-sweep" "zhooks" -}}
 {{ if eq .osFamily "linux-arch" -}}
 {{   $omz_path = "/usr/share/oh-my-zsh/" -}}
 {{ else -}}
@@ -10,6 +9,11 @@
 {{ end -}}
 # Path to your oh-my-zsh installation.
 ZSH="{{ $omz_path }}"
+
+{{ $omz_plugins := list "git" "pyenv" "python" "vscode" "zsh-sweep" "zhooks" -}}
+{{- if hasKey . "work_email" }}
+{{   $omz_plugins = append $omz_plugins "nvm" -}}
+{{ end -}}
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,

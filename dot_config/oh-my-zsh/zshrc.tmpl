@@ -2,6 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 {{ $omz_path := "" -}}
+{{ $omz_plugins := list "git" "pyenv" "python" "vscode" "zsh-sweep" "zhooks" -}}
 {{ if eq .osFamily "linux-arch" -}}
 {{   $omz_path = "/usr/share/oh-my-zsh/" -}}
 {{ else -}}
@@ -92,7 +93,8 @@ ZSH_CUSTOM="${XDG_CONFIG_HOME:-$HOME/.config}/oh-my-zsh/custom"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 #plugins=(git zsh-tmux-auto-title pyenv python vscode zsh-sweep zhooks)
-plugins=(git pyenv python vscode zsh-sweep zhooks)
+#plugins=(git pyenv python vscode zsh-sweep zhooks)
+plugins=({{ $omz_plugins | join " " }})
 
 
 # User configuration

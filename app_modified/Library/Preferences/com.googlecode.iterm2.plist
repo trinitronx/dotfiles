@@ -1963,7 +1963,7 @@ Marks and Annotations.Previous Mark</string>
 				<key>editor</key>
 				<string>com.sublimetext.3</string>
 				<key>text</key>
-				<string>/Users/jcuzella/.local/bin/iterm_open_with \5 \1 \2</string>
+				<string>~/.local/bin/iterm_open_with \5 \1 \2</string>
 			</dict>
 			<key>Send Code When Idle</key>
 			<false/>
@@ -1994,7 +1994,7 @@ Marks and Annotations.Previous Mark</string>
 			<key>Window Type</key>
 			<integer>0</integer>
 			<key>Working Directory</key>
-			<string>/Users/pivotal</string>
+			<string>~/</string>
 		</dict>
 		<dict>
 			<key>ASCII Anti Aliased</key>
@@ -2850,7 +2850,7 @@ Marks and Annotations.Previous Mark</string>
 				<key>editor</key>
 				<string>com.sublimetext.3</string>
 				<key>text</key>
-				<string>/Users/jcuzella/.local/bin/iterm_open_with \5 \1 \2</string>
+				<string>~/.local/bin/iterm_open_with \5 \1 \2</string>
 			</dict>
 			<key>Send Code When Idle</key>
 			<false/>
@@ -3053,7 +3053,7 @@ Marks and Annotations.Previous Mark</string>
 			<key>Window Type</key>
 			<integer>2</integer>
 			<key>Working Directory</key>
-			<string>/Users/pivotal</string>
+			<string>~/</string>
 		</dict>
 		<dict>
 			<key>ASCII Anti Aliased</key>
@@ -3903,7 +3903,7 @@ Marks and Annotations.Previous Mark</string>
 				<key>editor</key>
 				<string>com.sublimetext.3</string>
 				<key>text</key>
-				<string>/Users/jcuzella/.local/bin/iterm_open_with \5 \1 \2</string>
+				<string>~/.local/bin/iterm_open_with \5 \1 \2</string>
 			</dict>
 			<key>Send Code When Idle</key>
 			<false/>
@@ -3938,7 +3938,7 @@ Marks and Annotations.Previous Mark</string>
 			<key>Window Type</key>
 			<integer>2</integer>
 			<key>Working Directory</key>
-			<string>/Users/pivotal</string>
+			<string>~/</string>
 		</dict>
 		<dict>
 			<key>ASCII Anti Aliased</key>
@@ -4771,7 +4771,7 @@ Marks and Annotations.Previous Mark</string>
 				<key>editor</key>
 				<string>com.sublimetext.3</string>
 				<key>text</key>
-				<string>/Users/jcuzella/.local/bin/iterm_open_with \5 \1 \2</string>
+				<string>~/.local/bin/iterm_open_with \5 \1 \2</string>
 			</dict>
 			<key>Send Code When Idle</key>
 			<false/>
@@ -4980,7 +4980,7 @@ Marks and Annotations.Previous Mark</string>
 			<key>Window Type</key>
 			<integer>8</integer>
 			<key>Working Directory</key>
-			<string>/Users/pivotal</string>
+			<string>~/</string>
 		</dict>
 	</array>
 	<key>NoSyncAllAppVersions</key>

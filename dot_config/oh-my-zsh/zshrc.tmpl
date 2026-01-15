@@ -11,7 +11,7 @@
 ZSH="{{ $omz_path }}"
 {{ $omz_plugins := list "git" "pyenv" "python" "vscode" "zsh-sweep" "zhooks" -}}
 {{- if hasKey . "work_email" }}
-{{   $omz_plugins = concat $omz_plugins (list "nvm" "1password") -}}
+{{   $omz_plugins = concat $omz_plugins (list "kubectl" "nvm" "1password") -}}
 {{ end -}}
 
 # Set name of the theme to load --- if set to "random", it will

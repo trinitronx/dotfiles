@@ -170,9 +170,11 @@ app_modified/**
 .config/systemd/user/remotestash.service
 .config/systemd/user/default.target.wants/remotestash.service
 {{ end -}}
+{{ if ne .chezmoi.os "darwin" -}}
+Library
+{{ end -}}
 {{- /* Different file paths for mailvelope gpgme config on Linux vs MacOS */ -}}
 {{ if ne .chezmoi.os "darwin" | or (not (lookPath "gpgme-json")) -}}
-Library
 Library/Application Support
 Library/Application Support/Mozilla
 Library/Application Support/Mozilla/NativeMessagingHosts

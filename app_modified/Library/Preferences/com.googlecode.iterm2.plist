@@ -1212,6 +1212,8 @@ Marks and Annotations.Previous Mark</string>
 	<integer>7</integer>
 	<key>LeftOption</key>
 	<integer>2</integer>
+	<key>LoadPrefsFromCustomFolder</key>
+	<true/>
 	<key>MaxVertically</key>
 	<false/>
 	<key>New Bookmarks</key>
@@ -4978,6 +4980,8 @@ Marks and Annotations.Previous Mark</string>
 			<string>kNextWindowPointerAction</string>
 		</dict>
 	</dict>
+	<key>PrefsCustomFolder</key>
+	<string>~/.local/share/chezmoi/app_modified/Library/Preferences</string>
 	<key>Print In Black And White</key>
 	<true/>
 	<key>PromptOnClose</key>

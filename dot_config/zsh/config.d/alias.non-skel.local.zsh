@@ -64,3 +64,6 @@ alias ff="fzf -m --preview \
 
 # Cisco vt100 screenrc RS-232 serial console
 alias cisco-console='screen -c ~/.config/screen/screenrc.cisco-vt100 $@'
+
+# K8s
+alias kctx='kubectx'

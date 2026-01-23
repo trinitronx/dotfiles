@@ -33,6 +33,9 @@ app_modified/**
 {{ if not (lookPath "batcat") -}}
 .config/profile.d/09-alias-batcat.sh
 {{ end -}}
+{{ if not (lookPath "fdfind") -}}
+.config/profile.d/09-alias-fdfind.sh
+{{ end -}}
 {{ if not (lookPath "broot") -}}
 .config/broot
 .config/profile.d/08-broot-br-func.sh

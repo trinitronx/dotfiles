@@ -1,0 +1,16 @@
+{{ $icon_theme := "" -}}
+{{ $gtk_theme := "" -}}
+{{ if (eq .chezmoi.os "linux") | and (eq .osId "ubuntu") -}}
+{{   $icon_theme = "Yaru" -}}
+{{   $gtk_theme = "Yaru-dark" -}}
+{{ else -}}
+{{   $icon_theme = "Papirus-Dark-Maia" -}}
+{{   $gtk_theme = "Matcha-dark-sea" -}}
+{{ end -}}
+# 2023-10-02: JMC: Explicit settings to make GTK3 apps behave (e.g. geeqie)
+# Keep in-parity with: /usr/share/sway/themes/matcha-green/definitions
+[Settings]
+gtk-application-prefer-dark-theme = 1
+gtk-icon-theme-name = {{ $icon_theme }}
+gtk-theme-name = {{ $gtk_theme }}
+gtk-font-name = Roboto 11

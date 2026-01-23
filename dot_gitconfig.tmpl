@@ -96,7 +96,11 @@
 [commit]
 	gpgsign = true
 [gpg]
+{{- if lookPath "gpg2" }}
 	program = gpg2
+{{- else }}
+	program = gpg
+{{- end }}
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f

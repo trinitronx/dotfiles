@@ -443,6 +443,9 @@ Library/Preferences/org.videolan.vlc/vlcrc
 {{ if not (eq .chezmoi.os "darwin") | or (not (lookPath "gcloud")) -}}
 .config/zsh/config.d/02-gcloud-macos-zsh-completion.zsh
 {{ end -}}
+{{ if ne .chezmoi.os "darwin" | or (not (glob "/Applications/Rancher Desktop.app")) -}}
+.config/profile.d/07-rancher-cli.sh
+{{ end -}}
 {{ if not (eq .chezmoi.os "linux") | or (not (lookPath "code")) -}}
 .config/Code
 {{ end -}}

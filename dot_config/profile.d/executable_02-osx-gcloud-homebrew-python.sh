@@ -1,1 +1,1 @@
-export CLOUDSDK_PYTHON=/opt/homebrew/Cellar/python@3.14/3.14.2/bin/python3.14
+export CLOUDSDK_PYTHON=/opt/homebrew/opt/python@3.14/libexec/bin/python

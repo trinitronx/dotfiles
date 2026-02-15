@@ -171,6 +171,13 @@ x => "https://github.com/search?q=" +
 	encodeURIComponent(x.split(":").slice(1).join(":"));
 '''
 
+[omnirule.hn]
+match = '^hn:'
+substitute-url = '''
+x => "https://hn.algolia.com/?query=" +
+	encodeURIComponent(x.split(":").slice(1).join(":"));
+'''
+
 [siteconf.ddg]
 url = 'https?://((html|lite|www).)?duckduckgo.com/.*'
 # on current master, stylesheet is deprecated in favor of user-style
@@ -213,6 +220,87 @@ scripting = true
 images = true
 autofocus = true
 history = true
+
+[siteconf.reddit]
+host = '(.*\.)?reddit\.com'
+cookie = "save"
+share-cookie-jar = 'reddit.com'
+scripting = true
+images = true
+autofocus = true
+history = true
+# Workaround for broken login js buttons & comment XHR loader
+rewrite-url = '''
+(x) => {
+    if (x.host == "www.reddit.com") {
+      x.host = "old.reddit.com";
+    }
+    /* No need to return; URL objects are passed by reference. */
+}
+'''
+
+[siteconf.hn]
+host = '(.*\.)?ycombinator\.com'
+cookie = "save"
+share-cookie-jar = 'ycombinator.com'
+scripting = true
+images = true
+autofocus = true
+history = true
+
+[siteconf.hn-search]
+host = 'hn\.algolia\.com'
+cookie = "save"
+share-cookie-jar = 'algolia.com'
+scripting = true
+images = true
+autofocus = true
+history = true
+
+[siteconf.manjaro]
+host = '(.*\.)?manjaro\.org'
+cookie = "save"
+share-cookie-jar = 'manjaro.org'
+scripting = true
+images = true
+autofocus = true
+history = true
+
+[siteconf.glab]
+host = '(.*\.)?gitlab\.com'
+cookie = "save"
+share-cookie-jar = 'gitlab.com'
+scripting = true
+images = true
+autofocus = true
+history = true
+
+[siteconf.die]
+host = '(.*\.)?die\.net'
+cookie = "save"
+share-cookie-jar = 'die.net'
+scripting = true
+images = true
+autofocus = true
+history = true
+meta-refresh = "always"
+
+[siteconf.medium]
+host = '(.*\.)?medium\.com'
+cookie = "save"
+share-cookie-jar = 'medium.com'
+scripting = true
+images = true
+autofocus = true
+history = true
+rewrite-url = '''
+(x) => {
+    if (x.host == "medium.com") {
+      x.host = "freedium-mirror.cfd";
+    }
+    /* No need to return; URL objects are passed by reference. */
+}
+'''
 
 [siteconf.downloads]
 url = 'about:downloads'

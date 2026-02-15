@@ -40,6 +40,7 @@
 "irssi" = { type = "generic", value = '▕  󰻞 │' }
 "seahorse" = { type = "exact", value= "󱕵" }
 "veracrypt" = { type = "exact", value= "󱃬 " }
+"gcr-prompter" = { type = "exact", value= "" }
 "org.pwmt.zathura" = { type = "exact", value= "󰷊" }
 "io.gitlab.news_flash.NewsFlash" = { type = "exact", value= '▕ 󰑫  │' }
 "org.manjaro.pamac.manager" = { type = "exact", value= ' ' }

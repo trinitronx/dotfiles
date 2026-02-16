@@ -39,6 +39,7 @@
 "vim" = { type = "generic", value = "" }
 "irssi" = { type = "generic", value = '▕  󰻞 │' }
 "seahorse" = { type = "exact", value= "󱕵" }
+"org.gnome.seahorse.Application" = { type = "exact", value= "󱕵" }
 "veracrypt" = { type = "exact", value= "󱃬 " }
 "gcr-prompter" = { type = "exact", value= "" }
 "org.pwmt.zathura" = { type = "exact", value= "󰷊" }

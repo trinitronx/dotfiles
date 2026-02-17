@@ -250,6 +250,7 @@ Library/Preferences/org.videolan.vlc/vlcrc
 .local/bin/idle_inhibitor_windows
 .local/bin/idle_inhibitor_windows_user_or_app
 .config/xdg-desktop-portal*
+.config/xdg-desktop-portal-wlr/sway
 .local/share/sway/scripts/set-session-locked-hint.sh
 {{   if not (lookPath "swayidle-conf") -}}
 .config/sway/idle.yaml

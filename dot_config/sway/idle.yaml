@@ -33,10 +33,12 @@ timeouts:
 before-sleep: 'playerctl pause;
   loginctl lock-session & sleep \$sleep_delay'
 after-resume: swaymsg "output * power on"
-lock: 'dbus-send --session --dest=org.gnome.keyring --type=method_call --print-reply /org/freedesktop/secrets org.freedesktop.Secret.Service.LockService;
+lock: 'systemctl stop --user waybar.service;
+  dbus-send --session --dest=org.gnome.keyring --type=method_call --print-reply /org/freedesktop/secrets org.freedesktop.Secret.Service.LockService;
   dbus-send --system --print-reply --dest=org.freedesktop.login1 /org/freedesktop/login1/session/auto org.freedesktop.login1.Session.SetLockedHint boolean:true;
   makoctl mode -a locked;
   swaymsg exec \$swaylock'
 unlock: 'dbus-send --system --print-reply --dest=org.freedesktop.login1 /org/freedesktop/login1/session/auto org.freedesktop.login1.Session.SetLockedHint boolean:false;
+  systemctl start --user waybar.service;
   makoctl mode -r locked; sleep 5 && pkill -x -SIGUSR2 waybar;'
 idlehint: '240'

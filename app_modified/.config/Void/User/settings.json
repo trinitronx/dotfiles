@@ -168,9 +168,6 @@
       "editor.semanticHighlighting.enabled": true, // Enable semantic highlighting
       "editor.formatOnType": true // Enable formatting while typing
     },
-    "yaml.schemas": {
-      "file://${userHome}/.void-editor/extensions/atlassian.atlascode-4.0.13/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
-    },
     "gitlens.graph.dimMergeCommits": true,
     "gitlens.views.repositories.showIncomingActivity": true,
     "gitlens.graph.minimap.additionalTypes": [

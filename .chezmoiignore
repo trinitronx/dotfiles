@@ -204,6 +204,9 @@ Library/Preferences/com.googlecode.iterm2.plist
 # Don't run iTerm custom config setup if not macOS or not installed
 .chezmoiscripts/05-iterm2-custom-config.sh
 {{ end -}}
+{{ if ne .chezmoi.os "darwin" | or (not (lookPath "nerdctl")) -}}
+.config/zsh/config.d/02-osx-rancher-desktop-nerdctl-completion.zsh
+{{ end -}}
 {{ if ne .chezmoi.os "darwin" | or (not (lookPath "tpnote")) -}}
 Library/Application Support/rs.tpnote
 {{ end -}}

@@ -67,3 +67,6 @@ alias cisco-console='screen -c ~/.config/screen/screenrc.cisco-vt100 $@'
 
 # K8s
 alias kctx='kubectx'
+
+# Google Cloud CLI
+alias gauth='gcloud auth login --update-adc'

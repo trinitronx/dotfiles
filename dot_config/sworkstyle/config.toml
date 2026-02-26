@@ -36,6 +36,7 @@
 "pavucontrol" = { type = "exact", value = " " }
 "imv" = " "
 "org.gnome.dspy" = { type = "exact", value= "" }
+"org.freedesktop.Bustle" = { type = "exact", value= " " }
 "vim" = { type = "generic", value = "" }
 "irssi" = { type = "generic", value = '▕  󰻞 │' }
 "seahorse" = { type = "exact", value= "󱕵" }

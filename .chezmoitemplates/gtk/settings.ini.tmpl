@@ -1,0 +1,8 @@
+{{- /* # Keep gtk/theme.json.tmpl vars in-parity with: /usr/share/sway/themes/matcha-green/definitions */ -}}
+{{- $gtk := includeTemplate "gtk/theme.json.tmpl" . | fromJson -}}
+# 2023-10-02: JMC: Explicit settings to make GTK apps behave (e.g. geeqie [GTK3])
+[Settings]
+gtk-application-prefer-dark-theme = 1
+gtk-icon-theme-name = {{ $gtk.icon_theme }}
+gtk-theme-name = {{ $gtk.gtk_theme }}
+gtk-font-name = Roboto 11

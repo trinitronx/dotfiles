@@ -173,6 +173,9 @@ app_modified/**
 .config/systemd/user/remotestash.service
 .config/systemd/user/default.target.wants/remotestash.service
 {{ end -}}
+{{ if not (eq .chezmoi.os "linux") | or (not (lookPath "soundconverter")) -}}
+.local/share/applications/soundconverter.desktop
+{{ end -}}
 {{ if ne .chezmoi.os "darwin" -}}
 Library
 {{ end -}}

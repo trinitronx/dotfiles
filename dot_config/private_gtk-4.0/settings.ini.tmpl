@@ -1,14 +1,1 @@
-{{ $icon_theme := "" -}}
-{{ $gtk_theme := "" -}}
-{{ if (eq .chezmoi.os "linux") | and (eq .osId "ubuntu") -}}
-{{   $icon_theme = "Yaru" -}}
-{{   $gtk_theme = "Yaru-dark" -}}
-{{ else -}}
-{{   $icon_theme = "Papirus-Dark-Maia" -}}
-{{   $gtk_theme = "Matcha-dark-sea" -}}
-{{ end -}}
-[Settings]
-gtk-application-prefer-dark-theme = 1
-gtk-icon-theme-name = {{ $icon_theme }}
-gtk-theme-name = {{ $gtk_theme }}
-gtk-font-name = Roboto 11
+{{- template "gtk/settings.ini.tmpl" . -}}

@@ -37,6 +37,15 @@
       "action": "reject",
       "matches": {
         "cmd": [
+          "/\\bchezmoi\\b(.*?)apply(?!.*?--dry-run.*)/"
+        ]
+      }
+    },
+    {
+      "tool": "Bash",
+      "action": "reject",
+      "matches": {
+        "cmd": [
           "/\\b(cat|grep|head|tail|less|more|bat|see)\\b([\\s\"']*?|.+?)google_application_credentials\\.json([\\s\"']*)$/"
         ]
       }

@@ -1,0 +1,5 @@
+{{- if (eq .chezmoi.os "linux") | and (eq .osId "ubuntu") -}}
+{"icon_theme":"Yaru","gtk_theme":"Yaru-dark"}
+{{- else -}}
+{"icon_theme":"Papirus-Dark-Maia","gtk_theme":"Matcha-dark-sea"}
+{{- end -}}

@@ -178,10 +178,10 @@ app_modified/**
 {{ end -}}
 {{ if ne .chezmoi.os "darwin" -}}
 Library
+Library/Application Support
 {{ end -}}
 {{- /* Different file paths for mailvelope gpgme config on Linux vs MacOS */ -}}
 {{ if ne .chezmoi.os "darwin" | or (not (lookPath "gpgme-json")) -}}
-Library/Application Support
 Library/Application Support/Mozilla
 Library/Application Support/Mozilla/NativeMessagingHosts
 Library/Application Support/Mozilla/NativeMessagingHosts/gpgmejson.json

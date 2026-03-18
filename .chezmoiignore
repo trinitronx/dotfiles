@@ -581,3 +581,6 @@ Library/Preferences/org.videolan.vlc/vlcrc
 {{ if not (lookPath "lpass") | or (not (lookPath "rofi") | and (not (lookPath "wofi"))) -}}
 .local/bin/rofi-lpass
 {{ end -}}
+{{ if not (lookPath "gcloud") | or (not (lookPath "jq")) -}}
+.local/bin/gctx
+{{ end -}}

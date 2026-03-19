@@ -1,0 +1,25 @@
+{{- /* vim: set syntax=go : */ -}}
+{{- /* chezmoi:modify-template */ -}}
+{{- if lookPath "lpass" -}}
+{{-   $lpItemName := printf "void-settings-sync - Gist token - %s" .chezmoi.hostname -}}
+{{-   $lpItemCmd := printf "%s '%s' 2>/dev/null || echo '[]'" "lpass show --quiet --json --fixed-strings " $lpItemName -}}
+{{-   $lpItemExists := not (empty ((output "/bin/sh" "-c" $lpItemCmd) | fromJson)) -}}
+{{-   if $lpItemExists -}}
+{{-     $lpResults := lastpass $lpItemName -}}
+{{-     if $lpResults -}}
+{{-       $lpItem := index $lpResults 0 -}}
+{{-       $token := $lpItem.note.secretAPIKey | trim -}}
+{{-       if .chezmoi.stdin -}}
+{{          fromJson .chezmoi.stdin | setValueAtPath "token" $token | toPrettyJson }}
+{{-       else -}}
+{{-         dict "token" $token | toPrettyJson }}
+{{-       end -}}
+{{-     else -}}
+{{-       .chezmoi.stdin -}}
+{{-     end -}}
+{{-   else -}}
+{{-     .chezmoi.stdin -}}
+{{-   end -}}
+{{- else -}}
+{{-   .chezmoi.stdin -}}
+{{- end -}}

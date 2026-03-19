@@ -1,0 +1,32 @@
+{{- /* vim: set syntax=go : */ -}}
+{{- /* chezmoi:modify-template */ -}}
+{{- $appModifiedSrcFile := "app_modified/.config/Void/User/syncLocalSettings.json" -}}
+{{- $base := include $appModifiedSrcFile | fromJson -}}
+{{- /* Merge dynamic app-modified fields from the current file (stdin) */ -}}
+{{- /* These will be dynamic for each host, and won't be tracked in git */ -}}
+{{- if .chezmoi.stdin -}}
+{{-   $current := fromJson .chezmoi.stdin -}}
+{{-   if hasKey $current "version" -}}
+{{-     $_ := set $base "version" $current.version -}}
+{{-   end -}}
+{{-   if hasKey $current "lastUpload" -}}
+{{-     $_ := set $base "lastUpload" $current.lastUpload -}}
+{{-   end -}}
+{{-   if hasKey $current "lastDownload" -}}
+{{-     $_ := set $base "lastDownload" $current.lastDownload -}}
+{{-   end -}}
+{{- end -}}
+{{- /* Inject token from lpass */ -}}
+{{- if lookPath "lpass" -}}
+{{-   $lpItemName := printf "void-settings-sync - Gist token - %s" .chezmoi.hostname -}}
+{{-   $lpItemCmd := printf "%s '%s' 2>/dev/null || echo '[]'" "lpass show --quiet --json --fixed-strings " $lpItemName -}}
+{{-   $lpItemExists := not (empty ((output "/bin/sh" "-c" $lpItemCmd) | fromJson)) -}}
+{{-   if $lpItemExists -}}
+{{-     $lpResults := lastpass $lpItemName -}}
+{{-     if $lpResults -}}
+{{-       $lpItem := index $lpResults 0 -}}
+{{-       $_ := set $base "token" ($lpItem.note.secretAPIKey | trim) -}}
+{{-     end -}}
+{{-   end -}}
+{{- end -}}
+{{ $base | toPrettyJson "    " }}

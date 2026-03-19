@@ -1,0 +1,7 @@
+#!/bin/sh
+
+{{- if lookPath "void" }}
+void --install-extension Shan.code-settings-sync
+{{- else }}
+echo "$0: WARN: void not found on PATH - skipping Shan.code-settings-sync extension install"
+{{- end }}

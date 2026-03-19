@@ -978,5 +978,6 @@
         "tool": "skill",
         "action": "allow"
       }
-    ]
+    ],
+    "sync.gist": "9402a3adf7ce68171821b19f4f25b1d9"
 }

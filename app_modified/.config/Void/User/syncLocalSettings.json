@@ -1,0 +1,34 @@
+{
+  "ignoreUploadFiles": [
+    "state.*",
+    "syncLocalSettings.json",
+    ".DS_Store",
+    "sync.lock",
+    "projects.json",
+    "projects_cache_vscode.json",
+    "projects_cache_git.json",
+    "projects_cache_svn.json",
+    "gpm_projects.json",
+    "gpm-recentItems.json"
+  ],
+  "ignoreUploadFolders": [
+    "workspaceStorage",
+    "History",
+    "globalStorage"
+  ],
+  "ignoreExtensions": [],
+  "gistDescription": "Void Settings Sync Gist",
+  "downloadPublicGist": false,
+  "supportedFileExtensions": [
+    "json",
+    "code-snippets"
+  ],
+  "openTokenLink": true,
+  "disableUpdateMessage": false,
+  "githubEnterpriseUrl": null,
+  "askGistDescription": false,
+  "customFiles": {},
+  "hostName": null,
+  "universalKeybindings": false,
+  "autoUploadDelay": 20
+}

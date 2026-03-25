@@ -54,7 +54,11 @@ __aliases() {
     __view_alias_code | \
     bat --plain --language bash --color always | \
     perl -0777 -pe 's/\n/\0/g' | \
-    fzf --read0 --ansi --reverse --multi --highlight-line
+    fzf --read0 \
+        --ansi \
+        --reverse \
+        --multi \
+        --highlight-line
 }
 
 # Browse shell alias definitions with fzf

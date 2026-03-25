@@ -58,7 +58,9 @@ __aliases() {
         --ansi \
         --reverse \
         --multi \
-        --highlight-line
+        --highlight-line \
+        --delimiter '=' \
+        --accept-nth 1
 }
 
 # Browse shell alias definitions with fzf

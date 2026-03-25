@@ -69,4 +69,4 @@ alias cisco-console='screen -c ~/.config/screen/screenrc.cisco-vt100 $@'
 alias kctx='kubectx'
 
 # Google Cloud CLI
-alias gauth='gcloud auth login --update-adc'
+alias gauth='rm -f ${XDG_CONFIG_HOME:-$HOME/.config}/gcloud/application_default_credentials.json ~/.kube/gke_gcloud_auth_plugin_cache && gcloud auth login --update-adc'

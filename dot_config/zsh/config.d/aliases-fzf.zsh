@@ -65,8 +65,15 @@ __aliases() {
 
 # Browse shell alias definitions with fzf
 als() {
+  local _accepted_item
   # Filter out alias namespace clutter using grep by default
-  __aliases
+  _accepted_item="$(__aliases)"
+
+  # If the user didn't cancel fzf (string is not empty)
+  if [[ -n "$_accepted_item" ]]; then
+    # Push the command into the next prompt buffer
+    print -z "$_accepted_item"
+  fi
 }
 
 # Browse ALL shell alias definitions with fzf

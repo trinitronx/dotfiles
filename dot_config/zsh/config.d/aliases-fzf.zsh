@@ -54,13 +54,26 @@ __aliases() {
     __view_alias_code | \
     bat --plain --language bash --color always | \
     perl -0777 -pe 's/\n/\0/g' | \
-    fzf --read0 --ansi --reverse --multi --highlight-line
+    fzf --read0 \
+        --ansi \
+        --reverse \
+        --multi \
+        --highlight-line \
+        --delimiter '=' \
+        --accept-nth 1
 }
 
 # Browse shell alias definitions with fzf
 als() {
+  local _accepted_item
   # Filter out alias namespace clutter using grep by default
-  __aliases
+  _accepted_item="$(__aliases)"
+
+  # If the user didn't cancel fzf (string is not empty)
+  if [[ -n "$_accepted_item" ]]; then
+    # Push the command into the next prompt buffer
+    print -z "$_accepted_item"
+  fi
 }
 
 # Browse ALL shell alias definitions with fzf

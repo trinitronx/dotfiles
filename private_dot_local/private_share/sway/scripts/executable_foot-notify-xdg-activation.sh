@@ -1,30 +1,23 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# Wrapper around notify-send that captures the XDG activation token
+# and outputs it in the format foot expects (xdgtoken=TOKEN).
+#
+# notify-send writes the token to --activation-token-fd, not stdout.
+# This wrapper captures it via FD 3 and appends it to stdout for foot.
+set -eu
 
-app_id="$1"
-category="$2"
-urgency="$3"
-expire_time="$4"
-icon="$5"
-muted="$6"
-sound_name="$7"
-replace_id="$8"
-action_argument="$9"
-title="${10}"
-body="${11}"
-action_name="${12}"
-action_label="${13}"
+token_file="$(mktemp)"
+cleanup() { rm -f "$token_file"; }
+trap cleanup EXIT
 
-notify-send --wait \
-  --app-name "${app_id}" \
-  --icon "${app_id}" \
-  --category "${category}" \
-  --urgency "${urgency}" \
-  --expire-time "${expire_time}" \
-  --hint "STRING:image-path:${icon}" \
-  --hint "BOOLEAN:suppress-sound:${muted}" \
-  --hint "STRING:sound-name:${sound_name}" \
-  --replace-id "${replace_id}" "${action_argument}" \
-  --print-id -- "${title} ${body}" 1>/dev/null 2>&1
-# Output format - see "Window activation (focusing)" section: man 5 foot.ini
-echo "${action_name}"
-echo "xdgtoken=${XDG_TOKEN}"
+# Pass all arguments through to notify-send unchanged.
+# FD 3 captures the XDG activation token; stdout (ID + action) goes to foot.
+notify-send --activation-token-fd=3 "$@" 3>"$token_file"
+status=$?
+
+# Append the token line if one was received
+if [ -s "$token_file" ]; then
+    printf 'xdgtoken=%s\n' "$(cat "$token_file")"
+fi
+
+exit "$status"

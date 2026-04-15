@@ -71,10 +71,11 @@ visual=yes
 # command-focused=no
 
 [desktop-notifications]
+command=foot-notify-xdg-activation.sh "${app-id}" "${category}" --urgency "${urgency}" --expire-time "${expire-time}" --hint "STRING:image-path:${icon}" --hint "BOOLEAN:suppress-sound:${muted}" --hint "STRING:sound-name:${sound-name}" --replace-id "${replace-id}" "${action-argument}" --print-id -- "${title} ${body}"
 # command=notify-send --wait --app-name ${app-id} --icon ${app-id} --category ${category} --urgency ${urgency} --expire-time ${expire-time} --hint STRING:image-path:${icon} --hint BOOLEAN:suppress-sound:${muted} --hint STRING:sound-name:${sound-name} --replace-id ${replace-id} ${action-argument} --print-id -- ${title} ${body}
-# command-action-argument=--action ${action-name}=${action-label}
+command-action-argument=--action "${action-name}=${action-label}"
 # close=""
-# inhibit-when-focused=yes
+inhibit-when-focused=yes
 
 
 [scrollback]

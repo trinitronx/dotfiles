@@ -2,13 +2,21 @@
 {{ $footclient_version_out := output "/bin/sh" "-c" "footclient --version" -}}
 {{ $footclient_version := regexReplaceAll "^footclient version: ([0-9.]+) .*" $footclient_version_out "${1}" | trim | toString -}}
 {{ $supports_colors_cursor_schema := semverCompare ">1.22.x" $footclient_version -}}
+{{ $supports_colors_light_dark_schema := semverCompare ">=1.26.0" $footclient_version -}}
+{{ $supports_colors_light_dark_schema := semverCompare ">=1.26.0" $footclient_version -}}
 ## footclient version: {{ $footclient_version }}
 ## supports colors.cursor: {{ $supports_colors_cursor_schema }}
+## supports colors-{dark,light}: {{ $supports_colors_light_dark_schema }}
+
+{{- if $supports_colors_light_dark_schema }}
+[colors-dark]
+{{- else  }}
 [colors]
+{{- end }}
 alpha=0.9
 foreground=eeeeee
 background=141a1b
-{{ if $supports_colors_cursor_schema -}}
+{{ if $supports_colors_cursor_schema | or $supports_colors_light_dark_schema -}}
 #cursor= 141a1b bd93f9 # Purple
 cursor= 141a1b 2eb398 # Matcha Teal
 {{ end -}}

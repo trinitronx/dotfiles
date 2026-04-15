@@ -10,6 +10,9 @@ token_file="$(mktemp)"
 cleanup() { rm -f "$token_file"; }
 trap cleanup EXIT
 
+# Play sound
+paplay /usr/share/sounds/freedesktop/stereo/message.oga
+
 # Pass all arguments through to notify-send unchanged.
 # FD 3 captures the XDG activation token; stdout (ID + action) goes to foot.
 notify-send --activation-token-fd=3 "$@" 3>"$token_file"

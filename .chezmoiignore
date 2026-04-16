@@ -57,6 +57,7 @@ app_modified/**
 {{ end -}}
 {{ if not (lookPath "foot") -}}
 .config/foot
+.local/bin/foot-notify-xdg-activation.sh
 {{ end -}}
 {{ if not (hasKey . "work_srcdir") -}}
 {{ osBase .xdg_config_home }}/git/config.work.local

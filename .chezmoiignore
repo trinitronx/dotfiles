@@ -168,6 +168,11 @@ app_modified/**
 .config/profile.d/02-osx-gcloud-homebrew-python.sh
 {{   end -}}
 {{ end -}}
+{{ if not (eq .chezmoi.os "linux") | or (not (lookPath "systemctl")) | or (not (lookPath "foks")) -}}
+.config/foks/config.jsonnet
+.config/systemd/user/foks.service
+.config/systemd/user/default.target.wants/foks.service
+{{ end -}}
 {{ if not (eq .chezmoi.os "linux") | or (not (lookPath "systemctl")) | or (not (lookPath "remotestash")) -}}
 .config/remotestash
 .config/systemd/user/remotestash.service

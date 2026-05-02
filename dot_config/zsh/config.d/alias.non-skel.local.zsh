@@ -23,7 +23,7 @@ alias irssi="irssi --home=${XDG_CONFIG_HOME:-${HOME}/.config}/irssi"
 
 ## Fuzzy Find Aliases
 
-alias imv-last-ss="makoctl history | jq -r '.data | .[] | map(select(.summary.data == \"Screenshot saved\")) | first | .body.data'  | imv"
+alias imv-last-ss="busctl --json=short --user call  org.freedesktop.Notifications /fr/emersion/Mako fr.emersion.Mako ListHistory | jq -r '.data | .[] | map(select(.summary.data == \"Screenshot saved\" and (.body.data | contains(\".goutputstream\") | not ))) | first | .body.data'  | imv"
 alias pushd-src='_pushd_src() { ARGS="$@"; pushd ~/src/pub/$(find ~/src/pub -mindepth 1 -maxdepth 1 -type d -printf "%T@/%f\0" | sort -z -n -r | cut -z -d/ -f2 | fzf $ARGS --read0 ) }; _pushd_src'
 
 # Source: https://seb.jambor.dev/posts/improving-shell-workflows-with-fzf/

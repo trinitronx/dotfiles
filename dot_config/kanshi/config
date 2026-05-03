@@ -27,6 +27,12 @@ profile hdtv-extended {
 	exec pkill -x -SIGUSR2 waybar
 }
 
+profile pikvm-extended {
+	output $lg_oled_output_desc position 0,0 scale 2
+	output $pikvm_output_desc position 3841,0 scale 1
+	exec pkill -x -SIGUSR2 waybar
+}
+
 profile pikvm-mirrored {
 	output $lg_oled_output_desc position 0,0 scale 2
 	output $pikvm_output_desc position 0,0 scale 1

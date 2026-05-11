@@ -1,0 +1,8 @@
+#debug-level guru
+#log-file /tmp/scdaemon.log
+{{ if eq .chezmoi.os "linux" -}}
+disable-ccid
+reader-port Yubico YubiKey FIDO+CCID
+{{ else if (eq .chezmoi.os "darwin") -}}
+#disable-ccid
+{{ end -}}

@@ -196,11 +196,10 @@
 {{/* gitHubLatestRelease doesn't expose per-asset digests, so fetch the assets endpoint and parse the JSON in-template */ -}}
 {{ $monaspaceRelease := gitHubLatestRelease "githubnext/monaspace" -}}
 {{ $monaspaceAssets := output "curl" "-Ls" $monaspaceRelease.AssetsURL | fromJson -}}
-{{ $monaspaceNerdFontURL := "" -}}
+{{ $monaspaceNerdFontURL := gitHubLatestReleaseAssetURL "githubnext/monaspace" "monaspace-nerdfonts-*.zip" -}}
 {{ $monaspaceNerdFontDigest := "" -}}
 {{ range $monaspaceAssets -}}
 {{   if hasPrefix "monaspace-nerdfonts-" .name -}}
-{{     $monaspaceNerdFontURL = .browser_download_url -}}
 {{     $monaspaceNerdFontDigest = .digest | trimPrefix "sha256:" -}}
 {{   end -}}
 {{ end -}}

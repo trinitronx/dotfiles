@@ -5455,6 +5455,8 @@ Marks and Annotations.Previous Mark</string>
 				<key>Red Component</key>
 				<real>1</real>
 			</dict>
+			<key>Automatically Enable Alternate Mouse Scroll</key>
+			<true/>
 			<key>BM Growl</key>
 			<true/>
 			<key>Background Color</key>
@@ -5822,6 +5824,8 @@ Marks and Annotations.Previous Mark</string>
 			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
 			<integer>2</integer>
+			<key>Restrict Alternate Mouse Scroll to Vertical</key>
+			<false/>
 			<key>Right Option Key Sends</key>
 			<integer>0</integer>
 			<key>Rows</key>
@@ -5832,6 +5836,8 @@ Marks and Annotations.Previous Mark</string>
 			<integer>0</integer>
 			<key>Scrollback With Status Bar</key>
 			<false/>
+			<key>Scrollback in Alternate Screen</key>
+			<true/>
 			<key>Selected Text Color</key>
 			<dict>
 				<key>Alpha Component</key>

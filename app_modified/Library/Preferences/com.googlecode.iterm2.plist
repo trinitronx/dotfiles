@@ -5585,6 +5585,8 @@ Marks and Annotations.Previous Mark</string>
 			<false/>
 			<key>Enable Triggers in Interactive Apps</key>
 			<false/>
+			<key>Faint Text Alpha</key>
+			<real>0.55000000000000004</real>
 			<key>Flashing Bell</key>
 			<false/>
 			<key>Foreground Color</key>
@@ -5812,6 +5814,8 @@ Marks and Annotations.Previous Mark</string>
 			<true/>
 			<key>Normal Font</key>
 			<string>MonaspaceKryptonNF-Regular 14</string>
+			<key>Only The Default BG Color Uses Transparency</key>
+			<true/>
 			<key>Option Key Sends</key>
 			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
@@ -6048,7 +6052,7 @@ Marks and Annotations.Previous Mark</string>
 			<key>Thin Strokes</key>
 			<integer>1</integer>
 			<key>Transparency</key>
-			<real>0.1342594304733728</real>
+			<real>0.050000000000000003</real>
 			<key>Triggers</key>
 			<array>
 				<dict>

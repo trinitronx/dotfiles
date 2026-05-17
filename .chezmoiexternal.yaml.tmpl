@@ -191,3 +191,29 @@
   checksum:
     sha256: {{ (output "/bin/sh" "-c" $jetBrainsMonoChecksumCommand) | trim | quote }}
 {{ end -}}
+{{ if eq .chezmoi.os "darwin" | or (eq .chezmoi.os "linux" | and (not (glob "/usr/share/fonts/OTF/MonaspaceKryptonNF-*.otf"))) -}}
+# Darwin OR (Linux AND non-existent fonts path): {{ glob "/usr/share/fonts/OTF/MonaspaceKryptonNF-*.otf" }}
+{{/* gitHubLatestRelease doesn't expose per-asset digests, so fetch the assets endpoint and parse the JSON in-template */ -}}
+{{ $monaspaceRelease := gitHubLatestRelease "githubnext/monaspace" -}}
+{{ $monaspaceAssets := output "curl" "-Ls" $monaspaceRelease.AssetsURL | fromJson -}}
+{{ $monaspaceNerdFontURL := "" -}}
+{{ $monaspaceNerdFontDigest := "" -}}
+{{ range $monaspaceAssets -}}
+{{   if hasPrefix "monaspace-nerdfonts-" .name -}}
+{{     $monaspaceNerdFontURL = .browser_download_url -}}
+{{     $monaspaceNerdFontDigest = .digest | trimPrefix "sha256:" -}}
+{{   end -}}
+{{ end -}}
+"{{ $fonts_dir }}/MonaspaceNF":
+  type: "archive"
+  url: {{ $monaspaceNerdFontURL | quote }}
+  refreshPeriod: "168h"
+  stripComponents: 1
+  exclude: [ "LICENSE.txt", "README.md" ]
+  include: [ "*.otf" ]
+  exact: false
+  private: true
+  readonly: true
+  checksum:
+    sha256: {{ $monaspaceNerdFontDigest | quote }}
+{{ end -}}

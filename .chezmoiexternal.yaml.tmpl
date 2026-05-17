@@ -172,7 +172,8 @@
   exact: false
   private: true
   readonly: true
-  checksum.sha256: {{ (output "/bin/sh" "-c" $mesloChecksumCommand) | trim }}
+  checksum:
+    sha256: {{ (output "/bin/sh" "-c" $mesloChecksumCommand) | trim | quote }}
 {{ end -}}
 {{ if eq .chezmoi.os "darwin" | or (eq .chezmoi.os "linux" | and (not (glob "/usr/share/fonts/TTF/JetBrainsMonoNerdFontMono-*.ttf"))) -}}
 # Darwin OR (Linux AND non-existent fonts path): {{ glob "/usr/share/fonts/TTF/MesloLGS-NF-*.ttf" }}
@@ -187,5 +188,6 @@
   exact: false
   private: true
   readonly: true
-  checksum.sha256: {{ (output "/bin/sh" "-c" $jetBrainsMonoChecksumCommand) | trim }}
+  checksum:
+    sha256: {{ (output "/bin/sh" "-c" $jetBrainsMonoChecksumCommand) | trim | quote }}
 {{ end -}}

@@ -5477,15 +5477,15 @@ Marks and Annotations.Previous Mark</string>
 			<key>Badge Color</key>
 			<dict>
 				<key>Alpha Component</key>
-				<real>0.5</real>
+				<real>0.65953876718213056</real>
 				<key>Blue Component</key>
-				<real>0.0</real>
+				<real>0.3411764800548554</real>
 				<key>Color Space</key>
-				<string>Calibrated</string>
+				<string>P3</string>
 				<key>Green Component</key>
-				<real>0.0</real>
+				<real>0.46666666865348821</real>
 				<key>Red Component</key>
-				<real>1</real>
+				<real>0.84313726425170898</real>
 			</dict>
 			<key>Badge Font</key>
 			<string>JetBrainsMonoNLNFM-Bold</string>

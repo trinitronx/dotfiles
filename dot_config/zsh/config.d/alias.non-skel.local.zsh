@@ -68,6 +68,7 @@ alias cisco-console='screen -c ~/.config/screen/screenrc.cisco-vt100 $@'
 # K8s
 alias kctx='kubectx'
 alias minikube-ps='minikube ssh -- sudo nerdctl --address unix:///var/run/containerd/containerd.sock --namespace k8s.io ps'
+alias minikube-docker='minikube ssh -- sudo nerdctl --address unix:///var/run/containerd/containerd.sock --namespace k8s.io'
 
 # Google Cloud CLI
 alias gauth='rm -f ${XDG_CONFIG_HOME:-$HOME/.config}/gcloud/application_default_credentials.json ~/.kube/gke_gcloud_auth_plugin_cache && gcloud auth login --update-adc'

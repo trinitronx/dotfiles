@@ -302,6 +302,16 @@ rewrite-url = '''
 }
 '''
 
+[siteconf.pkgs]
+host = '(.*\.)?pkgs\.org'
+cookie = "save"
+share-cookie-jar = 'pkgs.org'
+scripting = true
+images = true
+autofocus = true
+history = true
+meta-refresh = "always"
+
 [siteconf.downloads]
 url = 'about:downloads'
 meta-refresh = "always"

@@ -102,6 +102,15 @@
     args: ["--ff-only"]
 
 {{   end -}}
+{{   if lookPath "amp" -}}
+".local/share/amp-handoff-plugin":
+  type: "git-repo"
+  url: "https://github.com/jim-ampcode/handoff-plugin.git"
+  refreshPeriod: "168h"
+  pull:
+    args: ["--ff-only"]
+
+{{   end -}}
 {{ end -}}
 {{ if lookPath "mpv" | and ( lookPath "rofi" | or ( lookPath "wofi" )) -}}
 ".local/share/rofi-mpv-dvb":

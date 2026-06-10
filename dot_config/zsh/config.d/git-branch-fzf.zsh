@@ -55,8 +55,6 @@ __git_branches_ansi() {
           line_tail = substr(rest, end + 3)
 
           # Determine POSIX-compliant prefix evaluation via ~ /^[PATTERN]/
-          #if (name == "master")            color = ESC "[32m"
-          #if (name ~ /^VULN-/)             color = ESC "[36m"
           if (name ~ /^VULN-/)             color = ESC "[38;5;208m"
           else if (name ~ /^SRE-/)         color = ESC "[36m"
           else                             color = ESC "[97m" # Default fallback
@@ -71,7 +69,6 @@ __git_branches_ansi() {
 }
 
 typeset -g _gitBranchToHash _viewGitLogBranch _viewGitLogBranchUnfancy _clipboardCopyCmd _unameOS
-#_gitBranchToHash="git show-ref --hash=7 --branches '{}' | grep -o '[a-f0-9]\{7,40\}' | head -1 | tr -d '\n'"
 _gitBranchToHash="git rev-parse --short=7 '{1}' | tr -d '\n'"
 _viewGitLogBranch='git log --graph --decorate --oneline --abbrev-commit --color=always {1}'
 _viewGitLogBranchUnfancy='git log --graph --decorate --oneline --all --abbrev-commit --color=always {1}'
@@ -92,7 +89,7 @@ case "${_unameOS}" in
                 ;;
 esac
 
-#        --bind "alt-v:execute:$_viewGitLogBranchUnfancy | echo \${PAGER:-less} --pattern='(^|[^[:alnum:]_./-]){1}([^a-zA-Z0-9_./-]|\$)' | less" \
+## OLD:
 #        --bind "alt-v:execute:$_viewGitLogBranchUnfancy | \${PAGER:-less} --use-backslash --pattern='(^|[^[:alnum:]_./-]){1}([^a-zA-Z0-9_./()-]|\\$)'" \
 git-branch-fzf() {
   __git_branches_ansi | \
@@ -126,8 +123,6 @@ git-branch-fzf() {
 }
 
 git-branch-checkout() {
-  # TODO: read $_git_branch_fzf_result from STDOUT of user-interactive FZF command: `fzf --ansi  --height=33% --accept-nth 1`
-  ## DEBUG: echo git checkout "${_git_branch_fzf_result}"
   local _git_branch_fzf_result
 
   # Stream your custom formatted list directly into fzf
@@ -144,4 +139,4 @@ git-branch-checkout() {
   fi
 }
 
-alias ggb='git-branch-fzf'
+alias ggb='git-branch-checkout'

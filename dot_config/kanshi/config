@@ -38,3 +38,46 @@ profile pikvm-mirrored {
 	output $pikvm_output_desc position 0,0 scale 1
 	exec pkill -x -SIGUSR2 waybar
 }
+
+profile hdtv-pikvm-off {
+	output $lg_oled_output_desc position 1920,0 scale 2
+	output $vizio_m601d_output_desc position 0,0 scale 1
+	output $pikvm_output_desc disable
+	# NOTE: alias vars do not yet work in exec
+	#exec swaymsg workspace 10, move workspace to output '$vizio_m601d_output_desc'
+	#exec swaymsg workspace 1, move workspace to output '$lg_oled_output_desc'
+	exec swaymsg "output 'LG Electronics LG TV SSCR2 0x01010101' enable"
+	exec swaymsg "output 'VIZIO, Inc M601d-A3/A3R 0x01010101' enable"
+	exec swaymsg "focus output 'VIZIO, Inc M601d-A3/A3R 0x01010101', workspace number 10, workspace number 10 output 'VIZIO, Inc M601d-A3/A3R 0x01010101'"
+	exec swaymsg "focus output 'LG Electronics LG TV SSCR2 0x01010101', workspace number 1, workspace number 1 output 'LG Electronics LG TV SSCR2 0x01010101'"
+	exec pkill -x -SIGUSR2 waybar
+}
+
+profile hdtv-pikvm-mirrored {
+	output $lg_oled_output_desc position 1920,0 scale 2
+	output $vizio_m601d_output_desc position 0,0 scale 1
+	output $pikvm_output_desc position 0,0 scale 1
+	# NOTE: alias vars do not yet work in exec
+	#exec swaymsg workspace 10, move workspace to output '$vizio_m601d_output_desc'
+	#exec swaymsg workspace 1, move workspace to output '$lg_oled_output_desc'
+	exec swaymsg "output 'LG Electronics LG TV SSCR2 0x01010101' enable"
+	exec swaymsg "output 'VIZIO, Inc M601d-A3/A3R 0x01010101' enable"
+	exec swaymsg "focus output 'VIZIO, Inc M601d-A3/A3R 0x01010101', workspace number 10, workspace number 10 output 'VIZIO, Inc M601d-A3/A3R 0x01010101'"
+	exec swaymsg "focus output 'LG Electronics LG TV SSCR2 0x01010101', workspace number 1, workspace number 1 output 'LG Electronics LG TV SSCR2 0x01010101'"
+	exec pkill -x -SIGUSR2 waybar
+}
+
+profile hdtv-pikvm-extended {
+	output $lg_oled_output_desc position 1920,0 scale 2
+	output $vizio_m601d_output_desc position 0,0 scale 1
+	output $pikvm_output_desc position 3841,0 scale 1
+	# NOTE: alias vars do not yet work in exec
+	#exec swaymsg workspace 10, move workspace to output '$vizio_m601d_output_desc'
+	#exec swaymsg workspace 1, move workspace to output '$lg_oled_output_desc'
+	exec swaymsg "output 'LG Electronics LG TV SSCR2 0x01010101' enable"
+	exec swaymsg "output 'VIZIO, Inc M601d-A3/A3R 0x01010101' enable"
+	exec swaymsg "focus output 'VIZIO, Inc M601d-A3/A3R 0x01010101', workspace number 10, workspace number 10 output 'VIZIO, Inc M601d-A3/A3R 0x01010101'"
+	exec swaymsg "focus output 'LG Electronics LG TV SSCR2 0x01010101', workspace number 1, workspace number 1 output 'LG Electronics LG TV SSCR2 0x01010101'"
+	exec pkill -x -SIGUSR2 waybar
+}
+

@@ -8,7 +8,8 @@
         "@modelcontextprotocol/server-filesystem",
         "~/src/pub",
         "~/src/ao",
-        "~/.local/share/chezmoi"
+        "~/.local/share/chezmoi",
+        "/tmp"
       ]
     }
   },

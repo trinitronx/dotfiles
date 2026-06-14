@@ -139,6 +139,14 @@ force-pixels-per-line = false
 match = '^ddg:'
 substitute-url = 'x => "https://lite.duckduckgo.com/lite/?kp=-1&kd=-1&q=" + encodeURIComponent(x.split(":").slice(1).join(":"))'
 
+[omnirule.ms]
+match = '^ms:'
+substitute-url = 'x => "https://marginalia-search.com/search?query=" + encodeURIComponent(x.split(":").slice(1).join(":"))'
+
+[omnirule.wi]
+match = '^wi:'
+substitute-url = 'x => "https://wiby.me/?q=" + encodeURIComponent(x.split(":").slice(1).join(":"))'
+
 [omnirule.br]
 match = '^br:'
 substitute-url = 'x => "https://search.brave.com/search?q=" + encodeURIComponent(x.split(":").slice(1).join(":"))'
@@ -238,6 +246,15 @@ rewrite-url = '''
     /* No need to return; URL objects are passed by reference. */
 }
 '''
+
+[siteconf.redlib-catsarch]
+host = '(.*\.)?redlib\.catsarch\.com'
+cookie = "save"
+share-cookie-jar = 'redlib-catsarch'
+scripting = true
+images = true
+autofocus = true
+history = true
 
 [siteconf.hn]
 host = '(.*\.)?ycombinator\.com'

@@ -1,0 +1,5 @@
+{{- /* Use tofu on all other machines */ -}}
+{{ if ne .chezmoi.hostname "J-CUZELLA-C24Q1" -}}
+# Terraform -> OpenTofu
+alias terraform='tofu'
+{{ end -}}

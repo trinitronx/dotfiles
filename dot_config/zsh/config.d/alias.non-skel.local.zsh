@@ -15,8 +15,6 @@ alias latgi='lat-gi'
 
 # list dir stack
 alias dv='dirs -v'
-# Terraform -> OpenTofu
-alias terraform='tofu'
 
 # https://github.com/irssi/irssi/issues/640
 alias irssi="irssi --home=${XDG_CONFIG_HOME:-${HOME}/.config}/irssi"

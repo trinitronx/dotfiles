@@ -7371,6 +7371,8 @@ Marks and Annotations.Previous Mark</string>
 					<dict>
 						<key>jobName</key>
 						<string>claude</string>
+						<key>leaderOnly</key>
+						<true/>
 					</dict>
 					<key>matchType</key>
 					<integer>114</integer>

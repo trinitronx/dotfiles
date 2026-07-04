@@ -246,6 +246,8 @@
     "remote.localPortHost": "allInterfaces",
     "remote.SSH.remoteServerListenOnSocket": true,
     "rubyTestExplorer.debugCommand": "bundle exec rdebug-ide",
+    "rubyTestExplorer.rspecCommand": "rvm-auto-ruby -r bundler -e \"Bundler.require\" -e \"system(\\\"rspec \\\" + ARGV.join(\\\" \\\"))\" -- ",
+    "rubyTestExplorer.logpanel": true,
     "solargraph.useBundler": true,
     "solargraph.transport": "external",
     "github.copilot.enable": {
@@ -296,7 +298,6 @@
     "rubyLsp.rubyVersionManager": {
       "identifier": "rvm"
     },
-    "rubyTestExplorer.rspecCommand": "rvm-auto-ruby -r bundler -e \"Bundler.require\" -e \"system(\\\"rspec \\\" + ARGV.join(\\\" \\\"))\" -- ",
     "testing.coverageToolbarEnabled": true,
     "sonarlint.testFilePattern": "**/test/**,**/tests/**,**/*test,**/spec/**",
     "sonarlint.analysisExcludesStandalone": "**/node_modules/**,**/vendor,**/__pycache__/**,**/site-packages/**,**/.void-editor/**",

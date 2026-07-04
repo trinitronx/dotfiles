@@ -285,10 +285,10 @@
     "atlascode.jira.enabled": true,
     "atlascode.bitbucket.enabled": true,
     "chat.mcp.discovery.enabled": true,
+    "git.autofetch": true,
     "git.blame.editorDecoration.enabled": true,
     "gitlens.ai.model": "vscode",
     "files.autoSave": "afterDelay",
-    "git.autofetch": true,
     "rubyLsp.formatter": "auto",
     "rubyLsp.featureFlags": {
       "fullTestDiscovery": false

@@ -280,6 +280,7 @@
     "git.autofetch": true,
     "git.blame.editorDecoration.enabled": true,
     "gitlens.ai.model": "vscode",
+    "files.autoSave": "afterDelay",
 
     "rubyTestExplorer.rspecCommand": "rvm-auto-ruby -r bundler -e \"Bundler.require\" -e \"system(\\\"rspec \\\" + ARGV.join(\\\" \\\"))\" -- ",
     "amp.permissions": [

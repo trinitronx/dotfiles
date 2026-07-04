@@ -11,7 +11,7 @@
     },
     "window.titleBarStyle": "native",
     "workbench.tree.enableStickyScroll": false,
-    "workbench.colorTheme": "Default Dark Modern",
+    "workbench.colorTheme": "Dark Modern",
     "editor.fontFamily": "'JetBrainsMono Nerd Font Mono', 'JetBrainsMono Nerd Font', 'FiraCode Nerd Font Mono', 'Monoid Nerd Font Mono', 'Droid Sans Mono',  monospace, 'Droid Sans Fallback'",
     "terminal.integrated.fontFamily": "'JetBrainsMono Nerd Font', monospace",
     "terminal.integrated.allowChords": false,

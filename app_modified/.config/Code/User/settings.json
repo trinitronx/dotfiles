@@ -67,6 +67,10 @@
       "**/usr/bin/*",
       "**/usr/local/bin/*"
     ],
+    "python.locator": "native",
+    "python.defaultInterpreterPath": "~/.pyenv/shims/python",
+    "python.useEnvironmentsExtension": true,
+    // "python-envs.defaultEnvManager": "ms-python.python:pyenv",
     "[python]": {
       "editor.formatOnSave": true,
       "editor.codeActionsOnSave": {
@@ -77,6 +81,24 @@
       "editor.defaultFormatter": "charliermarsh.ruff"
       // "editor.defaultFormatter": "ms-python.python"
     },
+    "python.experiments.enabled": true,
+    "python.experiments.optInto": [
+      "pythonTestAdapter"
+      // "pythonTerminalEnvVarActivation"
+    ],
+    "python.terminal.activateEnvironment": true,
+    "debugpy.debugJustMyCode": false,
+    "python.analysis.exclude": [
+      "**/node_modules",
+      "**/__pycache__",
+      "**/.git"
+      // "**/site-packages",
+      // "**/3rdparty_repositories",
+      // "**/usr/lib/python3.*/dist-packages",
+      // "**/usr/lib/python3.*/site-packages",
+      // "**/usr/local/lib/python3.*/dist-packages",
+      // "**/usr/local/lib/python3.*/site-packages"
+    ],
     "ruff.organizeImports": true,
     "ruff.exclude": [
       ".vscode/**/*.py",
@@ -242,13 +264,6 @@
     "solidity.telemetry": false,
     "gitlens.autolinks": [],
     "firedbg.showWelcome": false,
-    "python.experiments.optInto": [
-      "pythonTestAdapter",
-      "pythonTerminalEnvVarActivation"
-      // "pythonDebuggerAutoReload"
-    ],
-    "python.terminal.activateEnvironment": true,
-    "debugpy.debugJustMyCode": false,
     "[shellscript]": {
       "files.eol": "\n",
       "editor.formatOnSave": false,
@@ -260,7 +275,4 @@
     "shellformat.path": "/usr/bin/shfmt",
     "window.commandCenter": false,
     "rubyTestExplorer.rspecCommand": "rvm-auto-ruby -r bundler -e \"Bundler.require\" -e \"system(\\\"rspec \\\" + ARGV.join(\\\" \\\"))\" -- ",
-    "python.defaultInterpreterPath": "/bin/python",
-    "python.locator": "native",
-    "python.useEnvironmentsExtension": true
 }

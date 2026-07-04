@@ -276,6 +276,7 @@
     "window.commandCenter": false,
     "atlascode.jira.enabled": true,
     "atlascode.bitbucket.enabled": false,
+    "chat.mcp.discovery.enabled": true,
     "rubyTestExplorer.rspecCommand": "rvm-auto-ruby -r bundler -e \"Bundler.require\" -e \"system(\\\"rspec \\\" + ARGV.join(\\\" \\\"))\" -- ",
     "amp.permissions": [
       {

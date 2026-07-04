@@ -241,6 +241,10 @@
     "solargraph.logLevel": "debug",
     "solargraph.useBundler": true,
     "solargraph.transport": "external",
+    "solargraph.externalServer": {
+      "host": "localhost",
+      "port": 7658
+    },
     "github.copilot.enable": {
       "*": true,
       "plaintext": false,

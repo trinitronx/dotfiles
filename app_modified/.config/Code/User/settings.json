@@ -274,6 +274,8 @@
     },
     "shellformat.path": "/usr/bin/shfmt",
     "window.commandCenter": false,
+    "atlascode.jira.enabled": true,
+    "atlascode.bitbucket.enabled": true,
     "rubyTestExplorer.rspecCommand": "rvm-auto-ruby -r bundler -e \"Bundler.require\" -e \"system(\\\"rspec \\\" + ARGV.join(\\\" \\\"))\" -- ",
     "amp.permissions": [
       {

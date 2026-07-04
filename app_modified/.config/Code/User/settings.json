@@ -301,6 +301,11 @@
     "sonarlint.analysisExcludesStandalone": "**/node_modules/**,**/vendor,**/__pycache__/**,**/site-packages/**,**/.void-editor/**",
     "sonarlint.focusOnNewCode": true,
     "sonarlint.output.showVerboseLogs": true,
+    "scss.lint.duplicateProperties": "warning",
+    "scss.lint.universalSelector": "warning",
+    "custom-language-properties": {
+      "scss.comments.lineComment": ""
+    },
     "amp.permissions": [
       {
         "tool": "Bash",

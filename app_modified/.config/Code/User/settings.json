@@ -250,7 +250,6 @@
     "gopls": {
       "ui.semanticTokens": true
     },
-    "mesonbuild.downloadLanguageServer": true,
     "cmake.pinnedCommands": [
       "workbench.action.tasks.configureTaskRunner",
       "workbench.action.tasks.runTask"
@@ -282,6 +281,8 @@
     "git.blame.editorDecoration.enabled": true,
     "gitlens.ai.model": "vscode",
     "files.autoSave": "afterDelay",
+    "mesonbuild.downloadLanguageServer": true,
+    "mesonbuild.linter.muon.enabled": true,
     "rubyLsp.formatter": "auto",
     "rubyLsp.featureFlags": {
       "fullTestDiscovery": false

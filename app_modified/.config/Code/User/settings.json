@@ -294,6 +294,7 @@
     "rubyLsp.rubyVersionManager": {
       "identifier": "rvm"
     },
+    "testing.coverageToolbarEnabled": true,
     "amp.permissions": [
       {
         "tool": "Bash",

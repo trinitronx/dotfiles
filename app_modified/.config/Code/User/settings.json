@@ -971,5 +971,6 @@
         "action": "allow"
       }
     ],
-    "sync.gist": "397c6dc79bfa25cbbbbcb78a3bf8e358"
+    "sync.gist": "397c6dc79bfa25cbbbbcb78a3bf8e358",
+    "sync.removeExtensions": false
 }

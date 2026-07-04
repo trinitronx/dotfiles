@@ -296,6 +296,10 @@
       "identifier": "rvm"
     },
     "testing.coverageToolbarEnabled": true,
+    "sonarlint.testFilePattern": "**/test/**,**/tests/**,**/*test,**/spec/**",
+    "sonarlint.analysisExcludesStandalone": "**/node_modules/**,**/vendor,**/__pycache__/**,**/site-packages/**,**/.void-editor/**",
+    "sonarlint.focusOnNewCode": true,
+    "sonarlint.output.showVerboseLogs": true,
     "amp.permissions": [
       {
         "tool": "Bash",

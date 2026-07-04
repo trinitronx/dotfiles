@@ -10,6 +10,7 @@
       ]
     },
     "window.titleBarStyle": "native",
+    "workbench.tree.enableStickyScroll": false,
     "workbench.colorTheme": "Default Dark Modern",
     "editor.fontFamily": "'JetBrainsMono Nerd Font Mono', 'JetBrainsMono Nerd Font', 'FiraCode Nerd Font Mono', 'Monoid Nerd Font Mono', 'Droid Sans Mono',  monospace, 'Droid Sans Fallback'",
     "terminal.integrated.fontFamily": "'JetBrainsMono Nerd Font', monospace",
@@ -309,7 +310,6 @@
     "sonarlint.analysisExcludesStandalone": "**/node_modules/**,**/vendor,**/__pycache__/**,**/site-packages/**,**/.void-editor/**",
     "sonarlint.focusOnNewCode": true,
     "sonarlint.output.showVerboseLogs": true,
-    "workbench.tree.enableStickyScroll": false,
     "atlascode.jira.lastCreateSiteAndProject": {
       "siteId": "0cf91bcd-95a2-4137-be0f-653eb2908f55",
       "projectKey": "LPSPRIG"

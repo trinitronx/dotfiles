@@ -236,6 +236,7 @@
     "remote.localPortHost": "allInterfaces",
     "remote.SSH.remoteServerListenOnSocket": true,
     "rubyTestExplorer.debugCommand": "bundle exec rdebug-ide",
+    "rubyTestExplorer.rspecCommand": "rvm-auto-ruby -r bundler -e \"Bundler.require\" -e \"system(\\\"rspec \\\" + ARGV.join(\\\" \\\"))\" -- ",
     "rubyTestExplorer.logpanel": true,
     "solargraph.logLevel": "debug",
     "solargraph.useBundler": true,
@@ -288,7 +289,6 @@
     "rubyLsp.rubyVersionManager": {
       "identifier": "rvm"
     },
-    "rubyTestExplorer.rspecCommand": "rvm-auto-ruby -r bundler -e \"Bundler.require\" -e \"system(\\\"rspec \\\" + ARGV.join(\\\" \\\"))\" -- ",
     "amp.permissions": [
       {
         "tool": "Bash",

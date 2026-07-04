@@ -277,6 +277,10 @@
     "atlascode.jira.enabled": true,
     "atlascode.bitbucket.enabled": false,
     "chat.mcp.discovery.enabled": true,
+    "git.autofetch": true,
+    "git.blame.editorDecoration.enabled": true,
+    "gitlens.ai.model": "vscode",
+
     "rubyTestExplorer.rspecCommand": "rvm-auto-ruby -r bundler -e \"Bundler.require\" -e \"system(\\\"rspec \\\" + ARGV.join(\\\" \\\"))\" -- ",
     "amp.permissions": [
       {

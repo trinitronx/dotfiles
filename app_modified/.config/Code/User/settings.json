@@ -17,6 +17,7 @@
     "editor.fontLigatures": "'cv02', 'cv04', 'cv05', 'cv07', 'cv08', 'cv11', 'cv14', 'cv99', 'ss19', 'zero', 'calt', 'ss04', 'ss08', 'ss09', 'cv23'",
     "window.zoomLevel": 1,
     "redhat.telemetry.enabled": true,
+    "sonarlint.disableTelemetry": true,
     "git.openRepositoryInParentFolders": "always",
     "evenBetterToml.formatter.alignComments": true,
     "evenBetterToml.formatter.alignEntries": true,

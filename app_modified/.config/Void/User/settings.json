@@ -80,6 +80,10 @@
     "python.analysis.diagnosticMode": "openFilesOnly",
     "python.analysis.indexing": true,
     "python.trace.server": "verbose",
+    "python.locator": "native",
+    "python.defaultInterpreterPath": "/bin/python",
+    "python.useEnvironmentsExtension": true,
+    // "python-envs.defaultEnvManager": "ms-python.python:pyenv",
     "[python]": {
       "editor.formatOnSave": true,
       "editor.codeActionsOnSave": {
@@ -297,14 +301,10 @@
     "sonarlint.testFilePattern": "**/test/**,**/tests/**,**/*test,**/spec/**",
     "sonarlint.analysisExcludesStandalone": "**/node_modules/**,**/vendor,**/__pycache__/**,**/site-packages/**,**/.void-editor/**",
     "sonarlint.focusOnNewCode": true,
-    "python.locator": "native",
     "mesonbuild.linter.muon.enabled": true,
     "sonarlint.output.showVerboseLogs": true,
-    // "python.defaultInterpreterPath": "/bin/python",
-    // "python-envs.defaultEnvManager": "ms-python.python:pyenv",
     "telemetry.telemetryLevel": "all",
     "workbench.tree.enableStickyScroll": false,
-    "python.useEnvironmentsExtension": true,
     "atlascode.jira.lastCreateSiteAndProject": {
       "siteId": "0cf91bcd-95a2-4137-be0f-653eb2908f55",
       "projectKey": "LPSPRIG"
@@ -314,7 +314,6 @@
     "custom-language-properties": {
       "scss.comments.lineComment": ""
     },
-    "python.defaultInterpreterPath": "/bin/python",
     "solargraph.externalServer": {
       "host": "localhost",
       "port": 7658

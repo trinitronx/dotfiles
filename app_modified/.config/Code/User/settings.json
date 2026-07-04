@@ -281,7 +281,13 @@
     "git.blame.editorDecoration.enabled": true,
     "gitlens.ai.model": "vscode",
     "files.autoSave": "afterDelay",
-
+    "rubyLsp.formatter": "auto",
+    "rubyLsp.featureFlags": {
+      "fullTestDiscovery": false
+    },
+    "rubyLsp.rubyVersionManager": {
+      "identifier": "rvm"
+    },
     "rubyTestExplorer.rspecCommand": "rvm-auto-ruby -r bundler -e \"Bundler.require\" -e \"system(\\\"rspec \\\" + ARGV.join(\\\" \\\"))\" -- ",
     "amp.permissions": [
       {

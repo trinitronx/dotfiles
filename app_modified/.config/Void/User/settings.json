@@ -10,12 +10,14 @@
       ]
     },
     "window.titleBarStyle": "native",
+    "workbench.tree.enableStickyScroll": false,
     "workbench.colorTheme": "Default Dark Modern",
     "editor.fontFamily": "'JetBrainsMono Nerd Font Mono', 'JetBrainsMono Nerd Font', 'FiraCode Nerd Font Mono', 'Monoid Nerd Font Mono', 'Droid Sans Mono',  monospace, 'Droid Sans Fallback'",
     "terminal.integrated.fontFamily": "'JetBrainsMono Nerd Font', monospace",
     "terminal.integrated.allowChords": false,
     "editor.fontLigatures": "'cv02', 'cv04', 'cv05', 'cv07', 'cv08', 'cv11', 'cv14', 'cv99', 'ss19', 'zero', 'calt', 'ss04', 'ss08', 'ss09', 'cv23'",
     "window.zoomLevel": 1,
+    "telemetry.telemetryLevel": "all",
     "redhat.telemetry.enabled": true,
     "sonarlint.disableTelemetry": true,
     "git.openRepositoryInParentFolders": "always",
@@ -80,6 +82,10 @@
     "python.analysis.diagnosticMode": "openFilesOnly",
     "python.analysis.indexing": true,
     "python.trace.server": "verbose",
+    "python.locator": "native",
+    "python.defaultInterpreterPath": "/bin/python",
+    "python.useEnvironmentsExtension": true,
+    // "python-envs.defaultEnvManager": "ms-python.python:pyenv",
     "[python]": {
       "editor.formatOnSave": true,
       "editor.codeActionsOnSave": {
@@ -242,8 +248,14 @@
     "remote.localPortHost": "allInterfaces",
     "remote.SSH.remoteServerListenOnSocket": true,
     "rubyTestExplorer.debugCommand": "bundle exec rdebug-ide",
+    "rubyTestExplorer.rspecCommand": "rvm-auto-ruby -r bundler -e \"Bundler.require\" -e \"system(\\\"rspec \\\" + ARGV.join(\\\" \\\"))\" -- ",
+    "rubyTestExplorer.logpanel": true,
     "solargraph.useBundler": true,
     "solargraph.transport": "external",
+    "solargraph.externalServer": {
+      "host": "localhost",
+      "port": 7658
+    },
     "github.copilot.enable": {
       "*": true,
       "plaintext": false,
@@ -253,7 +265,6 @@
     "gopls": {
       "ui.semanticTokens": true
     },
-    "mesonbuild.downloadLanguageServer": true,
     "cmake.pinnedCommands": [
       "workbench.action.tasks.configureTaskRunner",
       "workbench.action.tasks.runTask"
@@ -281,10 +292,12 @@
     "atlascode.jira.enabled": true,
     "atlascode.bitbucket.enabled": true,
     "chat.mcp.discovery.enabled": true,
+    "git.autofetch": true,
     "git.blame.editorDecoration.enabled": true,
     "gitlens.ai.model": "vscode",
     "files.autoSave": "afterDelay",
-    "git.autofetch": true,
+    "mesonbuild.downloadLanguageServer": true,
+    "mesonbuild.linter.muon.enabled": true,
     "rubyLsp.formatter": "auto",
     "rubyLsp.featureFlags": {
       "fullTestDiscovery": false
@@ -292,19 +305,11 @@
     "rubyLsp.rubyVersionManager": {
       "identifier": "rvm"
     },
-    "rubyTestExplorer.rspecCommand": "rvm-auto-ruby -r bundler -e \"Bundler.require\" -e \"system(\\\"rspec \\\" + ARGV.join(\\\" \\\"))\" -- ",
     "testing.coverageToolbarEnabled": true,
     "sonarlint.testFilePattern": "**/test/**,**/tests/**,**/*test,**/spec/**",
     "sonarlint.analysisExcludesStandalone": "**/node_modules/**,**/vendor,**/__pycache__/**,**/site-packages/**,**/.void-editor/**",
     "sonarlint.focusOnNewCode": true,
-    "python.locator": "native",
-    "mesonbuild.linter.muon.enabled": true,
     "sonarlint.output.showVerboseLogs": true,
-    // "python.defaultInterpreterPath": "/bin/python",
-    // "python-envs.defaultEnvManager": "ms-python.python:pyenv",
-    "telemetry.telemetryLevel": "all",
-    "workbench.tree.enableStickyScroll": false,
-    "python.useEnvironmentsExtension": true,
     "atlascode.jira.lastCreateSiteAndProject": {
       "siteId": "0cf91bcd-95a2-4137-be0f-653eb2908f55",
       "projectKey": "LPSPRIG"
@@ -313,11 +318,6 @@
     "scss.lint.universalSelector": "warning",
     "custom-language-properties": {
       "scss.comments.lineComment": ""
-    },
-    "python.defaultInterpreterPath": "/bin/python",
-    "solargraph.externalServer": {
-      "host": "localhost",
-      "port": 7658
     },
     "amp.permissions": [
       {

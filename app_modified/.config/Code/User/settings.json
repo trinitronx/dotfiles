@@ -972,5 +972,7 @@
       }
     ],
     "sync.gist": "397c6dc79bfa25cbbbbcb78a3bf8e358",
-    "sync.removeExtensions": false
+    "sync.removeExtensions": false,
+    "containers.containerClient": "com.microsoft.visualstudio.containers.docker",
+    "containers.orchestratorClient": "com.microsoft.visualstudio.orchestrators.dockercompose"
 }

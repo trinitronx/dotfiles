@@ -73,7 +73,7 @@
       "**/usr/local/bin/*"
     ],
     "python.locator": "native",
-    "python.defaultInterpreterPath": "~/.pyenv/shims/python",
+    "python.defaultInterpreterPath": "${userHome}/.pyenv/shims/python",
     "python.useEnvironmentsExtension": true,
     // "python-envs.defaultEnvManager": "ms-python.python:pyenv",
     "[python]": {

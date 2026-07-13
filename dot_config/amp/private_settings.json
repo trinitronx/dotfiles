@@ -14,8 +14,7 @@
     }
   },
   "amp.tools.disable": [
-    "browser_navigate",
-    "builtin:edit_file"
+    "browser_navigate"
   ],
   "amp.guardedFiles.allowlist": [],
   "amp.dangerouslyAllowAll": false,

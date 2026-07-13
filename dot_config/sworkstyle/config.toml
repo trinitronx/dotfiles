@@ -60,6 +60,7 @@
 "libreoffice-startcenter" = { type = "exact", value= "󱂪 " }
 "soffice" = { type = "exact", value= "󱕕 " }
 "com.yubico.yubioath" = { type = "exact", value= '󰦯 󱊞 ' }
+"gpxsee" = { type = "exact", value= ' ' }
 # Browser tab titles
 "archlinux" = { type = "generic", value = ' ' }
 "archwiki" = { type = "generic", value = ' ' }

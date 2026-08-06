@@ -979,4 +979,5 @@
     "atlascode.jira.statusbar.showProduct": false,
     "atlascode.jira.statusbar.showLogin": true,
     "atlascode.jira.statusbar.showUser": false,
+    "terraform.mcp.server.enable": true,
 }

@@ -974,5 +974,6 @@
     "sync.gist": "397c6dc79bfa25cbbbbcb78a3bf8e358",
     "sync.removeExtensions": false,
     "containers.containerClient": "com.microsoft.visualstudio.containers.docker",
-    "containers.orchestratorClient": "com.microsoft.visualstudio.orchestrators.dockercompose"
+    "containers.orchestratorClient": "com.microsoft.visualstudio.orchestrators.dockercompose",
+    "gitlens.ai.vscode.model": "copilot:gemini-3.1-pro-preview",
 }

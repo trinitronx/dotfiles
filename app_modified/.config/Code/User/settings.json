@@ -980,4 +980,12 @@
     "atlascode.jira.statusbar.showLogin": true,
     "atlascode.jira.statusbar.showUser": false,
     "terraform.mcp.server.enable": true,
+    "yaml.disableSchemaDetection": [
+      "**/.github/workflows/*.yml",
+      "**/.github/workflows/*.yaml",
+      "**/.gitea/workflows/*.yml",
+      "**/.gitea/workflows/*.yaml",
+      "**/.forgejo/workflows/*.yml",
+      "**/.forgejo/workflows/*.yaml"
+    ]
 }

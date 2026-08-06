@@ -976,4 +976,7 @@
     "containers.containerClient": "com.microsoft.visualstudio.containers.docker",
     "containers.orchestratorClient": "com.microsoft.visualstudio.orchestrators.dockercompose",
     "gitlens.ai.vscode.model": "copilot:gemini-3.1-pro-preview",
+    "atlascode.jira.statusbar.showProduct": false,
+    "atlascode.jira.statusbar.showLogin": true,
+    "atlascode.jira.statusbar.showUser": false,
 }

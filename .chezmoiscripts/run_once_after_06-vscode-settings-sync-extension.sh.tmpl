@@ -1,0 +1,7 @@
+#!/bin/sh
+
+{{- if lookPath "code" }}
+code --install-extension Shan.code-settings-sync
+{{- else }}
+echo "$0: WARN: code not found on PATH - skipping Shan.code-settings-sync extension install"
+{{- end }}

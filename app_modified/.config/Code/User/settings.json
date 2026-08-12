@@ -11,7 +11,7 @@
     },
     "window.titleBarStyle": "native",
     "workbench.tree.enableStickyScroll": false,
-    "workbench.colorTheme": "Default Dark Modern",
+    "workbench.colorTheme": "Dark Modern",
     "editor.fontFamily": "'JetBrainsMono Nerd Font Mono', 'JetBrainsMono Nerd Font', 'FiraCode Nerd Font Mono', 'Monoid Nerd Font Mono', 'Droid Sans Mono',  monospace, 'Droid Sans Fallback'",
     "terminal.integrated.fontFamily": "'JetBrainsMono Nerd Font', monospace",
     "terminal.integrated.allowChords": false,
@@ -73,7 +73,7 @@
       "**/usr/local/bin/*"
     ],
     "python.locator": "native",
-    "python.defaultInterpreterPath": "~/.pyenv/shims/python",
+    "python.defaultInterpreterPath": "${userHome}/.pyenv/shims/python",
     "python.useEnvironmentsExtension": true,
     // "python-envs.defaultEnvManager": "ms-python.python:pyenv",
     "[python]": {
@@ -282,7 +282,12 @@
     "window.commandCenter": false,
     "atlascode.jira.enabled": true,
     "atlascode.bitbucket.enabled": false,
-    "chat.mcp.discovery.enabled": true,
+    "chat.mcp.discovery.enabled": {
+      "claude-desktop": true,
+      "windsurf": true,
+      "cursor-global": true,
+      "cursor-workspace": true
+    },
     "git.autofetch": true,
     "git.blame.editorDecoration.enabled": true,
     "gitlens.ai.model": "vscode",
@@ -966,5 +971,21 @@
         "action": "allow"
       }
     ],
-    "sync.gist": "9402a3adf7ce68171821b19f4f25b1d9"
+    "sync.gist": "397c6dc79bfa25cbbbbcb78a3bf8e358",
+    "sync.removeExtensions": false,
+    "containers.containerClient": "com.microsoft.visualstudio.containers.docker",
+    "containers.orchestratorClient": "com.microsoft.visualstudio.orchestrators.dockercompose",
+    "gitlens.ai.vscode.model": "copilot:gemini-3.1-pro-preview",
+    "atlascode.jira.statusbar.showProduct": false,
+    "atlascode.jira.statusbar.showLogin": true,
+    "atlascode.jira.statusbar.showUser": false,
+    "terraform.mcp.server.enable": true,
+    "yaml.disableSchemaDetection": [
+      "**/.github/workflows/*.yml",
+      "**/.github/workflows/*.yaml",
+      "**/.gitea/workflows/*.yml",
+      "**/.gitea/workflows/*.yaml",
+      "**/.forgejo/workflows/*.yml",
+      "**/.forgejo/workflows/*.yaml"
+    ]
 }

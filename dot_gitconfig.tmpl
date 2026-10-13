@@ -11,6 +11,12 @@
 	path = {{ .xdg_config_home }}/git/config.pub.local
 [includeIf "gitdir:{{ .chezmoi.sourceDir }}/"]
 	path = {{ .xdg_config_home }}/git/config.pub.local
+[includeIf "gitdir:{{ .chezmoi.homeDir }}/.local/share/"]
+	path = {{ .xdg_config_home }}/git/config.pub.local
+{{- end }}
+{{- if (eq .chezmoi.os "darwin") }}
+[includeIf "gitdir:{{ if eq .chezmoi.arch "arm64" }}/opt/homebrew{{ else }}/usr/local/Homebrew{{ end }}/Library/Taps/homebrew/homebrew-core"]
+	path = {{ .xdg_config_home }}/git/config.pub.local
 {{- end }}
 [color]
 	branch = auto

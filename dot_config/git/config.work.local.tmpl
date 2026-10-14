@@ -6,3 +6,6 @@
 {{- if hasKey . "work_signingkey" }}
 	signingkey = {{ .work_signingkey }}
 {{- end }}
+
+[url "git@github.com-work"]
+	insteadOf = git@github.com

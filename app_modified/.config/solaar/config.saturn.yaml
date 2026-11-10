@@ -1,11 +1,17 @@
-- 1.1.19
+- 1.1.20
 - _NAME: Wireless Multi-Device Keyboard K780
   _absent: [hi-res-scroll, lowres-scroll-mode, hires-smooth-invert, hires-smooth-resolution, hires-scroll-mode, scroll-ratchet, scroll-ratchet-torque, smart-shift,
     thumb-scroll-invert, thumb-scroll-mode, onboard_profiles, report_rate, report_rate_extended, pointer_speed, dpi, dpi_extended, speed-change, backlight,
     backlight_level, backlight_duration_hands_out, backlight_duration_hands_in, backlight_duration_powered, backlight-timed, led_control, led_zone_, rgb_control,
-    rgb_zone_, brightness_control, per-key-lighting, reprogrammable-keys, force-sensing, crown-smooth, divert-crown, divert-gkeys, m-key-leds, mr-key-led,
-    gesture2-gestures, gesture2-divert, gesture2-params, haptic-level, haptic-play, sidetone, equalizer, adc_power_management]
+    rgb_zone_, per-key-lighting, brightness_control, rgb_idle_effect, rgb_idle_timeout, rgb_sleep_timeout, rgb_startup_animation, rgb_shutdown_animation,
+    force-sensing, crown-smooth, divert-crown, divert-gkeys, m-key-leds, mr-key-led, gesture2-gestures, gesture2-divert, gesture2-params, analog-button-tuning,
+    haptic-level, haptic-play, sidetone, equalizer, adc_power_management, headset-eco-mode, headset-do-not-disturb, headset-mic-mute, headset-mic-snr, headset-ai-nr,
+    headset-ai-nr-level, headset-sidetone, headset-mic-gain, headset-mix-balance, headset-auto-sleep, headset-onboard-eq, headset-eq-active-preset, headset-advanced-eq,
+    headset_led_control, headset-onboard-effect, headset_per_zone_lighting, headset-signature-startup, headset-signature-shutdown, headset-signature-passive,
+    logivoice-nr-state, logivoice-ng-state, logivoice-comp-state, logivoice-deesser-state, logivoice-depopper-state, logivoice-limiter-state, logivoice-hpf-state,
+    reprogrammable-keys]
   _battery: 4096
+  _config_cookie: [55, 63]
   _modelId: B33B405B0000
   _sensitive: {change-host: true, hires-scroll-mode: ignore, hires-smooth-invert: ignore, hires-smooth-resolution: ignore, multiplatform: false}
   _serial: 9C6A4F2C
@@ -20,10 +26,15 @@
 - _NAME: Wireless Mouse MX Master 2S
   _absent: [hi-res-scroll, lowres-scroll-mode, scroll-ratchet-torque, thumb-scroll-invert, thumb-scroll-mode, onboard_profiles, report_rate, report_rate_extended,
     pointer_speed, dpi_extended, speed-change, backlight, backlight_level, backlight_duration_hands_out, backlight_duration_hands_in, backlight_duration_powered,
-    backlight-timed, led_control, led_zone_, rgb_control, rgb_zone_, brightness_control, per-key-lighting, fn-swap, persistent-remappable-keys, disable-keyboard-keys,
-    force-sensing, crown-smooth, divert-crown, divert-gkeys, m-key-leds, mr-key-led, multiplatform, gesture2-params, haptic-level, haptic-play, sidetone,
-    equalizer, adc_power_management]
+    backlight-timed, led_control, led_zone_, rgb_control, rgb_zone_, per-key-lighting, brightness_control, rgb_idle_effect, rgb_idle_timeout, rgb_sleep_timeout,
+    rgb_startup_animation, rgb_shutdown_animation, fn-swap, persistent-remappable-keys, disable-keyboard-keys, force-sensing, crown-smooth, divert-crown,
+    divert-gkeys, m-key-leds, mr-key-led, multiplatform, analog-button-tuning, haptic-level, haptic-play, sidetone, equalizer, adc_power_management, headset-eco-mode,
+    headset-do-not-disturb, headset-mic-mute, headset-mic-snr, headset-ai-nr, headset-ai-nr-level, headset-sidetone, headset-mic-gain, headset-mix-balance,
+    headset-auto-sleep, headset-onboard-eq, headset-eq-active-preset, headset-advanced-eq, headset_led_control, headset-onboard-effect, headset_per_zone_lighting,
+    headset-signature-startup, headset-signature-shutdown, headset-signature-passive, logivoice-nr-state, logivoice-ng-state, logivoice-comp-state, logivoice-deesser-state,
+    logivoice-depopper-state, logivoice-limiter-state, logivoice-hpf-state, gesture2-params]
   _battery: 4096
+  _config_cookie: [55, 62]
   _modelId: B01940690000
   _sensitive: {change-host: false, divert-keys: true, hires-smooth-resolution: false, reprogrammable-keys: true, smart-shift: false}
   _serial: A38D4F70

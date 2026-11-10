@@ -11,6 +11,13 @@
         "~/.local/share/chezmoi",
         "/tmp"
       ]
+    },
+    "github-gist": {
+      "command": "/bin/sh",
+      "args": [
+        "-c",
+        "export GITHUB_TOKEN=\"$(secret-tool lookup service 'gh:github.com' username \"$USERNAME\")\" && npx -y mcp-server-github-gist"
+      ]
     }
   },
   "amp.tools.disable": [

@@ -16,7 +16,7 @@
       "command": "/bin/sh",
       "args": [
         "-c",
-        "export GITHUB_TOKEN=\"$(secret-tool lookup service 'gh:github.com' username \"$USERNAME\")\" && npx -y mcp-server-github-gist"
+        "export GITHUB_TOKEN=\"$(gh auth token --hostname github.com)\" && exec npx -y mcp-server-github-gist"
       ]
     }
   },

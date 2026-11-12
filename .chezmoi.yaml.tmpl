@@ -79,6 +79,9 @@
 {{-   $work_transport_encryptionkey = promptString "work_transport_encryptionkey" -}}
 {{- end -}}
 
+{{- /* Work machines are those with work data encryption keys */ -}}
+{{- $is_work := or $work_data_encryptionkey_primary $work_data_encryptionkey_secondary | empty | not -}}
+
 {{- $work_srcdir := joinPath .chezmoi.homeDir "src" "work" -}}
 {{- if hasKey . "work_srcdir" -}}
 {{-   $work_srcdir = .work_srcdir -}}
@@ -201,7 +204,7 @@ gpg:
   recipients:
 {{- /* Use separate encryption keys for personal and work */ -}}
 {{- /* Note use of "!" to specify subkeys explicitly rather than relying on GPG automatic lookup */ -}}
-{{-   if $work_data_encryptionkey_primary | or $work_data_encryptionkey_secondary }}
+{{-   if $is_work }}
 {{-     if $work_data_encryptionkey_primary }}
     - "{{ $work_data_encryptionkey_primary }}!"
 {{-     end }}
@@ -225,6 +228,7 @@ data:
   signingkey: "{{ $signingkey }}"
   githubuser: "{{ $githubuser }}"
   launchpaduser: "{{ $launchpaduser }}"
+  is_work: {{ $is_work }}
 {{- if $work_email }}
   work_email: "{{ $work_email }}"
 {{- end }}

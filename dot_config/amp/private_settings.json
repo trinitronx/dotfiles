@@ -11,6 +11,13 @@
         "~/.local/share/chezmoi",
         "/tmp"
       ]
+    },
+    "github-gist": {
+      "command": "/bin/sh",
+      "args": [
+        "-c",
+        "export GITHUB_TOKEN=\"$(gh auth token --hostname github.com)\" && exec npx -y mcp-server-github-gist"
+      ]
     }
   },
   "amp.tools.disable": [

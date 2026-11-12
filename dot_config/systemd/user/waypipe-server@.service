@@ -1,0 +1,13 @@
+# ${HOME}/.config/systemd/user/waypipe-server.service
+[Unit]
+Description=Runs waypipe server for %I
+
+[Service]
+ExecStart=waypipe --socket %t/%N.sock --unlink-socket --no-gpu --display wayland-%i server -- sleep 1d
+ExecStartPre=-rm '%t/wayland-%i'
+ExecStopPost=-rm '%t/wayland-%i'
+Restart=on-failure
+Slice=session.slice
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,11 @@
+# ${HOME}/.config/systemd/user/waypipe-client.service
+[Unit]
+Description=Runs waypipe on startup to support SSH forwarding
+
+[Service]
+# waypipe won't bind over a stale socket left by an unclean exit (EADDRINUSE)
+ExecStartPre=-/usr/bin/rm -f %t/%N.sock
+ExecStart=/usr/bin/waypipe --socket %t/%N.sock client
+
+[Install]
+WantedBy=default.target

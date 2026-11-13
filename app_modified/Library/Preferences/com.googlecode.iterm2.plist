@@ -1003,7 +1003,7 @@
 			<key>Text</key>
 			<string></string>
 		</dict>
-		<key>0x4a-0x60000-0x26</key>
+		<key>0x4a-0x60000-0x26-0x1</key>
 		<dict>
 			<key>Action</key>
 			<integer>6</integer>
@@ -1016,7 +1016,7 @@
 			<key>Version</key>
 			<integer>2</integer>
 		</dict>
-		<key>0x4b-0x60000-0x28</key>
+		<key>0x4b-0x60000-0x28-0x1</key>
 		<dict>
 			<key>Action</key>
 			<integer>7</integer>
@@ -1029,7 +1029,7 @@
 			<key>Version</key>
 			<integer>2</integer>
 		</dict>
-		<key>0x52-0x60000-0xf</key>
+		<key>0x52-0x60000-0xf-0x1</key>
 		<dict>
 			<key>Action</key>
 			<integer>58</integer>
@@ -1042,7 +1042,7 @@
 			<key>Version</key>
 			<integer>2</integer>
 		</dict>
-		<key>0x53-0x60000-0x1</key>
+		<key>0x53-0x60000-0x1-0x1</key>
 		<dict>
 			<key>Action</key>
 			<integer>57</integer>
@@ -1055,7 +1055,7 @@
 			<key>Version</key>
 			<integer>2</integer>
 		</dict>
-		<key>0x58-0x60000-0x7</key>
+		<key>0x58-0x60000-0x7-0x1</key>
 		<dict>
 			<key>Action</key>
 			<integer>25</integer>
@@ -1069,7 +1069,7 @@ Marks and Annotations.Next Mark</string>
 			<key>Version</key>
 			<integer>2</integer>
 		</dict>
-		<key>0x5a-0x60000-0x6</key>
+		<key>0x5a-0x60000-0x6-0x1</key>
 		<dict>
 			<key>Action</key>
 			<integer>25</integer>
@@ -1083,7 +1083,7 @@ Marks and Annotations.Previous Mark</string>
 			<key>Version</key>
 			<integer>2</integer>
 		</dict>
-		<key>0x6a-0xc0000-0x26</key>
+		<key>0x6a-0xc0000-0x26-0x1</key>
 		<dict>
 			<key>Action</key>
 			<integer>8</integer>
@@ -1096,7 +1096,7 @@ Marks and Annotations.Previous Mark</string>
 			<key>Version</key>
 			<integer>2</integer>
 		</dict>
-		<key>0x6b-0xc0000-0x28</key>
+		<key>0x6b-0xc0000-0x28-0x1</key>
 		<dict>
 			<key>Action</key>
 			<integer>9</integer>
@@ -7542,30 +7542,29 @@ Marks and Annotations.Previous Mark</string>
 	<string>/-+\~_.</string>
 	<key>Workgroups</key>
 	<data>
-	W3sidW5pcXVlSWRlbnRpZmllciI6ImJ1aWx0aW4uY2xhdWRlQ29kZSIsInNlc3Npb25z
-	IjpbeyJwZXJGaWxlQ29tbWFuZCI6IiIsInVybFN0cmluZyI6IiIsInRvb2xiYXJJdGVt
-	cyI6W3sia2luZCI6Im1vZGVTd2l0Y2hlciJ9LHsia2luZCI6ImdpdFN0YXR1cyJ9XSwi
-	ZGlzcGxheU5hbWUiOiJDaGF0IiwibW9kZSI6InJlZ3VsYXIiLCJjb21tYW5kIjoiIiwi
-	dW5pcXVlSWRlbnRpZmllciI6ImJ1aWx0aW4uY2xhdWRlQ29kZS5tYWluIiwia2luZCI6
-	eyJraW5kIjoicm9vdCJ9fSx7InBlckZpbGVDb21tYW5kIjoiZ2l0IGRpZmZ0b29sIC15
-	IC14IHZpbWRpZmYgXFwoZ2l0QmFzZSkgLS0gXFwoZmlsZSkiLCJ1cmxTdHJpbmciOiIi
-	LCJ0b29sYmFySXRlbXMiOlt7ImtpbmQiOiJtb2RlU3dpdGNoZXIifSx7ImtpbmQiOiJj
-	aGFuZ2VkRmlsZVNlbGVjdG9yIn0seyJraW5kIjoiZ2l0QmFzZVNlbGVjdG9yIn0seyJr
-	aW5kIjoibmF2aWdhdGlvbiJ9XSwiZGlzcGxheU5hbWUiOiJEaWZmIiwicGFyZW50SUQi
-	OiJidWlsdGluLmNsYXVkZUNvZGUubWFpbiIsIm1vZGUiOiJyZWd1bGFyIiwiY29tbWFu
-	ZCI6ImdpdCBkaWZmdG9vbCAteSAteCB2aW1kaWZmIFxcKGdpdEJhc2UpIiwidW5pcXVl
-	SWRlbnRpZmllciI6ImJ1aWx0aW4uY2xhdWRlQ29kZS5kaWZmIiwia2luZCI6eyJraW5k
-	IjoicGVlciJ9fSx7InBlckZpbGVDb21tYW5kIjoiIiwidXJsU3RyaW5nIjoiIiwidG9v
-	bGJhckl0ZW1zIjpbeyJraW5kIjoibW9kZVN3aXRjaGVyIn0seyJraW5kIjoicmVsb2Fk
-	In1dLCJkaXNwbGF5TmFtZSI6IkNvZGUgUmV2aWV3IiwicGFyZW50SUQiOiJidWlsdGlu
-	LmNsYXVkZUNvZGUubWFpbiIsIm1vZGUiOiJjb2RlUmV2aWV3IiwiY29tbWFuZCI6ImNs
-	YXVkZSBcXChjb2RlUmV2aWV3UHJvbXB0KSAtLWFwcGVuZC1zeXN0ZW0tcHJvbXB0LWZp
-	bGUgJ1xcKGl0ZXJtMi5hcHBCdW5kbGVQYXRoKVwvQ29udGVudHNcL1Jlc291cmNlc1wv
-	Y29kZS1yZXZpZXctc3lzdGVtLXByb21wdC50eHQnIC0tc2V0dGluZ3MgJ1xcKGl0ZXJt
-	Mi5hcHBCdW5kbGVQYXRoKVwvQ29udGVudHNcL1Jlc291cmNlc1wvY29kZS1yZXZpZXct
-	c2V0dGluZ3MudHh0JyIsInVuaXF1ZUlkZW50aWZpZXIiOiJidWlsdGluLmNsYXVkZUNv
-	ZGUucmV2aWV3Iiwia2luZCI6eyJraW5kIjoicGVlciJ9fV0sIm5hbWUiOiJDbGF1ZGUg
-	Q29kZSJ9XQ==
+	W3sidW5pcXVlSWRlbnRpZmllciI6ImJ1aWx0aW4uY2xhdWRlQ29kZSIsIm5hbWUiOiJD
+	bGF1ZGUgQ29kZSIsInNlc3Npb25zIjpbeyJ1cmxTdHJpbmciOiIiLCJtb2RlIjoicmVn
+	dWxhciIsImRpc3BsYXlOYW1lIjoiQ2hhdCIsImNvbW1hbmQiOiIiLCJwZXJGaWxlQ29t
+	bWFuZCI6IiIsInRvb2xiYXJJdGVtcyI6W3sia2luZCI6Im1vZGVTd2l0Y2hlciJ9LHsi
+	a2luZCI6ImdpdFN0YXR1cyJ9XSwia2luZCI6eyJraW5kIjoicm9vdCJ9LCJ1bmlxdWVJ
+	ZGVudGlmaWVyIjoiYnVpbHRpbi5jbGF1ZGVDb2RlLm1haW4ifSx7InVybFN0cmluZyI6
+	IiIsIm1vZGUiOiJyZWd1bGFyIiwiZGlzcGxheU5hbWUiOiJEaWZmIiwicGVyRmlsZUNv
+	bW1hbmQiOiJnaXQgZGlmZnRvb2wgLXkgLXggdmltZGlmZiBcXChnaXRCYXNlKSAtLSBc
+	XChmaWxlKSIsImNvbW1hbmQiOiJnaXQgZGlmZnRvb2wgLXkgLXggdmltZGlmZiBcXChn
+	aXRCYXNlKSIsImtpbmQiOnsia2luZCI6InBlZXIifSwidG9vbGJhckl0ZW1zIjpbeyJr
+	aW5kIjoibW9kZVN3aXRjaGVyIn0seyJraW5kIjoiY2hhbmdlZEZpbGVTZWxlY3RvciJ9
+	LHsia2luZCI6ImdpdEJhc2VTZWxlY3RvciJ9LHsia2luZCI6Im5hdmlnYXRpb24ifV0s
+	InVuaXF1ZUlkZW50aWZpZXIiOiJidWlsdGluLmNsYXVkZUNvZGUuZGlmZiIsInBhcmVu
+	dElEIjoiYnVpbHRpbi5jbGF1ZGVDb2RlLm1haW4ifSx7InVybFN0cmluZyI6IiIsIm1v
+	ZGUiOiJjb2RlUmV2aWV3IiwiZGlzcGxheU5hbWUiOiJDb2RlIFJldmlldyIsInBlckZp
+	bGVDb21tYW5kIjoiIiwiY29tbWFuZCI6ImNsYXVkZSBcXChjb2RlUmV2aWV3UHJvbXB0
+	KSAtLWFwcGVuZC1zeXN0ZW0tcHJvbXB0LWZpbGUgJ1xcKGl0ZXJtMi5hcHBCdW5kbGVQ
+	YXRoKVwvQ29udGVudHNcL1Jlc291cmNlc1wvY29kZS1yZXZpZXctc3lzdGVtLXByb21w
+	dC50eHQnIC0tc2V0dGluZ3MgJ1xcKGNvZGVSZXZpZXdTZXR0aW5nc0ZpbGUpJyIsImtp
+	bmQiOnsia2luZCI6InBlZXIifSwidG9vbGJhckl0ZW1zIjpbeyJraW5kIjoibW9kZVN3
+	aXRjaGVyIn0seyJraW5kIjoicmVsb2FkIn1dLCJ1bmlxdWVJZGVudGlmaWVyIjoiYnVp
+	bHRpbi5jbGF1ZGVDb2RlLnJldmlldyIsInBhcmVudElEIjoiYnVpbHRpbi5jbGF1ZGVD
+	b2RlLm1haW4ifV19XQ==
 	</data>
 	<key>findIgnoreCase_iTerm</key>
 	<true/>

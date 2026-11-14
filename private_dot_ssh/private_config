@@ -1,0 +1,14 @@
+# Per-machine host configs (config.d/personal or config.d/work, managed by chezmoi).
+# Must come before any Host/Match block so it applies to all hosts and takes precedence.
+Include config.d/*
+
+## Catch-all settings
+Host *
+  ServerAliveInterval 120
+#  Compression yes
+
+# ssh-agent asks for password on wrong tty without this
+# https://unix.stackexchange.com/a/499133/7688
+# https://bugzilla.mindrot.org/show_bug.cgi?id=2824#c9
+#Match host * exec "gpg-connect-agent UPDATESTARTUPTTY /bye"
+

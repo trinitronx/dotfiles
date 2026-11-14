@@ -68,6 +68,12 @@ app_modified/**
 {{ if not (hasKey . "personal_email") -}}
 {{ osBase .xdg_config_home }}/git/config.pub.local
 {{ end -}}
+{{- /* SSH client config: each variant is encrypted to its own GPG recipients */ -}}
+{{ if .is_work -}}
+.ssh/config.d/personal
+{{ else -}}
+.ssh/config.d/work
+{{ end -}}
 {{ if not (lookPath "lpass") -}}
 .config/05-lpass-settings.sh
 {{ end -}}
@@ -188,6 +194,9 @@ app_modified/**
 {{ end -}}
 {{ if not (eq .chezmoi.os "linux") | or (not (lookPath "soundconverter")) -}}
 .local/share/applications/soundconverter.desktop
+{{ end -}}
+{{ if not (eq .chezmoi.os "linux") | or (not (lookPath "systemctl")) | or (not (lookPath "waypipe")) -}}
+.config/systemd/user/waypipe-client.service
 {{ end -}}
 {{ if ne .chezmoi.os "darwin" -}}
 Library

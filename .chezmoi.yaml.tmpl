@@ -20,6 +20,7 @@
 {{-   $email = promptString "email" $email -}}
 {{- end -}}
 
+{{- /* .gitconfig signing key */ -}}
 {{- $signingkey := "" -}}
 {{- if hasKey . "signingkey" -}}
 {{-   $signingkey = .signingkey -}}
@@ -57,6 +58,30 @@
 {{-   $work_signingkey = promptString "work signingkey" -}}
 {{- end -}}
 
+{{- $work_data_encryptionkey_primary := "" -}}
+{{- if hasKey . "work_data_encryptionkey_primary" -}}
+{{-   $work_data_encryptionkey_primary = .work_data_encryptionkey_primary -}}
+{{- else if $interactive -}}
+{{-   $work_data_encryptionkey_primary = promptString "work_data_encryptionkey_primary" -}}
+{{- end -}}
+
+{{- $work_data_encryptionkey_secondary := "" -}}
+{{- if hasKey . "work_data_encryptionkey_secondary" -}}
+{{-   $work_data_encryptionkey_secondary = .work_data_encryptionkey_secondary -}}
+{{- else if $interactive -}}
+{{-   $work_data_encryptionkey_secondary = promptString "work_data_encryptionkey_secondary" -}}
+{{- end -}}
+
+{{- $work_transport_encryptionkey := "" -}}
+{{- if hasKey . "work_transport_encryptionkey" -}}
+{{-   $work_transport_encryptionkey = .work_transport_encryptionkey -}}
+{{- else if $interactive -}}
+{{-   $work_transport_encryptionkey = promptString "work_transport_encryptionkey" -}}
+{{- end -}}
+
+{{- /* Work machines are those with work data encryption keys */ -}}
+{{- $is_work := or $work_data_encryptionkey_primary $work_data_encryptionkey_secondary | empty | not -}}
+
 {{- $work_srcdir := joinPath .chezmoi.homeDir "src" "work" -}}
 {{- if hasKey . "work_srcdir" -}}
 {{-   $work_srcdir = .work_srcdir -}}
@@ -80,6 +105,27 @@
 {{-   $personal_signingkey = .personal_signingkey -}}
 {{- else if $interactive -}}
 {{-   $personal_signingkey = promptString "personal_signingkey" -}}
+{{- end -}}
+
+{{- $personal_data_encryptionkey_primary := "" -}}
+{{- if hasKey . "personal_data_encryptionkey_primary" -}}
+{{-   $personal_data_encryptionkey_primary = .personal_data_encryptionkey_primary -}}
+{{- else if $interactive -}}
+{{-   $personal_data_encryptionkey_primary = promptString "personal_data_encryptionkey_primary" -}}
+{{- end -}}
+
+{{- $personal_data_encryptionkey_secondary := "" -}}
+{{- if hasKey . "personal_data_encryptionkey_secondary" -}}
+{{-   $personal_data_encryptionkey_secondary = .personal_data_encryptionkey_secondary -}}
+{{- else if $interactive -}}
+{{-   $personal_data_encryptionkey_secondary = promptString "personal_data_encryptionkey_secondary" -}}
+{{- end -}}
+
+{{- $personal_transport_encryptionkey := "" -}}
+{{- if hasKey . "personal_transport_encryptionkey" -}}
+{{-   $personal_transport_encryptionkey = .personal_transport_encryptionkey -}}
+{{- else if $interactive -}}
+{{-   $personal_transport_encryptionkey = promptString "personal_transport_encryptionkey" -}}
 {{- end -}}
 
 {{- $osId:= .chezmoi.os -}}
@@ -150,6 +196,30 @@
 {{- end -}}
 
 sourceDir: "{{ .chezmoi.sourceDir }}"
+{{- if $work_data_encryptionkey_primary | or $work_data_encryptionkey_secondary | or $personal_data_encryptionkey_primary | or $personal_data_encryptionkey_secondary }}
+encryption: gpg
+gpg:
+  args:
+    - --quiet
+  recipients:
+{{- /* Use separate encryption keys for personal and work */ -}}
+{{- /* Note use of "!" to specify subkeys explicitly rather than relying on GPG automatic lookup */ -}}
+{{-   if $is_work }}
+{{-     if $work_data_encryptionkey_primary }}
+    - "{{ $work_data_encryptionkey_primary }}!"
+{{-     end }}
+{{-     if $work_data_encryptionkey_secondary }}
+    - "{{ $work_data_encryptionkey_secondary }}!"
+{{-     end }}
+{{-   else }}
+{{-     if $personal_data_encryptionkey_primary }}
+    - "{{ $personal_data_encryptionkey_primary }}!"
+{{-     end }}
+{{-     if $personal_data_encryptionkey_secondary }}
+    - "{{ $personal_data_encryptionkey_secondary }}!"
+{{-     end }}
+{{-   end }}
+{{- end }}
 
 data:
   # gitconfig vars
@@ -158,11 +228,21 @@ data:
   signingkey: "{{ $signingkey }}"
   githubuser: "{{ $githubuser }}"
   launchpaduser: "{{ $launchpaduser }}"
+  is_work: {{ $is_work }}
 {{- if $work_email }}
   work_email: "{{ $work_email }}"
 {{- end }}
 {{- if $work_signingkey }}
   work_signingkey: "{{ $work_signingkey }}"
+{{- end }}
+{{- if $work_data_encryptionkey_primary }}
+  work_data_encryptionkey_primary: "{{ $work_data_encryptionkey_primary }}"
+{{- end }}
+{{- if $work_data_encryptionkey_secondary }}
+  work_data_encryptionkey_secondary: "{{ $work_data_encryptionkey_secondary }}"
+{{- end }}
+{{- if $work_transport_encryptionkey }}
+  work_transport_encryptionkey: "{{ $work_transport_encryptionkey }}"
 {{- end }}
 {{- if $work_srcdir }}
   work_srcdir: "{{ $work_srcdir }}"
@@ -172,6 +252,15 @@ data:
 {{- end }}
 {{- if $personal_signingkey }}
   personal_signingkey: "{{ $personal_signingkey }}"
+{{- end }}
+{{- if $personal_data_encryptionkey_primary }}
+  personal_data_encryptionkey_primary: "{{ $personal_data_encryptionkey_primary }}"
+{{- end }}
+{{- if $personal_data_encryptionkey_secondary }}
+  personal_data_encryptionkey_secondary: "{{ $personal_data_encryptionkey_secondary }}"
+{{- end }}
+{{- if $personal_transport_encryptionkey }}
+  personal_transport_encryptionkey: "{{ $personal_transport_encryptionkey }}"
 {{- end }}
   # platform-specific vars
   osId: {{ $osId | quote }}
